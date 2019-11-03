@@ -3,7 +3,7 @@ package Juego.Tablero;
 import Juego.Casillero.Casillero;
 
 public class Tablero {
-    private Casillero[][] casilleros; 
+    private Casillero[][] casilleros;
 
 
 

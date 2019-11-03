@@ -2,8 +2,8 @@ package unidades;
 
 import Juego.Posicion;
 
-public class Unidad {
-    private int costo;
-    private int vida;
-    private Posicion posicion;
+abstract public class Unidad {
+    protected int costo;
+    protected int vida;
+    protected Posicion posicion;
 }

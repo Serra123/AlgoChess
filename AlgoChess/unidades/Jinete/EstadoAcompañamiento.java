@@ -1,4 +1,5 @@
 package unidades.Jinete;
 
-public class EstadoAcompañamiento {
+abstract public class EstadoAcompañamiento {
+    private int daño;
 }
