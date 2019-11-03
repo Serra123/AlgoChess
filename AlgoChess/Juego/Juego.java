@@ -7,4 +7,5 @@ public class Juego {
     private Jugador jugadorActual;
     private Jugador jugadorContrincante;
     private unParametro;
+    private otroParametro;
 }
