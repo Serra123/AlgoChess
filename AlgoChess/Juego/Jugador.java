@@ -9,4 +9,11 @@ public class Jugador {
     private int puntos;
     private String nombre;
 
+    Jugador(String nombre){
+        this.puntos = 20;
+        this.nombre = nombre;
+        this.unidades = new ArrayList<Unidad>();
+    }
+
+
 }
