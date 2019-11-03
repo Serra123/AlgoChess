@@ -1,4 +1,6 @@
 package Juego.Casillero;
 
-public class EstadoOcupacion {
+public interface EstadoOcupacion {
+
+
 }
