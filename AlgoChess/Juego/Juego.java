@@ -7,11 +7,16 @@ public class Juego {
     private Jugador jugadorActual;
     private Jugador jugadorContrincante;
 
-    public Juego() {
+    public Juego(String nombreJugador1, String nombreJugador2) {
 
         tablero = new Tablero();
-        jugadorActual = new Jugador();
-        jugadorContrincante = new Jugador(); 
+        jugadorActual = new Jugador(nombreJugador1);
+        jugadorContrincante = new Jugador(nombreJugador2);
 
+    }
+
+    public void inicializar(){
+        jugadorActual.posicionarUnidades();
+        jugadorContrincante.posicionarUnidades();
     }
 }

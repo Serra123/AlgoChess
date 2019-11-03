@@ -9,11 +9,19 @@ public class Jugador {
     private int puntos;
     private String nombre;
 
-    Jugador(String nombre){
+    Jugador(String nombre) {
         this.puntos = 20;
         this.nombre = nombre;
         this.unidades = new ArrayList<Unidad>();
     }
 
+    public void agregarSoldado(int fila, int columna, Tablero tablero){
+        this.puntos -=
+    }
+    public void posicionarJinete(){
 
+    }
+    public void posicionarCatapulta(){
+
+    }
 }

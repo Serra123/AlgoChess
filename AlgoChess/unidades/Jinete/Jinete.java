@@ -4,7 +4,7 @@ import unidades.Interfaces.UnidadAtaque;
 import unidades.Interfaces.UnidadMovimiento;
 import unidades.Unidad;
 
-public class Jinete extends Unidad implements UnidadAtaque, UnidadMovimiento {
+public class Jinete extends Unidad implements UnidadAtaque, UnidadMovimiento{
     private EstadoAcompañamiento estadoAcompañamiento;
     private int dañoCuerpoACuerpo;
     private int dañoADistancia;
