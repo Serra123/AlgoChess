@@ -1,5 +1,6 @@
 package Jugadores;
 
+import Unidades.Catapulta;
 import Unidades.Jinete;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
@@ -27,6 +28,11 @@ public class Jugador {
         String nombreEjercito = this.nombre;
         Jinete unJinete = new Jinete(fila,columna,nombreEjercito);
         unidades.add(unJinete);
+    }
+    public void crearCatapultaEnPosicion(int fila,int columna){
+        String nombreEjercito = this.nombre;
+        Catapulta unaCatapulta = new Catapulta(fila, columna, nombreEjercito);
+        unidades.add(unaCatapulta);
     }
 
 }

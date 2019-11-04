@@ -20,13 +20,13 @@ public class JineteTest {
     @Test
     public void testJineteAtacaConArcoYFlechaASoldadoEnemigoCorrectamente(){
         Jinete unJinete = new Jinete(0,0,"");
-        Soldado enemigo = new Soldado(1,1,"");
+        Soldado unEnemigo = new Soldado(1,1,"");
 
         unJinete.cambiarArmaAArcoYFlecha();
 
-        unJinete.atacar(enemigo);
+        unJinete.atacar(unEnemigo);
 
-        Assert.assertEquals(85, enemigo.getVida());
+        Assert.assertEquals(85, unEnemigo.getVida());
     }
 
 }
