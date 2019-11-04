@@ -12,4 +12,9 @@ public class Unidad {
     protected void recibirAtaque(int valorDanio){
         vida -= valorDanio;
     }
+
+    protected void recibirCuracion(int valorCuracion) {
+
+        vida+=valorCuracion;
+    }
 }
