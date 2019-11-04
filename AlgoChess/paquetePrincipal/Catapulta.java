@@ -8,10 +8,11 @@ public class Catapulta extends Unidad {
         enemigo.recibirAtaque(this.danio);
     }
 
-    Catapulta(){
+    Catapulta(int fila, int columna){
         this.vida = 50;
         this.costo = 5;
         this.danio = 20;
+        this.posicion = new Posicion(fila,columna);
     }
     @Override
     public void recibirCuracion(int valorCuracion){

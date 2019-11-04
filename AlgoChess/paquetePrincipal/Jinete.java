@@ -5,8 +5,10 @@ public class Jinete extends UnidadMovible{
     private Arma armaDeAtaque;
 
 
-    public Jinete() {
-
+    public Jinete(int fila, int columna) {
+        this.costo = 3;
+        this.vida = 100;
+        this.posicion = new Posicion(fila,columna);
         armaDeAtaque = new Espada();
     }
 
