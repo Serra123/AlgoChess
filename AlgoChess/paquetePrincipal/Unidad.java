@@ -9,7 +9,8 @@ public class Unidad {
         return vida;
     }
 
-    protected void recibirAtaque(int valorDanio){
+    protected void recibirAtaque(int valorDanio)
+    {
         vida -= valorDanio;
     }
 
