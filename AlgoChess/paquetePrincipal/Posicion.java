@@ -14,11 +14,11 @@ public class Posicion {
         this.columna = nuevaPosicion.getColumna();
     }
 
-    private int getColumna() {
+    public int getColumna() {
         return this.columna;
     }
 
-    private int getFila() {
+    public int getFila() {
         return this.fila;
     }
 
