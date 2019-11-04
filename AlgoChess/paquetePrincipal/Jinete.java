@@ -2,16 +2,24 @@ package paquetePrincipal;
 
 public class Jinete extends UnidadMovible{
 
-    private int danioCuerpoACuerpo;
-    private int danioADistancia;
+    private Arma armaDeAtaque;
 
 
     public Jinete() {
-        danioADistancia = 15;
-        danioCuerpoACuerpo = 5;
+
+        armaDeAtaque = new Espada();
     }
 
     public void atacar(Unidad enemigo){
-        enemigo.recibirAtaque(danioCuerpoACuerpo);
+
+        armaDeAtaque.atacar(enemigo);
+    }
+
+    public void cambiarArmaAEspada(){
+        armaDeAtaque = new Espada();
+    }
+
+    public void cambiarArmaAArcoYFlecha(){
+        armaDeAtaque = new ArcoYFlecha();
     }
 }

@@ -10,6 +10,7 @@ public class Curandero extends UnidadMovible{
     }
 
     public void curar(Unidad unidadAliada) {
+
         unidadAliada.recibirCuracion(valorCuracion);
     }
 }

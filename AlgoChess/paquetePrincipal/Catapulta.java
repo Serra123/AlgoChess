@@ -13,4 +13,8 @@ public class Catapulta extends Unidad {
         this.costo = 5;
         this.danio = 20;
     }
+    @Override
+    public void recibirCuracion(int valorCuracion){
+        throw new RuntimeException("No se puede curar una catapulta");
+    }
 }
