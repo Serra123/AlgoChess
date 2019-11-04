@@ -18,4 +18,21 @@ public class CuranderoTest {
 
         Assert.assertEquals(soldadoAliado.getVida(),95);
     }
+
+    @Test
+    public void curarCatapultaTiraError(){
+        Curandero unCurandero = new Curandero();
+        Catapulta unaCatapulta = new Catapulta();
+
+        try {
+            unCurandero.curar(unaCatapulta);
+        }
+        catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            //y aca que elija otra unidad a la que curar
+        }
+        Assert.assertEquals(unaCatapulta.getVida(),50);
+    }
+
+
 }
