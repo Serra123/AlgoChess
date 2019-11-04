@@ -1,6 +1,6 @@
 package paquetePrincipal;
 
-public class Curandero extends Unidad{
+public class Curandero extends UnidadMovible{
 
     private int valorCuracion;
 

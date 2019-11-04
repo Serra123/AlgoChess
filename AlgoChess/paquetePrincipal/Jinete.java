@@ -1,6 +1,6 @@
 package paquetePrincipal;
 
-public class Jinete extends Unidad{
+public class Jinete extends UnidadMovible{
 
     private int danioCuerpoACuerpo;
     private int danioADistancia;

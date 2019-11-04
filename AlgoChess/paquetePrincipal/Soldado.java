@@ -1,6 +1,6 @@
 package paquetePrincipal;
 
-public class Soldado extends Unidad{
+public class Soldado extends UnidadMovible{
 
     private int danioCuerpoACuerpo;
 
