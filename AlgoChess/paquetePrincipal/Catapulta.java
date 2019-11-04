@@ -1,16 +1,16 @@
 package paquetePrincipal;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+public class Catapulta extends Unidad {
 
-public class Catapulta extends Application {
+    private int danio;
 
-    public static void main(String[] args) {
-        launch(args);
+    public void atacar(Soldado enemigo) {
+        enemigo.recibirAtaque(this.danio);
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-
+    Catapulta(){
+        this.vida = 50;
+        this.costo = 5;
+        this.danio = 20;
     }
 }
