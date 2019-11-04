@@ -1,4 +1,4 @@
-package paquetePrincipal;
+package Unidades;
 
 public class ArcoYFlecha extends Arma {
 
@@ -9,7 +9,7 @@ public class ArcoYFlecha extends Arma {
     }
 
     @Override
-    public void atacar(Unidad enemigo) {
+    protected void atacar(Unidad enemigo) {
         enemigo.recibirAtaque(danio);
     }
 }

@@ -1,4 +1,6 @@
-package paquetePrincipal;
+package Unidades;
+
+import Unidades.Posicion.Posicion;
 
 public class UnidadMovible extends Unidad {
         public void mover(Posicion nuevaPosicion){

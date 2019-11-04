@@ -1,12 +1,15 @@
-package paquetePrincipal;
+package Unidades;
 
-public class Curandero extends UnidadMovible{
+import Unidades.Posicion.Posicion;
+
+public class Curandero extends UnidadMovible {
 
     private int valorCuracion;
 
-    Curandero(int fila, int columna){
+    Curandero(int fila, int columna,String unNombreDeJugador){
         vida = 75;
         valorCuracion= 15;
+        this.ejercito = unNombreDeJugador;
         this.posicion = new Posicion(fila,columna);
     }
 

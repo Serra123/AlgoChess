@@ -1,4 +1,6 @@
-package paquetePrincipal;
+package Unidades;
+
+import Unidades.Posicion.Posicion;
 
 public class Catapulta extends Unidad {
 
@@ -8,10 +10,11 @@ public class Catapulta extends Unidad {
         enemigo.recibirAtaque(this.danio);
     }
 
-    Catapulta(int fila, int columna){
+    Catapulta(int fila, int columna,String unNombreDeJugador){
         this.vida = 50;
         this.costo = 5;
         this.danio = 20;
+        this.ejercito = unNombreDeJugador;
         this.posicion = new Posicion(fila,columna);
     }
     @Override

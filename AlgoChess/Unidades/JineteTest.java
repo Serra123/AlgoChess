@@ -1,4 +1,4 @@
-package paquetePrincipal;
+package Unidades;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,8 +7,8 @@ public class JineteTest {
 
     @Test
     public void testJineteAtacaConEspadaASoldadoEnemigoCorrectamente(){
-        Jinete unJinete = new Jinete(0,0);
-        Soldado enemigo = new Soldado(1,1);
+        Jinete unJinete = new Jinete(0,0,"");
+        Soldado enemigo = new Soldado(1,1,"");
 
         unJinete.cambiarArmaAEspada();
 
@@ -19,8 +19,8 @@ public class JineteTest {
 
     @Test
     public void testJineteAtacaConArcoYFlechaASoldadoEnemigoCorrectamente(){
-        Jinete unJinete = new Jinete(0,0);
-        Soldado enemigo = new Soldado(1,1);
+        Jinete unJinete = new Jinete(0,0,"");
+        Soldado enemigo = new Soldado(1,1,"");
 
         unJinete.cambiarArmaAArcoYFlecha();
 

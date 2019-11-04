@@ -1,14 +1,17 @@
-package paquetePrincipal;
+package Unidades;
 
-public class Jinete extends UnidadMovible{
+import Unidades.Posicion.Posicion;
+
+public class Jinete extends UnidadMovible {
 
     private Arma armaDeAtaque;
 
 
-    public Jinete(int fila, int columna) {
+    public Jinete(int fila, int columna,String unNombreDeJugador) {
         this.costo = 3;
         this.vida = 100;
         this.posicion = new Posicion(fila,columna);
+        this.ejercito = unNombreDeJugador;
         armaDeAtaque = new Espada();
     }
 

@@ -1,4 +1,4 @@
-package paquetePrincipal;
+package Unidades;
 
 public abstract class Arma {
 

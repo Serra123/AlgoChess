@@ -1,8 +1,8 @@
-package paquetePrincipal;
+package Unidades;
 
 import org.junit.Test;
 
-public class UnidadMovilbeTest {
+public class UnidadMovibleTest {
     @Test
     public void UnidadMovibleSeMueveArriba(){
 

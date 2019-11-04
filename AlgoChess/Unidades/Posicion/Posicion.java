@@ -1,10 +1,10 @@
-package paquetePrincipal;
+package Unidades.Posicion;
 
 public class Posicion {
     private int fila;
     private int columna;
 
-    Posicion(int fila, int columna){
+    public Posicion(int fila, int columna){
         this.fila = fila;
         this.columna = columna;
     }

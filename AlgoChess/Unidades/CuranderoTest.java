@@ -1,4 +1,4 @@
-package paquetePrincipal;
+package Unidades;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,9 +7,9 @@ public class CuranderoTest {
 
     @Test
     public void curarAliadoCorrectamenteTest(){
-        Curandero unCurandero = new Curandero(0,0);
-        Soldado soldadoAliado = new Soldado(1,1);
-        Soldado soldadoEnemigo = new Soldado(2,2);
+        Curandero unCurandero = new Curandero(0,0,"");
+        Soldado soldadoAliado = new Soldado(1,1,"");
+        Soldado soldadoEnemigo = new Soldado(2,2,"");
 
         soldadoEnemigo.atacar(soldadoAliado);
         soldadoEnemigo.atacar(soldadoAliado);
@@ -21,8 +21,8 @@ public class CuranderoTest {
 
     @Test
     public void curarCatapultaTiraError(){
-        Curandero unCurandero = new Curandero(0,0);
-        Catapulta unaCatapulta = new Catapulta(1,1);
+        Curandero unCurandero = new Curandero(0,0,"");
+        Catapulta unaCatapulta = new Catapulta(1,1,"");
 
         try {
             unCurandero.curar(unaCatapulta);
