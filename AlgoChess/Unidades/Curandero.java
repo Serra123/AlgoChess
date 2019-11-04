@@ -6,7 +6,7 @@ public class Curandero extends UnidadMovible {
 
     private int valorCuracion;
 
-    Curandero(int fila, int columna,String unNombreDeJugador){
+    public Curandero(int fila, int columna, String unNombreDeJugador){
         vida = 75;
         valorCuracion= 15;
         this.ejercito = unNombreDeJugador;

@@ -15,6 +15,9 @@ public class Soldado extends UnidadMovible {
     }
 
     public void atacar(Unidad unidadEnemiga){
+        if(this.esAliado(unidadEnemiga)){
+            throw new RuntimeException("No podes atacar a una unidad aliada");
+        }
         unidadEnemiga.recibirAtaque(danioCuerpoACuerpo);
     }
 }

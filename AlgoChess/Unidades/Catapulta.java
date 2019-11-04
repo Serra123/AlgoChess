@@ -10,7 +10,7 @@ public class Catapulta extends Unidad {
         enemigo.recibirAtaque(this.danio);
     }
 
-    Catapulta(int fila, int columna,String unNombreDeJugador){
+    public Catapulta(int fila, int columna, String unNombreDeJugador){
         this.vida = 50;
         this.costo = 5;
         this.danio = 20;

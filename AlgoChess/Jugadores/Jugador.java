@@ -1,10 +1,6 @@
 package Jugadores;
 
-import Unidades.Catapulta;
-import Unidades.Jinete;
-import Unidades.Posicion.Posicion;
-import Unidades.Soldado;
-import Unidades.Unidad;
+import Unidades.*;
 
 import java.util.ArrayList;
 
@@ -18,21 +14,45 @@ public class Jugador {
         this.nombre = nombre;
         this.unidades = new ArrayList<Unidad>();
     }
-
-    public void crearSoldadoEnPosicion(int fila,int columna){
-        String nombre = this.nombre;
-        Soldado unSoldado = new Soldado( fila,columna,nombre);
-        unidades.add(unSoldado);
+    private void reducirPuntos(int costo) {
+        this.puntos -= costo;
+        if(this.puntos < 0) throw new RuntimeException("No alcanzan los puntos");
     }
-    public void crearJineteEnPosicion(int fila,int columna){
+
+    public Unidad crearSoldadoEnPosicion(int fila,int columna){
+        String nombre = this.nombre;
+        Soldado unSoldado = new Soldado(fila,columna,nombre);
+        this.reducirPuntos(unSoldado.getCosto());
+        unidades.add(unSoldado);
+        return unSoldado;
+    }
+
+
+
+    public Unidad crearJineteEnPosicion(int fila,int columna){
         String nombreEjercito = this.nombre;
         Jinete unJinete = new Jinete(fila,columna,nombreEjercito);
+        this.reducirPuntos(unJinete.getCosto());
         unidades.add(unJinete);
+        return unJinete;
     }
-    public void crearCatapultaEnPosicion(int fila,int columna){
+    public Unidad crearCatapultaEnPosicion(int fila,int columna){
         String nombreEjercito = this.nombre;
         Catapulta unaCatapulta = new Catapulta(fila, columna, nombreEjercito);
+        this.reducirPuntos(unaCatapulta.getCosto());
         unidades.add(unaCatapulta);
+        return unaCatapulta;
+    }
+    public Unidad crearCuranderoEnPosicion(int fila, int columna){
+        String nombreEjercito = this.nombre;
+        Curandero unCurandero = new Curandero(fila,columna,nombreEjercito);
+        this.reducirPuntos(unCurandero.getCosto());
+        unidades.add(unCurandero);
+        return unCurandero;
+    }
+
+    public void jugarTurno(){
+       if(unidades.isEmpty()) throw new RuntimeException("Perdiste!");
     }
 
 }
