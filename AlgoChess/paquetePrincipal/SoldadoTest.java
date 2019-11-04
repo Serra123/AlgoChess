@@ -7,8 +7,8 @@ public class SoldadoTest {
 
     @Test
     public void testSoldadoAtacaSoldadoEnemigoCorrectamente(){
-        Soldado unSoldado = new Soldado();
-        Soldado enemigo = new Soldado();
+        Soldado unSoldado = new Soldado(0,0);
+        Soldado enemigo = new Soldado(1,1);
 
         unSoldado.atacar(enemigo);
 
