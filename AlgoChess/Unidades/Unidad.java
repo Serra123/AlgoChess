@@ -13,6 +13,7 @@ public class Unidad {
         return vida;
     }
     public int getCosto(){ return costo; }
+    public String getEjercito(){ return ejercito; }
 
     protected void recibirAtaque(int valorDanio) {
         vida -= valorDanio;
@@ -21,8 +22,11 @@ public class Unidad {
     }
 
     protected void recibirCuracion(int valorCuracion) {
-
         vida+=valorCuracion;
+    }
+    protected boolean esAliado(Unidad unaUnidad){
+        return  (this.ejercito == unaUnidad.getEjercito());
+
     }
 
 }

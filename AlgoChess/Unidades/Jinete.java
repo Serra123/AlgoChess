@@ -15,9 +15,11 @@ public class Jinete extends UnidadMovible {
         armaDeAtaque = new Espada();
     }
 
-    public void atacar(Unidad enemigo){
-
-        armaDeAtaque.atacar(enemigo);
+    public void atacar(Unidad unaUnidad){
+        if(this.esAliado(unaUnidad)){
+            throw new RuntimeException("No podes atacar a un aliado");
+        }
+        armaDeAtaque.atacar(unaUnidad);
     }
 
     public void cambiarArmaAEspada(){

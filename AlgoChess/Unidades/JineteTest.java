@@ -28,5 +28,16 @@ public class JineteTest {
 
         Assert.assertEquals(85, unEnemigo.getVida());
     }
+    @Test
+    public void testJineteAtacaAJineteAliadoYSaltaExcepcion() {
+        Jinete unJinete = new Jinete(0, 0, "juan");
+        Jinete otroJinete = new Jinete(0, 0, "juan");
+        try {
+            unJinete.atacar(otroJinete);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+        Assert.assertEquals(otroJinete.getVida(), 100);
+    }
 
 }

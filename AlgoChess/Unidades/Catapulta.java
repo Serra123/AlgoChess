@@ -6,8 +6,8 @@ public class Catapulta extends Unidad {
 
     private int danio;
 
-    public void atacar(Soldado enemigo) {
-        enemigo.recibirAtaque(this.danio);
+    public void atacar(Unidad cualquierUnidad){
+        cualquierUnidad.recibirAtaque(this.danio);
     }
 
     public Catapulta(int fila, int columna, String unNombreDeJugador){
