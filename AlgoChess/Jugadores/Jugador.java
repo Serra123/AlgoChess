@@ -52,6 +52,11 @@ public class Jugador {
     }
 
     public void jugarTurno(){
+        for(int i=0;i< unidades.size();i++){
+            if(unidades.get(i).getEstaMuerto()){
+                unidades.remove(i);
+            }
+        }
        if(unidades.isEmpty()) throw new RuntimeException("Perdiste!");
     }
 

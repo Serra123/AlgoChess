@@ -29,4 +29,7 @@ public class Unidad {
 
     }
 
+    public boolean getEstaMuerto() {
+        return (!this.estaVivo);
+    }
 }
