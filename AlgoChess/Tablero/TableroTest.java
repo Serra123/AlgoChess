@@ -4,7 +4,6 @@ import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions.assertThrows();
 
 public class TableroTest {
 
@@ -14,7 +13,7 @@ public class TableroTest {
 
 
 
-       // unTablero.moverUnidad(unaUnidad);   //COmentario a borrar
+       // unTablero.moverUnidad(unaUnidad);
         Assert.assertTrue(true);
     }
 
@@ -23,19 +22,20 @@ public class TableroTest {
         Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
         Soldado unSoldado = new Soldado(0,0,"Jugador1");
         Posicion unaPosicion = new Posicion(0,1);
-        tablero.colocarUnidad(unSoldado,unaPosicion);
+        try {
+            tablero.colocarUnidad(unSoldado,unaPosicion);
+        }catch (ExcepcionSectorEnemigo e) {
+            Assert.fail();
+        }
         Assert.assertEquals(unSoldado,tablero.getUnidad(unaPosicion));
     }
 
-    @Test
-    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona(){
-        Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
+    @Test(expected = ExcepcionSectorEnemigo.class)
+    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona() throws ExcepcionSectorEnemigo{
+        Tablero tablero = new Tablero(4,4,"Jugador1","jugador2");
         Soldado unSoldado = new Soldado(0,0,"Jugador1");
-        Posicion unaPosicion = new Posicion(1,1);
-        try{
-            tablero.colocarUnidad(unSoldado,unaPosicion);
-        }catch(RuntimeException e){
-            Assertions.assertThrows("La prueba no paso" + e.getMessage());
-        }
+        Posicion unaPosicion = new Posicion(3,1);
+        tablero.colocarUnidad(unSoldado,unaPosicion);
     }
+
 }

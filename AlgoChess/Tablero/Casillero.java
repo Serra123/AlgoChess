@@ -4,10 +4,10 @@ import Unidades.Unidad;
 
 public class Casillero {
     private EstadoOcupacion ocupacion;
-    private String nombreJugador;
+    private String nombreEjercito;
 
     Casillero(String nombreJugador){
-        this.nombreJugador = nombreJugador;
+        this.nombreEjercito = nombreJugador;
         this.ocupacion = new Vacio();
     }
     public void setUnidad(Unidad unidad) {
@@ -24,6 +24,12 @@ public class Casillero {
 
     public void verificarColocacion() throws ExcepcionDeCambioDeEstado {
         ocupacion.verificarColocacion();
+    }
+
+    public void verificarSector(Unidad unaUnidad) throws ExcepcionSectorEnemigo {
+        if(this.nombreEjercito != unaUnidad.getEjercito()){
+            throw new ExcepcionSectorEnemigo();
+        }
     }
 
     public void cambiarEstadoAOcupado(Unidad unidad) {
