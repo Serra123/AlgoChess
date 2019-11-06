@@ -7,6 +7,7 @@ public class Soldado extends UnidadMovible {
     private int danioCuerpoACuerpo;
 
     public Soldado(int fila,int columna, String unNombreDeJugador) {
+        super(fila,columna);
         danioCuerpoACuerpo = 10;
         vida = 100;
         costo = 1;
