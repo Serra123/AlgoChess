@@ -1,5 +1,6 @@
 package Unidades;
 
+import Unidades.Posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,8 +8,10 @@ public class CatapultaTest {
 
     @Test
     public void testCatapultaAtacaSoldadoEnemigoCorrectamente(){
-        Catapulta unaCatapulta = new Catapulta(0,0,"");
-        Soldado enemigo = new Soldado(8,8,"Enemigo");
+        Posicion unaPosicion = new Posicion(0,0);
+
+        Catapulta unaCatapulta = new Catapulta(unaPosicion,"");
+        Soldado enemigo = new Soldado(unaPosicion,"Enemigo");
 
         unaCatapulta.atacar(enemigo);
 
@@ -17,8 +20,10 @@ public class CatapultaTest {
 
     @Test
     public void testCatapultaAtacaSoldadoAliadoCorrectamente(){
-        Catapulta unaCatapulta = new Catapulta(0,0,"Ejercito aliado");
-        Soldado aliado = new Soldado(8,8,"Ejercito aliado");
+        Posicion unaPosicion = new Posicion(0,0);
+
+        Catapulta unaCatapulta = new Catapulta(unaPosicion,"Ejercito aliado");
+        Soldado aliado = new Soldado(unaPosicion,"Ejercito aliado");
 
         unaCatapulta.atacar(aliado);
 

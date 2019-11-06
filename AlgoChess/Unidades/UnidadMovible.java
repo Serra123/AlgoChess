@@ -2,13 +2,14 @@ package Unidades;
 
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
+import Tablero.ExcepcionCasilleroOcupado;
 
-public class UnidadMovible extends Unidad {
-    UnidadMovible(int fila,int columna){
-        this.posicion = new Posicion(fila,columna);
+public abstract class UnidadMovible extends Unidad {
+    UnidadMovible(Posicion unaPosicion){
+        this.posicion = unaPosicion;
 
     }
-        public void mover(Posicion nuevaPosicion, Tablero tablero){
+        public void mover(Posicion nuevaPosicion, Tablero tablero)throws ExcepcionCasilleroOcupado {
             double distanciaMovimiento = this.posicion.calcularDistancia(nuevaPosicion);
             if(distanciaMovimiento < 2){
                 tablero.moverUnidad(this.posicion,nuevaPosicion);

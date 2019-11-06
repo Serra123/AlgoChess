@@ -1,5 +1,6 @@
 package Unidades;
 
+import Unidades.Posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,8 +8,9 @@ public class JineteTest {
 
     @Test
     public void testJineteAtacaConEspadaASoldadoEnemigoCorrectamente(){
-        Jinete unJinete = new Jinete(0,0,"");
-        Soldado enemigo = new Soldado(1,1,"Ejercito enemigo");
+        Posicion unaPosicion = new Posicion(0,0);
+        Jinete unJinete = new Jinete(unaPosicion,"");
+        Soldado enemigo = new Soldado(unaPosicion,"Ejercito enemigo");
 
         unJinete.cambiarArmaAEspada();
 
@@ -19,8 +21,9 @@ public class JineteTest {
 
     @Test
     public void testJineteAtacaConArcoYFlechaASoldadoEnemigoCorrectamente(){
-        Jinete unJinete = new Jinete(0,0,"");
-        Soldado unEnemigo = new Soldado(1,1,"Ejercito enemigo");
+        Posicion unaPosicion = new Posicion(0,0);
+        Jinete unJinete = new Jinete(unaPosicion,"");
+        Soldado unEnemigo = new Soldado(unaPosicion,"Ejercito enemigo");
 
         unJinete.cambiarArmaAArcoYFlecha();
 
@@ -30,8 +33,9 @@ public class JineteTest {
     }
     @Test
     public void testJineteAtacaAJineteAliadoYSaltaExcepcion() {
-        Jinete unJinete = new Jinete(0, 0, "juan");
-        Jinete otroJinete = new Jinete(0, 0, "juan");
+        Posicion unaPosicion = new Posicion(0,0);
+        Jinete unJinete = new Jinete(unaPosicion, "juan");
+        Jinete otroJinete = new Jinete(unaPosicion, "juan");
         try {
             unJinete.atacar(otroJinete);
         } catch (RuntimeException e) {

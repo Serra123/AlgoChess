@@ -18,12 +18,12 @@ public class TableroTest {
     }
 
     @Test
-    public void testColocarPiezaAliadaEnSectorAliadoFunciona(){
+    public void testColocarPiezaAliadaEnSectorAliadoFunciona() throws ExcepcionCasilleroOcupado{
         Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
-        Soldado unSoldado = new Soldado(0,0,"Jugador1");
         Posicion unaPosicion = new Posicion(0,1);
+        Soldado unSoldado = new Soldado(unaPosicion,"Jugador1");
         try {
-            tablero.colocarUnidad(unSoldado,unaPosicion);
+            tablero.colocarUnidad(unSoldado);
         }catch (ExcepcionSectorEnemigo e) {
             Assert.fail();
         }
@@ -31,11 +31,12 @@ public class TableroTest {
     }
 
     @Test(expected = ExcepcionSectorEnemigo.class)
-    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona() throws ExcepcionSectorEnemigo{
+    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona() throws ExcepcionSectorEnemigo,ExcepcionCasilleroOcupado{
         Tablero tablero = new Tablero(4,4,"Jugador1","jugador2");
-        Soldado unSoldado = new Soldado(0,0,"Jugador1");
-        Posicion unaPosicion = new Posicion(3,1);
-        tablero.colocarUnidad(unSoldado,unaPosicion);
+        Posicion unaPosicion = new Posicion(0,0);
+        Soldado unSoldado = new Soldado(unaPosicion,"Jugador1");
+        Posicion otraPosicion = new Posicion(3,1);
+        tablero.colocarUnidad(unSoldado);
     }
 
 }

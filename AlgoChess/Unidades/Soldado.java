@@ -6,12 +6,12 @@ public class Soldado extends UnidadMovible {
 
     private int danioCuerpoACuerpo;
 
-    public Soldado(int fila,int columna, String unNombreDeJugador) {
-        super(fila,columna);
+    public Soldado(Posicion unaPosicion, String unNombreDeJugador) {
+        super(unaPosicion);
         danioCuerpoACuerpo = 10;
         vida = 100;
         costo = 1;
-        this.posicion = new Posicion(fila,columna);
+        this.posicion = unaPosicion;
         ejercito = unNombreDeJugador;
     }
 

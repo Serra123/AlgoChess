@@ -26,8 +26,9 @@ public class Tablero {
 
     }
 
-    public void colocarUnidad(Unidad unidad, Posicion posicion)throws ExcepcionCasilleroOcupado {
-        Casillero unCasillero = this.getCasillero(posicion);
+    public void colocarUnidad(Unidad unidad)throws ExcepcionCasilleroOcupado,ExcepcionSectorEnemigo {
+        Posicion unaPosicion = unidad.getPosicion();
+        Casillero unCasillero = this.getCasillero(unaPosicion);
         try {
             unCasillero.verificarColocacion();
         }catch(ExcepcionDeCambioDeEstado e){

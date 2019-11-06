@@ -1,6 +1,8 @@
 package Jugadores;
 
+import Tablero.Tablero;
 import Unidades.*;
+import Unidades.Posicion.Posicion;
 
 import java.util.ArrayList;
 
@@ -19,32 +21,32 @@ public class Jugador {
         if(this.puntos < 0) throw new RuntimeException("No alcanzan los puntos");
     }
 
-    public Unidad crearSoldadoEnPosicion(int fila,int columna){
+    public Unidad crearSoldadoEnPosicion(Posicion unaPosicion, Tablero unTablero){
         String nombre = this.nombre;
-        Soldado unSoldado = new Soldado(fila,columna,nombre);
+        Soldado unSoldado = new Soldado(unaPosicion,nombre);
         this.reducirPuntos(unSoldado.getCosto());
         unidades.add(unSoldado);
         return unSoldado;
     }
 
 
-    public Unidad crearJineteEnPosicion(int fila,int columna){
+    public Unidad crearJineteEnPosicion(Posicion unaPosicion,Tablero unTablero){
         String nombreEjercito = this.nombre;
-        Jinete unJinete = new Jinete(fila,columna,nombreEjercito);
+        Jinete unJinete = new Jinete(unaPosicion,nombreEjercito);
         this.reducirPuntos(unJinete.getCosto());
         unidades.add(unJinete);
         return unJinete;
     }
-    public Unidad crearCatapultaEnPosicion(int fila,int columna){
+    public Unidad crearCatapultaEnPosicion(Posicion unaPosicion,Tablero unTablero){
         String nombreEjercito = this.nombre;
-        Catapulta unaCatapulta = new Catapulta(fila, columna, nombreEjercito);
+        Catapulta unaCatapulta = new Catapulta(unaPosicion, nombreEjercito);
         this.reducirPuntos(unaCatapulta.getCosto());
         unidades.add(unaCatapulta);
         return unaCatapulta;
     }
-    public Unidad crearCuranderoEnPosicion(int fila, int columna){
+    public Unidad crearCuranderoEnPosicion(Posicion unaPosicion,Tablero unTablero){
         String nombreEjercito = this.nombre;
-        Curandero unCurandero = new Curandero(fila,columna,nombreEjercito);
+        Curandero unCurandero = new Curandero(unaPosicion,nombreEjercito);
         this.reducirPuntos(unCurandero.getCosto());
         unidades.add(unCurandero);
         return unCurandero;

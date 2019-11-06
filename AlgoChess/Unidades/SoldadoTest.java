@@ -1,5 +1,6 @@
 package Unidades;
 
+import Unidades.Posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,8 +8,9 @@ public class SoldadoTest {
 
     @Test
     public void testSoldadoAtacaASoldadoEnemigoCorrectamente() {
-        Soldado unSoldado = new Soldado(0, 0, "juan");
-        Soldado enemigo = new Soldado(1, 1, "fede");
+        Posicion unaPosicion = new Posicion(0,0);
+        Soldado unSoldado = new Soldado(unaPosicion, "juan");
+        Soldado enemigo = new Soldado(unaPosicion, "fede");
 
         unSoldado.atacar(enemigo);
 
@@ -17,8 +19,9 @@ public class SoldadoTest {
 
     @Test
     public void testSoldadoAtacaASoldadoAliadoYSaltaExcepcion() {
-        Soldado unSoldado = new Soldado(0, 0, "juan");
-        Soldado otroSoldado = new Soldado(0, 0, "juan");
+        Posicion unaPosicion = new Posicion(0,0);
+        Soldado unSoldado = new Soldado(unaPosicion, "juan");
+        Soldado otroSoldado = new Soldado(unaPosicion, "juan");
         try {
             unSoldado.atacar(otroSoldado);
         } catch (RuntimeException e) {

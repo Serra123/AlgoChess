@@ -1,17 +1,21 @@
 package Jugadores;
 
+import Tablero.Tablero;
+import Unidades.Posicion.Posicion;
 import org.junit.Test;
 
 public class JugadorTest {
     @Test
     public void jugadorNoPuedeCrearUnidadesCuandoSeQuedaSinPuntos(){
         Jugador unJugador = new Jugador("juan");
-        unJugador.crearCatapultaEnPosicion(0,0);
-        unJugador.crearCatapultaEnPosicion(0,0);
-        unJugador.crearCatapultaEnPosicion(0,0);
-        unJugador.crearCatapultaEnPosicion(0,0);
+        Posicion unaPosicion = new Posicion(0,1);
+        Tablero unTablero = new Tablero(10,10,"juan","Jugador2");
+        unJugador.crearCatapultaEnPosicion(unaPosicion,unTablero);
+        unJugador.crearCatapultaEnPosicion(unaPosicion,unTablero);
+        unJugador.crearCatapultaEnPosicion(unaPosicion,unTablero);
+        unJugador.crearCatapultaEnPosicion(unaPosicion,unTablero);
         try{
-            unJugador.crearCatapultaEnPosicion(0,0);
+            unJugador.crearCatapultaEnPosicion(unaPosicion,unTablero);
         }catch(RuntimeException e){
             System.out.println(e.getMessage());
             //manejar excepcion

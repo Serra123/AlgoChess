@@ -32,4 +32,8 @@ public class Unidad {
     public boolean getEstaMuerto() {
         return (!this.estaVivo);
     }
+
+    public Posicion getPosicion() {
+        return this.posicion;
+    }
 }

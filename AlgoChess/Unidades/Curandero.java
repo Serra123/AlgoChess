@@ -6,8 +6,8 @@ public class Curandero extends UnidadMovible {
 
     private int valorCuracion;
 
-    public Curandero(int fila, int columna, String unNombreDeJugador){
-        super(fila,columna);
+    public Curandero(Posicion unaPosicion, String unNombreDeJugador){
+        super(unaPosicion);
         vida = 75;
         valorCuracion= 15;
         this.ejercito = unNombreDeJugador;
