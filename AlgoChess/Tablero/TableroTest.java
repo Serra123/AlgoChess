@@ -4,7 +4,7 @@ import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions.assertThrows();
+import org.junit.jupiter.api.Assertions;
 
 public class TableroTest {
 
