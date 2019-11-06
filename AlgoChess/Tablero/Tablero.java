@@ -29,11 +29,13 @@ public class Tablero {
     public void colocarUnidad(Unidad unidad)throws ExcepcionCasilleroOcupado,ExcepcionSectorEnemigo {
         Posicion unaPosicion = unidad.getPosicion();
         Casillero unCasillero = this.getCasillero(unaPosicion);
+        unCasillero.verificarSector(unidad);
         try {
             unCasillero.verificarColocacion();
         }catch(ExcepcionDeCambioDeEstado e){
             unCasillero.cambiarEstadoAOcupado(unidad);
         }
+
     }
     public void moverUnidad(Posicion posicionAnterior,Posicion posicionNueva) throws ExcepcionCasilleroOcupado{
         Casillero casilleroDeUnidad = this.getCasillero(posicionAnterior);
