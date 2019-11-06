@@ -29,6 +29,6 @@ public class Tablero {
                 this.casilleros.put(posicion,casillero);
             }
         }
-        
+
     }
 }
