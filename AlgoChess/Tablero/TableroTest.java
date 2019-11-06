@@ -1,7 +1,10 @@
 package Tablero;
 
+import Unidades.Posicion.Posicion;
+import Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions.assertThrows();
 
 public class TableroTest {
 
@@ -11,7 +14,28 @@ public class TableroTest {
 
 
 
-        unTablero.moverUnidad(unaUnidad);   //COmentario a borrar
-        Assert.assertTrue();
+       // unTablero.moverUnidad(unaUnidad);   //COmentario a borrar
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testColocarPiezaAliadaEnSectorAliadoFunciona(){
+        Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
+        Soldado unSoldado = new Soldado(0,0,"Jugador1");
+        Posicion unaPosicion = new Posicion(0,1);
+        tablero.colocarUnidad(unSoldado,unaPosicion);
+        Assert.assertEquals(unSoldado,tablero.getUnidad(unaPosicion));
+    }
+
+    @Test
+    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona(){
+        Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
+        Soldado unSoldado = new Soldado(0,0,"Jugador1");
+        Posicion unaPosicion = new Posicion(1,1);
+        try{
+            tablero.colocarUnidad(unSoldado,unaPosicion);
+        }catch(RuntimeException e){
+            Assertions.assertThrows("La prueba no paso" + e.getMessage());
+        }
     }
 }

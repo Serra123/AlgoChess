@@ -11,4 +11,7 @@ public class Vacio implements EstadoOcupacion {
         this.unidad = unidad;
         throw new RuntimeException("Cambio de estado");
     }
+    public void verificarColocacion() throws ExcepcionDeCambioDeEstado {
+        throw new ExcepcionDeCambioDeEstado();
+    }
 }
