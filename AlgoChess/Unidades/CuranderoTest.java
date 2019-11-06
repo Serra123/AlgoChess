@@ -6,10 +6,10 @@ import org.junit.Test;
 public class CuranderoTest {
 
     @Test
-    public void curarAliadoCorrectamenteTest(){
+    public void testCurarSoldadoAliadoCorrectamente(){
         Curandero unCurandero = new Curandero(0,0,"");
-        Soldado soldadoAliado = new Soldado(1,1,"");
-        Soldado soldadoEnemigo = new Soldado(2,2,"");
+        Soldado soldadoAliado = new Soldado(1,1,"Ejercito aliado");
+        Soldado soldadoEnemigo = new Soldado(2,2,"Ejercito enemigo");
 
         soldadoEnemigo.atacar(soldadoAliado);
         soldadoEnemigo.atacar(soldadoAliado);
@@ -20,7 +20,7 @@ public class CuranderoTest {
     }
 
     @Test
-    public void curarCatapultaTiraError(){
+    public void testCurarCatapultaTiraError(){
         Curandero unCurandero = new Curandero(0,0,"");
         Catapulta unaCatapulta = new Catapulta(1,1,"");
 
@@ -29,7 +29,7 @@ public class CuranderoTest {
         }
         catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            //y aca que elija otra unidad a la que curar
+            //En esta parte, el jugador tendría que poder elegir otra unidad para curar.
         }
         Assert.assertEquals(unaCatapulta.getVida(),50);
     }

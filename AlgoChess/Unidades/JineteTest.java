@@ -8,7 +8,7 @@ public class JineteTest {
     @Test
     public void testJineteAtacaConEspadaASoldadoEnemigoCorrectamente(){
         Jinete unJinete = new Jinete(0,0,"");
-        Soldado enemigo = new Soldado(1,1,"");
+        Soldado enemigo = new Soldado(1,1,"Ejercito enemigo");
 
         unJinete.cambiarArmaAEspada();
 
@@ -20,7 +20,7 @@ public class JineteTest {
     @Test
     public void testJineteAtacaConArcoYFlechaASoldadoEnemigoCorrectamente(){
         Jinete unJinete = new Jinete(0,0,"");
-        Soldado unEnemigo = new Soldado(1,1,"");
+        Soldado unEnemigo = new Soldado(1,1,"Ejercito enemigo");
 
         unJinete.cambiarArmaAArcoYFlecha();
 
