@@ -8,9 +8,9 @@ public class Jinete extends UnidadMovible {
 
 
     public Jinete(int fila, int columna,String unNombreDeJugador) {
+        super(fila,columna);
         this.costo = 3;
         this.vida = 100;
-        this.posicion = new Posicion(fila,columna);
         this.ejercito = unNombreDeJugador;
         armaDeAtaque = new Espada();
     }
