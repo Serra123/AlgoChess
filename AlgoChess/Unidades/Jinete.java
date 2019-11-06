@@ -6,7 +6,6 @@ public class Jinete extends UnidadMovible {
 
     private Arma armaDeAtaque;
 
-
     public Jinete(int fila, int columna,String unNombreDeJugador) {
         super(fila,columna);
         this.costo = 3;

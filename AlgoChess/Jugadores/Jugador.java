@@ -28,7 +28,6 @@ public class Jugador {
     }
 
 
-
     public Unidad crearJineteEnPosicion(int fila,int columna){
         String nombreEjercito = this.nombre;
         Jinete unJinete = new Jinete(fila,columna,nombreEjercito);
