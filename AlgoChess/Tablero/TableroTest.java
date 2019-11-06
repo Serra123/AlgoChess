@@ -19,7 +19,7 @@ public class TableroTest {
     }
 
     @Test
-    public void testColocarPiezaAliadaEnSectorAliadoFunciona(){
+    public void testColocarPiezaAliadaEnSectorAliadoFunciona() throws ExcepcionCasilleroOcupado{
         Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
         Soldado unSoldado = new Soldado(0,0,"Jugador1");
         Posicion unaPosicion = new Posicion(0,1);
@@ -28,7 +28,7 @@ public class TableroTest {
     }
 
     @Test
-    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona(){
+    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona() throws ExcepcionCasilleroOcupado  {
         Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
         Soldado unSoldado = new Soldado(0,0,"Jugador1");
         Posicion unaPosicion = new Posicion(1,1);

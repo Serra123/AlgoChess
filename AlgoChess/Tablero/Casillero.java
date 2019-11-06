@@ -22,11 +22,13 @@ public class Casillero {
         return this.ocupacion.getUnidad();
     }
 
-    public void verificarColocacion() throws ExcepcionDeCambioDeEstado {
+    public void verificarColocacion() throws ExcepcionDeCambioDeEstado,ExcepcionCasilleroOcupado {
         ocupacion.verificarColocacion();
     }
 
     public void cambiarEstadoAOcupado(Unidad unidad) {
         ocupacion = new Ocupado(unidad);
     }
+
+    public void cambiarEstadoAVacio() { ocupacion = new Vacio();}
 }

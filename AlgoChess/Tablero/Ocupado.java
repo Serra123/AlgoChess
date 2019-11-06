@@ -17,7 +17,7 @@ public class Ocupado implements EstadoOcupacion {
 
     }
 
-    public void verificarColocacion(){
-        throw new RuntimeException("Ya hay una unidad en este casillero!");
+    public void verificarColocacion() throws ExcepcionCasilleroOcupado{
+        throw new ExcepcionCasilleroOcupado();
     }
 }

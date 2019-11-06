@@ -26,14 +26,24 @@ public class Tablero {
 
     }
 
-    public void colocarUnidad(Unidad unidad, Posicion posicion) {
+    public void colocarUnidad(Unidad unidad, Posicion posicion)throws ExcepcionCasilleroOcupado {
         Casillero unCasillero = this.getCasillero(posicion);
         try {
             unCasillero.verificarColocacion();
         }catch(ExcepcionDeCambioDeEstado e){
             unCasillero.cambiarEstadoAOcupado(unidad);
         }
-
+    }
+    public void moverUnidad(Posicion posicionAnterior,Posicion posicionNueva) throws ExcepcionCasilleroOcupado{
+        Casillero casilleroDeUnidad = this.getCasillero(posicionAnterior);
+        Casillero casilleroNuevo = this.getCasillero(posicionNueva);
+        try{
+            casilleroNuevo.verificarColocacion();
+        }catch(ExcepcionDeCambioDeEstado e){
+            casilleroNuevo.cambiarEstadoAOcupado(casilleroDeUnidad.getUnidad());
+        }
+        casilleroDeUnidad.cambiarEstadoAVacio();
+        posicionAnterior.mover(posicionNueva);
     }
     public Unidad getUnidad(Posicion unaPosicion){
         Casillero unCasillero = this.getCasillero(unaPosicion);
