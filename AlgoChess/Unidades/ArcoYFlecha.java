@@ -9,7 +9,7 @@ public class ArcoYFlecha extends Arma {
     }
 
     @Override
-    protected void atacar(Unidad enemigo) {
+    public void atacar(Unidad enemigo) {
         enemigo.recibirAtaque(danio);
     }
 }
