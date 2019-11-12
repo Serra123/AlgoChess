@@ -34,4 +34,21 @@ public class TableroTest {
         tablero.colocarUnidad(unSoldado);
         tablero.colocarUnidad(otroSoldado);
     }
+
+    @Test
+    public void testSectorInferiorPerteneceAPrimerJugador(){
+        Tablero tablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Posicion unaPosicion = new Posicion(1,0);
+        Assert.assertEquals((tablero.estaEnSector("Jugador1",unaPosicion)),true);
+
+    }
+
+    @Test
+    public void testSectorSuperiorPerteneceASegundoJugador(){
+        Tablero tablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Posicion unaPosicion = new Posicion(11,0);
+        Assert.assertEquals((tablero.estaEnSector("Jugador2",unaPosicion)),true);
+
+    }
+
 }

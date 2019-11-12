@@ -4,22 +4,43 @@ import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
 
 public class Tablero {
 
     private ArrayList<Fila> filas;
+    private HashMap<String,Sector> sectores;
 
     public Tablero(int filas, int columnas, String nombreUnJugador, String nombreOtroJugador) {
         this.filas = new ArrayList<Fila>();
+
+        this.sectores= new HashMap<String, Sector>();
+        Sector sectorUno= new Sector(0 ,9);
+        sectores.put(nombreUnJugador,sectorUno);
+        Sector sectorDos= new Sector(10 ,19);
+        sectores.put(nombreOtroJugador,sectorDos);
+
         for(int i=0; i < (filas/2);i++){
             Fila nuevaFila = new Fila(columnas,nombreUnJugador);
             this.filas.add(nuevaFila);
+
         }
         for(int i= (filas/2); i < filas;i++){
             Fila nuevaFila = new Fila(columnas,nombreOtroJugador);
             this.filas.add(nuevaFila);
         }
 
+
+
+    }
+
+    public boolean estaEnSector(String nombreEjercito,Posicion unaPosicion){
+
+        Sector sector = sectores.get(nombreEjercito);
+
+        return (sector.estaEnSector(unaPosicion.getFila()));
 
     }
 
