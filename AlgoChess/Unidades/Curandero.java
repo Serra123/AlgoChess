@@ -14,7 +14,8 @@ public class Curandero extends UnidadMovible {
     }
 
     public void curar(Unidad unidadAliada) {
-
-        unidadAliada.recibirCuracion(valorCuracion);
+        if(this.esAliado(unidadAliada)){
+            unidadAliada.recibirCuracion(valorCuracion);
+        }else throw new ExcepcionCuracionAEnemigo();
     }
 }

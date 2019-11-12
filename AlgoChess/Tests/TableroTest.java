@@ -1,7 +1,8 @@
-package Tablero;
+package Tests;
 
+import Tablero.*;
+import Unidades.*;
 import Unidades.Posicion.Posicion;
-import Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,14 +20,14 @@ public class TableroTest {
     }
 
     @Test(expected = ExcepcionSectorEnemigo.class)
-    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona() throws ExcepcionSectorEnemigo,ExcepcionCasilleroOcupado{
+    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona() throws ExcepcionSectorEnemigo, ExcepcionCasilleroOcupado {
         Tablero tablero = new Tablero(4,4,"Jugador1","jugador2");
         Posicion unaPosicion = new Posicion(3,0);
         Soldado unSoldado = new Soldado(unaPosicion,"Jugador1");
         tablero.colocarUnidad(unSoldado);
     }
     @Test(expected = ExcepcionCasilleroOcupado.class)
-    public void testColocarPiezaAliadaEnCasilleroAlidadoOcupado() throws ExcepcionSectorEnemigo,ExcepcionCasilleroOcupado{
+    public void testColocarPiezaAliadaEnCasilleroAliadoOcupado() throws ExcepcionSectorEnemigo, ExcepcionCasilleroOcupado {
         Tablero tablero = new Tablero(4,4,"Jugador1","jugador2");
         Posicion unaPosicion = new Posicion(1,0);
         Soldado unSoldado = new Soldado(unaPosicion,"Jugador1");

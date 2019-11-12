@@ -1,6 +1,7 @@
-package Unidades;
+package Tests;
 
 import Unidades.Posicion.Posicion;
+import Unidades.Soldado;
 import org.junit.Assert;
 import org.junit.Test;
 

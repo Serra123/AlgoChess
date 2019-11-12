@@ -19,6 +19,6 @@ public class Catapulta extends Unidad {
     }
     @Override
     public void recibirCuracion(int valorCuracion){
-        throw new RuntimeException("No se puede curar una catapulta");
+        throw new ExcepcionCuracionACatapulta();
     }
 }

@@ -6,7 +6,7 @@ public class Jinete extends UnidadMovible {
 
     private Arma armaDeAtaque;
 
-    public Jinete(Posicion unaPosicion,String unNombreDeJugador) {
+    public Jinete(Posicion unaPosicion, String unNombreDeJugador) {
         super(unaPosicion);
         this.costo = 3;
         this.vida = 100;
@@ -16,7 +16,7 @@ public class Jinete extends UnidadMovible {
 
     public void atacar(Unidad unaUnidad){
         if(this.esAliado(unaUnidad)){
-            throw new RuntimeException("No podes atacar a un aliado");
+            throw new ExcepcionAtaqueAAliado();
         }
         armaDeAtaque.atacar(unaUnidad);
     }

@@ -2,6 +2,7 @@ package Tablero;
 
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
+import Unidades.UnidadMovible;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -45,15 +46,19 @@ public class Tablero {
     }
 
     public void colocarUnidad(Unidad unidad)throws ExcepcionCasilleroOcupado,ExcepcionSectorEnemigo {
+        String unEjercito = unidad.getEjercito();
         Posicion unaPosicion = unidad.getPosicion();
-        Fila unaFila = filas.get(unaPosicion.getFila());
-        unaFila.colocarUnidadEnColumna(unidad,unaPosicion.getColumna());
+        if (this.estaEnSector(unEjercito, unaPosicion)) {
+            Fila unaFila = filas.get(unaPosicion.getFila());
+            unaFila.colocarUnidadEnColumna(unidad, unaPosicion.getColumna());
+        } else throw new ExcepcionSectorEnemigo();
     }
-    public void moverUnidad(Posicion posicionAnterior,Posicion posicionNueva) throws ExcepcionCasilleroOcupado, ExcepcionCasilleroVacio{
-        Fila filaAnterior = filas.get(posicionAnterior.getFila());
+    public void moverUnidad(UnidadMovible unaUnidadMovible,Posicion posicionNueva) throws ExcepcionCasilleroOcupado, ExcepcionCasilleroVacio{
+        Posicion unaPosicion = unaUnidadMovible.getPosicion();
+        Fila filaAnterior = filas.get(unaPosicion.getFila());
         Fila filaNueva = filas.get(posicionNueva.getFila());
-        Unidad unaUnidad = filaAnterior.vaciarUnidad(posicionAnterior.getColumna());
-        filaNueva.recibirUnidad(unaUnidad,posicionNueva.getColumna());
+        filaAnterior.vaciarUnidad(unaPosicion.getColumna());
+        filaNueva.recibirUnidad(unaUnidadMovible,posicionNueva.getColumna());
     }
     public Unidad getUnidad(Posicion unaPosicion){
         Fila unaFila = filas.get(unaPosicion.getFila());
