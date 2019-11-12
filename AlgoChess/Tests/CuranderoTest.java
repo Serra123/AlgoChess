@@ -24,6 +24,20 @@ public class CuranderoTest {
     }
 
     @Test
+    public void testCurarUnidadNoDebeSuperarSuVidaMaxima(){
+
+        Posicion unaPosicion = new Posicion(0,0);
+        Curandero unCurandero = new Curandero(unaPosicion,"Ejercito aliado");
+        Soldado soldadoAliado = new Soldado(unaPosicion,"Ejercito aliado");
+        Soldado soldadoEnemigo = new Soldado(unaPosicion,"Ejercito enemigo");
+
+        soldadoEnemigo.atacar(soldadoAliado);
+        unCurandero.curar(soldadoAliado);
+
+        Assert.assertEquals(soldadoAliado.getVida(),100);
+    }
+
+    @Test
     public void testCurarCatapultaTiraError(){
         Posicion unaPosicion = new Posicion(0,0);
         Curandero unCurandero = new Curandero(unaPosicion,"");

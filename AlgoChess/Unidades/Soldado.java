@@ -1,16 +1,19 @@
 package Unidades;
 
+import Excepciones.ExcepcionAtaqueAAliado;
 import Unidades.Posicion.Posicion;
 
 public class Soldado extends UnidadMovible {
 
-    private int danioCuerpoACuerpo;
+    private static int DANIOCUERPOACUERPO = 10;
+    private static int VIDAINICIAL = 100;
+    private static int COSTO = 1;
 
     public Soldado(Posicion unaPosicion, String unNombreDeJugador) {
         super(unaPosicion);
-        danioCuerpoACuerpo = 10;
-        vida = 100;
-        costo = 1;
+        this.vida = VIDAINICIAL;
+        this.vidaMaxima = VIDAINICIAL;
+        this.costo = COSTO;
         this.posicion = unaPosicion;
         ejercito = unNombreDeJugador;
     }
@@ -19,6 +22,6 @@ public class Soldado extends UnidadMovible {
         if(this.esAliado(unidadEnemiga)){
             throw new ExcepcionAtaqueAAliado();
         }
-        unidadEnemiga.recibirAtaque(danioCuerpoACuerpo);
+        unidadEnemiga.recibirAtaque(DANIOCUERPOACUERPO);
     }
 }

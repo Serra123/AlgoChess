@@ -1,10 +1,11 @@
 package Tablero;
 
+import Excepciones.ExcepcionCasilleroVacio;
 import Unidades.Unidad;
 
 public class Vacio implements EstadoOcupacion {
     private Unidad unidad;
-    public Unidad contenido() throws ExcepcionCasilleroVacio{
+    public Unidad contenido() throws ExcepcionCasilleroVacio {
         throw new ExcepcionCasilleroVacio();
     }
     public void setUnidad(Unidad unidad){

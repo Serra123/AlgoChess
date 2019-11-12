@@ -1,4 +1,4 @@
-package Jugadores;
+package Jugador;
 
 import Unidades.Unidad;
 import java.util.ArrayList;

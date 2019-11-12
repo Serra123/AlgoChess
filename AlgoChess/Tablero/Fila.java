@@ -1,6 +1,7 @@
 package Tablero;
 
-import Unidades.Posicion.Posicion;
+import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionCasilleroVacio;
 import Unidades.Unidad;
 
 import java.util.ArrayList;
@@ -25,11 +26,11 @@ public class Fila {
         Casillero unCasillero = this.getCasillero(unaColumna);
         unCasillero.colocar(unaUnidad);
     }
-    public Unidad vaciarUnidad(int unaColumna) throws ExcepcionCasilleroVacio{
+    public Unidad vaciarUnidad(int unaColumna) throws ExcepcionCasilleroVacio {
         Casillero unCasillero = this.getCasillero(unaColumna);
         return unCasillero.vaciarUnidad();
     }
-    public void recibirUnidad(Unidad unaUnidad, int unaColumna)throws ExcepcionCasilleroOcupado{
+    public void recibirUnidad(Unidad unaUnidad, int unaColumna)throws ExcepcionCasilleroOcupado {
         Casillero unCasillero = this.getCasillero(unaColumna);
         unCasillero.recibirUnidad(unaUnidad);
     }

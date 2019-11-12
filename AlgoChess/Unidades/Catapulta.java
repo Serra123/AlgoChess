@@ -1,19 +1,23 @@
 package Unidades;
 
+import Excepciones.ExcepcionCuracionACatapulta;
 import Unidades.Posicion.Posicion;
 
 public class Catapulta extends Unidad {
 
-    private int danio;
+    private static int DANIO = 20;
+    private static int COSTO = 5;
+    private static int VIDAINICIAL = 50;
 
     public void atacar(Unidad cualquierUnidad){
-        cualquierUnidad.recibirAtaque(this.danio);
+        cualquierUnidad.recibirAtaque(DANIO);
     }
 
     public Catapulta(Posicion unaPosicion, String unNombreDeJugador){
-        this.vida = 50;
-        this.costo = 5;
-        this.danio = 20;
+
+        this.vidaMaxima=VIDAINICIAL;
+        this.costo = COSTO;
+        this.vida = VIDAINICIAL;
         this.ejercito = unNombreDeJugador;
         this.posicion = unaPosicion;
     }

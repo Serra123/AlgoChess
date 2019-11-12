@@ -1,12 +1,13 @@
 package Tablero;
 
+import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionCasilleroVacio;
+import Excepciones.ExcepcionSectorEnemigo;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 import Unidades.UnidadMovible;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
 
 public class Tablero {
@@ -18,9 +19,9 @@ public class Tablero {
         this.filas = new ArrayList<Fila>();
 
         this.sectores= new HashMap<String, Sector>();
-        Sector sectorUno= new Sector(0 ,9);
+        Sector sectorUno= new Sector(0 ,((filas/2)-1));
         sectores.put(nombreUnJugador,sectorUno);
-        Sector sectorDos= new Sector(10 ,19);
+        Sector sectorDos= new Sector(filas/2 ,filas);
         sectores.put(nombreOtroJugador,sectorDos);
 
         for(int i=0; i < (filas/2);i++){
@@ -45,7 +46,7 @@ public class Tablero {
 
     }
 
-    public void colocarUnidad(Unidad unidad)throws ExcepcionCasilleroOcupado,ExcepcionSectorEnemigo {
+    public void colocarUnidad(Unidad unidad)throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
         String unEjercito = unidad.getEjercito();
         Posicion unaPosicion = unidad.getPosicion();
         if (this.estaEnSector(unEjercito, unaPosicion)) {
@@ -53,7 +54,7 @@ public class Tablero {
             unaFila.colocarUnidadEnColumna(unidad, unaPosicion.getColumna());
         } else throw new ExcepcionSectorEnemigo();
     }
-    public void moverUnidad(UnidadMovible unaUnidadMovible,Posicion posicionNueva) throws ExcepcionCasilleroOcupado, ExcepcionCasilleroVacio{
+    public void moverUnidad(UnidadMovible unaUnidadMovible,Posicion posicionNueva) throws ExcepcionCasilleroOcupado, ExcepcionCasilleroVacio {
         Posicion unaPosicion = unaUnidadMovible.getPosicion();
         Fila filaAnterior = filas.get(unaPosicion.getFila());
         Fila filaNueva = filas.get(posicionNueva.getFila());

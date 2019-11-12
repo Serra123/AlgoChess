@@ -1,4 +1,4 @@
-package Unidades;
+package Excepciones;
 
 public class ExcepcionCuracionAEnemigo extends RuntimeException {
 }

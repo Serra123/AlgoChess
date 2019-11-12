@@ -1,5 +1,8 @@
 package Tablero;
 
+import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionCasilleroVacio;
+import Excepciones.ExcepcionSectorEnemigo;
 import Unidades.Unidad;
 
 public class Casillero {
@@ -15,7 +18,7 @@ public class Casillero {
         return this.ocupacion.contenido();
     }
 
-    public void colocar(Unidad unaUnidad) throws ExcepcionCasilleroOcupado{
+    public void colocar(Unidad unaUnidad) throws ExcepcionCasilleroOcupado {
         EstadoOcupacion unEstadoOcupacion = ocupacion.colocar(unaUnidad);
        this.ocupacion = unEstadoOcupacion;
     }
@@ -26,7 +29,7 @@ public class Casillero {
         }
     }
 
-    public Unidad vaciarUnidad() throws ExcepcionCasilleroVacio{
+    public Unidad vaciarUnidad() throws ExcepcionCasilleroVacio {
         Unidad unaUnidad = this.ocupacion.contenido();
         EstadoOcupacion unEstado = this.ocupacion.vaciar();
         this.ocupacion = unEstado;

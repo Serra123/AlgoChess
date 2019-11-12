@@ -1,5 +1,6 @@
 package Tablero;
 
+import Excepciones.ExcepcionCasilleroOcupado;
 import Unidades.Unidad;
 
 public class Ocupado implements EstadoOcupacion {
@@ -17,7 +18,7 @@ public class Ocupado implements EstadoOcupacion {
 
     }
 
-    public EstadoOcupacion colocar(Unidad unaUnidad) throws ExcepcionCasilleroOcupado{
+    public EstadoOcupacion colocar(Unidad unaUnidad) throws ExcepcionCasilleroOcupado {
         throw new ExcepcionCasilleroOcupado();
     }
 

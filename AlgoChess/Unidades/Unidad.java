@@ -2,8 +2,10 @@ package Unidades;
 
 import Unidades.Posicion.Posicion;
 
-public class Unidad {
+public abstract class Unidad {
+
     protected int vida;
+    protected int vidaMaxima;
     protected int costo;
     protected Posicion posicion;
     protected String ejercito;
@@ -23,6 +25,9 @@ public class Unidad {
 
     protected void recibirCuracion(int valorCuracion) {
         vida+=valorCuracion;
+        if(vida>vidaMaxima){
+            vida = vidaMaxima;
+        }
     }
     protected boolean esAliado(Unidad unaUnidad){
         return  (this.ejercito == unaUnidad.getEjercito());

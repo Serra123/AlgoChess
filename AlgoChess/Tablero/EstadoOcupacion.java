@@ -1,5 +1,7 @@
 package Tablero;
 
+import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionCasilleroVacio;
 import Unidades.Unidad;
 
 public interface EstadoOcupacion {

@@ -1,5 +1,7 @@
 package Tests;
 
+import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionSectorEnemigo;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
 import Unidades.UnidadMovible;

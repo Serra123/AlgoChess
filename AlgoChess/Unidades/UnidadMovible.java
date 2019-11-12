@@ -1,8 +1,9 @@
 package Unidades;
 
+import Excepciones.ExcepcionMovimientoInvalido;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
-import Tablero.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionCasilleroOcupado;
 
 public abstract class UnidadMovible extends Unidad {
     UnidadMovible(Posicion unaPosicion) {
@@ -15,7 +16,7 @@ public abstract class UnidadMovible extends Unidad {
         return (distanciaMovimiento < 2);
     }
 
-    public void mover(Posicion nuevaPosicion, Tablero tablero) throws ExcepcionCasilleroOcupado,ExcepcionMovimientoInvalido {
+    public void mover(Posicion nuevaPosicion, Tablero tablero) throws ExcepcionCasilleroOcupado, ExcepcionMovimientoInvalido {
         if(this.puedeMoverse(nuevaPosicion)) {
             tablero.moverUnidad(this, nuevaPosicion);
             this.actualizaPosicion(nuevaPosicion);
