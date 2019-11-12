@@ -10,15 +10,11 @@ public class TableroTest {
     //Faltaria chequear la correcta inicializacion de el tablero!
 
     @Test
-    public void testColocarPiezaAliadaEnSectorAliadoFunciona() throws ExcepcionCasilleroOcupado{
+    public void testColocarPiezaAliadaEnSectorAliadoFunciona(){
         Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
         Posicion unaPosicion = new Posicion(0,1);
         Soldado unSoldado = new Soldado(unaPosicion,"Jugador1");
-        try {
-            tablero.colocarUnidad(unSoldado);
-        }catch (ExcepcionSectorEnemigo e) {
-            Assert.fail();
-        }
+        tablero.colocarUnidad(unSoldado);
         Assert.assertEquals(unSoldado,tablero.getUnidad(unaPosicion));
     }
 

@@ -10,20 +10,14 @@ public class Casillero {
         this.nombreEjercito = nombreJugador;
         this.ocupacion = new Vacio();
     }
-    public void setUnidad(Unidad unidad) {
-        try {
-            ocupacion.setUnidad(unidad);
-        } catch (RuntimeException e) {
-            this.ocupacion = new Ocupado(unidad);
-        }
+
+    public Unidad contenido() {
+        return this.ocupacion.contenido();
     }
 
-    public Unidad getUnidad() {
-        return this.ocupacion.getUnidad();
-    }
-
-    public void verificarColocacion() throws ExcepcionDeCambioDeEstado,ExcepcionCasilleroOcupado {
-        ocupacion.verificarColocacion();
+    public void colocar(Unidad unaUnidad) throws ExcepcionCasilleroOcupado{
+        EstadoOcupacion unEstadoOcupacion = ocupacion.colocar(unaUnidad);
+       this.ocupacion = unEstadoOcupacion;
     }
 
     public void verificarSector(Unidad unaUnidad) throws ExcepcionSectorEnemigo {
@@ -32,9 +26,14 @@ public class Casillero {
         }
     }
 
-    public void cambiarEstadoAOcupado(Unidad unidad) {
-        ocupacion = new Ocupado(unidad);
+    public Unidad vaciarUnidad() throws ExcepcionCasilleroVacio{
+        Unidad unaUnidad = this.ocupacion.contenido();
+        EstadoOcupacion unEstado = this.ocupacion.vaciar();
+        this.ocupacion = unEstado;
+        return unaUnidad;
     }
-
-    public void cambiarEstadoAVacio() { ocupacion = new Vacio();}
+    public void recibirUnidad(Unidad unaUnidad) throws ExcepcionCasilleroOcupado{
+        EstadoOcupacion unEstado = this.ocupacion.recibirUnidad(unaUnidad);
+        this.ocupacion = unEstado;
+    }
 }

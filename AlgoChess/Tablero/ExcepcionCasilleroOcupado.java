@@ -1,4 +1,4 @@
 package Tablero;
 
-public class ExcepcionCasilleroOcupado extends Exception {
+public class ExcepcionCasilleroOcupado extends RuntimeException {
 }

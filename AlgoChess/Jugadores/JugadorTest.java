@@ -22,7 +22,7 @@ public class JugadorTest {
         }
     }
 
-    @Test
+   /* @Test
     public void jugadorSinUnidadesIntentaJugarYPierde(){
         Jugador unJugador = new Jugador("juan");
         try{
@@ -30,5 +30,5 @@ public class JugadorTest {
         } catch(RuntimeException e){
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 }

@@ -4,9 +4,6 @@ import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 public class Tablero {
 
@@ -28,33 +25,18 @@ public class Tablero {
 
     public void colocarUnidad(Unidad unidad)throws ExcepcionCasilleroOcupado,ExcepcionSectorEnemigo {
         Posicion unaPosicion = unidad.getPosicion();
-        Casillero unCasillero = this.getCasillero(unaPosicion);
-        unCasillero.verificarSector(unidad);
-        try {
-            unCasillero.verificarColocacion();
-        }catch(ExcepcionDeCambioDeEstado e){
-            unCasillero.cambiarEstadoAOcupado(unidad);
-        }
-
+        Fila unaFila = filas.get(unaPosicion.getFila());
+        unaFila.colocarUnidadEnColumna(unidad,unaPosicion.getColumna());
     }
-    public void moverUnidad(Posicion posicionAnterior,Posicion posicionNueva) throws ExcepcionCasilleroOcupado{
-        Casillero casilleroDeUnidad = this.getCasillero(posicionAnterior);
-        Casillero casilleroNuevo = this.getCasillero(posicionNueva);
-        try{
-            casilleroNuevo.verificarColocacion();
-        }catch(ExcepcionDeCambioDeEstado e){
-            casilleroNuevo.cambiarEstadoAOcupado(casilleroDeUnidad.getUnidad());
-        }
-        casilleroDeUnidad.cambiarEstadoAVacio();
-        posicionAnterior.mover(posicionNueva);
+    public void moverUnidad(Posicion posicionAnterior,Posicion posicionNueva) throws ExcepcionCasilleroOcupado, ExcepcionCasilleroVacio{
+        Fila filaAnterior = filas.get(posicionAnterior.getFila());
+        Fila filaNueva = filas.get(posicionNueva.getFila());
+        Unidad unaUnidad = filaAnterior.vaciarUnidad(posicionAnterior.getColumna());
+        filaNueva.recibirUnidad(unaUnidad,posicionNueva.getColumna());
     }
     public Unidad getUnidad(Posicion unaPosicion){
-        Casillero unCasillero = this.getCasillero(unaPosicion);
-        return unCasillero.getUnidad();
-    }
-    private Casillero getCasillero(Posicion unaPosicion){
-        int fila = unaPosicion.getFila();
-        Casillero unCasillero = (filas.get(fila)).getCasillero(unaPosicion);
-        return unCasillero;
+        Fila unaFila = filas.get(unaPosicion.getFila());
+        Casillero unCasillero = unaFila.getCasillero(unaPosicion.getColumna());
+        return unCasillero.contenido();
     }
 }

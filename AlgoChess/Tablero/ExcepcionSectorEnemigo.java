@@ -1,4 +1,4 @@
 package Tablero;
 
-public class ExcepcionSectorEnemigo extends Exception {
+public class ExcepcionSectorEnemigo extends RuntimeException{
 }

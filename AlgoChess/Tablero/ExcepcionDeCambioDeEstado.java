@@ -1,4 +1,4 @@
 package Tablero;
 
-public class ExcepcionDeCambioDeEstado extends Exception {
+public class ExcepcionDeCambioDeEstado extends RuntimeException{
 }
