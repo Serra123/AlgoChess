@@ -22,10 +22,9 @@ public class Jugador {
         if(this.puntos < 0) throw new RuntimeException("No alcanzan los puntos");
     }
 
-    public void crearUnidadEnPosicion(Posicion unaPosicion, String tipoUnidad, Tablero unTablero){
+    public void crearUnidadEnPosicion(Posicion unaPosicion, String tipoUnidad){
         Unidad unaUnidad;
-        unaUnidad = fabrica.crearUnidad(unaPosicion, tipoUnidad, unTablero);
-        unTablero.colocarUnidad(unaUnidad);
+        unaUnidad = fabrica.crearUnidad(unaPosicion, tipoUnidad);
         this.reducirPuntos(unaUnidad.getCosto());
         this.ejercito.agregarUnidad(unaUnidad);
     }

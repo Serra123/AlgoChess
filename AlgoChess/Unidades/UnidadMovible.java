@@ -16,13 +16,14 @@ public abstract class UnidadMovible extends Unidad {
         return (distanciaMovimiento < 2);
     }
 
-    public void mover(Posicion nuevaPosicion, Tablero tablero) throws ExcepcionCasilleroOcupado, ExcepcionMovimientoInvalido {
+    public void mover(Posicion nuevaPosicion) throws ExcepcionCasilleroOcupado, ExcepcionMovimientoInvalido {
+        Tablero unTablero = Tablero.getInstancia();
         if(this.puedeMoverse(nuevaPosicion)) {
-            tablero.moverUnidad(this, nuevaPosicion);
-            this.actualizaPosicion(nuevaPosicion);
+            unTablero.moverUnidad(this, nuevaPosicion);
+            this.actualizarPosicion(nuevaPosicion);
         } else throw new ExcepcionMovimientoInvalido();
     }
-    public void actualizaPosicion(Posicion nuevaPosicion){
+    public void actualizarPosicion(Posicion nuevaPosicion){
         this.posicion.mover(nuevaPosicion);
     }
 }

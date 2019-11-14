@@ -1,9 +1,9 @@
 package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
+import Excepciones.ExcepcionAtaqueFueraDeRango;
 import Unidades.Posicion.Posicion;
 
-import javax.swing.text.ViewFactory;
 
 public class Jinete extends UnidadMovible {
 
@@ -21,11 +21,17 @@ public class Jinete extends UnidadMovible {
         armaDeAtaque = new Espada();
     }
 
-    public void atacar(Unidad unaUnidad){
-        if(this.esAliado(unaUnidad)){
+    public void atacar(Unidad unidadEnemiga){
+        if(this.esAliado(unidadEnemiga)){
             throw new ExcepcionAtaqueAAliado();
         }
-        armaDeAtaque.atacar(unaUnidad);
+        if(this.puedeAtacar(unidadEnemiga)){
+            armaDeAtaque.atacar(unidadEnemiga);
+        }else throw new ExcepcionAtaqueFueraDeRango();
+    }
+
+    public boolean puedeAtacar(Unidad unidadEnemiga){
+        return this.armaDeAtaque.puedeAtacar(this.posicion,unidadEnemiga.getPosicion());
     }
 
     public void cambiarArmaAEspada(){
