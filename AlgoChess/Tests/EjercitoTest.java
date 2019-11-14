@@ -30,8 +30,11 @@ public class EjercitoTest {
         soldados.add(soldadoDos);
         soldados.add(soldadoTres);
 
+
+
         ejercito.moverBatallon(soldados,nuevaPosicionCentral);
 
+        //Assert.assertTrue( mismaFila && mismaColumna);
         //Assert.assertEquals(unSoldado,tablero.getUnidad(unaPosicion));
     }
 
@@ -55,8 +58,6 @@ public class EjercitoTest {
         soldados.add(soldadoTres);
 
         ejercito.moverBatallon(soldados,nuevaPosicionCentral);
-
-        //Assert.assertEquals(unSoldado,tablero.getUnidad(unaPosicion));
     }
 
 
