@@ -29,4 +29,12 @@ public class Posicion {
 
        return distancia;
     }
+
+    public void mantenerDistanciaARespectoDe(Posicion posicionCentralNueva, Posicion posicionCentralVieja) {
+        int distanciaFila = posicionCentralNueva.getFila() - posicionCentralVieja.getFila();
+        int distanciaColumna = posicionCentralNueva.getColumna() - posicionCentralVieja.getColumna();
+        fila+=distanciaFila;
+        columna+=distanciaColumna;
+
+    }
 }

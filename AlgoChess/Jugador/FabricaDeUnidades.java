@@ -13,8 +13,9 @@ public class FabricaDeUnidades {
         this.nombreEjercito = nombreEjercito;
     }
 
-    public Unidad crearUnidad(Posicion unaPosicion, String tipoUnidad, Tablero unTablero){
+    public Unidad crearUnidad(Posicion unaPosicion, String tipoUnidad){
         Unidad unaUnidad;
+        Tablero unTablero = Tablero.getInstancia();
         switch (tipoUnidad){
 
             case "Soldado": unaUnidad = new Soldado(unaPosicion,this.nombreEjercito); break;
@@ -28,7 +29,7 @@ public class FabricaDeUnidades {
             default: throw new ExcepcionTipoUnidadInvalida();
 
         }
-
+        unTablero.colocarUnidad(unaUnidad);
         return unaUnidad;
     }
 }
