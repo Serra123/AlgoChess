@@ -8,20 +8,19 @@ import org.junit.Test;
 public class JugadorTest {
     @Test
     public void jugadorNoPuedeCrearUnidadesCuandoSeQuedaSinPuntos(){
-        Tablero.setParametrosConsigna();
-        Tablero unTablero = Tablero.getInstancia();
-        Jugador unJugador = new Jugador("Jugador1");
-        Posicion posicionUno = new Posicion(8,1);
-        Posicion posicionDos = new Posicion(8,2);
-        Posicion posicionTres = new Posicion(8,3);
-        Posicion posicionCuatro = new Posicion(8,4);
-        Posicion posicionCinco = new Posicion(8,5);
-        unJugador.crearUnidadEnPosicion(posicionUno,"Catapulta");
-        unJugador.crearUnidadEnPosicion(posicionDos,"Catapulta");
-        unJugador.crearUnidadEnPosicion(posicionTres,"Catapulta");
-        unJugador.crearUnidadEnPosicion(posicionCuatro,"Catapulta");
+        Jugador unJugador = new Jugador("juan");
+        Posicion posicionUno = new Posicion(0,1);
+        Posicion posicionDos = new Posicion(0,2);
+        Posicion posicionTres = new Posicion(0,3);
+        Posicion posicionCuatro = new Posicion(0,4);
+        Posicion posicionCinco = new Posicion(0,5);
+        Tablero unTablero = new Tablero(10,10,"juan","Jugador2");
+        unJugador.crearUnidadEnPosicion(posicionUno,"Catapulta", unTablero);
+        unJugador.crearUnidadEnPosicion(posicionDos,"Catapulta", unTablero);
+        unJugador.crearUnidadEnPosicion(posicionTres,"Catapulta", unTablero);
+        unJugador.crearUnidadEnPosicion(posicionCuatro,"Catapulta", unTablero);
         try{
-            unJugador.crearUnidadEnPosicion(posicionCinco,"Catapulta");
+            unJugador.crearUnidadEnPosicion(posicionCinco,"Catapulta", unTablero);
         }catch(RuntimeException e){
             System.out.println(e.getMessage());
             //manejar excepcion

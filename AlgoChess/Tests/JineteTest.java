@@ -1,7 +1,5 @@
 package Tests;
 
-import Excepciones.ExcepcionAtaqueAAliado;
-import Excepciones.ExcepcionAtaqueFueraDeRango;
 import Unidades.Jinete;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
@@ -13,9 +11,8 @@ public class JineteTest {
     @Test
     public void testJineteAtacaConEspadaASoldadoEnemigoCorrectamente(){
         Posicion unaPosicion = new Posicion(0,0);
-        Posicion otraPosicion = new Posicion(1,0);
         Jinete unJinete = new Jinete(unaPosicion,"");
-        Soldado enemigo = new Soldado(otraPosicion,"Ejercito enemigo");
+        Soldado enemigo = new Soldado(unaPosicion,"Ejercito enemigo");
 
         unJinete.cambiarArmaAEspada();
 
@@ -24,24 +21,11 @@ public class JineteTest {
         Assert.assertEquals(95, enemigo.getVida());
     }
 
-    @Test(expected = ExcepcionAtaqueFueraDeRango.class)
-    public void testJineteNoPuedeAtacarASoldadoEnemigoLejanoConEspada(){
-        Posicion unaPosicion = new Posicion(0,0);
-        Posicion otraPosicion = new Posicion(3,0);
-        Jinete unJinete = new Jinete(unaPosicion,"");
-        Soldado enemigo = new Soldado(otraPosicion,"Ejercito enemigo");
-
-        unJinete.cambiarArmaAEspada();
-
-        unJinete.atacar(enemigo);
-    }
-
     @Test
     public void testJineteAtacaConArcoYFlechaASoldadoEnemigoCorrectamente(){
         Posicion unaPosicion = new Posicion(0,0);
-        Posicion otraPosicion = new Posicion(4,0);
         Jinete unJinete = new Jinete(unaPosicion,"");
-        Soldado unEnemigo = new Soldado(otraPosicion,"Ejercito enemigo");
+        Soldado unEnemigo = new Soldado(unaPosicion,"Ejercito enemigo");
 
         unJinete.cambiarArmaAArcoYFlecha();
 
@@ -49,36 +33,17 @@ public class JineteTest {
 
         Assert.assertEquals(85, unEnemigo.getVida());
     }
-
-    @Test(expected = ExcepcionAtaqueFueraDeRango.class)
-    public void testJineteNoPuedeAtacarASoldadoEnemigoCercanoConArcoYFlecha(){
-        Posicion unaPosicion = new Posicion(0,0);
-        Posicion otraPosicion = new Posicion(1,0);
-        Jinete unJinete = new Jinete(unaPosicion,"");
-        Soldado enemigo = new Soldado(otraPosicion,"Ejercito enemigo");
-
-        unJinete.cambiarArmaAArcoYFlecha();
-
-        unJinete.atacar(enemigo);
-    }
-
-    @Test(expected = ExcepcionAtaqueFueraDeRango.class)
-    public void testJineteNoPuedeAtacarASoldadoEnemigoLejanoConArcoYFlecha(){
-        Posicion unaPosicion = new Posicion(0,0);
-        Posicion otraPosicion = new Posicion(10,0);
-        Jinete unJinete = new Jinete(unaPosicion,"");
-        Soldado enemigo = new Soldado(otraPosicion,"Ejercito enemigo");
-
-        unJinete.cambiarArmaAArcoYFlecha();
-
-        unJinete.atacar(enemigo);
-    }
-    @Test(expected = ExcepcionAtaqueAAliado.class)
+    @Test
     public void testJineteAtacaAJineteAliadoYSaltaExcepcion() {
         Posicion unaPosicion = new Posicion(0,0);
         Jinete unJinete = new Jinete(unaPosicion, "juan");
         Jinete otroJinete = new Jinete(unaPosicion, "juan");
-        unJinete.atacar(otroJinete);
+        try {
+            unJinete.atacar(otroJinete);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
+        Assert.assertEquals(otroJinete.getVida(), 100);
+    }
 
 }
