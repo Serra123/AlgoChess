@@ -14,7 +14,7 @@ public class Casillero {
         this.ocupacion = new Vacio();
     }
 
-    public Unidad contenido() {
+    public Unidad contenido() throws ExcepcionCasilleroVacio {
         return this.ocupacion.contenido();
     }
 

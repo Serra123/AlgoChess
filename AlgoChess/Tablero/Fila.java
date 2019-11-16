@@ -2,6 +2,7 @@ package Tablero;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
+import Unidades.Soldado;
 import Unidades.Unidad;
 
 import java.util.ArrayList;
@@ -33,5 +34,21 @@ public class Fila {
     public void recibirUnidad(Unidad unaUnidad, int unaColumna)throws ExcepcionCasilleroOcupado {
         Casillero unCasillero = this.getCasillero(unaColumna);
         unCasillero.recibirUnidad(unaUnidad);
+    }
+
+    public boolean hayAlgunSoldadoADistancia(int numeroColumna, int distancia){
+        Casillero casilleroActual;
+        for(int i = numeroColumna - distancia; i <= numeroColumna + distancia; i++){
+            casilleroActual = casilleros.get(i);
+            try{
+                if((casilleroActual.contenido()) instanceof Soldado){
+                    return true;
+                }
+            }catch (ExcepcionCasilleroVacio e){
+                //Manjear esta excepcion.
+            }
+
+        }
+        return false;
     }
 }

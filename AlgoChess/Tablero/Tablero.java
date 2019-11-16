@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 public class Tablero {
 
+    private static final int DISTANCIACORTA = 2;
     private ArrayList<Fila> filas;
     private HashMap<String,Sector> sectores;
 
@@ -46,7 +47,7 @@ public class Tablero {
 
     }
 
-    public void colocarUnidad(Unidad unidad)throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void colocarUnidad(Unidad unidad) throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
         String unEjercito = unidad.getEjercito();
         Posicion unaPosicion = unidad.getPosicion();
         if (this.estaEnSector(unEjercito, unaPosicion)) {
@@ -65,5 +66,19 @@ public class Tablero {
         Fila unaFila = filas.get(unaPosicion.getFila());
         Casillero unCasillero = unaFila.getCasillero(unaPosicion.getColumna());
         return unCasillero.contenido();
+    }
+
+    public boolean haySoldadoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
+        int numeroFila = unaPosicion.getFila();
+        int numeroColumna = unaPosicion.getColumna();
+        Fila filaActual;
+        for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
+            filaActual = filas.get(i);
+            if(filaActual.hayAlgunSoldadoADistancia(numeroColumna, DISTANCIACORTA)){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

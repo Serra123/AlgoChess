@@ -1,9 +1,9 @@
 package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
+import Excepciones.ExcepcionCasilleroVacio;
+import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
-
-import javax.swing.text.ViewFactory;
 
 public class Jinete extends UnidadMovible {
 
@@ -21,11 +21,23 @@ public class Jinete extends UnidadMovible {
         armaDeAtaque = new Espada();
     }
 
-    public void atacar(Unidad unaUnidad){
+    //La única forma en la cual puede actualizar el arma con la cual va a atacar es si conoce al mapa.
+    public void atacar(Unidad unaUnidad, Tablero unTablero) throws ExcepcionCasilleroVacio {
+        armaDeAtaque = this.obtenerArmaDeAtaque(unaUnidad, unTablero);
         if(this.esAliado(unaUnidad)){
             throw new ExcepcionAtaqueAAliado();
         }
         armaDeAtaque.atacar(unaUnidad);
+    }
+
+    private Arma obtenerArmaDeAtaque(Unidad unaUnidad, Tablero unTablero) throws ExcepcionCasilleroVacio {
+       boolean haySoldadoCerca = unTablero.haySoldadoCerca(this.posicion);
+       //boolean hayEnemigoCerca = unTablero.hayEnemigoCerca(this.posicion);
+       //boolean hayAliadoCerca = unTablero.hayAliadoCerca(this.posicion);
+        if(haySoldadoCerca){
+            return new ArcoYFlecha();
+        }
+        return new Espada();
     }
 
     public void cambiarArmaAEspada(){
