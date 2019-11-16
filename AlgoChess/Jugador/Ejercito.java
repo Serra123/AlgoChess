@@ -41,7 +41,5 @@ public class Ejercito {
         Batallon batallon= new Batallon(soldados);
         batallon.moverCentroA(nuevaPosicionCentral);
 
-
-
     }
 }

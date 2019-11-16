@@ -33,7 +33,10 @@ public class Batallon {
 
     }
 
-    public void moverCentroA(Posicion nuevaPosicionCentral) {
-
+    public void moverCentroA(Posicion posicionCentralNueva) {
+        Posicion posicionCentralVieja = soldadoCentral.getPosicion();
+        for (int i=0;i<soldados.size();i++){
+            soldados.get(i).getPosicion().mantenerDistanciaARespectoDe(posicionCentralNueva,posicionCentralVieja);
+        };
     }
 }
