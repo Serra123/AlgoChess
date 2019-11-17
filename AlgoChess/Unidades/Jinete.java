@@ -22,29 +22,25 @@ public class Jinete extends UnidadMovible {
     }
 
     //La única forma en la cual puede actualizar el arma con la cual va a atacar es si conoce al mapa.
-    public void atacar(Unidad unaUnidad, Tablero unTablero) throws ExcepcionCasilleroVacio {
-        this.armaDeAtaque = this.obtenerArmaDeAtaque(unaUnidad, unTablero);
+    public void atacar(Unidad unaUnidad, Tablero unTablero){
+        this.armaDeAtaque = this.obtenerArmaDeAtaque(unTablero);
         if(this.esAliado(unaUnidad)){
             throw new ExcepcionAtaqueAAliado();
         }
         armaDeAtaque.atacar(unaUnidad);
     }
 
-    private Arma obtenerArmaDeAtaque(Unidad unaUnidad, Tablero unTablero) throws ExcepcionCasilleroVacio {
+    //Suponemos que si hay Aliados cercanos que NO sean soldados, y hay enemigos cerca,
+    // luego el arma de ataque es la espada.
+    private Arma obtenerArmaDeAtaque(Tablero unTablero) {
        boolean haySoldadoCerca = unTablero.haySoldadoCerca(this.posicion);
-       //boolean hayEnemigoCerca = unTablero.hayEnemigoCerca(this.posicion);
-       //boolean hayAliadoCerca = unTablero.hayAliadoCerca(this.posicion);
-        if(haySoldadoCerca){
+       boolean hayEnemigoCerca = unTablero.hayEnemigoCerca(this.posicion);
+        if(!hayEnemigoCerca || haySoldadoCerca){
             return new ArcoYFlecha();
-        }
-        return new Espada();
+        }else{
+                return new Espada();
+            }
     }
 
-    public void cambiarArmaAEspada(){
-        armaDeAtaque = new Espada();
-    }
-
-    public void cambiarArmaAArcoYFlecha(){
-        armaDeAtaque = new ArcoYFlecha();
-    }
 }
+

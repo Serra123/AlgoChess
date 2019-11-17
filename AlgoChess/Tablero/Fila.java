@@ -2,7 +2,6 @@ package Tablero;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
-import Excepciones.ExcepcionFinDelTablero;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
 import Unidades.Unidad;
@@ -47,10 +46,27 @@ public class Fila {
                     return true;
                 }
             }catch (ExcepcionCasilleroVacio e){
-                //Manjear esta excepcion.
+                //En realidad no habría que hacer nada en el manejo de esta excepción.
             }
 
         }
+        return false;
+    }
+
+    public boolean hayEnemigoCerca(int numeroColumna, int distancia) throws ExcepcionCasilleroVacio{
+        String ejercitoAliado = casilleros.get(numeroColumna).contenido().getEjercito();
+        Casillero casilleroActual;
+        for(int i = numeroColumna - distancia; i <= numeroColumna + distancia; i++){
+            casilleroActual = casilleros.get(i);
+            try {
+                if(!(casilleroActual.contenido()).getEjercito().equals(ejercitoAliado)){
+                    return true;
+                }
+            }catch (ExcepcionCasilleroVacio e){
+              //No se debería de hacer nada en el manejo de esta excepción.
+            }
+        }
+
         return false;
     }
     public void agregarPosicionesAfectadasPorExpansion(int unaColumna, ArrayList<Posicion> posicionesAfectadas, Tablero unTablero){
@@ -77,4 +93,5 @@ public class Fila {
             // no tiene que hacer nada pues el casillero no existe
         }
     }
+
 }
