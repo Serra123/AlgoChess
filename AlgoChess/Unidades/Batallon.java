@@ -47,8 +47,6 @@ public class Batallon {
             catch (ExcepcionCasilleroOcupado e){
                 //no hago nada,si tira esta excepcion esta bien que no lo mueva.
             }
-
-            //soldado.getPosicion().mantenerDistanciaARespectoDe(posicionCentralNueva, posicionCentralVieja);
         }
     }
 }
