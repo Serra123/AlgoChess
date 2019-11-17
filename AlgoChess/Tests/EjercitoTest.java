@@ -2,10 +2,10 @@ package Tests;
 
 import Excepciones.*;
 import Jugador.Ejercito;
-import Tablero.Tablero;
+import Unidades.Jinete;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
-import org.junit.Assert;
+import Unidades.Unidad;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -19,13 +19,14 @@ public class EjercitoTest {
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+
+        Unidad soldadoUno = new Soldado(posicionUno,"Jugador1");
+        Unidad soldadoDos = new Soldado(posicionDos,"Jugador1");
+        Unidad soldadoTres = new Soldado(posicionTres,"Jugador1");
 
         Posicion nuevaPosicionCentral = new Posicion(1,2);
 
-        ArrayList<Soldado> soldados = new ArrayList<Soldado>();
+        ArrayList<Unidad> soldados = new ArrayList<>();
         soldados.add(soldadoUno);
         soldados.add(soldadoDos);
         soldados.add(soldadoTres);
@@ -36,20 +37,21 @@ public class EjercitoTest {
     }
 
 
-    @Test (expected = ExcepcionNoSePuedeCrearBatallon.class)
+    @Test (expected = ExcepcionLasUnidadesEstanSeparadas.class)
     public void testNoPuedoCrearBatallonConSoldadosSeparados() {
 
         Ejercito ejercito = new Ejercito("Jugador1");
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,4);
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+
+        Unidad soldadoUno = new Soldado(posicionUno,"Jugador1");
+        Unidad soldadoDos = new Soldado(posicionDos,"Jugador1");
+        Unidad soldadoTres = new Soldado(posicionTres,"Jugador1");
 
         Posicion nuevaPosicionCentral = new Posicion(1,2);
 
-        ArrayList<Soldado> soldados = new ArrayList<Soldado>();
+        ArrayList<Unidad> soldados = new ArrayList<>();
         soldados.add(soldadoUno);
         soldados.add(soldadoDos);
         soldados.add(soldadoTres);
@@ -66,19 +68,46 @@ public class EjercitoTest {
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
-        Soldado soldadoUno = new Soldado(posicionUno,"Carlos");
-        Soldado soldadoDos = new Soldado(posicionDos,"Esteban");
-        Soldado soldadoTres = new Soldado(posicionTres,"Carlos");
+
+        Unidad soldadoUno = new Soldado(posicionUno,"Carlos");
+        Unidad soldadoDos = new Soldado(posicionDos,"Esteban");
+        Unidad soldadoTres = new Soldado(posicionTres,"Carlos");
+
 
         Posicion nuevaPosicionCentral = new Posicion(1,2);
 
-        ArrayList<Soldado> soldados = new ArrayList<Soldado>();
+        ArrayList<Unidad> soldados = new ArrayList<>();
         soldados.add(soldadoUno);
         soldados.add(soldadoDos);
         soldados.add(soldadoTres);
 
         ejercito.moverBatallon(soldados,nuevaPosicionCentral);
     }
+
+    @Test (expected = ExcepcionUnidadesNoSonSoldados.class)
+    public void testNoPuedoCrearBatallonConUnidadesQueNoSonSoldados() {
+
+        Ejercito ejercito = new Ejercito("Jugador1");
+        Posicion posicionUno = new Posicion(0,1);
+        Posicion posicionDos = new Posicion(0,2);
+        Posicion posicionTres = new Posicion(0,3);
+
+        Unidad soldadoUno = new Soldado(posicionUno,"Jugador1");
+        Unidad soldadoDos = new Soldado(posicionDos,"Jugador1");
+        Unidad jinete = new Jinete(posicionTres,"Jugador1");
+
+
+        Posicion nuevaPosicionCentral = new Posicion(1,2);
+
+        ArrayList<Unidad> soldados = new ArrayList<>();
+        soldados.add(soldadoUno);
+        soldados.add(soldadoDos);
+        soldados.add(jinete);
+
+        ejercito.moverBatallon(soldados,nuevaPosicionCentral);
+    }
+
+
 
 
 }

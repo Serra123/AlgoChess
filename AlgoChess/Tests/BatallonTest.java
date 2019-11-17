@@ -15,13 +15,13 @@ public class BatallonTest {
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Unidad soldadoUno = new Soldado(posicionUno,"Jugador1");
+        Unidad soldadoDos = new Soldado(posicionDos,"Jugador1");
+        Unidad soldadoTres = new Soldado(posicionTres,"Jugador1");
         Posicion nuevaPosicionUno = new Posicion(1,1);
         Posicion nuevaPosicionDos = new Posicion(1,2);
         Posicion nuevaPosicionTres = new Posicion(1,3);
-        ArrayList<Soldado> soldados = new ArrayList<Soldado>();
+        ArrayList<Unidad> soldados = new ArrayList<>();
         soldados.add(soldadoUno);
         soldados.add(soldadoDos);
         soldados.add(soldadoTres);

@@ -6,23 +6,23 @@ import java.util.ArrayList;
 
 public class Batallon {
 
-    ArrayList<Soldado> soldados;
-    Soldado soldadoCentral;
+    private ArrayList<Unidad> soldados;
+    private Unidad soldadoCentral;
 
 
-    public Batallon(ArrayList<Soldado> soldados){
+    public Batallon(ArrayList<Unidad> soldados){
         this.soldados = soldados;
         this.soldadoCentral = this.getSoldadoCentral();
     }
 
-    public Soldado getSoldadoCentral(){
+    public Unidad getSoldadoCentral(){
 
         double distanciaMin = 100;
-        Soldado soldadoCentral = soldados.get(1);
+        Unidad soldadoCentral = soldados.get(1);
         for(int i=0;i<soldados.size();i++){
             double distanciaSoldado = 0;
-            for (int j=0;j<soldados.size();j++){
-                distanciaSoldado+= soldados.get(i).getPosicion().calcularDistancia(soldados.get(j).getPosicion());
+            for (Unidad soldado : soldados) {
+                distanciaSoldado += soldados.get(i).getPosicion().calcularDistancia(soldado.getPosicion());
             }
             if(distanciaSoldado<distanciaMin){
                 distanciaMin = distanciaSoldado;
@@ -35,8 +35,8 @@ public class Batallon {
 
     public void moverCentroA(Posicion posicionCentralNueva) {
         Posicion posicionCentralVieja = new Posicion(soldadoCentral.getPosicion().getFila(),soldadoCentral.getPosicion().getColumna());
-        for (int i=0;i<soldados.size();i++){
-            soldados.get(i).getPosicion().mantenerDistanciaARespectoDe(posicionCentralNueva,posicionCentralVieja);
-        };
+        for (Unidad soldado : soldados) {
+            soldado.getPosicion().mantenerDistanciaARespectoDe(posicionCentralNueva, posicionCentralVieja);
+        }
     }
 }
