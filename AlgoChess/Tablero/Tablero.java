@@ -78,4 +78,31 @@ public class Tablero {
 
         return false;
     }
+
+    public void expandirDanio(Posicion unaPosicion,int unDanio){
+        ArrayList<Posicion> posiciones = new ArrayList<Posicion>();
+        posiciones.add(unaPosicion);
+        this.obtenerUnidadesAfectadasPorExpansion(unaPosicion,posiciones);
+        posiciones.forEach((posicion) -> this.getUnidad(posicion).recibirAtaque(unDanio));
+
+    }
+
+    public void obtenerUnidadesAfectadasPorExpansion(Posicion unaPosicion,ArrayList<Posicion> posiciones){
+        int filaCentro = unaPosicion.getFila();
+        int columnaCentro = unaPosicion.getColumna();
+        Fila filaActual;
+
+        for(int i = filaCentro -1; i <= filaCentro+1;i++) {
+            try {
+                filaActual = filas.get(i);
+            }catch(IndexOutOfBoundsException e){
+                continue;
+            }
+            for (int j = columnaCentro - 1; j <= columnaCentro + 1; j++) {
+                if ((i != filaCentro) || (j != columnaCentro)) {
+                    filaActual.agregarPosicionesAfectadasPorExpansion(j, posiciones, this);
+                }
+            }
+        }
+    }
 }

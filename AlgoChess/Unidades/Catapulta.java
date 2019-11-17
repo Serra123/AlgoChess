@@ -1,6 +1,7 @@
 package Unidades;
 
 import Excepciones.ExcepcionCuracionACatapulta;
+import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
 public class Catapulta extends Unidad {
@@ -9,8 +10,8 @@ public class Catapulta extends Unidad {
     private static int COSTO = 5;
     private static int VIDAINICIAL = 50;
 
-    public void atacar(Unidad cualquierUnidad){
-        cualquierUnidad.recibirAtaque(DANIO);
+    public void atacar(Unidad cualquierUnidad, Tablero unTablero){
+        cualquierUnidad.expandirAtaqueRecibido(DANIO,unTablero);
     }
 
     public Catapulta(Posicion unaPosicion, String unNombreDeJugador){
@@ -22,7 +23,7 @@ public class Catapulta extends Unidad {
         this.posicion = unaPosicion;
     }
     @Override
-    public void recibirCuracion(int valorCuracion){
+    public void recibirCuracion(int valorCuracion) throws ExcepcionCuracionACatapulta{
         throw new ExcepcionCuracionACatapulta();
     }
 }

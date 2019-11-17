@@ -23,7 +23,7 @@ public class Jinete extends UnidadMovible {
 
     //La única forma en la cual puede actualizar el arma con la cual va a atacar es si conoce al mapa.
     public void atacar(Unidad unaUnidad, Tablero unTablero) throws ExcepcionCasilleroVacio {
-        armaDeAtaque = this.obtenerArmaDeAtaque(unaUnidad, unTablero);
+        this.armaDeAtaque = this.obtenerArmaDeAtaque(unaUnidad, unTablero);
         if(this.esAliado(unaUnidad)){
             throw new ExcepcionAtaqueAAliado();
         }
