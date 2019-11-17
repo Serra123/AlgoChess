@@ -1,6 +1,6 @@
 package Tests;
 
-import Excepciones.ExcepcionNoSePuedeCrearBatallon;
+import Excepciones.*;
 import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
@@ -37,7 +37,7 @@ public class EjercitoTest {
 
 
     @Test (expected = ExcepcionNoSePuedeCrearBatallon.class)
-    public void testNoPuedoCrearBatallonConSoldadosLejanos() {
+    public void testNoPuedoCrearBatallonConSoldadosSeparados() {
 
         Ejercito ejercito = new Ejercito("Jugador1");
         Posicion posicionUno = new Posicion(0,1);
@@ -57,6 +57,27 @@ public class EjercitoTest {
         ejercito.moverBatallon(soldados,nuevaPosicionCentral);
 
         //Assert.assertEquals(unSoldado,tablero.getUnidad(unaPosicion));
+    }
+
+    @Test (expected = ExcepcionSoldadosNoPerteneceATuEjercito.class)
+    public void testNoPuedoCrearBatallonConSoldadosDeDistintosJugadores() {
+
+        Ejercito ejercito = new Ejercito("Jugador1");
+        Posicion posicionUno = new Posicion(0,1);
+        Posicion posicionDos = new Posicion(0,2);
+        Posicion posicionTres = new Posicion(0,3);
+        Soldado soldadoUno = new Soldado(posicionUno,"Carlos");
+        Soldado soldadoDos = new Soldado(posicionDos,"Esteban");
+        Soldado soldadoTres = new Soldado(posicionTres,"Carlos");
+
+        Posicion nuevaPosicionCentral = new Posicion(1,2);
+
+        ArrayList<Soldado> soldados = new ArrayList<Soldado>();
+        soldados.add(soldadoUno);
+        soldados.add(soldadoDos);
+        soldados.add(soldadoTres);
+
+        ejercito.moverBatallon(soldados,nuevaPosicionCentral);
     }
 
 

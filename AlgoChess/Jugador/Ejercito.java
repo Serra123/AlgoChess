@@ -1,7 +1,7 @@
 package Jugador;
 
 import Excepciones.ExcepcionNoSePuedeCrearBatallon;
-import Excepciones.ExcepcionSectorEnemigo;
+import Excepciones.*;
 import Unidades.Batallon;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
@@ -23,7 +23,17 @@ public class Ejercito {
         return this.nombre;
     }
 
-    public void moverBatallon(ArrayList<Soldado> soldados, Posicion nuevaPosicionCentral) throws ExcepcionNoSePuedeCrearBatallon {
+
+    public void moverBatallon(ArrayList<Soldado> soldados, Posicion nuevaPosicionCentral){
+
+        verificarPosicionesDeBatallon(soldados);
+        verificarEjercitoDeBatallon(soldados);
+        Batallon batallon= new Batallon(soldados);
+        batallon.moverCentroA(nuevaPosicionCentral);
+
+    }
+
+    private void verificarPosicionesDeBatallon(ArrayList<Soldado> soldados) throws ExcepcionNoSePuedeCrearBatallon{
 
         for(int i=0;i<soldados.size();i++){
             int cantidadPosicionesSeparadas = 0;
@@ -33,13 +43,18 @@ public class Ejercito {
                     cantidadPosicionesSeparadas++;
                 }
             }
-
             if (cantidadPosicionesSeparadas>1) {
                 throw new ExcepcionNoSePuedeCrearBatallon();
             }
         }
-        Batallon batallon= new Batallon(soldados);
-        batallon.moverCentroA(nuevaPosicionCentral);
-
     }
+
+
+    private void verificarEjercitoDeBatallon(ArrayList<Soldado> soldados) throws ExcepcionSoldadosNoPerteneceATuEjercito {
+
+        if( !(soldados.get(0).esAliado(soldados.get(1)) & soldados.get(1).esAliado(soldados.get(2))) ){
+            throw new ExcepcionSoldadosNoPerteneceATuEjercito();
+        }
+    }
+
 }

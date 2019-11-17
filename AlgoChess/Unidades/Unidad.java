@@ -29,7 +29,7 @@ public abstract class Unidad {
             vida = vidaMaxima;
         }
     }
-    protected boolean esAliado(Unidad unaUnidad){
+    public boolean esAliado(Unidad unaUnidad){
         return  (this.ejercito == unaUnidad.getEjercito());
 
     }
