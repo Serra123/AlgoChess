@@ -25,9 +25,7 @@ public class Posicion {
     public double calcularDistancia(Posicion nuevaPosicion) {
        int diferenciaFilas = this.fila - nuevaPosicion.getFila();
        int diferenciaColumnas = this.columna - nuevaPosicion.getColumna();
-       double distancia = Math.sqrt(diferenciaFilas*diferenciaFilas + diferenciaColumnas*diferenciaColumnas);
-
-       return distancia;
+        return (Math.sqrt(diferenciaFilas*diferenciaFilas + diferenciaColumnas*diferenciaColumnas));
     }
 
     public void mantenerDistanciaARespectoDe(Posicion posicionCentralNueva, Posicion posicionCentralVieja) {
@@ -37,4 +35,11 @@ public class Posicion {
         columna+=distanciaColumna;
     }
 
+    public Posicion calcularNuevaPosicionRespectoDe(Posicion posicionCentralNueva, Posicion posicionCentralVieja) {
+        int distanciaFila = posicionCentralNueva.getFila() - posicionCentralVieja.getFila();
+        int distanciaColumna = posicionCentralNueva.getColumna() - posicionCentralVieja.getColumna();
+        int nuevaFila= fila + distanciaFila;
+        int nuevaColumna=columna + distanciaColumna;
+        return (new Posicion(nuevaFila,nuevaColumna));
+    }
 }

@@ -34,9 +34,6 @@ public class Tablero {
             Fila nuevaFila = new Fila(columnas,nombreOtroJugador);
             this.filas.add(nuevaFila);
         }
-
-
-
     }
 
     public boolean estaEnSector(String nombreEjercito,Posicion unaPosicion){
