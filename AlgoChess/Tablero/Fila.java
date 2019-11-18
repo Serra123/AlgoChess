@@ -56,18 +56,20 @@ public class Fila {
     public boolean hayEnemigoCerca(int numeroColumna, int distancia) throws ExcepcionCasilleroVacio{
         String ejercitoAliado = casilleros.get(numeroColumna).contenido().getEjercito();
         Casillero casilleroActual;
+        boolean hayEnemigoCerca = false;
         for(int i = numeroColumna - distancia; i <= numeroColumna + distancia; i++){
             casilleroActual = casilleros.get(i);
-            try {
-                if(!(casilleroActual.contenido()).getEjercito().equals(ejercitoAliado)){
-                    return true;
+            Unidad unaUnidad;
+            try{
+                unaUnidad = casilleroActual.contenido();
+                if(!unaUnidad.getEjercito().equals(ejercitoAliado)){
+                    hayEnemigoCerca = true;
                 }
             }catch (ExcepcionCasilleroVacio e){
-              //No se debería de hacer nada en el manejo de esta excepción.
+                //En realidad no habría que hacer nada en el manejo de esta excepción.
             }
         }
-
-        return false;
+        return hayEnemigoCerca;
     }
     public void agregarPosicionesAfectadasPorExpansion(int unaColumna, ArrayList<Posicion> posicionesAfectadas, Tablero unTablero){
         boolean posicionNoAfectada = true;
