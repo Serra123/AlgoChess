@@ -79,16 +79,17 @@ public class Tablero {
         return false;
     }
 
-    public boolean hayEnemigoCerca(Posicion unaPosicion) {
+    public boolean hayEnemigoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
         int numeroFila = unaPosicion.getFila();
         int numeroColumna = unaPosicion.getColumna();
+        String ejercitoAliado = this.getUnidad(unaPosicion).getEjercito();
         boolean hayEnemigoCerca = false;
         boolean hayEnemigoEnFila;
         Fila filaActual;
         for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
             filaActual = filas.get(i);
             try {
-                hayEnemigoEnFila = filaActual.hayEnemigoCerca(numeroColumna, DISTANCIACORTA);
+                hayEnemigoEnFila = filaActual.hayEnemigoCerca(unaPosicion,ejercitoAliado);
                 if(hayEnemigoEnFila){
                     hayEnemigoCerca = true;
                 }

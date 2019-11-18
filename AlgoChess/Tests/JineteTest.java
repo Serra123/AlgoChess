@@ -65,16 +65,16 @@ public class JineteTest {
         Posicion posicionJineteAliado = new Posicion(9,5);
         Posicion posicionEnemigo = new Posicion(10,5);
 
-        Jinete jineteAliado = new Jinete(posicionJineteAliado, "Fede");
-        Jinete enemigo = new Jinete(posicionEnemigo, "Juan");
+        Jinete jineteAliado = new Jinete(posicionJineteAliado, "Jugador1");
+        Jinete enemigo = new Jinete(posicionEnemigo, "Jugador2");
 
-        Tablero unTablero = new Tablero(20,20,"Fede","Juan");
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
         unTablero.colocarUnidad(jineteAliado);
         unTablero.colocarUnidad(enemigo);
 
         jineteAliado.atacar(enemigo, unTablero);
 
-        Assert.assertEquals(enemigo.getVida(),95);
+        Assert.assertEquals(95,enemigo.getVida());
     }
 
 }

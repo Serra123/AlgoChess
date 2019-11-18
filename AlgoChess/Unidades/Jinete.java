@@ -27,7 +27,7 @@ public class Jinete extends UnidadMovible {
         if(this.esAliado(unaUnidad)){
             throw new ExcepcionAtaqueAAliado();
         }
-        armaDeAtaque.atacar(unaUnidad);
+        this.armaDeAtaque.atacar(unaUnidad);
     }
 
     //Suponemos que si hay Aliados cercanos que NO sean soldados, y hay enemigos cerca,
