@@ -52,8 +52,7 @@ public class Fila {
         return false;
     }
 
-    public boolean hayEnemigoCerca(int numeroColumna, int distancia) throws ExcepcionCasilleroVacio{
-        String ejercitoAliado = casilleros.get(numeroColumna).contenido().getEjercito();
+    public boolean hayEnemigoCerca(int numeroColumna, int distancia, String ejercitoAliado) throws ExcepcionCasilleroVacio{
         Casillero casilleroActual;
         boolean hayEnemigoCerca = false;
         for(int i = numeroColumna - distancia; i <= numeroColumna + distancia; i++){
@@ -61,7 +60,7 @@ public class Fila {
             Unidad unaUnidad;
             try{
                 unaUnidad = casilleroActual.contenido();
-                if(!unaUnidad.getEjercito().equals(ejercitoAliado)){
+                if(!(unaUnidad.getEjercito().equals(ejercitoAliado))){
                     hayEnemigoCerca = true;
                 }
             }catch (ExcepcionCasilleroVacio e){

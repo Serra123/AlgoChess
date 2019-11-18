@@ -15,12 +15,6 @@ public class Casillero {
     }
 
     public Unidad contenido() throws ExcepcionCasilleroVacio {
-        try{
-            Unidad unaUnidad = this.ocupacion.contenido();
-        }catch (ExcepcionCasilleroVacio e){
-            //Manejar de alguna manera la excepción.
-        }
-
         return this.ocupacion.contenido();
     }
 

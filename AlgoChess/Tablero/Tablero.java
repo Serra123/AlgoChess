@@ -82,13 +82,14 @@ public class Tablero {
     public boolean hayEnemigoCerca(Posicion unaPosicion) {
         int numeroFila = unaPosicion.getFila();
         int numeroColumna = unaPosicion.getColumna();
+        String ejercitoAliado = this.filas.get(numeroFila).getCasillero(numeroColumna).contenido().getEjercito();
         boolean hayEnemigoCerca = false;
         boolean hayEnemigoEnFila;
         Fila filaActual;
         for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
             filaActual = filas.get(i);
             try {
-                hayEnemigoEnFila = filaActual.hayEnemigoCerca(numeroColumna, DISTANCIACORTA);
+                hayEnemigoEnFila = filaActual.hayEnemigoCerca(numeroColumna, DISTANCIACORTA,ejercitoAliado);
                 if(hayEnemigoEnFila){
                     hayEnemigoCerca = true;
                 }

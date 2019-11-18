@@ -1,8 +1,8 @@
 package Tests;
 
 import Excepciones.ExcepcionAtaqueAAliado;
-import Excepciones.ExcepcionCasilleroVacio;
 import Tablero.Tablero;
+import Tablero.Fila;
 import Unidades.Jinete;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
@@ -62,13 +62,14 @@ public class JineteTest {
 
     @Test
     public void testJineteTieneEnemigosCercaAtacaConEspada(){
+        Tablero unTablero = new Tablero(20,20,"Juan","Fede");
+
         Posicion posicionJineteAliado = new Posicion(9,5);
         Posicion posicionEnemigo = new Posicion(10,5);
 
-        Jinete jineteAliado = new Jinete(posicionJineteAliado, "Fede");
-        Jinete enemigo = new Jinete(posicionEnemigo, "Juan");
+        Jinete jineteAliado = new Jinete(posicionJineteAliado, "Juan");
+        Jinete enemigo = new Jinete(posicionEnemigo, "Fede");
 
-        Tablero unTablero = new Tablero(20,20,"Fede","Juan");
         unTablero.colocarUnidad(jineteAliado);
         unTablero.colocarUnidad(enemigo);
 
