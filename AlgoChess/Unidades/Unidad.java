@@ -1,5 +1,6 @@
 package Unidades;
 
+import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
 public abstract class Unidad {
@@ -17,11 +18,14 @@ public abstract class Unidad {
     public int getCosto(){ return costo; }
     public String getEjercito(){ return ejercito; }
 
-    protected void recibirAtaque(int valorDanio) {
+    public void recibirAtaque(int valorDanio) {
         vida -= valorDanio;
         this.estaVivo = this.vida > 0;
-
     }
+    public void expandirAtaqueRecibido(int valorDanio, Tablero unTablero){
+        unTablero.expandirDanio(this.getPosicion(),valorDanio);
+    }
+
 
     protected void recibirCuracion(int valorCuracion) {
         vida+=valorCuracion;

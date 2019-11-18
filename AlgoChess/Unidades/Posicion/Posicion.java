@@ -42,4 +42,15 @@ public class Posicion {
         int nuevaColumna=columna + distanciaColumna;
         return (new Posicion(nuevaFila,nuevaColumna));
     }
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof Posicion)){
+            return false;
+        }
+        boolean columnasIguales = this.columna == ((Posicion) o).getColumna();
+        boolean filasIguales = this.fila == ((Posicion) o).getFila();
+
+        return (columnasIguales && filasIguales);
+
+    }
 }

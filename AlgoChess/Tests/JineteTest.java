@@ -1,8 +1,8 @@
 package Tests;
 
 import Excepciones.ExcepcionAtaqueAAliado;
+import Excepciones.ExcepcionAtaqueLejanoConEspada;
 import Tablero.Tablero;
-import Tablero.Fila;
 import Unidades.Jinete;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
@@ -27,7 +27,7 @@ public class JineteTest {
     public void testJineteTieneSoldadoCercaAtacaConArcoYFlecha(){
         Posicion posicionJineteAliado = new Posicion(9,5);
         Posicion posicionSoldadoAliado = new Posicion(9,4);
-        Posicion posicionEnemigo = new Posicion(10,5);
+        Posicion posicionEnemigo = new Posicion(12,5);
 
         Jinete jineteAliado = new Jinete(posicionJineteAliado, "Fede");
         Soldado soldadoAliado = new Soldado(posicionSoldadoAliado, "Fede");
@@ -45,8 +45,8 @@ public class JineteTest {
 
     @Test
     public void testJineteNoTieneEnemigosCercaAtacaConArcoYFlecha(){
-        Posicion posicionJineteAliado = new Posicion(5,5);
-        Posicion posicionEnemigo = new Posicion(18,4);
+        Posicion posicionJineteAliado = new Posicion(9,5);
+        Posicion posicionEnemigo = new Posicion(12,5);
 
         Jinete jineteAliado = new Jinete(posicionJineteAliado, "fede");
         Jinete enemigo = new Jinete(posicionEnemigo, "juan");
@@ -62,20 +62,56 @@ public class JineteTest {
 
     @Test
     public void testJineteTieneEnemigosCercaAtacaConEspada(){
-        Tablero unTablero = new Tablero(20,20,"Juan","Fede");
-
         Posicion posicionJineteAliado = new Posicion(9,5);
         Posicion posicionEnemigo = new Posicion(10,5);
 
-        Jinete jineteAliado = new Jinete(posicionJineteAliado, "Juan");
-        Jinete enemigo = new Jinete(posicionEnemigo, "Fede");
+        Jinete jineteAliado = new Jinete(posicionJineteAliado, "Jugador1");
+        Jinete enemigo = new Jinete(posicionEnemigo, "Jugador2");
 
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
         unTablero.colocarUnidad(jineteAliado);
         unTablero.colocarUnidad(enemigo);
 
         jineteAliado.atacar(enemigo, unTablero);
 
-        Assert.assertEquals(enemigo.getVida(),95);
+        Assert.assertEquals(95,enemigo.getVida());
+    }
+
+    @Test
+    public void testJineteNoTieneAliadosCercaPeroSiTieneEnemigoCercaAtacaConEspada(){
+        Posicion posicionAliado = new Posicion(9,5);
+        Posicion posicionEnemigo = new Posicion(10,5);
+
+        Jinete aliado = new Jinete(posicionAliado,"Pedro");
+        Jinete enemigo = new Jinete(posicionEnemigo, "Andy");
+
+        Tablero unTablero = new Tablero(20,20,"Pedro","Andy");
+        unTablero.colocarUnidad(aliado);
+        unTablero.colocarUnidad(enemigo);
+
+        aliado.atacar(enemigo, unTablero);
+
+        Assert.assertEquals(95,enemigo.getVida());
+
+    }
+
+    @Test (expected = ExcepcionAtaqueLejanoConEspada.class)
+    public void testJineteSinAliadosCercaConUnEnemigoCercaYOtroNoQuiereAtacarAlSegundoYNoPuede(){
+        Posicion posicionAliado = new Posicion(9,5);
+        Posicion posicionEnemigoCercano = new Posicion(10,5);
+        Posicion posicionEnemigoLejano = new Posicion(15,5);
+
+        Jinete aliado = new Jinete(posicionAliado,"Raul");
+        Jinete enemigoCercano = new Jinete(posicionEnemigoCercano, "Lucas");
+        Jinete enemigoLejano = new Jinete(posicionEnemigoLejano, "Lucas");
+
+
+        Tablero unTablero = new Tablero(20,20,"Raul","Lucas");
+        unTablero.colocarUnidad(aliado);
+        unTablero.colocarUnidad(enemigoCercano);
+        unTablero.colocarUnidad(enemigoLejano);
+
+        aliado.atacar(enemigoLejano, unTablero);
     }
 
 }

@@ -2,6 +2,7 @@ package Tablero;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
+import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
 import Unidades.Unidad;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 public class Fila {
     private ArrayList<Casillero> casilleros;
+    private static final int DISTANCIACORTA = 2;
 
     public Fila(int columnas, String nombreUnJugador) {
         casilleros = new ArrayList<Casillero>();
@@ -52,22 +54,49 @@ public class Fila {
         return false;
     }
 
-    public boolean hayEnemigoCerca(int numeroColumna, int distancia, String ejercitoAliado) throws ExcepcionCasilleroVacio{
+    public boolean hayEnemigoCerca(Posicion posicionDeReferencia,String ejercitoAliado) throws ExcepcionCasilleroVacio{
+        int numeroColumna = posicionDeReferencia.getColumna();
         Casillero casilleroActual;
-        boolean hayEnemigoCerca = false;
-        for(int i = numeroColumna - distancia; i <= numeroColumna + distancia; i++){
-            casilleroActual = casilleros.get(i);
+        for(int j = numeroColumna - DISTANCIACORTA; j <= numeroColumna + DISTANCIACORTA; j++){
+            casilleroActual = casilleros.get(j);
             Unidad unaUnidad;
             try{
                 unaUnidad = casilleroActual.contenido();
-                if(!(unaUnidad.getEjercito().equals(ejercitoAliado))){
-                    hayEnemigoCerca = true;
+                boolean estaCerca = unaUnidad.getPosicion().calcularDistancia(posicionDeReferencia) < DISTANCIACORTA;
+                boolean esEnemigo = !unaUnidad.getEjercito().equals(ejercitoAliado);
+                if(estaCerca && esEnemigo){
+                    return true;
                 }
             }catch (ExcepcionCasilleroVacio e){
                 //En realidad no habría que hacer nada en el manejo de esta excepción.
             }
+
         }
-        return hayEnemigoCerca;
+        return false;
+    }
+    public void agregarPosicionesAfectadasPorExpansion(int unaColumna, ArrayList<Posicion> posicionesAfectadas, Tablero unTablero){
+        boolean posicionNoAfectada = true;
+
+        try{
+            Casillero unCasillero = this.getCasillero(unaColumna);
+            Unidad unaUnidad = unCasillero.contenido();
+            Posicion unaPosicion = unaUnidad.getPosicion();
+            for(int i = 0; i < posicionesAfectadas.size();i++){
+                if(unaPosicion.equals(posicionesAfectadas.get(i))){
+
+                    posicionNoAfectada = false;
+                }
+            }
+            if(posicionNoAfectada){
+                posicionesAfectadas.add(unaPosicion);
+                unTablero.obtenerUnidadesAfectadasPorExpansion(unaPosicion,posicionesAfectadas);
+            }
+
+        }catch(ExcepcionCasilleroVacio e){
+            // no tiene que hacer nada pues el casillero esta vacio
+        }catch(IndexOutOfBoundsException e){
+            // no tiene que hacer nada pues el casillero no existe
+        }
     }
 
 }

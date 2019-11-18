@@ -79,17 +79,17 @@ public class Tablero {
         return false;
     }
 
-    public boolean hayEnemigoCerca(Posicion unaPosicion) {
+    public boolean hayEnemigoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
         int numeroFila = unaPosicion.getFila();
         int numeroColumna = unaPosicion.getColumna();
-        String ejercitoAliado = this.filas.get(numeroFila).getCasillero(numeroColumna).contenido().getEjercito();
+        String ejercitoAliado = this.getUnidad(unaPosicion).getEjercito();
         boolean hayEnemigoCerca = false;
         boolean hayEnemigoEnFila;
         Fila filaActual;
         for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
             filaActual = filas.get(i);
             try {
-                hayEnemigoEnFila = filaActual.hayEnemigoCerca(numeroColumna, DISTANCIACORTA,ejercitoAliado);
+                hayEnemigoEnFila = filaActual.hayEnemigoCerca(unaPosicion,ejercitoAliado);
                 if(hayEnemigoEnFila){
                     hayEnemigoCerca = true;
                 }
@@ -99,5 +99,32 @@ public class Tablero {
         }
 
         return hayEnemigoCerca;
+    }
+
+    public void expandirDanio(Posicion unaPosicion,int unDanio){
+        ArrayList<Posicion> posiciones = new ArrayList<Posicion>();
+        posiciones.add(unaPosicion);
+        this.obtenerUnidadesAfectadasPorExpansion(unaPosicion,posiciones);
+        posiciones.forEach((posicion) -> this.getUnidad(posicion).recibirAtaque(unDanio));
+
+    }
+
+    public void obtenerUnidadesAfectadasPorExpansion(Posicion unaPosicion,ArrayList<Posicion> posiciones){
+        int filaCentro = unaPosicion.getFila();
+        int columnaCentro = unaPosicion.getColumna();
+        Fila filaActual;
+
+        for(int i = filaCentro -1; i <= filaCentro+1;i++) {
+            try {
+                filaActual = filas.get(i);
+            }catch(IndexOutOfBoundsException e){
+                continue;
+            }
+            for (int j = columnaCentro - 1; j <= columnaCentro + 1; j++) {
+                if ((i != filaCentro) || (j != columnaCentro)) {
+                    filaActual.agregarPosicionesAfectadasPorExpansion(j, posiciones, this);
+                }
+            }
+        }
     }
 }
