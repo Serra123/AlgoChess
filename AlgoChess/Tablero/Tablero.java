@@ -82,18 +82,21 @@ public class Tablero {
     public boolean hayEnemigoCerca(Posicion unaPosicion) {
         int numeroFila = unaPosicion.getFila();
         int numeroColumna = unaPosicion.getColumna();
+        boolean hayEnemigoCerca = false;
+        boolean hayEnemigoEnFila;
         Fila filaActual;
         for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
             filaActual = filas.get(i);
             try {
-                if(filaActual.hayEnemigoCerca(numeroColumna, DISTANCIACORTA)){
-                    return true;
+                hayEnemigoEnFila = filaActual.hayEnemigoCerca(numeroColumna, DISTANCIACORTA);
+                if(hayEnemigoEnFila){
+                    hayEnemigoCerca = true;
                 }
             }catch (ExcepcionCasilleroVacio e){
                 //En realidad no habría que hacer nada en el manejo de esta excepción.
             }
         }
 
-        return false;
+        return hayEnemigoCerca;
     }
 }
