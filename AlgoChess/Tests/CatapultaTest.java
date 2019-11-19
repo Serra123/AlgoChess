@@ -75,10 +75,11 @@ public class CatapultaTest {
     @Test
     public void testCatapultaAtacaSoldadoAliadoCorrectamente(){
         Posicion unaPosicion = new Posicion(0,0);
+        Posicion otraPosicion = new Posicion(0,9);
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Catapulta unaCatapulta = new Catapulta(unaPosicion,"Jugador1");
-        Soldado aliado = new Soldado(unaPosicion,"Jugador1");
+        Soldado aliado = new Soldado(otraPosicion,"Jugador1");
         unTablero.colocarUnidad(aliado);
         unaCatapulta.atacar(aliado,unTablero);
 
