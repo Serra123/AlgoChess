@@ -1,10 +1,13 @@
 package Unidades;
 
 import Excepciones.ExcepcionCuracionAEnemigo;
+import Excepciones.ExcepcionDistanciaAtaqueInvalida;
+import Excepciones.ExcepcionDistanciaCuracionInvalida;
 import Unidades.Posicion.Posicion;
 
 public class Curandero extends UnidadMovible {
 
+    private static final int DISTANCIACERCANA = 2 ;
     private static int VALORCURACION = 15;
     private static int VIDAINICIAL = 75;
     private static int COSTO = 2;
@@ -18,7 +21,10 @@ public class Curandero extends UnidadMovible {
         this.ejercito = unNombreDeJugador;
     }
 
-    public void curar(Unidad unidadAliada) {
+    public void curar(Unidad unidadAliada) throws ExcepcionCuracionAEnemigo, ExcepcionDistanciaCuracionInvalida {
+        if(this.posicion.calcularDistancia(unidadAliada.getPosicion()) >= DISTANCIACERCANA){
+            throw new ExcepcionDistanciaCuracionInvalida();
+        }
         if(this.esAliado(unidadAliada)){
             unidadAliada.recibirCuracion(VALORCURACION);
         }else throw new ExcepcionCuracionAEnemigo();
