@@ -396,6 +396,10 @@ public class BatallonTest {
         Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres && noMovioSoldadoCuatro);
 
     }
+    @Test
+    public void testFail(){
+        Assert.fail();
+    }
 
 
 
