@@ -397,16 +397,6 @@ public class BatallonTest {
 
     }
 
-    @Test
-    public void testTravis() {
-
-    }
-
-    @Test
-    public void testTravis2() {
-
-    }
-
 
 
 
