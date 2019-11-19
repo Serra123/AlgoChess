@@ -1,7 +1,7 @@
 # AlgoChess
 
 
-[![Build Status](https://api.travis-ci.org/Serra123/AlgoChess.svg?branch=master)](https://api.travis-ci.org/Serra123/AlgoChess) 
+[![Build Status](https://api.travis-ci.org/Serra123/AlgoChess.svg?branch=master)](https://travis-ci.org/Serra123/AlgoChess/) 
 
 
 b263cf63-9b16-4070-911f-458659a519e9
