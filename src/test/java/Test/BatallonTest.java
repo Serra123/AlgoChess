@@ -389,12 +389,18 @@ public class BatallonTest {
 
         boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
         boolean movioBienSoldadoDos = ((soldadoDos.getPosicion().calcularDistancia(nuevaPosicionDos)) == 0 );
+
+
         boolean movioBienSoldadoTres = ((soldadoTres.getPosicion().calcularDistancia(nuevaPosicionTres)) == 0 );
         boolean noMovioSoldadoCuatro = ((soldadoCuatro.getPosicion().calcularDistancia(posicionCuatro)) == 0 );
         Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres && noMovioSoldadoCuatro);
 
     }
 
+    @Test
+    public void testTravis() {
+
+    }
 
 
 
