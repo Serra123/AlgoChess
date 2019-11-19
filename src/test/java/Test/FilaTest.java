@@ -1,4 +1,4 @@
-package Tests;
+package Test;
 
 import Tablero.Fila;
 import org.junit.Test;

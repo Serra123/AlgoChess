@@ -1,4 +1,4 @@
-package Tests;
+package Test;
 
 import Excepciones.*;
 import Tablero.Tablero;

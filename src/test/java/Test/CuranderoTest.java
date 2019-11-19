@@ -1,4 +1,4 @@
-package Tests;
+package Test;
 
 import Unidades.Catapulta;
 import Unidades.Curandero;

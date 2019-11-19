@@ -1,4 +1,4 @@
-package Tests;
+package Test;
 
 import Excepciones.ExcepcionAtaqueAAliado;
 import Excepciones.ExcepcionDistanciaAtaqueInvalida;
