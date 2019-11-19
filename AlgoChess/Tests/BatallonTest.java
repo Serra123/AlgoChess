@@ -1,6 +1,6 @@
 package Tests;
 
-import Excepciones.ExcepcionBatallonSeMueveDeAUno;
+import Excepciones.ExcepcionMovimientoInvalido;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.*;
@@ -105,7 +105,7 @@ public class BatallonTest {
         UnidadMovible soldadoDos = new Soldado(posicionDos,"Jugador1");
         UnidadMovible soldadoTres = new Soldado(posicionTres,"Jugador1");
 
-        Unidad catapulpa = new Catapulta(posicionCatapulta,"Jugador1");
+        Unidad catapulta = new Catapulta(posicionCatapulta,"Jugador1");
 
         Posicion nuevaPosicionUno = new Posicion(1,0);
         Posicion nuevaPosicionDos = new Posicion(2,1);
@@ -120,7 +120,7 @@ public class BatallonTest {
         unTablero.colocarUnidad(soldadoUno);
         unTablero.colocarUnidad(soldadoDos);
         unTablero.colocarUnidad(soldadoTres);
-        unTablero.colocarUnidad(catapulpa);
+        unTablero.colocarUnidad(catapulta);
 
         Batallon batallon = new Batallon(soldados,unTablero);
         batallon.moverA(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
@@ -207,7 +207,7 @@ public class BatallonTest {
         Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
     }
 
-    @Test (expected = ExcepcionBatallonSeMueveDeAUno.class)
+    @Test (expected = ExcepcionMovimientoInvalido.class)
     public void testNoPuedoMovermeMasDeUnCasilleroDeDistancia() {
 
         Tablero unTablero = new Tablero(20, 20, "Jugador1", "Jugador2");

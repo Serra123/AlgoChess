@@ -1,6 +1,7 @@
 package Tests;
 
 import Excepciones.ExcepcionAtaqueAAliado;
+import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Excepciones.ExcepcionAtaqueLejanoConEspada;
 import Excepciones.ExcepcionFinDelTablero;
 import Tablero.Tablero;
@@ -96,7 +97,7 @@ public class JineteTest {
 
     }
 
-    @Test (expected = ExcepcionAtaqueLejanoConEspada.class)
+    @Test (expected = ExcepcionDistanciaAtaqueInvalida.class)
     public void testJineteSinAliadosCercaConUnEnemigoCercaYOtroNoQuiereAtacarAlSegundoYNoPuede(){
         Posicion posicionAliado = new Posicion(9,5);
         Posicion posicionEnemigoCercano = new Posicion(10,5);

@@ -1,12 +1,11 @@
 package Unidades;
 
-import Excepciones.ExcepcionBatallonSeMueveDeAUno;
 import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionMovimientoInvalido;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Batallon {
 
@@ -38,17 +37,16 @@ public class Batallon {
     }
 
     public void moverA(Posicion posicionCentralNueva) {
-        Posicion posicionCentralVieja = new Posicion(soldadoCentral.getPosicion().getFila(),soldadoCentral.getPosicion().getColumna());
-
+        Posicion posicionCentralVieja = this.soldadoCentral.getPosicion();
         validarPosicionNueva(posicionCentralNueva,posicionCentralVieja);
         ArrayList nuevasPosiciones = calcularPosicionesNuevas(posicionCentralNueva,posicionCentralVieja);
         moverSoldados(nuevasPosiciones,0);
     }
 
-    public void validarPosicionNueva(Posicion posicionCentralNueva,Posicion posicionCentralVieja) throws ExcepcionBatallonSeMueveDeAUno {
+    public void validarPosicionNueva(Posicion posicionCentralNueva,Posicion posicionCentralVieja) throws ExcepcionMovimientoInvalido {
 
         if (posicionCentralNueva.calcularDistancia(posicionCentralVieja)>1.5){
-            throw new ExcepcionBatallonSeMueveDeAUno();
+            throw new ExcepcionMovimientoInvalido();
         }
 
 

@@ -96,7 +96,7 @@ public class EjercitoTest {
         ejercito.moverBatallon(soldados,nuevaPosicionCentral,unTablero);
     }
 
-    @Test (expected = ExcepcionUnidadesNoSonSoldados.class)
+    @Test (expected = ExcepcionTipoUnidadInvalida.class)
     public void testNoPuedoCrearBatallonConUnidadesQueNoSonSoldados() {
 
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
