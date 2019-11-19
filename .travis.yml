@@ -1,2 +1,16 @@
-language:java
-jdk:oraclejdk11
+language: java
+jdk:
+  - openjdk11
+
+script:
+  - mvn test
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    recipients:
+      - andi_carretero@hotmail.com
+      - juanx.serra.jcs@gmail.com
+    on_failure: always
+
