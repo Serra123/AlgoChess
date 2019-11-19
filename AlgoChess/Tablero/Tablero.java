@@ -2,6 +2,7 @@ package Tablero;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
+import Excepciones.ExcepcionFinDelTablero;
 import Excepciones.ExcepcionSectorEnemigo;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
@@ -68,20 +69,27 @@ public class Tablero {
     public boolean haySoldadoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
         int numeroFila = unaPosicion.getFila();
         int numeroColumna = unaPosicion.getColumna();
+        String ejercitoAliado = this.filas.get(numeroFila).getCasillero(numeroColumna).contenido().getEjercito();
+        boolean haySoldadoAliadoCerca = false;
+        boolean haySoldadoAliadoEnFila;
         Fila filaActual;
         for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
             filaActual = filas.get(i);
-            if(filaActual.hayAlgunSoldadoADistancia(numeroColumna, DISTANCIACORTA)){
-                return true;
+            try {
+                haySoldadoAliadoEnFila = filaActual.hayAlgunSoldadoADistancia(unaPosicion,ejercitoAliado,DISTANCIACORTA);
+                if(haySoldadoAliadoEnFila){
+                    haySoldadoAliadoCerca = true;
+                }
+            }catch (ExcepcionCasilleroVacio e){
+                //No hay que hacer nada sobre el manejo de esta excepción.
             }
         }
 
-        return false;
+        return haySoldadoAliadoCerca;
     }
 
     public boolean hayEnemigoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
         int numeroFila = unaPosicion.getFila();
-        int numeroColumna = unaPosicion.getColumna();
         String ejercitoAliado = this.getUnidad(unaPosicion).getEjercito();
         boolean hayEnemigoCerca = false;
         boolean hayEnemigoEnFila;
@@ -94,7 +102,7 @@ public class Tablero {
                     hayEnemigoCerca = true;
                 }
             }catch (ExcepcionCasilleroVacio e){
-                //En realidad no habría que hacer nada en el manejo de esta excepción.
+                //No hay que hacer nada sobre el manejo de esta excepción.
             }
         }
 

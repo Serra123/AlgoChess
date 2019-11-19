@@ -2,6 +2,7 @@ package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
 import Excepciones.ExcepcionCasilleroVacio;
+import Excepciones.ExcepcionFinDelTablero;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
@@ -22,7 +23,7 @@ public class Jinete extends UnidadMovible {
     }
 
     //La única forma en la cual puede actualizar el arma con la cual va a atacar es si conoce al mapa.
-    public void atacar(Unidad unaUnidad, Tablero unTablero){
+    public void atacar(Unidad unaUnidad, Tablero unTablero) throws ExcepcionFinDelTablero{
         this.armaDeAtaque = this.obtenerArmaDeAtaque(unTablero);
         if(this.esAliado(unaUnidad)){
             throw new ExcepcionAtaqueAAliado();
@@ -32,14 +33,18 @@ public class Jinete extends UnidadMovible {
 
     //Suponemos que si hay Aliados cercanos que NO sean soldados, y hay enemigos cerca,
     // luego el arma de ataque es la espada.
-    private Arma obtenerArmaDeAtaque(Tablero unTablero) {
-       boolean haySoldadoCerca = unTablero.haySoldadoCerca(this.posicion);
-       boolean hayEnemigoCerca = unTablero.hayEnemigoCerca(this.posicion);
-        if(!hayEnemigoCerca || haySoldadoCerca){
-            return new ArcoYFlecha();
-        }else{
+    private Arma obtenerArmaDeAtaque(Tablero unTablero) throws ExcepcionFinDelTablero{
+        try {
+            boolean haySoldadoCerca = unTablero.haySoldadoCerca(this.posicion);
+            boolean hayEnemigoCerca = unTablero.hayEnemigoCerca(this.posicion);
+            if (!hayEnemigoCerca || haySoldadoCerca) {
+                return new ArcoYFlecha();
+            } else {
                 return new Espada();
             }
+        }catch(IndexOutOfBoundsException e){
+            throw new ExcepcionFinDelTablero();
+        }
     }
 
 }

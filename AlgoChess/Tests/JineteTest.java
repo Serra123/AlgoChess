@@ -2,6 +2,7 @@ package Tests;
 
 import Excepciones.ExcepcionAtaqueAAliado;
 import Excepciones.ExcepcionAtaqueLejanoConEspada;
+import Excepciones.ExcepcionFinDelTablero;
 import Tablero.Tablero;
 import Unidades.Jinete;
 import Unidades.Posicion.Posicion;
@@ -112,6 +113,21 @@ public class JineteTest {
         unTablero.colocarUnidad(enemigoLejano);
 
         aliado.atacar(enemigoLejano, unTablero);
+    }
+
+    @Test (expected = ExcepcionFinDelTablero.class)
+    public void testJineteEnBordeDeTableroQuiereAtacarEnemigoYSaltaExcepcionPorQuererAveriguarCualArmaUsar(){
+        Posicion posicionAliado = new Posicion(9,0);
+        Posicion posicionEnemigo = new Posicion(10,0);
+
+        Jinete aliado = new Jinete(posicionAliado,"Pedro");
+        Jinete enemigo = new Jinete(posicionEnemigo,"Carlos");
+
+        Tablero unTablero = new Tablero(20,20,"Pedro","Carlos");
+        unTablero.colocarUnidad(aliado);
+        unTablero.colocarUnidad(enemigo);
+
+        aliado.atacar(enemigo,unTablero);
     }
 
 }

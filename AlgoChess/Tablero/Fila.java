@@ -38,12 +38,18 @@ public class Fila {
         unCasillero.recibirUnidad(unaUnidad);
     }
 
-    public boolean hayAlgunSoldadoADistancia(int numeroColumna, int distancia){
+    public boolean hayAlgunSoldadoADistancia(Posicion posicionDeReferencia, String ejercitoAliado, int distancia){
+        int numeroColumna = posicionDeReferencia.getColumna();
         Casillero casilleroActual;
-        for(int i = numeroColumna - distancia; i <= numeroColumna + distancia; i++){
-            casilleroActual = casilleros.get(i);
+        for(int j = numeroColumna - distancia; j <= numeroColumna + distancia; j++){
+            casilleroActual = casilleros.get(j);
+            Unidad unaUnidad;
             try{
-                if((casilleroActual.contenido()) instanceof Soldado){
+                unaUnidad = casilleroActual.contenido();
+                boolean estaCerca = unaUnidad.getPosicion().calcularDistancia(posicionDeReferencia) < distancia;
+                boolean esAliado = unaUnidad.getEjercito().equals(ejercitoAliado);
+                boolean esSoldado = unaUnidad instanceof Soldado;
+                if(estaCerca && esAliado && esSoldado){
                     return true;
                 }
             }catch (ExcepcionCasilleroVacio e){
@@ -74,6 +80,7 @@ public class Fila {
         }
         return false;
     }
+
     public void agregarPosicionesAfectadasPorExpansion(int unaColumna, ArrayList<Posicion> posicionesAfectadas, Tablero unTablero){
         boolean posicionNoAfectada = true;
 
