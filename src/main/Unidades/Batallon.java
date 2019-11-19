@@ -14,7 +14,6 @@ public class Batallon {
 
     public Batallon(ArrayList<UnidadMovible> listaSoldados, Tablero unTablero){
         agregarSoldados(listaSoldados);
-        //this.soldados = listaSoldados;
         this.soldadoCentral = this.getSoldadoCentral();
         this.unTablero = unTablero;
         soldadosEstanContiguos();
