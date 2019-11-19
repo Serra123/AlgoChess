@@ -1,4 +1,4 @@
-package Tests;
+package Test;
 
 import Jugador.Jugador;
 import Tablero.Tablero;

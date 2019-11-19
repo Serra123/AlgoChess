@@ -1,4 +1,4 @@
-package Tests;
+package Test;
 
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;

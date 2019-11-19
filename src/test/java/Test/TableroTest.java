@@ -1,4 +1,4 @@
-package Tests;
+package Test;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionSectorEnemigo;
@@ -42,7 +42,7 @@ public class TableroTest {
     public void testSectorInferiorPerteneceAPrimerJugador(){
         Tablero tablero = new Tablero(20,20,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(1,0);
-        Assert.assertEquals((tablero.estaEnSector("Jugador1",unaPosicion)),true);
+        Assert.assertTrue((tablero.estaEnSector("Jugador1", unaPosicion)));
 
     }
 
@@ -50,7 +50,7 @@ public class TableroTest {
     public void testSectorSuperiorPerteneceASegundoJugador(){
         Tablero tablero = new Tablero(20,20,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(11,0);
-        Assert.assertEquals((tablero.estaEnSector("Jugador2",unaPosicion)),true);
+        Assert.assertTrue((tablero.estaEnSector("Jugador2", unaPosicion)));
 
     }
 

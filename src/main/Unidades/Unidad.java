@@ -33,7 +33,7 @@ public abstract class Unidad {
         }
     }
     public boolean esAliado(Unidad unaUnidad){
-        return  (this.ejercito == unaUnidad.getEjercito());
+        return  (this.ejercito.equals(unaUnidad.getEjercito()));
 
     }
 

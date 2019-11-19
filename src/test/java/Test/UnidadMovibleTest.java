@@ -1,4 +1,4 @@
-package Tests;
+package Test;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionSectorEnemigo;
