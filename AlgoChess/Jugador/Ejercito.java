@@ -33,7 +33,7 @@ public class Ejercito {
         verificarEjercitoDeBatallon(soldados);
         verificarUnidadesSonSoldados(soldados);
         Batallon batallon= new Batallon(soldados,tablero);
-        batallon.moverCentroA(nuevaPosicionCentral);
+        batallon.moverA(nuevaPosicionCentral);
 
     }
 

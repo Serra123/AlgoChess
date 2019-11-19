@@ -1,10 +1,12 @@
 package Unidades;
 
+import Excepciones.ExcepcionBatallonSeMueveDeAUno;
 import Excepciones.ExcepcionCasilleroOcupado;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Batallon {
 
@@ -33,24 +35,34 @@ public class Batallon {
             }
         }
         return soldadoCentral;
+    }
+
+    public void moverA(Posicion posicionCentralNueva) {
+        Posicion posicionCentralVieja = new Posicion(soldadoCentral.getPosicion().getFila(),soldadoCentral.getPosicion().getColumna());
+
+        validarPosicionNueva(posicionCentralNueva,posicionCentralVieja);
+        ArrayList nuevasPosiciones = calcularPosicionesNuevas(posicionCentralNueva,posicionCentralVieja);
+        moverSoldados(nuevasPosiciones,0);
+    }
+
+    public void validarPosicionNueva(Posicion posicionCentralNueva,Posicion posicionCentralVieja) throws ExcepcionBatallonSeMueveDeAUno {
+
+        if (posicionCentralNueva.calcularDistancia(posicionCentralVieja)>1.5){
+            throw new ExcepcionBatallonSeMueveDeAUno();
+        }
+
 
     }
 
-    public void moverCentroA(Posicion posicionCentralNueva) {
-        Posicion posicionCentralVieja = new Posicion(soldadoCentral.getPosicion().getFila(),soldadoCentral.getPosicion().getColumna());
+    public ArrayList calcularPosicionesNuevas(Posicion posicionCentralNueva,Posicion posicionCentralVieja){
 
         ArrayList<Posicion> nuevasPosiciones = new ArrayList<>();
         for (UnidadMovible soldado : soldados) {
 
             Posicion nuevaPosicion = soldado.getPosicion().calcularNuevaPosicionRespectoDe(posicionCentralNueva, posicionCentralVieja);
             nuevasPosiciones.add(nuevaPosicion);
-            /*try {
-                soldado.mover(nuevaPosicion, unTablero);
-            } catch (ExcepcionCasilleroOcupado e) {
-                //no hago nada,si tira esta excepcion esta bien que no lo mueva.
-            }*/
         }
-        moverSoldados(nuevasPosiciones,0);
+        return nuevasPosiciones;
     }
 
 
