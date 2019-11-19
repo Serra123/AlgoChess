@@ -11,14 +11,29 @@ public class Batallon {
     private ArrayList<UnidadMovible> soldados;
     private UnidadMovible soldadoCentral;
     private Tablero unTablero;
-    public Batallon(ArrayList<UnidadMovible> soldados, Tablero unTablero){
-        this.soldados = soldados;
+
+    public Batallon(ArrayList<UnidadMovible> listaSoldados, Tablero unTablero){
+        agregarSoldados(listaSoldados);
+        //this.soldados = listaSoldados;
         this.soldadoCentral = this.getSoldadoCentral();
         this.unTablero = unTablero;
         soldadosEstanContiguos();
         soldadosPertenecenAlMismoEjercito();
         unidadesSonSoldados();
     }
+
+    public void agregarSoldados(ArrayList<UnidadMovible> listaSoldados) throws ExcepcionCantidadInsuficienteDeSoldados{
+        if(listaSoldados.size()<3){
+            throw new ExcepcionCantidadInsuficienteDeSoldados();
+        }
+        else{
+            this.soldados = new ArrayList<>();
+            for(int i=0;i<3;i++){
+                this.soldados.add(listaSoldados.get(i));
+            }
+        }
+    }
+
     public void soldadosEstanContiguos() throws ExcepcionLasUnidadesEstanSeparadas {
         for(int i=0;i<soldados.size();i++){
             int cantidadPosicionesSeparadas = 0;
