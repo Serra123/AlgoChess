@@ -55,8 +55,4 @@ public class EjercitoTest {
         Assert.assertEquals(0,unEjercito.getPuntos());
     }
 
-
-
-
-
 }

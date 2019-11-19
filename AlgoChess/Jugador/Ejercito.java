@@ -32,4 +32,7 @@ public class Ejercito {
         }
     }
 
+    public int getPuntos() {
+        return this.puntos;
+    }
 }
