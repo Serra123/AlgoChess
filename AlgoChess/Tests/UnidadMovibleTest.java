@@ -111,12 +111,9 @@ public class UnidadMovibleTest {
         Posicion otraPosicion = new Posicion(1,1);
         UnidadMovible soldado = new Soldado(unaPosicion,"Jugador1");
         UnidadMovible otroSoldado = new Soldado(otraPosicion,"Jugador1");
-        try {
-            unTablero.colocarUnidad(soldado);
-            unTablero.colocarUnidad(otroSoldado);
-        }catch(ExcepcionCasilleroOcupado e){
-            Assert.fail();
-        }
+        unTablero.colocarUnidad(soldado);
+        unTablero.colocarUnidad(otroSoldado);
+
         soldado.mover(otraPosicion,unTablero);
 
     }

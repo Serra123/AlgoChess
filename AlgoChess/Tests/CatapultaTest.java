@@ -1,5 +1,6 @@
 package Tests;
 
+import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Tablero.Tablero;
 import Unidades.Catapulta;
 import Unidades.Posicion.Posicion;
@@ -68,18 +69,30 @@ public class CatapultaTest {
 
         Assert.assertEquals(80, enemigo3.getVida());
     }
-}
 
 
-   /* @Test
+
+    @Test
     public void testCatapultaAtacaSoldadoAliadoCorrectamente(){
         Posicion unaPosicion = new Posicion(0,0);
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
-        Catapulta unaCatapulta = new Catapulta(unaPosicion,"Ejercito aliado");
-        Soldado aliado = new Soldado(unaPosicion,"Ejercito aliado");
-
-        unaCatapulta.atacar(aliado);
+        Catapulta unaCatapulta = new Catapulta(unaPosicion,"Jugador1");
+        Soldado aliado = new Soldado(unaPosicion,"Jugador1");
+        unTablero.colocarUnidad(aliado);
+        unaCatapulta.atacar(aliado,unTablero);
 
         Assert.assertEquals(80, aliado.getVida());
     }
-} */
+
+    @Test(expected = ExcepcionDistanciaAtaqueInvalida.class)
+    public void testCatapultaNoPuedeAtacarADistanciaCorta(){
+        Posicion unaPosicion = new Posicion(9,0);
+        Posicion otraPosicion = new Posicion(10,0);
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Catapulta unaCatapulta = new Catapulta(unaPosicion,"Jugador1");
+        Soldado unSoldado = new Soldado(otraPosicion,"Jugador1");
+        unTablero.colocarUnidad(unaCatapulta);
+        unaCatapulta.atacar(unSoldado,unTablero);
+    }
+}

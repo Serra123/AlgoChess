@@ -1,7 +1,6 @@
 package Unidades;
 
-import Excepciones.ExcepcionAtaqueCercanoConArcoYFlecha;
-import Excepciones.ExcepcionAtaqueLejanoConArcoYFlecha;
+import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Unidades.Posicion.Posicion;
 
 public class ArcoYFlecha extends Arma {
@@ -14,10 +13,10 @@ public class ArcoYFlecha extends Arma {
     public void atacar(Unidad enemigo, Posicion posicionAtacante) {
         double distanciaAEnemigo = posicionAtacante.calcularDistancia(enemigo.posicion);
         if(distanciaAEnemigo <= DISTANCIACORTA){
-            throw new ExcepcionAtaqueCercanoConArcoYFlecha();
+            throw new ExcepcionDistanciaAtaqueInvalida();
         }
         else if(distanciaAEnemigo >= DISTANCIALEJANA){
-            throw new ExcepcionAtaqueLejanoConArcoYFlecha();
+            throw new ExcepcionDistanciaAtaqueInvalida();
         }
         else{
             enemigo.recibirAtaque(DANIO);

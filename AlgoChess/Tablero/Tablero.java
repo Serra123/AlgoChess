@@ -81,7 +81,6 @@ public class Tablero {
 
     public boolean hayEnemigoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
         int numeroFila = unaPosicion.getFila();
-        int numeroColumna = unaPosicion.getColumna();
         String ejercitoAliado = this.getUnidad(unaPosicion).getEjercito();
         boolean hayEnemigoCerca = false;
         boolean hayEnemigoEnFila;

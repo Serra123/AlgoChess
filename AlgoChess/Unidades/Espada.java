@@ -1,6 +1,6 @@
 package Unidades;
 
-import Excepciones.ExcepcionAtaqueLejanoConEspada;
+import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Unidades.Posicion.Posicion;
 
 public class Espada extends Arma {
@@ -12,7 +12,7 @@ public class Espada extends Arma {
     public void atacar(Unidad enemigo, Posicion posicionAtacante) {
         double distanciaAEnemigo = posicionAtacante.calcularDistancia(enemigo.posicion);
         if(distanciaAEnemigo > DISTANCIACORTA){
-            throw new ExcepcionAtaqueLejanoConEspada();
+            throw new ExcepcionDistanciaAtaqueInvalida();
         }
         else{
             enemigo.recibirAtaque(DANIO);

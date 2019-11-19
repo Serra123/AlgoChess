@@ -61,11 +61,11 @@ public class Ejercito {
         }
     }
 
-    private void verificarUnidadesSonSoldados(ArrayList<UnidadMovible> soldados) throws ExcepcionUnidadesNoSonSoldados {
+    private void verificarUnidadesSonSoldados(ArrayList<UnidadMovible> soldados) throws ExcepcionTipoUnidadInvalida {
 
         for (UnidadMovible soldado : soldados) {
             if (!(soldado instanceof Soldado)) {
-                throw new ExcepcionUnidadesNoSonSoldados();
+                throw new ExcepcionTipoUnidadInvalida();
             }
         }
 
