@@ -14,10 +14,6 @@ public class Ocupado implements EstadoOcupacion {
         return this.unidad;
     }
 
-    public void setUnidad(Unidad unidad){
-
-    }
-
     public EstadoOcupacion colocar(Unidad unaUnidad) throws ExcepcionCasilleroOcupado {
         throw new ExcepcionCasilleroOcupado();
     }

@@ -1,13 +1,7 @@
 package Jugador;
 
-import Excepciones.ExcepcionLasUnidadesEstanSeparadas;
 import Excepciones.*;
-import Tablero.Tablero;
-import Unidades.*;
-import Unidades.Posicion.Posicion;
-import Unidades.Soldado;
 import Unidades.Unidad;
-import Unidades.UnidadMovible;
 
 import java.util.ArrayList;
 

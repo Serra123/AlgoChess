@@ -9,13 +9,13 @@ import Unidades.Unidad;
 import java.util.ArrayList;
 
 public class Fila {
-    private ArrayList<Casillero> casilleros;
-    private static final int DISTANCIACORTA = 2;
 
-    public Fila(int columnas, String nombreUnJugador) {
+    private ArrayList<Casillero> casilleros;
+
+    public Fila(int columnas) {
         casilleros = new ArrayList<Casillero>();
         for (int i = 0; i < columnas; i++) {
-            Casillero unCasillero = new Casillero(nombreUnJugador);
+            Casillero unCasillero = new Casillero();
             casilleros.add(unCasillero);
         }
     }
@@ -38,7 +38,7 @@ public class Fila {
         unCasillero.recibirUnidad(unaUnidad);
     }
 
-    public boolean hayAlgunSoldadoADistancia(Posicion posicionDeReferencia, String ejercitoAliado, int distancia){
+    public boolean hayAlgunSoldadoAliadoADistancia(Posicion posicionDeReferencia, String ejercitoAliado, int distancia){
         int numeroColumna = posicionDeReferencia.getColumna();
         Casillero casilleroActual;
         for(int j = numeroColumna - distancia; j <= numeroColumna + distancia; j++){
@@ -60,15 +60,15 @@ public class Fila {
         return false;
     }
 
-    public boolean hayEnemigoCerca(Posicion posicionDeReferencia,String ejercitoAliado) throws ExcepcionCasilleroVacio{
+    public boolean hayEnemigoCerca(Posicion posicionDeReferencia, String ejercitoAliado, int distancia) throws ExcepcionCasilleroVacio{
         int numeroColumna = posicionDeReferencia.getColumna();
         Casillero casilleroActual;
-        for(int j = numeroColumna - DISTANCIACORTA; j <= numeroColumna + DISTANCIACORTA; j++){
+        for(int j = numeroColumna - distancia; j <= numeroColumna + distancia; j++){
             casilleroActual = casilleros.get(j);
             Unidad unaUnidad;
             try{
                 unaUnidad = casilleroActual.contenido();
-                boolean estaCerca = unaUnidad.getPosicion().calcularDistancia(posicionDeReferencia) < DISTANCIACORTA;
+                boolean estaCerca = unaUnidad.getPosicion().calcularDistancia(posicionDeReferencia) < distancia;
                 boolean esEnemigo = !unaUnidad.getEjercito().equals(ejercitoAliado);
                 if(estaCerca && esEnemigo){
                     return true;

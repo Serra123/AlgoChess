@@ -61,7 +61,7 @@ public class Batallon {
         return soldadoCentral;
     }
     public void moverBatallon(Posicion posicionCentralNueva) {
-        Posicion posicionCentralVieja = new Posicion(soldadoCentral.getPosicion().getFila(),soldadoCentral.getPosicion().getColumna());
+        Posicion posicionCentralVieja = soldadoCentral.getPosicion();
         validarPosicionNueva(posicionCentralNueva,posicionCentralVieja);
         ArrayList nuevasPosiciones = calcularPosicionesNuevas(posicionCentralNueva,posicionCentralVieja);
         moverSoldados(nuevasPosiciones,0);

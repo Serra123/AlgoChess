@@ -2,7 +2,6 @@ package Tablero;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
-import Excepciones.ExcepcionFinDelTablero;
 import Excepciones.ExcepcionSectorEnemigo;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
@@ -27,12 +26,12 @@ public class Tablero {
         sectores.put(nombreOtroJugador,sectorDos);
 
         for(int i=0; i < (filas/2);i++){
-            Fila nuevaFila = new Fila(columnas,nombreUnJugador);
+            Fila nuevaFila = new Fila(columnas);
             this.filas.add(nuevaFila);
 
         }
         for(int i= (filas/2); i < filas;i++){
-            Fila nuevaFila = new Fila(columnas,nombreOtroJugador);
+            Fila nuevaFila = new Fila(columnas);
             this.filas.add(nuevaFila);
         }
     }
@@ -66,7 +65,7 @@ public class Tablero {
         return unCasillero.contenido();
     }
 
-    public boolean haySoldadoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
+    public boolean haySoldadoAliadoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
         int numeroFila = unaPosicion.getFila();
         int numeroColumna = unaPosicion.getColumna();
         String ejercitoAliado = this.filas.get(numeroFila).getCasillero(numeroColumna).contenido().getEjercito();
@@ -76,7 +75,7 @@ public class Tablero {
         for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
             filaActual = filas.get(i);
             try {
-                haySoldadoAliadoEnFila = filaActual.hayAlgunSoldadoADistancia(unaPosicion,ejercitoAliado,DISTANCIACORTA);
+                haySoldadoAliadoEnFila = filaActual.hayAlgunSoldadoAliadoADistancia(unaPosicion,ejercitoAliado,DISTANCIACORTA);
                 if(haySoldadoAliadoEnFila){
                     haySoldadoAliadoCerca = true;
                 }
@@ -97,7 +96,7 @@ public class Tablero {
         for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
             filaActual = filas.get(i);
             try {
-                hayEnemigoEnFila = filaActual.hayEnemigoCerca(unaPosicion,ejercitoAliado);
+                hayEnemigoEnFila = filaActual.hayEnemigoCerca(unaPosicion,ejercitoAliado, DISTANCIACORTA);
                 if(hayEnemigoEnFila){
                     hayEnemigoCerca = true;
                 }
@@ -135,4 +134,6 @@ public class Tablero {
             }
         }
     }
+
+
 }

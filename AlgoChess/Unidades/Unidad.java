@@ -10,7 +10,6 @@ public abstract class Unidad {
     protected int costo;
     protected Posicion posicion;
     protected String ejercito;
-    protected Boolean estaVivo;
 
     public int getVida() {
         return vida;
@@ -20,8 +19,8 @@ public abstract class Unidad {
 
     public void recibirAtaque(int valorDanio) {
         vida -= valorDanio;
-        this.estaVivo = this.vida > 0;
     }
+
     public void expandirAtaqueRecibido(int valorDanio, Tablero unTablero){
         unTablero.expandirDanio(this.getPosicion(),valorDanio);
     }
@@ -36,10 +35,6 @@ public abstract class Unidad {
     public boolean esAliado(Unidad unaUnidad){
         return  (this.ejercito == unaUnidad.getEjercito());
 
-    }
-
-    public boolean getEstaMuerto() {
-        return (!this.estaVivo);
     }
 
     public Posicion getPosicion() {

@@ -1,7 +1,6 @@
 package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
-import Excepciones.ExcepcionCasilleroVacio;
 import Excepciones.ExcepcionFinDelTablero;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
@@ -35,7 +34,7 @@ public class Jinete extends UnidadMovible {
     // luego el arma de ataque es la espada.
     private Arma obtenerArmaDeAtaque(Tablero unTablero) throws ExcepcionFinDelTablero{
         try {
-            boolean haySoldadoCerca = unTablero.haySoldadoCerca(this.posicion);
+            boolean haySoldadoCerca = unTablero.haySoldadoAliadoCerca(this.posicion);
             boolean hayEnemigoCerca = unTablero.hayEnemigoCerca(this.posicion);
             if (!hayEnemigoCerca || haySoldadoCerca) {
                 return new ArcoYFlecha();

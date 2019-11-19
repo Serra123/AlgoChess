@@ -1,7 +1,6 @@
 package Jugador;
 
 import Excepciones.ExcepcionTipoUnidadInvalida;
-import Tablero.Tablero;
 import Unidades.*;
 import Unidades.Posicion.Posicion;
 
@@ -13,7 +12,7 @@ public class FabricaDeUnidades {
         this.nombreEjercito = nombreEjercito;
     }
 
-    public Unidad crearUnidad(Posicion unaPosicion, String tipoUnidad, Tablero unTablero){
+    public Unidad crearUnidad(Posicion unaPosicion, String tipoUnidad){
         Unidad unaUnidad;
         switch (tipoUnidad){
 
