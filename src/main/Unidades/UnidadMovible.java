@@ -6,6 +6,7 @@ import Unidades.Posicion.Posicion;
 import Excepciones.ExcepcionCasilleroOcupado;
 
 public abstract class UnidadMovible extends Unidad {
+
     UnidadMovible(Posicion unaPosicion) {
         this.posicion = unaPosicion;
 

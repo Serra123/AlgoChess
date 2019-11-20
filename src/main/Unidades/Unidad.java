@@ -25,6 +25,12 @@ public abstract class Unidad {
         unTablero.expandirDanio(this.getPosicion(),valorDanio);
     }
 
+    //Este método lo había propuesto el corrector, falta ponerlo en uso para los lugares donde se usaba en realidad
+    //el calcular distancia de posición.
+    public double distanciaA(Unidad unaUnidad){
+        return this.posicion.calcularDistancia(unaUnidad.getPosicion());
+    }
+
 
     protected void recibirCuracion(int valorCuracion) {
         vida+=valorCuracion;

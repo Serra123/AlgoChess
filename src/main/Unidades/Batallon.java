@@ -37,7 +37,7 @@ public class Batallon {
         for(int i=0;i<soldados.size();i++){
             int cantidadPosicionesSeparadas = 0;
             for (UnidadMovible soldado : soldados) {
-                double distanciaAPosicionActual = soldados.get(i).getPosicion().calcularDistancia(soldado.getPosicion());
+                double distanciaAPosicionActual = soldados.get(i).distanciaA(soldado);
                 if (distanciaAPosicionActual >= 2) {
                     cantidadPosicionesSeparadas++;
                 }
@@ -47,25 +47,26 @@ public class Batallon {
             }
         }
     }
-    public void soldadosPertenecenAlMismoEjercito() throws ExcepcionSoldadosNoPerteneceATuEjercito {
+
+    private void soldadosPertenecenAlMismoEjercito() throws ExcepcionSoldadosNoPerteneceATuEjercito {
         if( !(soldados.get(0).esAliado(soldados.get(1)) & soldados.get(1).esAliado(soldados.get(2))) ){
             throw new ExcepcionSoldadosNoPerteneceATuEjercito();
         }
     }
-    public void unidadesSonSoldados() throws ExcepcionTipoUnidadInvalida {
+    private void unidadesSonSoldados() throws ExcepcionTipoUnidadInvalida {
         for (UnidadMovible soldado : soldados) {
             if (!(soldado instanceof Soldado)) {
                 throw new ExcepcionTipoUnidadInvalida();
             }
         }
     }
-    public UnidadMovible getSoldadoCentral(){
+    private UnidadMovible getSoldadoCentral(){
         double distanciaMin = 100;
         UnidadMovible soldadoCentral = soldados.get(1);
         for(int i=0;i<soldados.size();i++){
             double distanciaSoldado = 0;
             for (UnidadMovible soldado : soldados) {
-                distanciaSoldado += soldados.get(i).getPosicion().calcularDistancia(soldado.getPosicion());
+                distanciaSoldado += soldados.get(i).distanciaA(soldado);
             }
             if(distanciaSoldado<distanciaMin){
                 distanciaMin = distanciaSoldado;
@@ -85,7 +86,7 @@ public class Batallon {
             throw new ExcepcionMovimientoInvalido();
         }
     }
-    public ArrayList calcularPosicionesNuevas(Posicion posicionCentralNueva,Posicion posicionCentralVieja){
+    private ArrayList calcularPosicionesNuevas(Posicion posicionCentralNueva,Posicion posicionCentralVieja){
         ArrayList<Posicion> nuevasPosiciones = new ArrayList<>();
         for (UnidadMovible soldado : soldados) {
             Posicion nuevaPosicion = soldado.getPosicion().calcularNuevaPosicionRespectoDe(posicionCentralNueva, posicionCentralVieja);
@@ -93,7 +94,7 @@ public class Batallon {
         }
         return nuevasPosiciones;
     }
-    public void moverSoldados(ArrayList<Posicion> nuevasPosiciones,int soldadoActual){
+    private void moverSoldados(ArrayList<Posicion> nuevasPosiciones,int soldadoActual){
         boolean mismaPosicionConDos = nuevasPosiciones.get(soldadoActual).calcularDistancia(soldados.get(1).getPosicion()) == 0;
         boolean mismaPosicionConTres = nuevasPosiciones.get(soldadoActual).calcularDistancia(soldados.get(2).getPosicion()) == 0;
         if(mismaPosicionConDos && soldadoActual!=1){
@@ -107,7 +108,7 @@ public class Batallon {
             moverSoldados(nuevasPosiciones,soldadoActual+1);
         }
     }
-    public void moverUnSoldado(ArrayList<Posicion> nuevasPosiciones,int soldadoActual){
+    private void moverUnSoldado(ArrayList<Posicion> nuevasPosiciones,int soldadoActual){
         try{
             soldados.get(soldadoActual).mover(nuevasPosiciones.get(soldadoActual),unTablero);
         }

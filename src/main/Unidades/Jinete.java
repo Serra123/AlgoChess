@@ -20,7 +20,7 @@ public class Jinete extends UnidadMovible {
         this.ejercito = unNombreDeJugador;
         armaDeAtaque = new Espada();
     }
-    
+
     public void atacar(Unidad unaUnidad, Tablero unTablero) throws ExcepcionFinDelTablero{
         this.armaDeAtaque = this.obtenerArmaDeAtaque(unTablero);
         if(this.esAliado(unaUnidad)){
