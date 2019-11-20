@@ -13,7 +13,6 @@ import java.util.HashMap;
 
 public class Tablero {
 
-    private static final int DISTANCIACORTA = 2;
     private ArrayList<Fila> filas;
     private HashMap<String,Sector> sectores;
 

@@ -3,7 +3,7 @@ package Unidades;
 import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Unidades.Posicion.Posicion;
 
-public class Espada extends Arma {
+public class Espada implements Arma {
 
     private static int DANIO = 5;
     private static int DISTANCIACORTA = 2;

@@ -45,11 +45,9 @@ public class Ejercito {
         if(posicionesTotales.size()<3){
             throw new ExcepcionCantidadInsuficienteDePosiciones();
         }
-        ArrayList<Posicion> posiciones = new ArrayList<>();
-        for(int i=0;i<3;i++){
-            posiciones.add(posicionesTotales.get(i));
-        }
-        return posiciones;
+
+        return new ArrayList<>(posicionesTotales);
+
     }
 
     private void posicionesEstanContiguas(ArrayList<Posicion> posiciones)throws ExcepcionLasUnidadesEstanSeparadas {

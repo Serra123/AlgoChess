@@ -2,7 +2,7 @@ package Unidades;
 
 import Unidades.Posicion.Posicion;
 
-public abstract class Arma {
+public interface Arma {
 
-    abstract void atacar(Unidad enemigo, Posicion posicionAtacante);
+    void atacar(Unidad enemigo, Posicion posicionAtacante);
 }

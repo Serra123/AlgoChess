@@ -3,7 +3,7 @@ package Unidades;
 import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Unidades.Posicion.Posicion;
 
-public class ArcoYFlecha extends Arma {
+public class ArcoYFlecha implements Arma {
 
     private static int DANIO = 15;
     private static int DISTANCIACORTA = 2;
