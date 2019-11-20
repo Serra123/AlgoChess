@@ -3,6 +3,8 @@ package Unidades;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
+import java.util.ArrayList;
+
 public abstract class Unidad {
 
     protected int vida;
@@ -48,4 +50,12 @@ public abstract class Unidad {
     }
 
     public boolean candidatoABatallonEn(Posicion unaPosicion){ return false; }
+
+    protected boolean hayUnidadEnemiga(ArrayList<Unidad> unidadesCercanas) {
+      return  unidadesCercanas.stream().anyMatch(unidad -> ( ! ( unidad.getEjercito().equals(this.ejercito) ) ) );
+    }
+
+    protected boolean haySoldadoAliado(ArrayList<Unidad> unidadesCercanas) {
+        return unidadesCercanas.stream().anyMatch(unidad -> (unidad instanceof Soldado));
+    }
 }

@@ -2,6 +2,7 @@ package Tablero;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
+import Excepciones.ExcepcionFinDelTablero;
 import Excepciones.ExcepcionSectorEnemigo;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
@@ -65,51 +66,37 @@ public class Tablero {
         return unCasillero.contenido();
     }
 
-    public boolean haySoldadoAliadoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
-        int numeroFila = unaPosicion.getFila();
-        int numeroColumna = unaPosicion.getColumna();
-        String ejercitoAliado = this.filas.get(numeroFila).getCasillero(numeroColumna).contenido().getEjercito();
-        boolean haySoldadoAliadoCerca = false;
-        boolean haySoldadoAliadoEnFila;
-        Fila filaActual;
-        for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
-            filaActual = filas.get(i);
-            try {
-                haySoldadoAliadoEnFila = filaActual.hayAlgunSoldadoAliadoADistancia(unaPosicion,ejercitoAliado,DISTANCIACORTA);
-                if(haySoldadoAliadoEnFila){
-                    haySoldadoAliadoCerca = true;
+    //Temporalmente está bien manejar la excepción de Fin de Tablero de esta forma pero en un futuro, no vamos a tener que throwear
+    //la de Excepción Fin de Tablero sino solo hacer que se compruebe el tema de la distancia en los casilleros que
+    //efectivamente se encuentran dentro del tablero. Pero por ahora está bien.
+    public ArrayList<Unidad> obtenerUnidadesADistancia(Posicion posicionReferencia, int distancia) throws ExcepcionFinDelTablero{
+        ArrayList<Unidad> unidadesCercanas = new ArrayList<>();
+        int filaReferencia = posicionReferencia.getFila();
+        int columnaReferencia = posicionReferencia.getColumna();
+        try {
+            for (int i = filaReferencia - distancia; i <= filaReferencia + distancia; i++) {
+                for (int j = columnaReferencia - distancia; j <= columnaReferencia + distancia; j++) {
+                    boolean esUnidadReferencia = (i == filaReferencia && j == columnaReferencia);
+                    try {
+                        Unidad unidadActual = this.filas.get(i).getCasillero(j).contenido();
+                        if (posicionReferencia.calcularDistancia(unidadActual.getPosicion()) <= distancia
+                                && !esUnidadReferencia) {
+                            unidadesCercanas.add(unidadActual);
+                        }
+                    } catch (ExcepcionCasilleroVacio e) {
+                        //No se debería de hacer nada en el manejo de esta excepción.
+                    }
                 }
-            }catch (ExcepcionCasilleroVacio e){
-                //No hay que hacer nada sobre el manejo de esta excepción.
             }
+        }catch (IndexOutOfBoundsException e){
+            throw new ExcepcionFinDelTablero();
         }
 
-        return haySoldadoAliadoCerca;
-    }
-
-    public boolean hayEnemigoCerca(Posicion unaPosicion) throws ExcepcionCasilleroVacio {
-        int numeroFila = unaPosicion.getFila();
-        String ejercitoAliado = this.getUnidad(unaPosicion).getEjercito();
-        boolean hayEnemigoCerca = false;
-        boolean hayEnemigoEnFila;
-        Fila filaActual;
-        for(int i = numeroFila - DISTANCIACORTA; i <= numeroFila + DISTANCIACORTA ; i++){
-            filaActual = filas.get(i);
-            try {
-                hayEnemigoEnFila = filaActual.hayEnemigoCerca(unaPosicion,ejercitoAliado, DISTANCIACORTA);
-                if(hayEnemigoEnFila){
-                    hayEnemigoCerca = true;
-                }
-            }catch (ExcepcionCasilleroVacio e){
-                //No hay que hacer nada sobre el manejo de esta excepción.
-            }
-        }
-
-        return hayEnemigoCerca;
+        return unidadesCercanas;
     }
 
     public void expandirDanio(Posicion unaPosicion,int unDanio){
-        ArrayList<Posicion> posiciones = new ArrayList<Posicion>();
+        ArrayList<Posicion> posiciones = new ArrayList<>();
         posiciones.add(unaPosicion);
         this.obtenerUnidadesAfectadasPorExpansion(unaPosicion,posiciones);
         posiciones.forEach((posicion) -> this.getUnidad(posicion).recibirAtaque(unDanio));
