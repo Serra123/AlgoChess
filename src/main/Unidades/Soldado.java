@@ -10,7 +10,9 @@ public class Soldado extends UnidadMovible {
     private static int COSTO = 1;
 
     @Override
-    public boolean candidatoABatallon(){ return true; }
+    public boolean candidatoABatallonEn(Posicion unaPosicion) {
+        return (this.posicion.equals(unaPosicion));
+    }
 
     public Soldado(Posicion unaPosicion, String unNombreDeJugador) {
         super(unaPosicion);

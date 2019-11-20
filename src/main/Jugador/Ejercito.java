@@ -35,24 +35,10 @@ public class Ejercito {
     //cambiar int por Batallon luego o algo asi
     public ArrayList<Unidad> crearBatallon(ArrayList<Posicion> posicionesTotales){
 
-        ArrayList<Unidad> soldados = crearListaSoldados();
         ArrayList<Posicion> posiciones = getTresPosiciones(posicionesTotales);
         posicionesEstanContiguas(posiciones);
-        ArrayList<Unidad> soldadosDeBatallon = getSoldadosDePosiciones(soldados,posiciones);
+        ArrayList<Unidad> soldadosDeBatallon = getSoldadosDePosiciones(posiciones);
         return soldadosDeBatallon;
-    }
-
-    private ArrayList<Unidad> crearListaSoldados() throws ExcepcionCantidadInsuficienteDeSoldados{
-        ArrayList<Unidad> unidadesDeBatallon = new ArrayList<>();
-        for (Unidad unidades : unidades) {
-            if (unidades.candidatoABatallon() == true) {
-                unidadesDeBatallon.add(unidades);
-            }
-        }
-        if(unidadesDeBatallon.size()<3){
-            throw new ExcepcionCantidadInsuficienteDeSoldados();
-        }
-        return unidadesDeBatallon;
     }
 
     private ArrayList<Posicion> getTresPosiciones(ArrayList<Posicion> posicionesTotales)throws ExcepcionCantidadInsuficienteDePosiciones{
@@ -81,15 +67,16 @@ public class Ejercito {
         }
     }
 
-    private ArrayList<Unidad> getSoldadosDePosiciones(ArrayList<Unidad> soldados, ArrayList<Posicion> posiciones)throws ExcepcionPosicionInvalida {
+    private ArrayList<Unidad> getSoldadosDePosiciones(ArrayList<Posicion> posiciones)throws ExcepcionPosicionInvalida {
 
         ArrayList<Unidad> soldadosDeBatallon = new ArrayList<>();
-        for (Unidad soldado : soldados) {
-            if (soldado.equals(posiciones.get(0)) | soldado.equals(posiciones.get(1)) | soldado.equals(posiciones.get(2))) {
-                soldadosDeBatallon.add(soldado);
+
+        for (Unidad unidades : unidades) {
+            if (unidades.candidatoABatallonEn(posiciones.get(0)) | unidades.candidatoABatallonEn(posiciones.get(1)) | unidades.candidatoABatallonEn(posiciones.get(2))) {
+                soldadosDeBatallon.add(unidades);
             }
         }
-        if(soldadosDeBatallon.size()<2){
+        if(soldadosDeBatallon.size()<3){
             throw new ExcepcionPosicionInvalida();
         }
         return soldadosDeBatallon;

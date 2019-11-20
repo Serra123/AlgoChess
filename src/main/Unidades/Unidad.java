@@ -41,5 +41,5 @@ public abstract class Unidad {
         return this.posicion;
     }
 
-    public boolean candidatoABatallon(){ return false; }
+    public boolean candidatoABatallonEn(Posicion unaPosicion){ return false; }
 }

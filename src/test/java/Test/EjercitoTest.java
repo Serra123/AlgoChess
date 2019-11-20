@@ -57,30 +57,6 @@ public class EjercitoTest {
         Assert.assertEquals(0,unEjercito.getPuntos());
     }
 
-    @Test (expected = ExcepcionCantidadInsuficienteDeSoldados.class)
-    public void testNoTengoSuficientesSoldadosParaBatallon() {
-
-        Ejercito unEjercito = new Ejercito();
-
-        Posicion posicionUno = new Posicion(2, 2);
-        Posicion posicionDos = new Posicion(1, 1);
-        Posicion posicionTres = new Posicion(3, 3);
-
-        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
-        Catapulta catapulta = new Catapulta(posicionTres,"Jugador 1");
-
-        unEjercito.agregarUnidad(soldadoUno);
-        unEjercito.agregarUnidad(soldadoDos);
-        unEjercito.agregarUnidad(catapulta);
-
-        ArrayList<Posicion> posiciones = new ArrayList<>();
-        posiciones.add(posicionUno);
-        posiciones.add(posicionDos);
-
-        unEjercito.crearBatallon(posiciones);
-    }
-
 
     @Test (expected = ExcepcionCantidadInsuficienteDePosiciones.class)
     public void testNoLeMandoSuficientesPosicionesParaBatallon() {
@@ -133,9 +109,33 @@ public class EjercitoTest {
         unEjercito.crearBatallon(posiciones);
     }
 
-
-    @Test(expected = ExcepcionPosicionInvalida.class)
+    @Test (expected = ExcepcionPosicionInvalida.class)
     public void testLeMandoUnaPosicionQueNoTieneSoldado(){
+        Ejercito unEjercito = new Ejercito();
+
+        Posicion posicionUno = new Posicion(2, 2);
+        Posicion posicionDos = new Posicion(1, 1);
+        Posicion posicionTres = new Posicion(3, 3);
+        Posicion posicionSinSoldado = new Posicion(2, 3);
+
+        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
+        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
+        Soldado soldadoTres = new Soldado(posicionTres,"Jugador 1");
+
+        unEjercito.agregarUnidad(soldadoUno);
+        unEjercito.agregarUnidad(soldadoDos);
+        unEjercito.agregarUnidad(soldadoTres);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionSinSoldado);
+
+        unEjercito.crearBatallon(posiciones);
+    }
+
+    @Test
+    public void testCreoUnBatallonExitosamente(){
         Ejercito unEjercito = new Ejercito();
 
         Posicion posicionUno = new Posicion(2, 2);
@@ -157,7 +157,5 @@ public class EjercitoTest {
 
         unEjercito.crearBatallon(posiciones);
     }
-
-
 
 }
