@@ -21,5 +21,4 @@ public class Jugador {
         unTablero.colocarUnidad(unaUnidad);
         this.ejercito.agregarUnidad(unaUnidad);
     }
-
 }

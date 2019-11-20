@@ -9,6 +9,9 @@ public class Soldado extends UnidadMovible {
     private static int VIDAINICIAL = 100;
     private static int COSTO = 1;
 
+    @Override
+    public boolean candidatoABatallon(){ return true; }
+
     public Soldado(Posicion unaPosicion, String unNombreDeJugador) {
         super(unaPosicion);
         this.vida = VIDAINICIAL;

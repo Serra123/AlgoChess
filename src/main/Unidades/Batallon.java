@@ -21,7 +21,7 @@ public class Batallon {
         unidadesSonSoldados();
     }
 
-    public void agregarSoldados(ArrayList<UnidadMovible> listaSoldados) throws ExcepcionCantidadInsuficienteDeSoldados{
+    private void agregarSoldados(ArrayList<UnidadMovible> listaSoldados) throws ExcepcionCantidadInsuficienteDeSoldados{
         if(listaSoldados.size()<3){
             throw new ExcepcionCantidadInsuficienteDeSoldados();
         }
@@ -33,12 +33,12 @@ public class Batallon {
         }
     }
 
-    public void soldadosEstanContiguos() throws ExcepcionLasUnidadesEstanSeparadas {
+    private void soldadosEstanContiguos() throws ExcepcionLasUnidadesEstanSeparadas {
         for(int i=0;i<soldados.size();i++){
             int cantidadPosicionesSeparadas = 0;
-            for(int j=0;j<soldados.size();j++) {
-                double distanciaAPosicionActual = soldados.get(i).getPosicion().calcularDistancia(soldados.get(1).getPosicion());
-                if (distanciaAPosicionActual>=2){
+            for (UnidadMovible soldado : soldados) {
+                double distanciaAPosicionActual = soldados.get(i).getPosicion().calcularDistancia(soldado.getPosicion());
+                if (distanciaAPosicionActual >= 2) {
                     cantidadPosicionesSeparadas++;
                 }
             }

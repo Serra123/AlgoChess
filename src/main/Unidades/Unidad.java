@@ -40,4 +40,6 @@ public abstract class Unidad {
     public Posicion getPosicion() {
         return this.posicion;
     }
+
+    public boolean candidatoABatallon(){ return false; }
 }

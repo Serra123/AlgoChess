@@ -9,6 +9,8 @@ import Unidades.Posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class EjercitoTest {
 
     @Test (expected = ExcepcionPuntosInsuficientes.class)
@@ -54,5 +56,108 @@ public class EjercitoTest {
 
         Assert.assertEquals(0,unEjercito.getPuntos());
     }
+
+    @Test (expected = ExcepcionCantidadInsuficienteDeSoldados.class)
+    public void testNoTengoSuficientesSoldadosParaBatallon() {
+
+        Ejercito unEjercito = new Ejercito();
+
+        Posicion posicionUno = new Posicion(2, 2);
+        Posicion posicionDos = new Posicion(1, 1);
+        Posicion posicionTres = new Posicion(3, 3);
+
+        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
+        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
+        Catapulta catapulta = new Catapulta(posicionTres,"Jugador 1");
+
+        unEjercito.agregarUnidad(soldadoUno);
+        unEjercito.agregarUnidad(soldadoDos);
+        unEjercito.agregarUnidad(catapulta);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+
+        unEjercito.crearBatallon(posiciones);
+    }
+
+
+    @Test (expected = ExcepcionCantidadInsuficienteDePosiciones.class)
+    public void testNoLeMandoSuficientesPosicionesParaBatallon() {
+
+        Ejercito unEjercito = new Ejercito();
+
+        Posicion posicionUno = new Posicion(2, 2);
+        Posicion posicionDos = new Posicion(1, 1);
+        Posicion posicionTres = new Posicion(3, 3);
+
+        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
+        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
+        Soldado soldadoTres = new Soldado(posicionTres,"Jugador 1");
+
+        unEjercito.agregarUnidad(soldadoUno);
+        unEjercito.agregarUnidad(soldadoDos);
+        unEjercito.agregarUnidad(soldadoTres);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+
+        unEjercito.crearBatallon(posiciones);
+    }
+
+
+
+    @Test (expected = ExcepcionLasUnidadesEstanSeparadas.class)
+    public void testNoCreoBatallonSiPosicionesNoEstanContiguas() {
+
+        Ejercito unEjercito = new Ejercito();
+
+        Posicion posicionUno = new Posicion(2, 2);
+        Posicion posicionDos = new Posicion(1, 1);
+        Posicion posicionTres = new Posicion(3, 4);
+
+        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
+        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
+        Soldado soldadoTres = new Soldado(posicionTres, "Jugador1");
+
+        unEjercito.agregarUnidad(soldadoUno);
+        unEjercito.agregarUnidad(soldadoDos);
+        unEjercito.agregarUnidad(soldadoTres);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+        unEjercito.crearBatallon(posiciones);
+    }
+
+
+    @Test(expected = ExcepcionPosicionInvalida.class)
+    public void testLeMandoUnaPosicionQueNoTieneSoldado(){
+        Ejercito unEjercito = new Ejercito();
+
+        Posicion posicionUno = new Posicion(2, 2);
+        Posicion posicionDos = new Posicion(1, 1);
+        Posicion posicionTres = new Posicion(3, 3);
+
+        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
+        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
+        Soldado soldadoTres = new Soldado(posicionTres,"Jugador 1");
+
+        unEjercito.agregarUnidad(soldadoUno);
+        unEjercito.agregarUnidad(soldadoDos);
+        unEjercito.agregarUnidad(soldadoTres);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+        unEjercito.crearBatallon(posiciones);
+    }
+
+
 
 }
