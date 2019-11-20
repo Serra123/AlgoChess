@@ -37,20 +37,18 @@ public class Tablero {
         }
     }
 
-    public boolean estaEnSector(String nombreEjercito,Posicion unaPosicion){
+    public boolean estaEnSector(Unidad unaUnidad){
 
-        Sector sector = sectores.get(nombreEjercito);
+        Sector sector = sectores.get(unaUnidad.getEjercito());
 
-        return (sector.estaEnSector(unaPosicion.getFila()));
+        return (sector.estaEnSector(unaUnidad.getPosicion()));
 
     }
 
-    public void colocarUnidad(Unidad unidad) throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
-        String unEjercito = unidad.getEjercito();
-        Posicion unaPosicion = unidad.getPosicion();
-        if (this.estaEnSector(unEjercito, unaPosicion)) {
-            Fila unaFila = filas.get(unaPosicion.getFila());
-            unaFila.colocarUnidadEnColumna(unidad, unaPosicion.getColumna());
+    public void colocarUnidad(Unidad unaUnidad) throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+        if (this.estaEnSector(unaUnidad)) {
+            Fila unaFila = filas.get(unaUnidad.getPosicion().getFila());
+            unaFila.colocarUnidadEnColumna(unaUnidad, unaUnidad.getPosicion().getColumna());
         } else throw new ExcepcionSectorEnemigo();
     }
     public void moverUnidad(UnidadMovible unaUnidadMovible,Posicion posicionNueva) throws ExcepcionCasilleroOcupado, ExcepcionCasilleroVacio {

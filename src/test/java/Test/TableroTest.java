@@ -42,16 +42,16 @@ public class TableroTest {
     public void testSectorInferiorPerteneceAPrimerJugador(){
         Tablero tablero = new Tablero(20,20,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(1,0);
-        Assert.assertTrue((tablero.estaEnSector("Jugador1", unaPosicion)));
-
+        Soldado unSoldado = new Soldado(unaPosicion,"Jugador1");
+        Assert.assertTrue((tablero.estaEnSector(unSoldado)));
     }
 
     @Test
     public void testSectorSuperiorPerteneceASegundoJugador(){
         Tablero tablero = new Tablero(20,20,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(11,0);
-        Assert.assertTrue((tablero.estaEnSector("Jugador2", unaPosicion)));
-
+        Soldado unSoldado = new Soldado(unaPosicion,"Jugador2");
+        Assert.assertTrue((tablero.estaEnSector(unSoldado)));
     }
 
 }
