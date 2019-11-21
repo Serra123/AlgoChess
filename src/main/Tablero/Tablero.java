@@ -44,6 +44,7 @@ public class Tablero {
             unaFila.colocarUnidadEnColumna(unaUnidad, unaUnidad.getPosicion().getColumna());
         } else throw new ExcepcionSectorEnemigo();
     }
+
     public void moverUnidad(UnidadMovible unaUnidadMovible,Posicion posicionNueva) throws ExcepcionCasilleroOcupado,
                                                                                           ExcepcionCasilleroVacio {
         Posicion unaPosicion = unaUnidadMovible.getPosicion();
@@ -52,6 +53,7 @@ public class Tablero {
         filaAnterior.vaciarUnidad(unaPosicion.getColumna());
         filaNueva.recibirUnidad(unaUnidadMovible,posicionNueva.getColumna());
     }
+
     public Unidad getUnidad(Posicion unaPosicion){
         Fila unaFila = filas.get(unaPosicion.getFila());
         Casillero unCasillero = unaFila.getCasillero(unaPosicion.getColumna());

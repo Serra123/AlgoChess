@@ -52,8 +52,8 @@ public class Ejercito {
     private void posicionesEstanContiguas(ArrayList<Posicion> posiciones)throws ExcepcionLasUnidadesEstanSeparadas {
         for(int i=0;i<posiciones.size();i++){
             int cantidadPosicionesSeparadas = 0;
-            for (Posicion posicione : posiciones) {
-                double distanciaAPosicionActual = posiciones.get(i).calcularDistancia(posicione);
+            for (Posicion posicion : posiciones) {
+                double distanciaAPosicionActual = posiciones.get(i).calcularDistancia(posicion);
                 if (distanciaAPosicionActual >= 2) {
                     cantidadPosicionesSeparadas++;
                 }
