@@ -13,6 +13,7 @@ class Sector {
     }
 
     boolean estaEnSector(Posicion unaPosicion) {
-        return (unaPosicion.getFila() >= limiteInferior & unaPosicion.getFila() <= limiteSuperior);
+        return (unaPosicion.getFila() >= limiteInferior &&
+                unaPosicion.getFila() <= limiteSuperior);
     }
 }

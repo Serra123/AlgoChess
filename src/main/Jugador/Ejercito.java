@@ -37,8 +37,7 @@ public class Ejercito {
 
         ArrayList<Posicion> posiciones = getTresPosiciones(posicionesTotales);
         posicionesEstanContiguas(posiciones);
-        ArrayList<Unidad> soldadosDeBatallon = getSoldadosDePosiciones(posiciones);
-        return soldadosDeBatallon;
+        return getSoldadosDePosiciones(posiciones);
     }
 
     private ArrayList<Posicion> getTresPosiciones(ArrayList<Posicion> posicionesTotales)throws ExcepcionCantidadInsuficienteDePosiciones{
@@ -53,9 +52,9 @@ public class Ejercito {
     private void posicionesEstanContiguas(ArrayList<Posicion> posiciones)throws ExcepcionLasUnidadesEstanSeparadas {
         for(int i=0;i<posiciones.size();i++){
             int cantidadPosicionesSeparadas = 0;
-            for(int j=0;j<posiciones.size();j++) {
-                double distanciaAPosicionActual = posiciones.get(i).calcularDistancia(posiciones.get(j));
-                if (distanciaAPosicionActual>=2){
+            for (Posicion posicione : posiciones) {
+                double distanciaAPosicionActual = posiciones.get(i).calcularDistancia(posicione);
+                if (distanciaAPosicionActual >= 2) {
                     cantidadPosicionesSeparadas++;
                 }
             }
@@ -70,7 +69,8 @@ public class Ejercito {
         ArrayList<Unidad> soldadosDeBatallon = new ArrayList<>();
 
         for (Unidad unidades : unidades) {
-            if (unidades.candidatoABatallonEn(posiciones.get(0)) | unidades.candidatoABatallonEn(posiciones.get(1)) | unidades.candidatoABatallonEn(posiciones.get(2))) {
+            if (unidades.candidatoABatallonEn(posiciones.get(0)) | unidades.candidatoABatallonEn(posiciones.get(1)) |
+                                        unidades.candidatoABatallonEn(posiciones.get(2))) {
                 soldadosDeBatallon.add(unidades);
             }
         }

@@ -10,7 +10,7 @@ public class Espada implements Arma {
 
     @Override
     public void atacar(Unidad enemigo, Posicion posicionAtacante) {
-        double distanciaAEnemigo = posicionAtacante.calcularDistancia(enemigo.posicion);
+        double distanciaAEnemigo = posicionAtacante.calcularDistancia(enemigo.getPosicion());
         if(distanciaAEnemigo > DISTANCIACORTA){
             throw new ExcepcionDistanciaAtaqueInvalida();
         }

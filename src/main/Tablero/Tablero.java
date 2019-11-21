@@ -18,21 +18,15 @@ public class Tablero {
 
     public Tablero(int filas, int columnas, String nombreUnJugador, String nombreOtroJugador) {
         this.filas = new ArrayList<Fila>();
-
         this.sectores= new HashMap<String, Sector>();
-        Sector sectorUno= new Sector(0 ,((filas/2)-1));
-        sectores.put(nombreUnJugador,sectorUno);
-        Sector sectorDos= new Sector(filas/2 ,filas);
-        sectores.put(nombreOtroJugador,sectorDos);
 
-        for(int i=0; i < (filas/2);i++){
+        sectores.put(nombreUnJugador,new Sector(0 ,((filas/2)-1)));
+        sectores.put(nombreOtroJugador,new Sector(filas/2 ,filas));
+
+        for(int i=0; i < filas;i++){
             Fila nuevaFila = new Fila(columnas);
             this.filas.add(nuevaFila);
 
-        }
-        for(int i= (filas/2); i < filas;i++){
-            Fila nuevaFila = new Fila(columnas);
-            this.filas.add(nuevaFila);
         }
     }
 
@@ -50,7 +44,8 @@ public class Tablero {
             unaFila.colocarUnidadEnColumna(unaUnidad, unaUnidad.getPosicion().getColumna());
         } else throw new ExcepcionSectorEnemigo();
     }
-    public void moverUnidad(UnidadMovible unaUnidadMovible,Posicion posicionNueva) throws ExcepcionCasilleroOcupado, ExcepcionCasilleroVacio {
+    public void moverUnidad(UnidadMovible unaUnidadMovible,Posicion posicionNueva) throws ExcepcionCasilleroOcupado,
+                                                                                          ExcepcionCasilleroVacio {
         Posicion unaPosicion = unaUnidadMovible.getPosicion();
         Fila filaAnterior = filas.get(unaPosicion.getFila());
         Fila filaNueva = filas.get(posicionNueva.getFila());
@@ -66,27 +61,34 @@ public class Tablero {
     //Temporalmente está bien manejar la excepción de Fin de Tablero de esta forma pero en un futuro, no vamos a tener que throwear
     //la de Excepción Fin de Tablero sino solo hacer que se compruebe el tema de la distancia en los casilleros que
     //efectivamente se encuentran dentro del tablero. Pero por ahora está bien.
-    public ArrayList<Unidad> obtenerUnidadesADistancia(Posicion posicionReferencia, int distancia) throws ExcepcionFinDelTablero{
+    public ArrayList obtenerUnidadesADistancia(Posicion posicionReferencia, int distancia) throws ExcepcionFinDelTablero{
+        ArrayList unidadesCercanas;
+        try {
+            unidadesCercanas = obtenerUnidadesAlejadasA(posicionReferencia, distancia);
+        }catch (IndexOutOfBoundsException e){
+            throw new ExcepcionFinDelTablero();
+        }
+
+        return unidadesCercanas;
+    }
+
+    private ArrayList obtenerUnidadesAlejadasA(Posicion posicionReferencia, int distancia) {
         ArrayList<Unidad> unidadesCercanas = new ArrayList<>();
         int filaReferencia = posicionReferencia.getFila();
         int columnaReferencia = posicionReferencia.getColumna();
-        try {
-            for (int i = filaReferencia - distancia; i <= filaReferencia + distancia; i++) {
-                for (int j = columnaReferencia - distancia; j <= columnaReferencia + distancia; j++) {
-                    boolean esUnidadReferencia = (i == filaReferencia && j == columnaReferencia);
-                    try {
-                        Unidad unidadActual = this.filas.get(i).getCasillero(j).contenido();
-                        if (posicionReferencia.calcularDistancia(unidadActual.getPosicion()) <= distancia
-                                && !esUnidadReferencia) {
-                            unidadesCercanas.add(unidadActual);
-                        }
-                    } catch (ExcepcionCasilleroVacio e) {
-                        //No se debería de hacer nada en el manejo de esta excepción.
+        for (int i = filaReferencia - distancia; i <= filaReferencia + distancia; i++) {
+            for (int j = columnaReferencia - distancia; j <= columnaReferencia + distancia; j++) {
+                boolean esUnidadReferencia = (i == filaReferencia && j == columnaReferencia);
+                try {
+                    Unidad unidadActual = this.filas.get(i).getCasillero(j).contenido();
+                    if (posicionReferencia.calcularDistancia(unidadActual.getPosicion()) <= distancia
+                            && !esUnidadReferencia) {
+                        unidadesCercanas.add(unidadActual);
                     }
+                } catch (ExcepcionCasilleroVacio e) {
+                    //No se debería de hacer nada en el manejo de esta excepción.
                 }
             }
-        }catch (IndexOutOfBoundsException e){
-            throw new ExcepcionFinDelTablero();
         }
 
         return unidadesCercanas;

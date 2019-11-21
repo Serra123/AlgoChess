@@ -22,7 +22,7 @@ public class Curandero extends UnidadMovible {
     }
 
     public void curar(Unidad unidadAliada) throws ExcepcionCuracionAEnemigo, ExcepcionDistanciaCuracionInvalida {
-        if(this.posicion.calcularDistancia(unidadAliada.getPosicion()) >= DISTANCIACERCANA){
+        if(this.distanciaA(unidadAliada) >= DISTANCIACERCANA){
             throw new ExcepcionDistanciaCuracionInvalida();
         }
         if(this.esAliado(unidadAliada)){
