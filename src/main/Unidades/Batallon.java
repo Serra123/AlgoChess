@@ -69,7 +69,7 @@ public class Batallon {
         try{
             soldados.get(soldadoActual).mover(nuevasPosiciones.get(soldadoActual),unTablero);
         }
-        catch (ExcepcionCasilleroOcupado | ExcepcionMovimientoInvalido e){
+        catch (ExcepcionCasilleroOcupado | ExcepcionSuperaLimitesDelTablero e){
             //no hago nada,si tira esta excepcion esta bien que no lo mueva.
         }
     }
