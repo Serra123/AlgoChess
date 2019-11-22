@@ -12,18 +12,18 @@ public abstract class UnidadMovible extends Unidad {
 
     }
 
-    public boolean puedeMoverse(Posicion nuevaPosicion) {
+    private boolean puedeMoverse(Posicion nuevaPosicion, Tablero tablero) {
         double distanciaMovimiento = this.posicion.calcularDistancia(nuevaPosicion);
-        return (distanciaMovimiento < 2);
+        return ((distanciaMovimiento < 2) && tablero.posicionValida(nuevaPosicion));
     }
 
     public void mover(Posicion nuevaPosicion, Tablero tablero) throws ExcepcionCasilleroOcupado, ExcepcionMovimientoInvalido {
-        if(this.puedeMoverse(nuevaPosicion)) {
+        if(this.puedeMoverse(nuevaPosicion,tablero)) {
             tablero.moverUnidad(this, nuevaPosicion);
             this.actualizaPosicion(nuevaPosicion);
         } else throw new ExcepcionMovimientoInvalido();
     }
-    public void actualizaPosicion(Posicion nuevaPosicion){
+    private void actualizaPosicion(Posicion nuevaPosicion){
         this.posicion.mover(nuevaPosicion);
     }
 }

@@ -62,4 +62,8 @@ public class Fila {
         }
     }
 
+    public int getCantidadColumnas(){
+        return casilleros.size();
+    }
+
 }

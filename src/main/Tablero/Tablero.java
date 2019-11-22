@@ -124,4 +124,9 @@ public class Tablero {
     }
 
 
+    public boolean posicionValida(Posicion nuevaPosicion) {
+        boolean filaValida = nuevaPosicion.getFila()>=0 && nuevaPosicion.getFila()<filas.size();
+        boolean columnaValida = nuevaPosicion.getColumna()>=0 && nuevaPosicion.getFila()<filas.get(1).getCantidadColumnas();
+        return (filaValida && columnaValida);
+    }
 }

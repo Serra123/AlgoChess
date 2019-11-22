@@ -1,7 +1,9 @@
 package Jugador;
 
 import Excepciones.*;
+import Unidades.Batallon;
 import Unidades.Posicion.Posicion;
+import Unidades.Soldado;
 import Unidades.Unidad;
 
 import java.util.ArrayList;
@@ -33,19 +35,23 @@ public class Ejercito {
 
 
     //cambiar int por Batallon luego o algo asi
-    public ArrayList<Unidad> crearBatallon(ArrayList<Posicion> posicionesTotales){
+    public Batallon crearBatallon(ArrayList<Posicion> posicionesTotales){
 
         ArrayList<Posicion> posiciones = getTresPosiciones(posicionesTotales);
         posicionesEstanContiguas(posiciones);
-        return getSoldadosDePosiciones(posiciones);
+        ArrayList<Soldado> SoldadosDeBatallon =  getSoldadosDePosiciones(posiciones);
+        return new Batallon(SoldadosDeBatallon);
     }
 
     private ArrayList<Posicion> getTresPosiciones(ArrayList<Posicion> posicionesTotales)throws ExcepcionCantidadInsuficienteDePosiciones{
         if(posicionesTotales.size()<3){
             throw new ExcepcionCantidadInsuficienteDePosiciones();
         }
-
-        return new ArrayList<>(posicionesTotales);
+        ArrayList<Posicion> tresPosiciones = new ArrayList<>();
+        for(int i=0;i<3;i++){
+            tresPosiciones.add(posicionesTotales.get(i));
+        }
+        return tresPosiciones;
 
     }
 
@@ -64,14 +70,14 @@ public class Ejercito {
         }
     }
 
-    private ArrayList<Unidad> getSoldadosDePosiciones(ArrayList<Posicion> posiciones)throws ExcepcionPosicionInvalida {
+    private ArrayList<Soldado> getSoldadosDePosiciones(ArrayList<Posicion> posiciones)throws ExcepcionPosicionInvalida {
 
-        ArrayList<Unidad> soldadosDeBatallon = new ArrayList<>();
+        ArrayList<Soldado> soldadosDeBatallon = new ArrayList<>();
 
         for (Unidad unidades : unidades) {
             if (unidades.candidatoABatallonEn(posiciones.get(0)) | unidades.candidatoABatallonEn(posiciones.get(1)) |
                                         unidades.candidatoABatallonEn(posiciones.get(2))) {
-                soldadosDeBatallon.add(unidades);
+                soldadosDeBatallon.add((Soldado) unidades);
             }
         }
         if(soldadosDeBatallon.size()<3){

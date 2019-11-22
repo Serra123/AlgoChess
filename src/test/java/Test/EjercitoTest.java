@@ -82,6 +82,36 @@ public class EjercitoTest {
         unEjercito.crearBatallon(posiciones);
     }
 
+    @Test
+    public void testCreaBatallonConTresPosicionesAunqueLeMandeMas() {
+
+        Ejercito unEjercito = new Ejercito();
+
+        Posicion posicionUno = new Posicion(2, 2);
+        Posicion posicionDos = new Posicion(1, 1);
+        Posicion posicionTres = new Posicion(3, 3);
+        Posicion posicionCuatro = new Posicion(6, 6);
+
+        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
+        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
+        Soldado soldadoTres = new Soldado(posicionTres,"Jugador 1");
+        Soldado soldadoCuatro = new Soldado(posicionCuatro,"Jugador 1");
+
+        unEjercito.agregarUnidad(soldadoUno);
+        unEjercito.agregarUnidad(soldadoDos);
+        unEjercito.agregarUnidad(soldadoTres);
+        unEjercito.agregarUnidad(soldadoCuatro);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+        posiciones.add(posicionCuatro);
+
+        Batallon batallon = unEjercito.crearBatallon(posiciones);
+        Assert.assertEquals(batallon.getCantidadSoldados(),3);
+    }
+
 
 
     @Test (expected = ExcepcionLasUnidadesEstanSeparadas.class)
@@ -157,5 +187,49 @@ public class EjercitoTest {
 
         unEjercito.crearBatallon(posiciones);
     }
+
+    @Test
+    public void testMuevoCorrectamenteLosSoldadosDeBatallon(){
+
+        Ejercito unEjercito = new Ejercito();
+
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Posicion posicionUno = new Posicion(0,1);
+        Posicion posicionDos = new Posicion(0,2);
+        Posicion posicionTres = new Posicion(0,3);
+
+        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
+        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
+        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+
+        Posicion nuevaPosicionUno = new Posicion(1,1);
+        Posicion nuevaPosicionDos = new Posicion(1,2);
+        Posicion nuevaPosicionTres = new Posicion(1,3);
+
+        unEjercito.agregarUnidad(soldadoUno);
+        unEjercito.agregarUnidad(soldadoDos);
+        unEjercito.agregarUnidad(soldadoTres);
+
+        unTablero.colocarUnidad(soldadoUno);
+        unTablero.colocarUnidad(soldadoDos);
+        unTablero.colocarUnidad(soldadoTres);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+        Batallon batallon= unEjercito.crearBatallon(posiciones);
+        batallon.agregarTablero(unTablero);
+        batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
+
+        boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
+        boolean movioBienSoldadoDos = ((soldadoDos.getPosicion().calcularDistancia(nuevaPosicionDos)) == 0 );
+        boolean movioBienSoldadoTres = ((soldadoTres.getPosicion().calcularDistancia(nuevaPosicionTres)) == 0 );
+
+        Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
+    }
+
 
 }
