@@ -35,4 +35,10 @@ public class Catapulta extends Unidad {
     public void recibirCuracion(int valorCuracion) throws ExcepcionCuracionACatapulta{
         throw new ExcepcionCuracionACatapulta();
     }
+
+    @Override
+    public String getTipoUnidad(){
+        String tipoUnidad = "catapulta";
+        return tipoUnidad;
+    }
 }

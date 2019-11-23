@@ -29,4 +29,10 @@ public class Soldado extends UnidadMovible {
         }
         unidadEnemiga.recibirAtaque(DANIOCUERPOACUERPO);
     }
+
+    @Override
+    public String getTipoUnidad(){
+        String tipoUnidad = "soldado";
+        return tipoUnidad;
+    }
 }

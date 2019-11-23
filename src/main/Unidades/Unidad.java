@@ -58,4 +58,6 @@ public abstract class Unidad {
     protected boolean haySoldadoAliado(ArrayList<Unidad> unidadesCercanas) {
         return unidadesCercanas.stream().anyMatch(unidad -> (unidad instanceof Soldado));
     }
+
+    public abstract String getTipoUnidad();
 }

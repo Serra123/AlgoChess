@@ -29,4 +29,9 @@ public class Curandero extends UnidadMovible {
             unidadAliada.recibirCuracion(VALORCURACION);
         }else throw new ExcepcionCuracionAEnemigo();
     }
+    @Override
+    public String getTipoUnidad(){
+        String tipoUnidad = "curandero";
+        return tipoUnidad;
+    }
 }

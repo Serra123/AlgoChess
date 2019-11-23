@@ -45,5 +45,10 @@ public class Jinete extends UnidadMovible {
         }
     }
 
+    @Override
+    public String getTipoUnidad(){
+        String tipoUnidad = "jinete";
+        return tipoUnidad;
+    }
 }
 
