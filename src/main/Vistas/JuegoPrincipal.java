@@ -82,6 +82,7 @@ public class JuegoPrincipal {
         inicioCreacionUnidades.setText("seleccione la posicion \n Y LUEGO la unidad que quiera crear");
         opcionesParaCrearUnidades.getChildren().add(inicioCreacionUnidades);
 
+        
         Button opcionSoldado = new Button("Soldado");
         opcionSoldado.setOnAction(e->crearUnidad("Soldado",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
