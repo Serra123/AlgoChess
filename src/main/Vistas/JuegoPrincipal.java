@@ -123,9 +123,8 @@ public class JuegoPrincipal {
                  int finalI = i;
                  int finalJ = j;
 
-                 //clickearCasilleroEventHandler[i][j] = new ClickearCasilleroEventHandler((Posicion) casillero[finalI][finalJ].getUserData(),infoUsuarioClickeado,posicionClickeada);
-
                  casillero[i][j].setOnAction(e->informacionCasillero(casillero[finalI][finalJ],(Posicion) casillero[finalI][finalJ].getUserData(),infoUsuarioClickeado,posicionClickeada));
+                 informacionCasillero(casillero[finalI][finalJ],(Posicion) casillero[finalI][finalJ].getUserData(),infoUsuarioClickeado,posicionClickeada);
                  fila[i].getChildren().add(casillero[i][j]);
              }
              vistaTablero.getChildren().addAll(fila[i]);
