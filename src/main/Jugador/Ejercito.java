@@ -21,10 +21,10 @@ public class Ejercito {
 
     public void agregarUnidad(Unidad unaUnidad) throws ExcepcionPuntosInsuficientes{
         int costoUnidad = unaUnidad.getCosto();
-        this.unidades.add(unaUnidad);
         if(costoUnidad > this.puntos){
             throw new ExcepcionPuntosInsuficientes();
         }else{
+            this.unidades.add(unaUnidad);
             this.puntos -= costoUnidad;
         }
     }
@@ -86,4 +86,21 @@ public class Ejercito {
         return soldadosDeBatallon;
     }
 
+    public void puedoCrearUnidad(String tipoUnidad) throws ExcepcionPuntosInsuficientes{
+
+        int costoUnidad=0;
+        switch (tipoUnidad){
+            case "Soldado" : costoUnidad = 1;
+                break;
+            case "Curandero" : costoUnidad = 2;
+                break;
+            case "Jinete" : costoUnidad = 3;
+                break;
+            case "Catapulta" : costoUnidad = 5;
+                break;
+        }
+        if(costoUnidad > this.puntos){
+            throw new ExcepcionPuntosInsuficientes();
+        }
+    }
 }

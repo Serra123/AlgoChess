@@ -17,6 +17,7 @@ public class Jugador {
 
     public void crearUnidadEnPosicion(Posicion unaPosicion, String tipoUnidad, Tablero unTablero) throws ExcepcionPuntosInsuficientes {
         Unidad unaUnidad;
+        this.ejercito.puedoCrearUnidad(tipoUnidad);
         unaUnidad = fabrica.crearUnidad(unaPosicion, tipoUnidad, unTablero);
         this.ejercito.agregarUnidad(unaUnidad);
     }

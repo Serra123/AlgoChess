@@ -19,6 +19,8 @@ public class JuegoPrincipal {
     private Jugador jugadorUno;
     private Jugador jugadorDos;
     private Tablero tablero;
+    private Posicion posicionClickeada;
+    private Button[][] casillero;
 
     public void iniciar(Stage stage,String jugadorUno,String jugadorDos) {
 
@@ -27,9 +29,9 @@ public class JuegoPrincipal {
         this.jugadorDos = new Jugador(jugadorDos);
         this.tablero = new Tablero(20,20,jugadorUno,jugadorDos);
 
+        this.casillero = new Button[20][20];
 
         VBox opcionesDeJuego = new VBox();
-        Posicion posicionClickeada = new Posicion(0,0);
 
         Label espacioGenerado = new Label();
         espacioGenerado.setText("\n\n\n");
@@ -40,25 +42,22 @@ public class JuegoPrincipal {
 
         VBox opcionesParaCrearUnidades = new VBox();
 
-        agregarUnidadesJugadorUno.setOnAction(e->colocarUnidadesDe(this.jugadorUno,opcionesParaCrearUnidades,posicionClickeada));
+        Label infoTablero = new Label();
+        infoTablero.setText(" ");
 
-        Label infoUsuarioClickeado = new Label();
-        infoUsuarioClickeado.setText(" ");
+        agregarUnidadesJugadorUno.setOnAction(e->colocarUnidadesDe(this.jugadorUno,opcionesParaCrearUnidades,infoTablero));
+        agregarUnidadesJugadorDos.setOnAction(e->colocarUnidadesDe(this.jugadorDos,opcionesParaCrearUnidades,infoTablero));
 
 
         opcionesDeJuego.setSpacing(10);
-        opcionesDeJuego.getChildren().addAll(espacioGenerado,agregarUnidadesJugadorUno,agregarUnidadesJugadorDos,opcionesParaCrearUnidades,infoUsuarioClickeado);
+        opcionesDeJuego.getChildren().addAll(espacioGenerado,agregarUnidadesJugadorUno,agregarUnidadesJugadorDos,opcionesParaCrearUnidades,infoTablero);
 
-
-        Posicion posicion = new Posicion(2,2);
-        Soldado soldado = new Soldado(posicion,jugadorUno);
-        tablero.colocarUnidad(soldado);
         VBox vistaTablero = new VBox(0);
         Label sectorDeJugador1 = new Label();
         sectorDeJugador1.setText("Sector de jugador 1: "+ jugadorUno);
         vistaTablero.getChildren().add(sectorDeJugador1);
 
-        inicializarTablero(vistaTablero,infoUsuarioClickeado,posicionClickeada);
+        inicializarTablero(vistaTablero,infoTablero);
 
         Label sectorDeJugador2 = new Label();
         sectorDeJugador2.setText("Sector de jugador 2: "+ jugadorDos);
@@ -75,27 +74,25 @@ public class JuegoPrincipal {
 
     }
 
-    private void colocarUnidadesDe(Jugador jugadorUno, VBox opcionesParaCrearUnidades,Posicion posicionClickeada) {
+    private void colocarUnidadesDe(Jugador jugadorRecibido, VBox opcionesParaCrearUnidades,Label infoPosicionClickeada) {
+
+        opcionesParaCrearUnidades.getChildren().clear();
 
         Label inicioCreacionUnidades = new Label();
-        inicioCreacionUnidades.setText("seleccione la unidad que quiera crear");
+        inicioCreacionUnidades.setText("seleccione la posicion \n Y LUEGO la unidad que quiera crear");
         opcionesParaCrearUnidades.getChildren().add(inicioCreacionUnidades);
 
         Button opcionSoldado = new Button("Soldado");
-        CrearUnidadEventHandler elegirOpcionSoldado = new CrearUnidadEventHandler("Soldado",tablero,opcionesParaCrearUnidades,posicionClickeada);
-        opcionSoldado.setOnAction(elegirOpcionSoldado);
+        opcionSoldado.setOnAction(e->crearUnidad("Soldado",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
         Button opcionCurandero = new Button("Curandero");
-        CrearUnidadEventHandler elegirOpcionCurandero = new CrearUnidadEventHandler("Curandero",tablero,opcionesParaCrearUnidades,posicionClickeada);
-        opcionCurandero.setOnAction(elegirOpcionCurandero);
+        opcionCurandero.setOnAction(e->crearUnidad("Curandero",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
         Button opcionJinete = new Button("Jinete");
-        CrearUnidadEventHandler elegirOpcionJinete = new CrearUnidadEventHandler("Jinete",tablero,opcionesParaCrearUnidades,posicionClickeada);
-        opcionJinete.setOnAction(elegirOpcionJinete);
+        opcionJinete.setOnAction(e->crearUnidad("Jinete",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
         Button opcionCatapulta = new Button("Catapulta");
-        CrearUnidadEventHandler elegirOpcionCatapulta = new CrearUnidadEventHandler("Catapulta",tablero,opcionesParaCrearUnidades,posicionClickeada);
-        opcionSoldado.setOnAction(elegirOpcionCatapulta);
+        opcionCatapulta.setOnAction(e->crearUnidad("Catapulta",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
         HBox opcionesSoldadoOCurandero = new HBox();
         opcionesSoldadoOCurandero.getChildren().addAll(opcionSoldado,opcionCurandero);
@@ -106,11 +103,27 @@ public class JuegoPrincipal {
 
     }
 
-    private void inicializarTablero(VBox vistaTablero,Label infoUsuarioClickeado,Posicion posicionClickeada) {
+    private void crearUnidad(String unidadElegida, VBox opcionesParaCrearUnidades, Jugador jugadorRecibido,Label infoTablero) {
+
+        Label opcionElegida = new Label();
+        opcionesParaCrearUnidades.getChildren().add(opcionElegida);
+
+        try {
+            jugadorRecibido.crearUnidadEnPosicion(posicionClickeada, unidadElegida, tablero);
+            informacionCasillero(casillero[posicionClickeada.getFila()][posicionClickeada.getColumna()],posicionClickeada,infoTablero);
+
+        } catch (RuntimeException e){
+            infoTablero.setText("No podes crear esa unidad ahí");
+        }
+
+    }
+
+
+    private void inicializarTablero(VBox vistaTablero,Label infoUsuarioClickeado) {
 
         vistaTablero.setPadding(new Insets(20,20,20,20));
-        Button[][] casillero = new Button[20][20];
-        ClickearCasilleroEventHandler[][] clickearCasilleroEventHandler = new ClickearCasilleroEventHandler[20][20];
+        //Si uso la clase event handler,no puedo depender luego de la posicion a la que haga click porque ya lo inicialice con otra
+        //ClickearCasilleroEventHandler[][] clickearCasilleroEventHandler = new ClickearCasilleroEventHandler[20][20];
         HBox [] fila = new HBox[20];
 
          for(int i=0;i<20;i++){
@@ -123,17 +136,17 @@ public class JuegoPrincipal {
                  int finalI = i;
                  int finalJ = j;
 
-                 casillero[i][j].setOnAction(e->informacionCasillero(casillero[finalI][finalJ],(Posicion) casillero[finalI][finalJ].getUserData(),infoUsuarioClickeado,posicionClickeada));
-                 informacionCasillero(casillero[finalI][finalJ],(Posicion) casillero[finalI][finalJ].getUserData(),infoUsuarioClickeado,posicionClickeada);
+                 casillero[i][j].setOnAction(e->informacionCasillero(casillero[finalI][finalJ],(Posicion) casillero[finalI][finalJ].getUserData(),infoUsuarioClickeado));
+                 informacionCasillero(casillero[finalI][finalJ],(Posicion) casillero[finalI][finalJ].getUserData(),infoUsuarioClickeado);
                  fila[i].getChildren().add(casillero[i][j]);
              }
              vistaTablero.getChildren().addAll(fila[i]);
         }
 
     }
-    private void informacionCasillero(Button boton,Posicion posicion,Label infousuarioClickeado,Posicion posicionClickeada) {
+    private void informacionCasillero(Button boton,Posicion posicion,Label infousuarioClickeado) {
         Unidad unidad;
-        posicionClickeada=posicion;
+        posicionClickeada= posicion;
         int fila = posicion.getFila()+1;
         int columna = posicion.getColumna()+1;
         try {
