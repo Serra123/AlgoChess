@@ -109,9 +109,10 @@ public class JuegoPrincipal {
         opcionCatapulta.setOnAction(e->crearUnidad("Catapulta",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
         Button continuar = new Button("Continuar");
+        continuar.setStyle("-fx-background-color: #2FD00C;-fx-font-size: 2em");
         continuar.setPadding( new Insets(15,15,15,15));
 
-        opcionesParaCrearUnidades.getChildren().addAll(opcionCatapulta,opcionCurandero,opcionJinete,opcionSoldado);
+        opcionesParaCrearUnidades.getChildren().addAll(opcionCatapulta,opcionCurandero,opcionJinete,opcionSoldado,continuar);
 
         if( jugadorRecibido.getNombre() == nombreJugadorUno ){
             continuar.setOnAction( e-> colocarUnidadesDe(jugadorDos, opcionesParaCrearUnidades,infoPosicionClickeada));
