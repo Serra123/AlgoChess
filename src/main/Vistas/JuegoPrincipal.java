@@ -47,7 +47,8 @@ public class JuegoPrincipal {
         //agregarUnidadesJugadorDos.setPadding(new Insets(20,20,20,20));
 
         VBox opcionesParaCrearUnidades = new VBox();
-
+        opcionesParaCrearUnidades.setPrefWidth(200);
+        opcionesParaCrearUnidades.setSpacing(10);
         Label infoTablero = new Label();
         //infoTablero.setText(" ");
 
@@ -70,7 +71,7 @@ public class JuegoPrincipal {
 
         pantalla.getChildren().addAll(vistaTablero,opcionesDeJuego);
 
-        Scene tablero = new Scene(pantalla,1200,900);
+        Scene tablero = new Scene(pantalla,1500,800);
 
         stage.setScene(tablero);
         stage.show();
@@ -85,28 +86,33 @@ public class JuegoPrincipal {
         inicioCreacionUnidades.setText(jugadorRecibido.getNombre()+"\n seleccione la posicion \n Y LUEGO la unidad que quiera crear");
         opcionesParaCrearUnidades.getChildren().add(inicioCreacionUnidades);
 
+        Insets configBotonesOpcionesUnidades = new Insets(20,20,20,20);
 
         Button opcionSoldado = new Button("Soldado");
+        opcionSoldado.setMinWidth(opcionesParaCrearUnidades.getPrefWidth());
+        opcionSoldado.setPadding(configBotonesOpcionesUnidades);
         opcionSoldado.setOnAction(e->crearUnidad("Soldado",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
         Button opcionCurandero = new Button("Curandero");
+        opcionCurandero.setMinWidth(opcionesParaCrearUnidades.getPrefWidth());
+        opcionCurandero.setPadding(configBotonesOpcionesUnidades);
         opcionCurandero.setOnAction(e->crearUnidad("Curandero",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
         Button opcionJinete = new Button("Jinete");
+        opcionJinete.setMinWidth(opcionesParaCrearUnidades.getPrefWidth());
+        opcionJinete.setPadding(configBotonesOpcionesUnidades);
         opcionJinete.setOnAction(e->crearUnidad("Jinete",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
         Button opcionCatapulta = new Button("Catapulta");
+        opcionCatapulta.setMinWidth(opcionesParaCrearUnidades.getPrefWidth());
+        opcionCatapulta.setPadding(configBotonesOpcionesUnidades);
         opcionCatapulta.setOnAction(e->crearUnidad("Catapulta",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
-        HBox opcionesSoldadoOCurandero = new HBox();
-        opcionesSoldadoOCurandero.getChildren().addAll(opcionSoldado,opcionCurandero);
-        HBox opcionesJineteOCatapulta = new HBox();
-        opcionesJineteOCatapulta.getChildren().addAll(opcionJinete,opcionCatapulta);
-
         Button continuar = new Button("Continuar");
+        continuar.setStyle("-fx-background-color: #2FD00C;-fx-font-size: 2em");
         continuar.setPadding( new Insets(15,15,15,15));
 
-        opcionesParaCrearUnidades.getChildren().addAll(opcionesSoldadoOCurandero,opcionesJineteOCatapulta,continuar);
+        opcionesParaCrearUnidades.getChildren().addAll(opcionCatapulta,opcionCurandero,opcionJinete,opcionSoldado,continuar);
 
         if( jugadorRecibido.getNombre() == nombreJugadorUno ){
             continuar.setOnAction( e-> colocarUnidadesDe(jugadorDos, opcionesParaCrearUnidades,infoPosicionClickeada));
