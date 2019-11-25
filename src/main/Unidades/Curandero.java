@@ -8,9 +8,9 @@ import Unidades.Posicion.Posicion;
 public class Curandero extends UnidadMovible {
 
     private static final int DISTANCIACERCANA = 2 ;
-    private static int VALORCURACION = 15;
-    private static int VIDAINICIAL = 75;
-    private static int COSTO = 2;
+    private static final int VALORCURACION = 15;
+    private static final int VIDAINICIAL = 75;
+    private static final int COSTO = 2;
 
     public Curandero(Posicion unaPosicion, String unNombreDeJugador){
 
@@ -31,7 +31,6 @@ public class Curandero extends UnidadMovible {
     }
     @Override
     public String getTipoUnidad(){
-        String tipoUnidad = "curandero";
-        return tipoUnidad;
+        return "curandero";
     }
 }

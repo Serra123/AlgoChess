@@ -10,8 +10,6 @@ import org.junit.Test;
 
 public class TableroTest {
 
-    //Faltaria chequear la correcta inicializacion de el tablero!
-
     @Test
     public void testColocarPiezaAliadaEnSectorAliadoFunciona(){
         Tablero tablero = new Tablero(2,2,"Jugador1","jugador2");
@@ -22,14 +20,14 @@ public class TableroTest {
     }
 
     @Test(expected = ExcepcionSectorEnemigo.class)
-    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona() throws ExcepcionSectorEnemigo, ExcepcionCasilleroOcupado {
+    public void testColocarPiezaAliadaEnSectorEnemigoNoFunciona(){
         Tablero tablero = new Tablero(4,4,"Jugador1","jugador2");
         Posicion unaPosicion = new Posicion(3,0);
         Soldado unSoldado = new Soldado(unaPosicion,"Jugador1");
         tablero.colocarUnidad(unSoldado);
     }
     @Test(expected = ExcepcionCasilleroOcupado.class)
-    public void testColocarPiezaAliadaEnCasilleroAliadoOcupado() throws ExcepcionSectorEnemigo, ExcepcionCasilleroOcupado {
+    public void testColocarPiezaAliadaEnCasilleroAliadoOcupado(){
         Tablero tablero = new Tablero(4,4,"Jugador1","jugador2");
         Posicion unaPosicion = new Posicion(1,0);
         Soldado unSoldado = new Soldado(unaPosicion,"Jugador1");

@@ -41,7 +41,7 @@ public class JineteTest {
 
         jineteAliado.atacar(enemigo, unTablero);
 
-        Assert.assertEquals(enemigo.getVida(),85);
+        Assert.assertEquals(enemigo.getVida(),85,0);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class JineteTest {
 
         jineteAliado.atacar(enemigo, unTablero);
 
-        Assert.assertEquals(enemigo.getVida(),85);
+        Assert.assertEquals(enemigo.getVida(),85,0);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class JineteTest {
 
         jineteAliado.atacar(enemigo, unTablero);
 
-        Assert.assertEquals(95,enemigo.getVida());
+        Assert.assertEquals(95,enemigo.getVida(),0);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class JineteTest {
 
         aliado.atacar(enemigo, unTablero);
 
-        Assert.assertEquals(95,enemigo.getVida());
+        Assert.assertEquals(95,enemigo.getVida(),0);
 
     }
 
@@ -115,8 +115,8 @@ public class JineteTest {
         aliado.atacar(enemigoLejano, unTablero);
     }
 
-    @Test (expected = ExcepcionFinDelTablero.class)
-    public void testJineteEnBordeDeTableroQuiereAtacarEnemigoYSaltaExcepcionPorQuererAveriguarCualArmaUsar(){
+    @Test
+    public void testJineteEnBordeDeTableroAtacaEnemigoCorrectamente(){
         Posicion posicionAliado = new Posicion(9,0);
         Posicion posicionEnemigo = new Posicion(10,0);
 
@@ -128,6 +128,30 @@ public class JineteTest {
         unTablero.colocarUnidad(enemigo);
 
         aliado.atacar(enemigo,unTablero);
+
+        Assert.assertEquals(95,enemigo.getVida(),0);
+    }
+
+    @Test
+    public void testJineteAtacaASoldadoEnemigoQueNoSeEncuentraEnSuSector(){
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Posicion unaPosicion = new Posicion(9,0);
+        Posicion otraPosicion = new Posicion(10,0);
+        Posicion nuevaPosicionEnemigo = new Posicion(9,1);
+
+        Jinete aliado = new Jinete(unaPosicion,"Jugador1");
+        Soldado enemigo = new Soldado(otraPosicion,"Jugador2");
+
+        unTablero.colocarUnidad(aliado);
+        unTablero.colocarUnidad(enemigo);
+
+        enemigo.mover(nuevaPosicionEnemigo,unTablero);
+
+        aliado.atacar(enemigo, unTablero);
+
+        Assert.assertEquals(94.75, (enemigo.getVida()), 0.0);
+
     }
 
 }

@@ -5,7 +5,7 @@ import Tablero.Tablero;
 import Unidades.*;
 import Unidades.Posicion.Posicion;
 
-public class FabricaDeUnidades {
+class FabricaDeUnidades {
 
     private String nombreEjercito;
 
@@ -13,7 +13,7 @@ public class FabricaDeUnidades {
         this.nombreEjercito = nombreEjercito;
     }
 
-    public Unidad crearUnidad(Posicion unaPosicion, String tipoUnidad, Tablero unTablero){
+    Unidad crearUnidad(Posicion unaPosicion, String tipoUnidad, Tablero unTablero){
         Unidad unaUnidad;
         switch (tipoUnidad){
 

@@ -4,5 +4,5 @@ import Unidades.Posicion.Posicion;
 
 public interface Arma {
 
-    void atacar(Unidad enemigo, Posicion posicionAtacante);
+    void atacar(Unidad enemigo, Posicion posicionAtacante, boolean enemigoEstaEnSuSector);
 }

@@ -11,7 +11,7 @@ import Tablero.*;
 
 public class UnidadMovibleTest {
     @Test
-    public void testUnidadMovibleSeMueveAbajo() throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void testUnidadMovibleSeMueveAbajo(){
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(0,0);
         Posicion otraPosicion = new Posicion(1,0);
@@ -22,7 +22,7 @@ public class UnidadMovibleTest {
     }
 
     @Test
-    public void testUnidadMovibleSeMueveArriba() throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void testUnidadMovibleSeMueveArriba(){
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(1,0);
         Posicion otraPosicion = new Posicion(0,0);
@@ -33,7 +33,7 @@ public class UnidadMovibleTest {
     }
 
     @Test
-    public void testUnidadMovibleSeMueveIzquierda() throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void testUnidadMovibleSeMueveIzquierda(){
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(0,1);
         Posicion otraPosicion = new Posicion(0,0);
@@ -44,7 +44,7 @@ public class UnidadMovibleTest {
     }
 
     @Test
-    public void testUnidadMovibleSeMueveDerecha() throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void testUnidadMovibleSeMueveDerecha(){
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(0,0);
         Posicion otraPosicion = new Posicion(0,1);
@@ -55,7 +55,7 @@ public class UnidadMovibleTest {
     }
 
     @Test
-    public void testUnidadMovibleSeMueveArribaIzquierda() throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void testUnidadMovibleSeMueveArribaIzquierda(){
         Tablero unTablero = new Tablero(10, 10, "Jugador1", "Jugador2");
         Posicion unaPosicion = new Posicion(1, 1);
         Posicion otraPosicion = new Posicion(0, 0);
@@ -66,7 +66,7 @@ public class UnidadMovibleTest {
                 (0 == ((unaUnidadMovible.getPosicion()).getFila())));
     }
     @Test
-    public void testUnidadMovibleSeMueveArribaDerecha() throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void testUnidadMovibleSeMueveArribaDerecha(){
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(1,0);
         Posicion otraPosicion = new Posicion(0,1);
@@ -79,7 +79,7 @@ public class UnidadMovibleTest {
     }
 
     @Test
-    public void testUnidadMovibleSeMueveAbajoIzquierda() throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void testUnidadMovibleSeMueveAbajoIzquierda(){
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(0,1);
         Posicion otraPosicion = new Posicion(1,0);
@@ -91,7 +91,7 @@ public class UnidadMovibleTest {
     }
 
     @Test
-    public void testUnidadMovibleSeMueveAbajoDerecha() throws ExcepcionCasilleroOcupado, ExcepcionSectorEnemigo {
+    public void testUnidadMovibleSeMueveAbajoDerecha(){
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(0,0);
         Posicion otraPosicion = new Posicion(1,1);
@@ -105,7 +105,7 @@ public class UnidadMovibleTest {
 
 
     @Test(expected = ExcepcionCasilleroOcupado.class)
-    public void testUnidadMovibleNosePuedeMoverACasilleroOcupado() throws ExcepcionSectorEnemigo, ExcepcionCasilleroOcupado {
+    public void testUnidadMovibleNosePuedeMoverACasilleroOcupado(){
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
         Posicion unaPosicion = new Posicion(1,0);
         Posicion otraPosicion = new Posicion(1,1);
