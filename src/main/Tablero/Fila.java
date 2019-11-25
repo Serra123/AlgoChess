@@ -53,7 +53,7 @@ public class Fila {
             }
             if(posicionNoAfectada){
                 posicionesAfectadas.add(unaPosicion);
-                unTablero.obtenerUnidadesAfectadasPorExpansion(unaPosicion,posicionesAfectadas);
+                unTablero.obtenerPosicionesAfectadasPorExpansion(unaPosicion,posicionesAfectadas);
             }
         }catch(ExcepcionCasilleroVacio e){
             // no tiene que hacer nada pues el casillero esta vacio.

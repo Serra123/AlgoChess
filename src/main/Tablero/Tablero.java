@@ -2,17 +2,16 @@ package Tablero;
 
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
-import Excepciones.ExcepcionFinDelTablero;
 import Excepciones.ExcepcionSectorEnemigo;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 import Unidades.UnidadMovible;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Tablero {
 
+    private static final int FILACUALQUIERA = 1;
     private ArrayList<Fila> filas;
     private HashMap<String,Sector> sectores;
 
@@ -60,17 +59,13 @@ public class Tablero {
         return unCasillero.contenido();
     }
 
-    //Temporalmente está bien manejar la excepción de Fin de Tablero de esta forma pero en un futuro, no vamos a tener que throwear
-    //la de Excepción Fin de Tablero sino solo hacer que se compruebe el tema de la distancia en los casilleros que
-    //efectivamente se encuentran dentro del tablero. Pero por ahora está bien.
-    public ArrayList obtenerUnidadesADistancia(Posicion posicionReferencia, int distancia){
-        ArrayList unidadesCercanas;
+    public ArrayList<Unidad> obtenerUnidadesADistancia(Posicion posicionReferencia, int distancia){
+        ArrayList<Unidad> unidadesCercanas;
         unidadesCercanas = obtenerUnidadesAlejadasA(posicionReferencia, distancia);
-
         return unidadesCercanas;
     }
 
-    private ArrayList obtenerUnidadesAlejadasA(Posicion posicionReferencia, int distancia) {
+    private ArrayList<Unidad> obtenerUnidadesAlejadasA(Posicion posicionReferencia, int distancia) {
         ArrayList<Unidad> unidadesCercanas = new ArrayList<>();
         int filaReferencia = posicionReferencia.getFila();
         int columnaReferencia = posicionReferencia.getColumna();
@@ -95,18 +90,13 @@ public class Tablero {
         return unidadesCercanas;
     }
 
-    public void expandirDanio(Posicion unaPosicion,int unDanio){
-        ArrayList<Posicion> posiciones = new ArrayList<>();
-        posiciones.add(unaPosicion);
-        this.obtenerUnidadesAfectadasPorExpansion(unaPosicion,posiciones);
-        posiciones.forEach((posicion) -> {
-            boolean estaEnSectorAliado = this.estaEnSector(this.getUnidad(posicion));
-            this.getUnidad(posicion).recibirAtaque(unDanio, estaEnSectorAliado);
-        });
-
+    public boolean esPosicionValida(Posicion nuevaPosicion) {
+        boolean filaValida = nuevaPosicion.getFila()>=0 && nuevaPosicion.getFila()<filas.size();
+        boolean columnaValida = nuevaPosicion.getColumna()>=0 && nuevaPosicion.getColumna()<filas.get(FILACUALQUIERA).getCantidadColumnas();
+        return (filaValida && columnaValida);
     }
 
-    void obtenerUnidadesAfectadasPorExpansion(Posicion unaPosicion, ArrayList<Posicion> posiciones){
+    public ArrayList<Posicion> obtenerPosicionesAfectadasPorExpansion(Posicion unaPosicion, ArrayList<Posicion> posiciones){
         int filaCentro = unaPosicion.getFila();
         int columnaCentro = unaPosicion.getColumna();
         Fila filaActual;
@@ -123,12 +113,8 @@ public class Tablero {
                 }
             }
         }
+
+        return posiciones;
     }
 
-
-    public boolean posicionValida(Posicion nuevaPosicion) {
-        boolean filaValida = nuevaPosicion.getFila()>=0 && nuevaPosicion.getFila()<filas.size();
-        boolean columnaValida = nuevaPosicion.getColumna()>=0 && nuevaPosicion.getFila()<filas.get(1).getCantidadColumnas();
-        return (filaValida && columnaValida);
-    }
 }

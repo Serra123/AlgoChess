@@ -18,12 +18,12 @@ public abstract class UnidadMovible extends Unidad {
         return (distanciaMovimiento < 2);
     }
 
-    private boolean noSuperaLimitesDelTablero(Posicion nuevaPosicion, Tablero tablero){
-        return  (tablero.posicionValida(nuevaPosicion));
+    private boolean superaLimitesDelTablero(Posicion nuevaPosicion, Tablero tablero){
+        return (!tablero.esPosicionValida(nuevaPosicion));
     }
 
     public void mover(Posicion nuevaPosicion, Tablero tablero) throws ExcepcionCasilleroOcupado, ExcepcionMovimientoInvalido, ExcepcionSuperaLimitesDelTablero {
-        if( !this.noSuperaLimitesDelTablero(nuevaPosicion,tablero)){
+        if(this.superaLimitesDelTablero(nuevaPosicion,tablero)){
             throw new ExcepcionSuperaLimitesDelTablero();
         }
         if(this.puedeMoverse(nuevaPosicion)) {
@@ -31,6 +31,7 @@ public abstract class UnidadMovible extends Unidad {
             this.actualizaPosicion(nuevaPosicion);
         } else throw new ExcepcionMovimientoInvalido();
     }
+
     private void actualizaPosicion(Posicion nuevaPosicion){
         this.posicion.mover(nuevaPosicion);
     }
