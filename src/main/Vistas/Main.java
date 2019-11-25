@@ -21,6 +21,13 @@ public class Main extends Application implements EventHandler<ActionEvent>{
     @Override
     public void start(Stage stage) throws Exception{
 
+        TextField texto = new TextField();
+        texto.setPromptText("Ingrese el texto deseado");
+        Button botonLimpiar = new Button();
+        botonLimpiar.setText("Limpiar cuadro texto");
+        BotonLimpiarEventHandler botonLimpiarEventHandler = new BotonLimpiarEventHandler(texto);
+        botonLimpiar.setOnAction(botonLimpiarEventHandler);
+
         JuegoPrincipal juegoPrincipal = new JuegoPrincipal();
 
         stage.setTitle("Algo Chess");
@@ -54,6 +61,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         stage.setScene(scene);
         stage.show();
     }
+
 
     private void nombreIngresado(String usuarioUnoIngresado, String jugadorUno, String usuarioDosIngresado, String jugadorDos, Label usuariosYaIngresados) {
         jugadorUno=usuarioUnoIngresado;
