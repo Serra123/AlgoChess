@@ -1,7 +1,6 @@
 package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
-import Excepciones.ExcepcionFinDelTablero;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
@@ -36,7 +35,7 @@ public class Jinete extends UnidadMovible {
     //Los métodos haySoldadoAliadoCerca y hayUnidadEnemiga los puse en la clase Unidad, aunque lo podríamos
     //dejar tranquilamente en esta clase Jinte. Discutirlo.
     private Arma obtenerArmaDeAtaque(Tablero unTablero){
-        ArrayList unidadesCercanas = unTablero.obtenerUnidadesADistancia(this.posicion, DISTANCIACORTA);
+        ArrayList<Unidad> unidadesCercanas = unTablero.obtenerUnidadesADistancia(this.posicion, DISTANCIACORTA);
         boolean haySoldadoAliadoCerca = this.haySoldadoAliado(unidadesCercanas);
         boolean hayEnemigoCerca = this.hayUnidadEnemiga(unidadesCercanas);
         if (!hayEnemigoCerca || haySoldadoAliadoCerca) {

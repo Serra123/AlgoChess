@@ -2,7 +2,6 @@ package Test;
 
 import Excepciones.ExcepcionAtaqueAAliado;
 import Excepciones.ExcepcionDistanciaAtaqueInvalida;
-import Excepciones.ExcepcionFinDelTablero;
 import Tablero.Tablero;
 import Unidades.Jinete;
 import Unidades.Posicion.Posicion;

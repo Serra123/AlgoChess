@@ -20,7 +20,7 @@ public abstract class Unidad {
     public int getCosto(){ return costo; }
     public String getEjercito(){ return ejercito; }
 
-    public void recibirAtaque(int valorDanio, boolean estaEnSectorAliado) {
+    void recibirAtaque(int valorDanio, boolean estaEnSectorAliado) {
        if(estaEnSectorAliado){
            vida -= valorDanio;
        }
@@ -30,11 +30,16 @@ public abstract class Unidad {
     }
 
     void expandirAtaqueRecibido(int valorDanio, Tablero unTablero){
-        unTablero.expandirDanio(this.getPosicion(),valorDanio);
+        ArrayList<Posicion> posicionesAfectadas = new ArrayList<>();
+        posicionesAfectadas = unTablero.obtenerPosicionesAfectadasPorExpansion(this.posicion,posicionesAfectadas);
+        posicionesAfectadas.add(this.posicion);
+        posicionesAfectadas.forEach((posicion) -> {
+                    boolean estaEnSectorAliado = unTablero.estaEnSector(unTablero.getUnidad(posicion));
+                    unTablero.getUnidad(posicion).recibirAtaque(valorDanio, estaEnSectorAliado);
+                }
+        );
     }
 
-    //Este método lo había propuesto el corrector, falta ponerlo en uso para los lugares donde se usaba en realidad
-    //el calcular distancia de posición.
     double distanciaA(Unidad unaUnidad){
         return this.posicion.calcularDistancia(unaUnidad.getPosicion());
     }
