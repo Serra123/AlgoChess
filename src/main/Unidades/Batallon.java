@@ -40,10 +40,10 @@ public class Batallon {
     }
     public void moverBatallon(Posicion posicionCentralNueva) {
         Posicion posicionCentralVieja = soldadoCentral.getPosicion();
-        ArrayList nuevasPosiciones = calcularPosicionesNuevas(posicionCentralNueva,posicionCentralVieja);
+        ArrayList<Posicion> nuevasPosiciones = calcularPosicionesNuevas(posicionCentralNueva,posicionCentralVieja);
         moverSoldados(nuevasPosiciones,0);
     }
-    private ArrayList calcularPosicionesNuevas(Posicion posicionCentralNueva,Posicion posicionCentralVieja){
+    private ArrayList<Posicion> calcularPosicionesNuevas(Posicion posicionCentralNueva, Posicion posicionCentralVieja){
         ArrayList<Posicion> nuevasPosiciones = new ArrayList<>();
         for (Soldado soldado : soldados) {
             Posicion nuevaPosicion = soldado.getPosicion().calcularNuevaPosicionRespectoDe(posicionCentralNueva, posicionCentralVieja);

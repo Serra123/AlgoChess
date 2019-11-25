@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class Jinete extends UnidadMovible {
 
-    private static int COSTO = 3;
-    private static int VIDAINICIAL = 100;
-    private static int DISTANCIACORTA = 2;
+    private static final int COSTO = 3;
+    private static final int VIDAINICIAL = 100;
+    private static final int DISTANCIACORTA = 2;
 
     private Arma armaDeAtaque;
 
@@ -24,18 +24,19 @@ public class Jinete extends UnidadMovible {
         armaDeAtaque = new Espada();
     }
 
-    public void atacar(Unidad unaUnidad, Tablero unTablero) throws ExcepcionFinDelTablero{
+    public void atacar(Unidad unaUnidad, Tablero unTablero){
+        boolean enemigoEstaEnSuSector = unTablero.estaEnSector(unaUnidad);
         this.armaDeAtaque = this.obtenerArmaDeAtaque(unTablero);
         if(this.esAliado(unaUnidad)){
             throw new ExcepcionAtaqueAAliado();
         }
-        this.armaDeAtaque.atacar(unaUnidad,this.posicion);
+        this.armaDeAtaque.atacar(unaUnidad,this.posicion, enemigoEstaEnSuSector);
     }
 
     //Los métodos haySoldadoAliadoCerca y hayUnidadEnemiga los puse en la clase Unidad, aunque lo podríamos
     //dejar tranquilamente en esta clase Jinte. Discutirlo.
-    private Arma obtenerArmaDeAtaque(Tablero unTablero) throws ExcepcionFinDelTablero{
-        ArrayList<Unidad> unidadesCercanas = unTablero.obtenerUnidadesADistancia(this.posicion, DISTANCIACORTA);
+    private Arma obtenerArmaDeAtaque(Tablero unTablero){
+        ArrayList unidadesCercanas = unTablero.obtenerUnidadesADistancia(this.posicion, DISTANCIACORTA);
         boolean haySoldadoAliadoCerca = this.haySoldadoAliado(unidadesCercanas);
         boolean hayEnemigoCerca = this.hayUnidadEnemiga(unidadesCercanas);
         if (!hayEnemigoCerca || haySoldadoAliadoCerca) {
@@ -47,8 +48,7 @@ public class Jinete extends UnidadMovible {
 
     @Override
     public String getTipoUnidad(){
-        String tipoUnidad = "jinete";
-        return tipoUnidad;
+        return "jinete";
     }
 }
 

@@ -119,6 +119,7 @@ public class BatallonTest {
 
         Assert.assertTrue( noMovioSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
     }
+
     @Test
     public void testMuevoCorrectamenteLosSoldadosConPosicionesDistintasYSuperposicionEnElMedio(){
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
@@ -158,6 +159,7 @@ public class BatallonTest {
         boolean movioBienSoldadoTres = ((soldadoTres.getPosicion().calcularDistancia(nuevaPosicionTres)) == 0 );
         Assert.assertTrue( movioBienSoldadoUno && noMovioSoldadoDos && movioBienSoldadoTres);
     }
+
     @Test
     public void testSoldadosAlineadosNoSeSuperponenEntreSiAlMoverse(){
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");

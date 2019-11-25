@@ -23,22 +23,22 @@ public class Fila {
         return casilleros.get(unaColumna);
     }
 
-    public void colocarUnidadEnColumna(Unidad unaUnidad, int unaColumna) {
+    void colocarUnidadEnColumna(Unidad unaUnidad, int unaColumna) {
         Casillero unCasillero = this.getCasillero(unaColumna);
         unCasillero.colocar(unaUnidad);
     }
 
-    public void vaciarUnidad(int unaColumna) throws ExcepcionCasilleroVacio {
+    void vaciarUnidad(int unaColumna) throws ExcepcionCasilleroVacio {
         Casillero unCasillero = this.getCasillero(unaColumna);
         unCasillero.vaciarUnidad();
     }
 
-    public void recibirUnidad(Unidad unaUnidad, int unaColumna)throws ExcepcionCasilleroOcupado {
+    void recibirUnidad(Unidad unaUnidad, int unaColumna)throws ExcepcionCasilleroOcupado {
         Casillero unCasillero = this.getCasillero(unaColumna);
         unCasillero.recibirUnidad(unaUnidad);
     }
 
-    public void agregarPosicionesAfectadasPorExpansion(int unaColumna, ArrayList<Posicion> posicionesAfectadas, Tablero unTablero){
+    void agregarPosicionesAfectadasPorExpansion(int unaColumna, ArrayList<Posicion> posicionesAfectadas, Tablero unTablero){
         boolean posicionNoAfectada = true;
 
         try{
@@ -62,7 +62,7 @@ public class Fila {
         }
     }
 
-    public int getCantidadColumnas(){
+    int getCantidadColumnas(){
         return casilleros.size();
     }
 

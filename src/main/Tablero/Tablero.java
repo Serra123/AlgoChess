@@ -63,13 +63,9 @@ public class Tablero {
     //Temporalmente está bien manejar la excepción de Fin de Tablero de esta forma pero en un futuro, no vamos a tener que throwear
     //la de Excepción Fin de Tablero sino solo hacer que se compruebe el tema de la distancia en los casilleros que
     //efectivamente se encuentran dentro del tablero. Pero por ahora está bien.
-    public ArrayList obtenerUnidadesADistancia(Posicion posicionReferencia, int distancia) throws ExcepcionFinDelTablero{
+    public ArrayList obtenerUnidadesADistancia(Posicion posicionReferencia, int distancia){
         ArrayList unidadesCercanas;
-        try {
-            unidadesCercanas = obtenerUnidadesAlejadasA(posicionReferencia, distancia);
-        }catch (IndexOutOfBoundsException e){
-            throw new ExcepcionFinDelTablero();
-        }
+        unidadesCercanas = obtenerUnidadesAlejadasA(posicionReferencia, distancia);
 
         return unidadesCercanas;
     }
@@ -78,6 +74,7 @@ public class Tablero {
         ArrayList<Unidad> unidadesCercanas = new ArrayList<>();
         int filaReferencia = posicionReferencia.getFila();
         int columnaReferencia = posicionReferencia.getColumna();
+
         for (int i = filaReferencia - distancia; i <= filaReferencia + distancia; i++) {
             for (int j = columnaReferencia - distancia; j <= columnaReferencia + distancia; j++) {
                 boolean esUnidadReferencia = (i == filaReferencia && j == columnaReferencia);
@@ -89,6 +86,8 @@ public class Tablero {
                     }
                 } catch (ExcepcionCasilleroVacio e) {
                     //No se debería de hacer nada en el manejo de esta excepción.
+                } catch (IndexOutOfBoundsException e){
+                    //No tenemos que hacer nada en el manejo de esta excepción.
                 }
             }
         }
@@ -100,11 +99,14 @@ public class Tablero {
         ArrayList<Posicion> posiciones = new ArrayList<>();
         posiciones.add(unaPosicion);
         this.obtenerUnidadesAfectadasPorExpansion(unaPosicion,posiciones);
-        posiciones.forEach((posicion) -> this.getUnidad(posicion).recibirAtaque(unDanio));
+        posiciones.forEach((posicion) -> {
+            boolean estaEnSectorAliado = this.estaEnSector(this.getUnidad(posicion));
+            this.getUnidad(posicion).recibirAtaque(unDanio, estaEnSectorAliado);
+        });
 
     }
 
-    public void obtenerUnidadesAfectadasPorExpansion(Posicion unaPosicion,ArrayList<Posicion> posiciones){
+    void obtenerUnidadesAfectadasPorExpansion(Posicion unaPosicion, ArrayList<Posicion> posiciones){
         int filaCentro = unaPosicion.getFila();
         int columnaCentro = unaPosicion.getColumna();
         Fila filaActual;

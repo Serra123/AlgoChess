@@ -12,7 +12,7 @@ public class Ejercito {
 
     private ArrayList<Unidad> unidades;
     private int puntos;
-    private static int PUNTOSINICIALES = 20;
+    private static final int PUNTOSINICIALES = 20;
 
     public Ejercito(){
         this.unidades = new ArrayList<>();
@@ -86,7 +86,7 @@ public class Ejercito {
         return soldadosDeBatallon;
     }
 
-    public void puedoCrearUnidad(String tipoUnidad) throws ExcepcionPuntosInsuficientes{
+    void puedoCrearUnidad(String tipoUnidad) throws ExcepcionPuntosInsuficientes{
 
         int costoUnidad=0;
         switch (tipoUnidad){

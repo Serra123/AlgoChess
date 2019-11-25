@@ -5,12 +5,12 @@ import Unidades.Posicion.Posicion;
 
 public class ArcoYFlecha implements Arma {
 
-    private static int DANIO = 15;
-    private static int DISTANCIACORTA = 2;
-    private static int DISTANCIALEJANA = 6;
+    private static final int DANIO = 15;
+    private static final int DISTANCIACORTA = 2;
+    private static final int DISTANCIALEJANA = 6;
 
     @Override
-    public void atacar(Unidad enemigo, Posicion posicionAtacante) {
+    public void atacar(Unidad enemigo, Posicion posicionAtacante, boolean enemigoEstaEnSuSector) {
         double distanciaAEnemigo = posicionAtacante.calcularDistancia(enemigo.getPosicion());
         if(distanciaAEnemigo <= DISTANCIACORTA){
             throw new ExcepcionDistanciaAtaqueInvalida();
@@ -19,7 +19,7 @@ public class ArcoYFlecha implements Arma {
             throw new ExcepcionDistanciaAtaqueInvalida();
         }
         else{
-            enemigo.recibirAtaque(DANIO);
+            enemigo.recibirAtaque(DANIO, enemigoEstaEnSuSector);
         }
     }
 

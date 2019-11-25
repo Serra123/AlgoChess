@@ -25,7 +25,7 @@ public class CatapultaTest {
         unTablero.colocarUnidad(enemigo);
         unaCatapulta.atacar(enemigo,unTablero);
 
-        Assert.assertEquals(80, enemigo.getVida());
+        Assert.assertEquals(80, enemigo.getVida(),0);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class CatapultaTest {
         unaCatapulta.atacar(enemigo,unTablero);
 
 
-        Assert.assertEquals(80, enemigo2.getVida());
+        Assert.assertEquals(80, enemigo2.getVida(),0);
     }
 
     @Test
@@ -69,13 +69,13 @@ public class CatapultaTest {
         unaCatapulta.atacar(enemigo,unTablero);
 
 
-        Assert.assertEquals(80, enemigo3.getVida());
+        Assert.assertEquals(80, enemigo3.getVida(),0);
     }
 
 
 
     @Test (expected = ExcepcionCatapultaNoAtacaAliados.class)
-    public void testCatapultaAtacaSoldadoAliadoYSaltaExcepcion() throws ExcepcionSectorEnemigo {
+    public void testCatapultaAtacaSoldadoAliadoYSaltaExcepcion(){
         Posicion unaPosicion = new Posicion(0,0);
         Posicion otraPosicion = new Posicion(0,9);
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
@@ -98,5 +98,27 @@ public class CatapultaTest {
         unTablero.colocarUnidad(unaCatapulta);
         unTablero.colocarUnidad(unSoldado);
         unaCatapulta.atacar(unSoldado,unTablero);
+    }
+
+    @Test
+    public void testCatapultaAtacaASoldadoEnemigoQueNoSeEncuentraEnSuSector(){
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Posicion unaPosicion = new Posicion(0,0);
+        Posicion otraPosicion = new Posicion(10,0);
+        Posicion nuevaPosicionEnemigo = new Posicion(9,0);
+
+        Catapulta aliado = new Catapulta(unaPosicion,"Jugador1");
+        Soldado enemigo = new Soldado(otraPosicion,"Jugador2");
+
+        unTablero.colocarUnidad(aliado);
+        unTablero.colocarUnidad(enemigo);
+
+        enemigo.mover(nuevaPosicionEnemigo,unTablero);
+
+        aliado.atacar(enemigo,unTablero);
+
+        Assert.assertEquals(79, (enemigo.getVida()), 0.0);
+
     }
 }

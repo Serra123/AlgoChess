@@ -38,7 +38,6 @@ public class Catapulta extends Unidad {
 
     @Override
     public String getTipoUnidad(){
-        String tipoUnidad = "catapulta";
-        return tipoUnidad;
+        return "catapulta";
     }
 }

@@ -1,13 +1,14 @@
 package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
+import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
 public class Soldado extends UnidadMovible {
 
-    private static int DANIOCUERPOACUERPO = 10;
-    private static int VIDAINICIAL = 100;
-    private static int COSTO = 1;
+    private static final int DANIOCUERPOACUERPO = 10;
+    private static final int VIDAINICIAL = 100;
+    private static final int COSTO = 1;
 
     @Override
     public boolean candidatoABatallonEn(Posicion unaPosicion) {
@@ -23,16 +24,18 @@ public class Soldado extends UnidadMovible {
         ejercito = unNombreDeJugador;
     }
 
-    public void atacar(Unidad unidadEnemiga){
+    public void atacar(Unidad unidadEnemiga, Tablero unTablero){
+        boolean enemigoEstaEnSuSector = unTablero.estaEnSector(unidadEnemiga);
         if(this.esAliado(unidadEnemiga)){
             throw new ExcepcionAtaqueAAliado();
         }
-        unidadEnemiga.recibirAtaque(DANIOCUERPOACUERPO);
+        else {
+            unidadEnemiga.recibirAtaque(DANIOCUERPOACUERPO, enemigoEstaEnSuSector);
+        }
     }
 
     @Override
     public String getTipoUnidad(){
-        String tipoUnidad = "soldado";
-        return tipoUnidad;
+        return "soldado";
     }
 }
