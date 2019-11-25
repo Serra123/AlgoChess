@@ -15,18 +15,22 @@ import javafx.stage.Stage;
 
 public class JuegoPrincipal {
 
-    private Stage stage;
     private Jugador jugadorUno;
     private Jugador jugadorDos;
+    private String nombreJugadorUno;
+    private String nombreJugadorDos;
     private Tablero tablero;
     private Posicion posicionClickeada;
     private Button[][] casillero;
 
     public void iniciar(Stage stage,String jugadorUno,String jugadorDos) {
 
-        this.stage = stage;
-        this.jugadorUno = new Jugador(jugadorUno);
-        this.jugadorDos = new Jugador(jugadorDos);
+        nombreJugadorUno = jugadorUno;
+        nombreJugadorDos = jugadorDos;
+
+        this.jugadorUno = new Jugador(nombreJugadorUno);
+        this.jugadorDos = new Jugador(nombreJugadorDos);
+
         this.tablero = new Tablero(20,20,jugadorUno,jugadorDos);
 
         this.casillero = new Button[20][20];
@@ -158,23 +162,30 @@ public class JuegoPrincipal {
         }
         catch (RuntimeException e){
             boton.setText(" ");
-            infousuarioClickeado.setText("\n\n\nNo hay una unidad acá");
+            infousuarioClickeado.setText("\n\n\nPosicion: ("+fila+";"+columna+")\nNo hay una unidad acá");
         }
     }
 
     private String setearTextoCasillero(String tipoUnidad, String ejercito) {
         String textoCasillero;
         switch (tipoUnidad){
-            case "soldado": textoCasillero="s"+"1";
+            case "soldado": textoCasillero="s";
                 break;
-            case "curandero": textoCasillero="cu"+"1";
+            case "curandero": textoCasillero="cu";
                 break;
-            case "catapulta": textoCasillero="ca"+"1";
+            case "catapulta": textoCasillero="ca";
                 break;
-            case "jinete": textoCasillero="j"+"1";
+            case "jinete": textoCasillero="j";
                 break;
-            default: textoCasillero="Nan"+"1";
+            default: textoCasillero="Nan";
         }
+        if(ejercito==nombreJugadorUno){
+            textoCasillero=textoCasillero+"1";
+        }
+        else{
+            textoCasillero=textoCasillero+"2";
+        }
+
         return textoCasillero;
     }
 
