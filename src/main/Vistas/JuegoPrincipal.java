@@ -25,6 +25,8 @@ public class JuegoPrincipal {
 
     public void iniciar(Stage stage,String jugadorUno,String jugadorDos) {
 
+
+
         nombreJugadorUno = jugadorUno;
         nombreJugadorDos = jugadorDos;
 
@@ -39,23 +41,20 @@ public class JuegoPrincipal {
 
         Label espacioGenerado = new Label();
         espacioGenerado.setText("\n\n\n");
-        Button agregarUnidadesJugadorUno = new Button("Agregar unidades jugador uno");
-        agregarUnidadesJugadorUno.setPadding(new Insets(20,20,20,20));
-        Button agregarUnidadesJugadorDos = new Button("Agregar unidades jugador dos");
-        agregarUnidadesJugadorDos.setPadding(new Insets(20,20,20,20));
+        //Button agregarUnidadesJugadorUno = new Button("Agregar undades jugador uno");
+        //agregarUnidadesJugadorUno.setPadding(new Insets(20,20,20,20));
+        //Button agregarUnidadesJugadorDos = new Button("Agregar undades jugador dos");
+        //agregarUnidadesJugadorDos.setPadding(new Insets(20,20,20,20));
 
         VBox opcionesParaCrearUnidades = new VBox();
         opcionesParaCrearUnidades.setPrefWidth(200);
         opcionesParaCrearUnidades.setSpacing(10);
         Label infoTablero = new Label();
-        infoTablero.setText(" ");
+        //infoTablero.setText(" ");
 
-        agregarUnidadesJugadorUno.setOnAction(e->colocarUnidadesDe(this.jugadorUno,opcionesParaCrearUnidades,infoTablero));
-        agregarUnidadesJugadorDos.setOnAction(e->colocarUnidadesDe(this.jugadorDos,opcionesParaCrearUnidades,infoTablero));
-
-
+        colocarUnidadesDe(this.jugadorUno,opcionesParaCrearUnidades,infoTablero);
         opcionesDeJuego.setSpacing(10);
-        opcionesDeJuego.getChildren().addAll(espacioGenerado,agregarUnidadesJugadorUno,agregarUnidadesJugadorDos,opcionesParaCrearUnidades,infoTablero);
+        opcionesDeJuego.getChildren().addAll(espacioGenerado,opcionesParaCrearUnidades,infoTablero);
 
         VBox vistaTablero = new VBox(0);
         Label sectorDeJugador1 = new Label();
@@ -84,7 +83,7 @@ public class JuegoPrincipal {
         opcionesParaCrearUnidades.getChildren().clear();
 
         Label inicioCreacionUnidades = new Label();
-        inicioCreacionUnidades.setText("seleccione la posicion \n Y LUEGO la unidad que quiera crear");
+        inicioCreacionUnidades.setText(jugadorRecibido.getNombre()+"\n seleccione la posicion \n Y LUEGO la unidad que quiera crear");
         opcionesParaCrearUnidades.getChildren().add(inicioCreacionUnidades);
 
         Insets configBotonesOpcionesUnidades = new Insets(20,20,20,20);
@@ -109,9 +108,28 @@ public class JuegoPrincipal {
         opcionCatapulta.setPadding(configBotonesOpcionesUnidades);
         opcionCatapulta.setOnAction(e->crearUnidad("Catapulta",opcionesParaCrearUnidades,jugadorRecibido,infoPosicionClickeada));
 
+        Button continuar = new Button("Continuar");
+        continuar.setPadding( new Insets(15,15,15,15));
+
         opcionesParaCrearUnidades.getChildren().addAll(opcionCatapulta,opcionCurandero,opcionJinete,opcionSoldado);
 
+        if( jugadorRecibido.getNombre() == nombreJugadorUno ){
+            continuar.setOnAction( e-> colocarUnidadesDe(jugadorDos, opcionesParaCrearUnidades,infoPosicionClickeada));
+        }
+        else {
+            continuar.setOnAction( e-> JugadorUnoAtacar(jugadorUno,opcionesParaCrearUnidades,infoPosicionClickeada));
+        }
     }
+
+    private void JugadorUnoAtacar(Jugador jugadorDos, VBox opcionesParaCrearUnidades,Label infoPosicionClickeada){
+
+        opcionesParaCrearUnidades.getChildren().clear();
+        Label inicioCreacionUnidades = new Label("aaaaaaaaaaaaa");
+        opcionesParaCrearUnidades.getChildren().add(inicioCreacionUnidades);
+
+    }
+
+
 
     private void crearUnidad(String unidadElegida, VBox opcionesParaCrearUnidades, Jugador jugadorRecibido,Label infoTablero) {
 

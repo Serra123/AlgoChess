@@ -9,8 +9,10 @@ public class Jugador {
 
     private Ejercito ejercito;
     private FabricaDeUnidades fabrica;
+    private String nombre;
 
     public Jugador(String nombre){
+        this.nombre = nombre;
         this.ejercito = new Ejercito();
         this.fabrica = new FabricaDeUnidades(nombre);
     }
@@ -21,5 +23,6 @@ public class Jugador {
         unaUnidad = fabrica.crearUnidad(unaPosicion, tipoUnidad, unTablero);
         this.ejercito.agregarUnidad(unaUnidad);
     }
+    public String getNombre(){ return nombre;}
 
 }
