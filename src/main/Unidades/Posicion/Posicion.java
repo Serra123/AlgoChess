@@ -9,6 +9,11 @@ public class Posicion {
         this.columna = columna;
     }
 
+    public Posicion(Posicion posicionACopiar){
+        this.fila = posicionACopiar.getFila();
+        this.columna = posicionACopiar.getColumna();
+    }
+
     public void mover(Posicion nuevaPosicion){
         this.fila = nuevaPosicion.getFila();
         this.columna = nuevaPosicion.getColumna();
@@ -53,4 +58,6 @@ public class Posicion {
         return (columnasIguales && filasIguales);
 
     }
+
+
 }
