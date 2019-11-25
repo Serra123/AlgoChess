@@ -134,7 +134,7 @@ public class JuegoPrincipal {
         atacar.setPadding( new Insets(15,15,15,15));
         atacar.setOnAction( e-> atacar(jugadorUno));
 
-        if(movio) {
+        if(!movio) {
             opcionesDeJuego.getChildren().addAll(OpcionesDeTurno, mover, atacar);
         } else{
             opcionesDeJuego.getChildren().addAll(OpcionesDeTurno, atacar);
