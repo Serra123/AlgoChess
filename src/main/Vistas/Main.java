@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
-public class Main extends Application implements EventHandler<ActionEvent>{
+public class Main extends Application{
     public static void main(String[] args){
         launch(args);
     }
@@ -69,8 +69,5 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         usuariosYaIngresados.setText("Usuarios ingresados correctamente,\ningrese continuar para iniciar juego");
     }
 
-    @Override
-    public void handle(ActionEvent actionEvent) {
-        System.out.println("sapeeeee");
-    }
+
 }

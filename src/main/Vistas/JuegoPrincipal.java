@@ -156,8 +156,6 @@ public class JuegoPrincipal {
 
     private void eleginuevaPosicion(Jugador jugadorRecibido){
 
-        //opcionesParaCrearUnidades.getChildren().clear();
-
         Posicion posicionAnterior = new Posicion(posicionClickeada);
 
         Label seleccioneUnidadAMover = new Label("seleccione la posicion a donde la desea mover");
@@ -182,10 +180,6 @@ public class JuegoPrincipal {
         } catch(RuntimeException e){
             turno(jugadorRecibido,false);
         }
-
-        //get unidad de jugador recibido en la posicion anterior
-        //unidad.mover(nuevaPosicion)
-
     }
 
 
@@ -234,7 +228,7 @@ public class JuegoPrincipal {
                  Posicion posicion = new Posicion(i,j);
                  casillero[i][j] = new Button(" ");
                  casillero[i][j].setPrefSize(50,30);
-                 //casillero[i][j].setUserData(posicion);
+                 casillero[i][j].setUserData(posicion);
                  int finalI = i;
                  int finalJ = j;
 
