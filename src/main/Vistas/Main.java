@@ -1,17 +1,11 @@
 package Vistas;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
 public class Main extends Application{
     public static void main(String[] args){
@@ -19,14 +13,7 @@ public class Main extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws Exception{
-
-        TextField texto = new TextField();
-        texto.setPromptText("Ingrese el texto deseado");
-        Button botonLimpiar = new Button();
-        botonLimpiar.setText("Limpiar cuadro texto");
-        BotonLimpiarEventHandler botonLimpiarEventHandler = new BotonLimpiarEventHandler(texto);
-        botonLimpiar.setOnAction(botonLimpiarEventHandler);
+    public void start(Stage stage){
 
         JuegoPrincipal juegoPrincipal = new JuegoPrincipal();
 
@@ -41,33 +28,20 @@ public class Main extends Application{
         Label mensajeIngresoUsuarioDos = new Label();
         mensajeIngresoUsuarioDos.setText("Ingrese el nombre del jugador 2");
 
-        Label usuariosYaIngresados = new Label();
-
         TextField ingresoUsuarioUno = new TextField();
         TextField ingresoUsuarioDos = new TextField();
 
-        Button usuariosIngresados = new Button("listo");
-        Button inicioJuego = new Button("continuar");
-
-        usuariosIngresados.setOnAction(e->nombreIngresado(ingresoUsuarioUno.getText(),jugadorUno,ingresoUsuarioDos.getText(),jugadorDos,usuariosYaIngresados));
+        Button inicioJuego = new Button("Continuar");
 
         VBox layoutInicio = new VBox(30);
         layoutInicio.setPadding(new Insets(20,20,20,10));
-        layoutInicio.getChildren().addAll(mensajeIngresoUsuarioUno,ingresoUsuarioUno,mensajeIngresoUsuarioDos,ingresoUsuarioDos,usuariosIngresados,usuariosYaIngresados,inicioJuego);
-
-        inicioJuego.setOnAction(e->juegoPrincipal.iniciar(stage,jugadorUno,jugadorDos));
+        layoutInicio.getChildren().addAll(mensajeIngresoUsuarioUno,ingresoUsuarioUno,mensajeIngresoUsuarioDos,ingresoUsuarioDos,inicioJuego);
 
         Scene scene = new Scene(layoutInicio,400,400);
         stage.setScene(scene);
         stage.show();
+
+        inicioJuego.setOnAction(e->juegoPrincipal.iniciar(stage,jugadorUno,jugadorDos));
     }
-
-
-    private void nombreIngresado(String usuarioUnoIngresado, String jugadorUno, String usuarioDosIngresado, String jugadorDos, Label usuariosYaIngresados) {
-        jugadorUno=usuarioUnoIngresado;
-        jugadorDos=usuarioDosIngresado;
-        usuariosYaIngresados.setText("Usuarios ingresados correctamente,\ningrese continuar para iniciar juego");
-    }
-
 
 }
