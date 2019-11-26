@@ -7,7 +7,6 @@ import Excepciones.ExcepcionSectorEnemigo;
 import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
-import Unidades.Soldado;
 import Unidades.Unidad;
 import Unidades.UnidadMovible;
 import javafx.geometry.Insets;
@@ -25,6 +24,7 @@ public class JuegoPrincipal {
     private Jugador jugadorUno;
     private Jugador jugadorDos;
     private Tablero tablero;
+    private Label infoCasilleroClickeado;
     private Button botonClickeado;
     private VBox opcionesDeJuego;
 
@@ -35,9 +35,7 @@ public class JuegoPrincipal {
         this.jugadorDos = new Jugador(jugadorDos);
 
         this.tablero = new Tablero(20,20,jugadorUno,jugadorDos);
-
-        Label infoCasilleroClickeado = new Label();
-
+        infoCasilleroClickeado = new Label();
         VBox infoTablero = new VBox();
         infoTablero.setSpacing(100);
 
@@ -50,15 +48,18 @@ public class JuegoPrincipal {
         GridPane layoutTablero = new GridPane();
 
 
+
         Label sectorDeJugador2 = new Label();
         sectorDeJugador2.setText("Sector de jugador 2: "+ this.jugadorDos.getNombre());
         layoutTablero.getChildren().add(sectorDeJugador2);
 
         tableroConSectores.getChildren().addAll(sectorDeJugador1,layoutTablero,sectorDeJugador2);
 
+        Label tituloDeInterfazJuego = new Label("ESTE ES EL TITULO DEL JUEGO");
 
 
         BorderPane layoutPrincipal = new BorderPane();
+        layoutPrincipal.setTop(tituloDeInterfazJuego);
         layoutPrincipal.setCenter(tableroConSectores);
         layoutPrincipal.setRight(infoTablero);
 
@@ -98,42 +99,45 @@ public class JuegoPrincipal {
                 unBoton.setPrefSize(50,30);
                 Posicion unaPosicion = new Posicion(i,j);
                 unBoton.setUserData(unaPosicion);
-                unBoton.setOnAction(e -> informacionCasillero(unBoton,infoCasilleroClickeado));
-                informacionCasillero(unBoton,infoCasilleroClickeado);
+                unBoton.setOnAction(e -> informacionCasillero(unBoton));
+                informacionCasillero(unBoton);
                 layoutTablero.add(unBoton,j,i);
             }
         }
 
     }
 
-    private void informacionCasillero(Button boton,Label infousuarioClickeado) {
-        Unidad unidad;
+    private void informacionCasillero(Button boton) {
+
         Posicion unaPosicion = (Posicion) boton.getUserData();
-        botonClickeado = boton;
         int fila = unaPosicion.getFila()+1;
         int columna = unaPosicion.getColumna()+1;
+
+        //botonClickeado = new Button();
+        //Posicion laMismaPosicion = new Posicion(unaPosicion);
+        //botonClickeado.setUserData(laMismaPosicion);
+        botonClickeado = boton;
+
+        Unidad unidad;
         try {
             unidad = tablero.getUnidad(unaPosicion);
-            infousuarioClickeado.setText("Posicion: ("+fila+";"+columna+")\nUnidad: "+unidad.getTipoUnidad()+"\nVida:"+unidad.getVida());
+            infoCasilleroClickeado.setText("Posicion: ("+fila+";"+columna+")\nUnidad: "+unidad.getTipoUnidad()+"\nVida:"+unidad.getVida());
             String textoCasillero = setearTextoCasillero(unidad.getTipoUnidad(),unidad.getEjercito());
             boton.setText(textoCasillero);
         }
         catch (ExcepcionCasilleroVacio e){
             boton.setText("");
-            infousuarioClickeado.setText("\n\n\nPosicion: ("+fila+";"+columna+")\nNo hay una unidad acá");
+            infoCasilleroClickeado.setText("Posicion: ("+fila+";"+columna+")\nNo hay una unidad acá");
         }
+
     }
 
 
     private void crearUnidad(String unidadElegida, Jugador jugadorRecibido,Label infoTablero) {
-
-        Label opcionElegida = new Label();
-        opcionesDeJuego.getChildren().add(opcionElegida);
-
         try {
             Posicion unaPosicion = (Posicion) botonClickeado.getUserData();
             jugadorRecibido.crearUnidadEnPosicion(unaPosicion, unidadElegida, tablero);
-            informacionCasillero(botonClickeado,infoTablero);
+            informacionCasillero(botonClickeado);
         } catch (ExcepcionSectorEnemigo e){
             infoTablero.setText("Este no es tu sector");
         } catch(ExcepcionCasilleroOcupado e){
@@ -189,75 +193,71 @@ public class JuegoPrincipal {
         }
     }
 
-    private void turno(Jugador jugadorRecibido,boolean yaMovio){
-
+    private void turno(Jugador jugadorDeTurno,Boolean yaMovio){
         opcionesDeJuego.getChildren().clear();
-        Label OpcionesDeTurno = new Label("Opciones de turno:" );
+        Label opcionesDeTurno = new Label("Opciones de turno:");
 
-        Button mover = new Button("Mover");
+        Button mover = new Button("OPCION Mover");
         mover.setPadding( new Insets(15,15,15,15));
-        mover.setOnAction(e->elegirUnidadAMover(jugadorRecibido));
+        mover.setOnAction(e->moverUnidad(jugadorDeTurno));
 
-        Button atacar = new Button("Atacar");
+        Button atacar = new Button("OPCION Atacar");
         atacar.setPadding( new Insets(15,15,15,15));
-        atacar.setOnAction( e-> atacar(jugadorRecibido));
+        atacar.setOnAction( e-> atacar(jugadorDeTurno));
+
+        Button curar = new Button("OPCION Curar");
+        curar.setPadding( new Insets(15,15,15,15));
+        curar.setOnAction( e-> atacar(jugadorDeTurno));
 
         Button pasar = new Button("Pasar");
         pasar.setPadding( new Insets(15,15,15,15));
-        //pasar.setOnAction( e-> turno(jugadorRecibido));
+        pasar.setOnAction( e->{
+            if(jugadorDeTurno.getNombre()==jugadorUno.getNombre()) {
+                turno(jugadorDos,false);
+            }else{
+                turno(jugadorUno,false);
+            }
+        });
 
-        if(!yaMovio) {
-            opcionesDeJuego.getChildren().addAll(OpcionesDeTurno, mover, atacar);
-        } else{
-            opcionesDeJuego.getChildren().addAll(OpcionesDeTurno, atacar);
-        }
+        opcionesDeJuego.getChildren().addAll(opcionesDeTurno,mover,atacar,curar,pasar);
+
+
+
+    }
+    private void moverUnidad(Jugador jugadorRecibido) {
+        opcionesDeJuego.getChildren().clear();
+        Button botonAnterior = botonClickeado;
+        Posicion posicionAnterior = (Posicion) botonAnterior.getUserData();
+
+        Label seleccionDeNuevaPosicion= new Label("seleccione la posicion a donde la desea mover");
+        Button confirmarNuevaPosicion = new Button("MOVER");
+        confirmarNuevaPosicion.setOnAction(e ->{
+            Posicion nuevaPosicion = (Posicion) botonClickeado.getUserData();
+            try{
+                UnidadMovible unidad = (UnidadMovible) tablero.getUnidad(posicionAnterior);
+                unidad.mover(nuevaPosicion,tablero);
+                turno(jugadorRecibido,true);
+            } catch(ExcepcionCasilleroOcupado error){
+                // Juan tenes que hacer la alerta
+                infoCasilleroClickeado.setText("NOOOOOOOOOOO");
+            } catch(ExcepcionCasilleroVacio error){
+                infoCasilleroClickeado.setText(" Esa posicion esta VACIA");
+            }
+        });
+        opcionesDeJuego.getChildren().addAll(seleccionDeNuevaPosicion,confirmarNuevaPosicion);
+
 
     }
 
-    private void elegirUnidadAMover(Jugador jugadorRecibido) {
-
-        Label seleccioneUnidadAMover = new Label("seleccione la unidad que desee mover");
-
-        Button unidadAMoverSelecionada = new Button();
-        unidadAMoverSelecionada.setText("Listo");
-
-        unidadAMoverSelecionada.setOnAction(e->eleginuevaPosicion(jugadorRecibido));
-
-        opcionesDeJuego.getChildren().addAll(seleccioneUnidadAMover,unidadAMoverSelecionada);
+    private void actualizarCasillero(Button boton){
+        informacionCasillero(boton);
     }
 
-    private void eleginuevaPosicion(Jugador jugadorRecibido){
 
-        //opcionesParaCrearUnidades.getChildren().clear();
 
-        Posicion posicionAnterior = new Posicion((Posicion) botonClickeado.getUserData());
 
-        Label seleccioneUnidadAMover = new Label("seleccione la posicion a donde la desea mover");
 
-        Button unidadAMoverSelecionada = new Button();
-        unidadAMoverSelecionada.setText("Listo");
 
-        unidadAMoverSelecionada.setOnAction(e->moverUnidad(jugadorRecibido,posicionAnterior));
-
-        opcionesDeJuego.getChildren().addAll(seleccioneUnidadAMover,unidadAMoverSelecionada);
-
-    }
-
-    private void moverUnidad(Jugador jugadorRecibido, Posicion posicionAnterior) {
-        Posicion posicionNueva = (Posicion) botonClickeado.getUserData();
-        try{
-            UnidadMovible unidad= (UnidadMovible) tablero.getUnidad(posicionAnterior);
-            unidad.mover(posicionNueva,tablero);
-            actualizarCasillero(botonClickeado,posicionAnterior);
-            turno(jugadorRecibido,true);
-        } catch(RuntimeException e){
-            turno(jugadorRecibido,false);
-        }
-
-        //get unidad de jugador recibido en la posicion anterior
-        //unidad.mover(nuevaPosicion)
-
-    }
 
 
     private void atacar(Jugador jugadorRecibido){
@@ -275,22 +275,6 @@ public class JuegoPrincipal {
     }
 
 
-
-
-
-
-
-    private void actualizarCasillero(Button boton,Posicion posicion){
-        Unidad unidad;
-        try {
-            unidad = tablero.getUnidad(posicion);
-            String textoCasillero =setearTextoCasillero(unidad.getTipoUnidad(),unidad.getEjercito());
-            boton.setText(textoCasillero);
-        }
-        catch (RuntimeException e){
-            boton.setText(" ");
-        }
-    }
 
 
 
@@ -318,11 +302,6 @@ public class JuegoPrincipal {
     }
 
     private void setLayoutJuego(VBox layoutJuego) {
-
-        Label mensajeJuego = new Label();
-        mensajeJuego.setText("mi primera cosa en el juego posta <3");
-        layoutJuego.getChildren().addAll(mensajeJuego);
-
     }
 
 

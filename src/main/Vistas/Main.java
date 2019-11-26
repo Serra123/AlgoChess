@@ -22,6 +22,7 @@ public class Main extends Application{
         String jugadorUno = "JugadorUno";
         String jugadorDos = "JugadorDos";
 
+
         Label mensajeIngresoUsuarioUno = new Label();
         mensajeIngresoUsuarioUno.setText("Ingrese el nombre del jugador 1");
 
