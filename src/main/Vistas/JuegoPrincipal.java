@@ -228,15 +228,23 @@ public class JuegoPrincipal {
         opcionesDeJuego.getChildren().clear();
         Button botonAnterior = botonClickeado;
         Posicion posicionAnterior = (Posicion) botonAnterior.getUserData();
+        Posicion mismaPosicionAnterior = new Posicion(posicionAnterior);
 
         Label seleccionDeNuevaPosicion= new Label("seleccione la posicion a donde la desea mover");
         Button confirmarNuevaPosicion = new Button("MOVER");
         confirmarNuevaPosicion.setOnAction(e ->{
-            Posicion nuevaPosicion = (Posicion) botonClickeado.getUserData();
+            Button botonNuevo = botonClickeado;
+            Posicion nuevaPosicion = (Posicion) botonNuevo.getUserData();
+            Posicion mismaPosicionNueva = new Posicion(nuevaPosicion);
             try{
                 UnidadMovible unidad = (UnidadMovible) tablero.getUnidad(posicionAnterior);
                 unidad.mover(nuevaPosicion,tablero);
                 turno(jugadorRecibido,true);
+
+                botonAnterior.setUserData(mismaPosicionAnterior);
+                botonNuevo.setUserData(mismaPosicionNueva);
+                informacionCasillero(botonAnterior);
+                informacionCasillero(botonNuevo);
             } catch(ExcepcionCasilleroOcupado error){
                 // Juan tenes que hacer la alerta
                 infoCasilleroClickeado.setText("NOOOOOOOOOOO");
