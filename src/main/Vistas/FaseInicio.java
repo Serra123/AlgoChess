@@ -18,14 +18,13 @@ public class FaseInicio extends VBox {
         campoNombreUsuarioUno.setPadding(formatoFaseInicio);
 
         Label ingreseNombreUsuarioDos = new Label();
+
         ingreseNombreUsuarioDos.setText("Ingrese nombre de usuario dos");
         ingreseNombreUsuarioDos.setPadding(formatoFaseInicio);
 
         Button continuar = new Button("continuar");
 
         TextField campoNombreUsuarioDos = new TextField();
-        campoNombreUsuarioDos.setPrefSize(20,20);
-
         this.getChildren().addAll(ingreseNombreUsuarioUno,campoNombreUsuarioUno,ingreseNombreUsuarioDos,campoNombreUsuarioDos,continuar);
 
         this.setSpacing(20);
