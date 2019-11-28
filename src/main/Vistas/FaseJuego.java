@@ -1,11 +1,9 @@
 package Vistas;
 
-import Jugador.Jugador;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class FaseJuego extends Application{
@@ -26,11 +24,11 @@ public class FaseJuego extends Application{
         faseJuego.setTop(tituloJuego);
 
 
-        InfoTablero infoTablero = new InfoTablero("aaaaa");
+        InfoCasillero infoCasillero = new InfoCasillero("aaaaa");
 
-        TableroView tableroView = new TableroView(infoTablero);
+        TableroView tableroView = new TableroView(infoCasillero);
         faseJuego.setLeft(tableroView);
-        faseJuego.setRight(infoTablero);
+        faseJuego.setRight(infoCasillero);
 
         Scene scene = new Scene(faseJuego,1300,800);
         stage.setScene(scene);

@@ -1,22 +1,22 @@
 package Controller;
 
 import Unidades.Posicion.Posicion;
-import Vistas.InfoTablero;
+import Vistas.InfoCasillero;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 
 public class CasilleroEventHandler implements EventHandler<ActionEvent> {
     private Posicion posicion;
-    private InfoTablero infoTablero;
+    private InfoCasillero infoCasillero;
 
-    public CasilleroEventHandler(Posicion unaPosicion,InfoTablero infoTablero) {
+    public CasilleroEventHandler(Posicion unaPosicion, InfoCasillero infoCasillero) {
         this.posicion = unaPosicion;
-        this.infoTablero = infoTablero;
+        this.infoCasillero = infoCasillero;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.infoTablero.actualizarPosicionClickeada(posicion);
+        this.infoCasillero.actualizarPosicionClickeada(posicion);
     }
 }

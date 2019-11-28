@@ -1,7 +1,6 @@
 package Vistas;
 
 import Unidades.Posicion.Posicion;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 public class TableroView extends GridPane {
@@ -10,11 +9,11 @@ public class TableroView extends GridPane {
     private static int COLUMNAS = 20;
 
 
-    public TableroView(InfoTablero infoTablero){
+    public TableroView(InfoCasillero infoCasillero){
         for(int i = 0; i < FILAS; i++){
             for(int j = 0; j < COLUMNAS;j++){
                 Posicion unaPosicion = new Posicion(i,j);
-                this.add(new BotonCasillero(unaPosicion,infoTablero),j,i);
+                this.add(new BotonCasillero(unaPosicion,infoCasillero),j,i);
             }
         }
     }

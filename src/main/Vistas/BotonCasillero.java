@@ -8,10 +8,10 @@ public class BotonCasillero extends Button {
 
     private Posicion posicion;
 
-    public BotonCasillero(Posicion unaPosicion,InfoTablero infoTablero){
+    public BotonCasillero(Posicion unaPosicion, InfoCasillero infoCasillero){
         this.posicion = unaPosicion;
         this.setPrefSize(50,30);
-        this.setOnAction(new CasilleroEventHandler(unaPosicion,infoTablero));
+        this.setOnAction(new CasilleroEventHandler(unaPosicion,infoCasillero));
 
     }
 
