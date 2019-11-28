@@ -25,9 +25,14 @@ public class FaseJuego extends Application{
         Label tituloJuego = new Label("AlgoChess");
         faseJuego.setTop(tituloJuego);
 
-        TableroView tableroView = new TableroView();
+
+        InfoTablero infoTablero = new InfoTablero("aaaaa");
+
+        TableroView tableroView = new TableroView(infoTablero);
         faseJuego.setLeft(tableroView);
-        Scene scene = new Scene(faseJuego,1500,800);
+        faseJuego.setRight(infoTablero);
+
+        Scene scene = new Scene(faseJuego,1300,800);
         stage.setScene(scene);
         stage.show();
     }

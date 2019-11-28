@@ -10,16 +10,11 @@ public class TableroView extends GridPane {
     private static int COLUMNAS = 20;
 
 
-    public TableroView(){
+    public TableroView(InfoTablero infoTablero){
         for(int i = 0; i < FILAS; i++){
             for(int j = 0; j < COLUMNAS;j++){
                 Posicion unaPosicion = new Posicion(i,j);
-                BotonCasillero unCasillero = new BotonCasillero(unaPosicion);
-                unCasillero.setPrefSize(50,30);
-                //unBoton.setOnAction(e -> informacionCasillero(unBoton));
-                //informacionCasillero(unBoton);
-                //layoutTablero.add(unBoton,j,i);
-                this.add(unCasillero,j,i);
+                this.add(new BotonCasillero(unaPosicion,infoTablero),j,i);
             }
         }
     }
