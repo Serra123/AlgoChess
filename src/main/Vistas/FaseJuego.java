@@ -26,10 +26,6 @@ public class FaseJuego extends Application{
 
         inicializarJuego();
 
-
-        Posicion unaPosicion = new Posicion(2,2);
-        jugadorUno.crearUnidadEnPosicion(unaPosicion, "Soldado", tablero);
-
         BorderPane faseJuego = new BorderPane();
 
         Label tituloJuego = new Label("AlgoChess");
@@ -37,9 +33,10 @@ public class FaseJuego extends Application{
 
         InfoCasillero infoCasillero = new InfoCasillero("");
 
-        StatusTablero statusTablero = new StatusTablero(infoCasillero,tablero,jugadorUno,jugadorDos);
-
         TableroView tableroView = new TableroView(tablero,infoCasillero, jugadorUno, jugadorDos);
+
+        StatusTablero statusTablero = new StatusTablero(tableroView,infoCasillero,tablero,jugadorUno,jugadorDos);
+
         faseJuego.setLeft(tableroView);
         faseJuego.setRight(statusTablero);
 
