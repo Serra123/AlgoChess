@@ -37,7 +37,7 @@ public class FaseJuego extends Application{
 
         InfoCasillero infoCasillero = new InfoCasillero("");
 
-        StatusTablero statusTablero = new StatusTablero(infoCasillero);
+        StatusTablero statusTablero = new StatusTablero(infoCasillero,tablero,jugadorUno,jugadorDos);
 
         TableroView tableroView = new TableroView(tablero,infoCasillero);
         faseJuego.setLeft(tableroView);

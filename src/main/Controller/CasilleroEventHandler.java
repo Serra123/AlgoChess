@@ -37,7 +37,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
             botonCasillero.setText("");
         }
 
-        this.infoCasillero.actualizarPosicionClickeada(infoCasillero);
+        this.infoCasillero.actualizarPosicionClickeada(infoCasillero,posicion);
     }
 
     private String setearTextoCasillero(String tipoUnidad) {
