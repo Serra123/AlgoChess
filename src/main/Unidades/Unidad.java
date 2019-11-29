@@ -72,4 +72,6 @@ public abstract class Unidad {
     }
 
     public abstract String getTipoUnidad();
+
+    public abstract void atacar(Unidad unidadEnemiga, Tablero unTablero);
 }

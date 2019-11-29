@@ -38,7 +38,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
         try {
             Unidad unidad= tablero.getUnidad(posicion);
             String tipoUnidad = unidad.getTipoUnidad();
-            infoCasillero = "unidad:" + tipoUnidad + "(" + (posicion.getFila() + 1) + ";" + (posicion.getColumna() + 1) + ")";
+            infoCasillero = "unidad:" + tipoUnidad + "(" + (posicion.getFila() + 1) + ";" + (posicion.getColumna() + 1) + "). Vida:"+unidad.getVida();
             String textoCasillero = setearTextoCasillero(tipoUnidad,unidad.getEjercito());
             botonCasillero.setText(textoCasillero);
         } catch (ExcepcionCasilleroVacio e) {

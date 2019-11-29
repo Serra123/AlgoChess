@@ -1,8 +1,10 @@
 package Unidades;
 
 import Excepciones.ExcepcionCuracionAEnemigo;
+import Excepciones.ExcepcionCuranderoNoAtaca;
 import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Excepciones.ExcepcionDistanciaCuracionInvalida;
+import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
 public class Curandero extends UnidadMovible {
@@ -32,5 +34,10 @@ public class Curandero extends UnidadMovible {
     @Override
     public String getTipoUnidad(){
         return "curandero";
+    }
+
+    @Override
+    public void atacar(Unidad unidad, Tablero tablero)throws ExcepcionCuranderoNoAtaca {
+        throw new ExcepcionCuranderoNoAtaca();
     }
 }
