@@ -12,7 +12,7 @@ public class StatusTablero extends VBox {
     public StatusTablero(TableroView tableroView,InfoCasillero infoCasillero, Tablero tablero, Jugador jugadorUno, Jugador jugadorDos) {
         this.infoCasillero = infoCasillero;
         this.tablero = tablero;
-        this.getChildren().add(new OpcionesView(tableroView,infoCasillero,tablero,jugadorUno,jugadorDos));
+        this.getChildren().add(new MenuDeOpciones(tableroView,infoCasillero,tablero,jugadorUno,jugadorDos));
         this.getChildren().add(infoCasillero);
     }
 }

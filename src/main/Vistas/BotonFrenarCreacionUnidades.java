@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 public class BotonFrenarCreacionUnidades extends Button {
 
 
-    public BotonFrenarCreacionUnidades(String listo, Jugador jugadorUno,Jugador jugadorActual , AgregarUnidades agregarUnidades,OpcionesView opcionesView) {
+    public BotonFrenarCreacionUnidades(String listo, Jugador jugadorUno, Jugador jugadorActual , AgregarUnidades agregarUnidades, MenuDeOpciones opcionesView) {
         this.setText(listo);
         if(jugadorActual.getNombre() == jugadorUno.getNombre()){
             this.setOnAction(e->agregarUnidades.cambiarJugador());

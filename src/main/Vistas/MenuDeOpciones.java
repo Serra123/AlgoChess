@@ -4,7 +4,7 @@ import Jugador.Jugador;
 import Tablero.Tablero;
 import javafx.scene.layout.VBox;
 
-public class OpcionesView extends VBox {
+public class MenuDeOpciones extends VBox {
 
     private TableroView tableroView;
     private InfoCasillero infoCasillero;
@@ -14,7 +14,7 @@ public class OpcionesView extends VBox {
 
 
 
-    public OpcionesView(TableroView tableroView ,InfoCasillero infoCasillero,Tablero tablero, Jugador jugadorUno, Jugador jugadorDos) {
+    public MenuDeOpciones(TableroView tableroView , InfoCasillero infoCasillero, Tablero tablero, Jugador jugadorUno, Jugador jugadorDos) {
 
         this.tableroView = tableroView;
         this.infoCasillero = infoCasillero;
@@ -32,6 +32,6 @@ public class OpcionesView extends VBox {
 
     public void iniciarTurno() {
         this.getChildren().clear();
-        this.getChildren().add(new Turno(tableroView,infoCasillero,tablero, jugadorUno,jugadorDos,false,this));
+        this.getChildren().add(new Turno(tableroView,infoCasillero,tablero, jugadorUno,jugadorDos,this));
     }
 }

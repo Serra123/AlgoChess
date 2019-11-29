@@ -2,8 +2,6 @@ package Vistas;
 
 import Jugador.Jugador;
 import Tablero.Tablero;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -16,9 +14,9 @@ public class AgregarUnidades extends VBox {
     private InfoCasillero infoCasillero;
     private Tablero tablero;
     private TableroView tableroView;
-    private OpcionesView opcionesView;
+    private MenuDeOpciones opcionesView;
 
-    public AgregarUnidades(TableroView tableroView, InfoCasillero infoCasillero, Tablero tablero, Jugador jugadorUno, Jugador jugadorDos, boolean jugadorUnoYaColoco, OpcionesView opcionesView) {
+    public AgregarUnidades(TableroView tableroView, InfoCasillero infoCasillero, Tablero tablero, Jugador jugadorUno, Jugador jugadorDos, boolean jugadorUnoYaColoco, MenuDeOpciones opcionesView) {
 
         this.jugadorUno = jugadorUno;
         this.jugadorDos = jugadorDos;

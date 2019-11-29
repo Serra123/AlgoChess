@@ -21,6 +21,7 @@ public class InfoCasillero extends Label{
     }
 
     public Posicion getPosicion(){
-        return posicion;
+
+        return new Posicion(posicion);
     }
 }
