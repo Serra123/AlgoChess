@@ -23,6 +23,7 @@ public class Jinete extends UnidadMovible {
         armaDeAtaque = new Espada();
     }
 
+    @Override
     public void atacar(Unidad unaUnidad, Tablero unTablero){
         boolean enemigoEstaEnSuSector = unTablero.estaEnSector(unaUnidad);
         this.armaDeAtaque = this.obtenerArmaDeAtaque(unTablero);

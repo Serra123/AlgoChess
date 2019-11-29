@@ -13,6 +13,7 @@ public class Catapulta extends Unidad {
     private static final int COSTO = 5;
     private static final int VIDAINICIAL = 50;
 
+    @Override
     public void atacar(Unidad cualquierUnidad, Tablero unTablero) throws ExcepcionDistanciaAtaqueInvalida{
         if(!cualquierUnidad.getEjercito().equals(this.ejercito)) {
             if (this.distanciaA(cualquierUnidad) >= DISTANCIALEJANA) {

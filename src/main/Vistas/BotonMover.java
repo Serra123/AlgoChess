@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 public class BotonMover extends Button {
 
     public BotonMover(Tablero tablero, InfoCasillero infoCasillero, Jugador jugadorActual, TableroView tableroView, Turno turno) {
-        this.setText("mover");
+        this.setText("OPCION mover");
         this.setPadding( new Insets(15,15,15,15));
         this.setOnAction(new MoverUnidadEventHandler(tablero,infoCasillero,jugadorActual,tableroView,turno));
     }

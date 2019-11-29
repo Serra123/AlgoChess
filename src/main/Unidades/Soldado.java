@@ -24,6 +24,7 @@ public class Soldado extends UnidadMovible {
         ejercito = unNombreDeJugador;
     }
 
+    @Override
     public void atacar(Unidad unidadEnemiga, Tablero unTablero){
         boolean enemigoEstaEnSuSector = unTablero.estaEnSector(unidadEnemiga);
         if(this.esAliado(unidadEnemiga)){
