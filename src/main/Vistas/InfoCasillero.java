@@ -1,16 +1,17 @@
 package Vistas;
 
+import Excepciones.ExcepcionCasilleroVacio;
+import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import javafx.scene.control.Label;
 
 public class InfoCasillero extends Label{
-    Posicion posicion;
+
     public InfoCasillero(String texto){
         this.setText(texto);
     }
 
-    public void actualizarPosicionClickeada(Posicion posicion) {
-        this.posicion=posicion;
-        this.setText("("+(posicion.getFila()+1)+";"+(posicion.getColumna()+1)+")");
+    public void actualizarPosicionClickeada(String texto) {
+        this.setText(texto);
     }
 }

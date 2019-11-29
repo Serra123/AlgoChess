@@ -1,5 +1,8 @@
 package Vistas;
 
+import Jugador.Jugador;
+import Tablero.Tablero;
+import Unidades.Posicion.Posicion;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -8,33 +11,47 @@ import javafx.stage.Stage;
 
 public class FaseJuego extends Application{
 
-    private static int FILAS = 20;
-    private static int COLUMNAS = 20;
+    private static int LADO = 20;
+    private static Jugador jugadorUno;
+    private static Jugador jugadorDos;
+    private static Tablero tablero;
 
     public static void main(String[] args){
         launch(args);
     }
 
+
     @Override
     public void start(Stage stage){
+
+        inicializarJuego();
+
+
+        Posicion unaPosicion = new Posicion(2,2);
+        jugadorUno.crearUnidadEnPosicion(unaPosicion, "Soldado", tablero);
 
         BorderPane faseJuego = new BorderPane();
 
         Label tituloJuego = new Label("AlgoChess");
         faseJuego.setTop(tituloJuego);
 
+        InfoCasillero infoCasillero = new InfoCasillero("");
 
-        InfoCasillero infoCasillero = new InfoCasillero("aaaaa");
+        StatusTablero statusTablero = new StatusTablero(infoCasillero);
 
-        TableroView tableroView = new TableroView(infoCasillero);
+        TableroView tableroView = new TableroView(tablero,infoCasillero);
         faseJuego.setLeft(tableroView);
-        faseJuego.setRight(infoCasillero);
+        faseJuego.setRight(statusTablero);
 
         Scene scene = new Scene(faseJuego,1300,800);
         stage.setScene(scene);
         stage.show();
     }
 
-    //private void inicializarJuego()
+    private void inicializarJuego(){
+        jugadorUno = new Jugador("JugadorUno");
+        jugadorDos = new Jugador("JugadorDos");
+        tablero = new Tablero(LADO,LADO,"JugadorUno","JugadorDos");
+    }
 
 }
