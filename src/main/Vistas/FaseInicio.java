@@ -10,71 +10,64 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class FaseInicio{
+class FaseInicio{
 
     private static String[] nombreJugadores = new String[2];
 
-    public static String[] display(){
-        Stage ventana = new Stage();
-        ventana.initModality(Modality.APPLICATION_MODAL);
-        ventana.setTitle("SELECCION DE NOMBRES");
-        ventana.setMinWidth(300);
+    static String[] display(){
+
+        Stage unaVentana = new Stage();
+
+        unaVentana.initModality(Modality.APPLICATION_MODAL);
+        unaVentana.setTitle("AlgoChess: Seleccion de nombres");
+        unaVentana.setMinWidth(400);
 
         VBox layoutGeneral = new VBox();
         layoutGeneral.setAlignment(Pos.CENTER);
 
         VBox seccionJugadorUno = new VBox();
-
-
         Label ingreseNombreUsuarioUno = new Label();
-        ingreseNombreUsuarioUno.setText("Ingrese nombre de usuario uno");
-
+        ingreseNombreUsuarioUno.setText("Ingrese el nombre del usuario uno:");
         TextField campoNombreUsuarioUno = new TextField();
         campoNombreUsuarioUno.setAlignment(Pos.CENTER);
         campoNombreUsuarioUno.setMaxWidth(200);
-
         seccionJugadorUno.getChildren().addAll(ingreseNombreUsuarioUno,campoNombreUsuarioUno);
+        seccionJugadorUno.setSpacing(10);
         seccionJugadorUno.setAlignment(Pos.CENTER);
 
         VBox seccionJugadorDos = new VBox();
-
         TextField campoNombreUsuarioDos = new TextField();
         campoNombreUsuarioDos.setAlignment(Pos.CENTER);
         campoNombreUsuarioDos.setMaxWidth(200);
-
-
-
         Label ingreseNombreUsuarioDos = new Label();
-
-        ingreseNombreUsuarioDos.setText("Ingrese nombre de usuario dos");
-
+        ingreseNombreUsuarioDos.setText("Ingrese el nombre del usuario dos:");
         seccionJugadorDos.getChildren().addAll(ingreseNombreUsuarioDos,campoNombreUsuarioDos);
+        seccionJugadorDos.setSpacing(10);
         seccionJugadorDos.setAlignment(Pos.CENTER);
-        Button continuar = new Button("continuar");
 
+        Button continuar = new Button("Continuar");
         continuar.setOnAction(e -> {
+
             nombreJugadores[0] = campoNombreUsuarioUno.getText();
 
             nombreJugadores[1] = campoNombreUsuarioDos.getText();
 
-            ventana.close();
+            unaVentana.close();
+
         });
 
         layoutGeneral.getChildren().addAll(seccionJugadorUno,seccionJugadorDos,continuar);
 
         Insets formatoFaseInicio = new Insets(20,20,20,20);
 
-
         layoutGeneral.setSpacing(20);
         layoutGeneral.setPadding(formatoFaseInicio);
 
         Scene scene = new Scene(layoutGeneral);
-        ventana.setScene(scene);
-        ventana.showAndWait();
-
-
-
+        unaVentana.setScene(scene);
+        unaVentana.showAndWait();
 
         return nombreJugadores;
     }
+
  }
