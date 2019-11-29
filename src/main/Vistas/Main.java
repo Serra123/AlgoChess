@@ -1,16 +1,10 @@
 package Vistas;
 
 import Jugador.Jugador;
-import Tablero.Tablero;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
-    private Jugador jugadorUno;
-    private Jugador jugadorDos;
-    private Tablero tablero;
 
     public static void main(String[] args) {
         launch(args);
@@ -23,9 +17,14 @@ public class Main extends Application {
     }
 
     private void inicializarJuego(Stage stage){
-        Scene scene = new Scene(new FaseInicio(jugadorUno,jugadorDos),400,400);
-        stage.setScene(scene);
-        stage.show();
+        String[] nombreJugadores = FaseInicio.display();
+        Jugador jugadorUno = new Jugador(nombreJugadores[0]);
+        Jugador jugadorDos = new Jugador(nombreJugadores[1]);
+
+        FaseJuego.display(jugadorUno, jugadorDos);
+
+
 
     }
+
 }
