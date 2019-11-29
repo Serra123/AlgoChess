@@ -27,7 +27,6 @@ public class MenuDeOpciones extends VBox {
     }
 
     public void menuAgregarUnidades(){
-        //this.getChildren().clear();
         this.getChildren().add(new AgregarUnidades(tableroView,infoCasillero,tablero,
                                 jugadorUno,jugadorDos,false,this));
     }
