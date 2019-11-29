@@ -6,72 +6,70 @@ import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 import Vistas.BotonCasillero;
-import Vistas.ButtonCrearUnidad;
 import Vistas.InfoCasillero;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-
 public class CasilleroEventHandler implements EventHandler<ActionEvent> {
+
     private Posicion posicion;
     private InfoCasillero infoCasillero;
     private Tablero tablero;
     private BotonCasillero botonCasillero;
     private Jugador jugadorUno;
-    private Jugador jugadorDos;
 
 
-    public CasilleroEventHandler(Tablero tablero, Posicion unaPosicion, InfoCasillero infoCasillero, BotonCasillero botonCasillero, Jugador jugadorUno, Jugador jugadorDos) {
+    public CasilleroEventHandler(Tablero tablero, Posicion unaPosicion, InfoCasillero infoCasillero, BotonCasillero botonCasillero, Jugador jugadorUno) {
 
         this.posicion = unaPosicion;
         this.infoCasillero = infoCasillero;
         this.tablero = tablero;
         this.botonCasillero = botonCasillero;
         this.jugadorUno = jugadorUno;
-        this.jugadorDos = jugadorDos;
 
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        String infoCasillero;
+        String estadisticasCasillero;
         try {
-            Unidad unidad= tablero.getUnidad(posicion);
+            Unidad unidad = tablero.getUnidad(posicion);
             String tipoUnidad = unidad.getTipoUnidad();
-            infoCasillero = "unidad:" + tipoUnidad + "(" + (posicion.getFila() + 1) + ";" + (posicion.getColumna() + 1) + "). Vida:"+unidad.getVida();
-            String textoCasillero = setearTextoCasillero(tipoUnidad,unidad.getEjercito());
-            botonCasillero.setText(textoCasillero);
+            estadisticasCasillero = "Unidad: " + tipoUnidad + " ( " + (posicion.getFila() + 1) + " ; " +
+                            (posicion.getColumna() + 1) + " ). Vida: "+ unidad.getVida();
+            String textoEnCasillero = setearTextoCasillero(tipoUnidad,unidad.getEjercito());
+            botonCasillero.setText(textoEnCasillero);
         } catch (ExcepcionCasilleroVacio e) {
-            infoCasillero = "(" + (posicion.getFila() + 1) + ";" + (posicion.getColumna() + 1) + ")";
+            estadisticasCasillero = "( " + (posicion.getFila() + 1) + " ; " + (posicion.getColumna() + 1) + " )";
             botonCasillero.setText("");
         }
 
-        this.infoCasillero.actualizarPosicionClickeada(infoCasillero,posicion);
+        this.infoCasillero.actualizarPosicionClickeada(estadisticasCasillero,posicion);
     }
 
     private String setearTextoCasillero(String tipoUnidad, String ejercito) {
         String textoCasillero;
         switch (tipoUnidad) {
             case "soldado":
-                textoCasillero = "s";
+                textoCasillero = "S";
                 break;
             case "curandero":
-                textoCasillero = "cu";
+                textoCasillero = "Cu";
                 break;
             case "catapulta":
-                textoCasillero = "ca";
+                textoCasillero = "Ca";
                 break;
             case "jinete":
-                textoCasillero = "j";
+                textoCasillero = "J";
                 break;
             default:
                 textoCasillero = "Nan";
         }
-        if(ejercito== this.jugadorUno.getNombre()){
-            textoCasillero=textoCasillero+"1";
+        if(ejercito.equals(this.jugadorUno.getNombre())){
+            textoCasillero = textoCasillero + "1";
         }
         else{
-            textoCasillero=textoCasillero+"2";
+            textoCasillero= textoCasillero + "2";
         }
 
         return textoCasillero;

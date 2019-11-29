@@ -39,8 +39,8 @@ public class Turno extends VBox {
 
         BotonAtacar atacar = new BotonAtacar(tablero, infoCasillero, jugadorActual, tableroView,this);
 
-        Button curar = new Button("OPCION Curar");
-        curar.setPadding( new Insets(15,15,15,15));
+        Button curar = new Button("Curar");
+        curar.setPadding( new Insets(20,24,20,24));
         //curar.setOnAction( e-> atacar(jugadorDeTurno));
 
         BotonPasar pasar = new BotonPasar(tablero, infoCasillero,jugadorUno,jugadorDos, jugadorActual, tableroView,this);

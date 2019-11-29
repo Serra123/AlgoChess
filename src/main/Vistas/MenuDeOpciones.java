@@ -14,7 +14,8 @@ public class MenuDeOpciones extends VBox {
 
 
 
-    public MenuDeOpciones(TableroView tableroView , InfoCasillero infoCasillero, Tablero tablero, Jugador jugadorUno, Jugador jugadorDos) {
+    public MenuDeOpciones(TableroView tableroView , InfoCasillero infoCasillero,
+                          Tablero tablero, Jugador jugadorUno, Jugador jugadorDos) {
 
         this.tableroView = tableroView;
         this.infoCasillero = infoCasillero;
@@ -26,12 +27,14 @@ public class MenuDeOpciones extends VBox {
     }
 
     public void menuAgregarUnidades(){
-        this.getChildren().clear();
-        this.getChildren().add(new AgregarUnidades(tableroView,infoCasillero,tablero, jugadorUno,jugadorDos,false,this));
+        //this.getChildren().clear();
+        this.getChildren().add(new AgregarUnidades(tableroView,infoCasillero,tablero,
+                                jugadorUno,jugadorDos,false,this));
     }
 
     public void iniciarTurno() {
         this.getChildren().clear();
-        this.getChildren().add(new Turno(tableroView,infoCasillero,tablero, jugadorUno,jugadorDos,this));
+        this.getChildren().add(new Turno(tableroView, infoCasillero, tablero,
+                                        jugadorUno,jugadorDos,this));
     }
 }
