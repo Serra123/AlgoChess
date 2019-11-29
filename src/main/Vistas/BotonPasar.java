@@ -11,10 +11,10 @@ public class BotonPasar extends Button {
 
 
 
-    public BotonPasar(Tablero tablero, InfoCasillero infoCasillero,Jugador jugadorUno,Jugador jugadorDos, Jugador jugadorActual, TableroView tableroView, Turno turno) {
+    public BotonPasar(Turno turno) {
         this.setText("Pasar");
         this.setPadding( new Insets(20,24,20,24));
-        this.setOnAction(new PasarEventHandler(tablero,infoCasillero,jugadorUno,jugadorDos,jugadorActual,tableroView,turno));
+        this.setOnAction(new PasarEventHandler(turno));
 
     }
 }

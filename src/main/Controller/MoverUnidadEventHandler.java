@@ -3,6 +3,7 @@ package Controller;
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
 import Excepciones.ExcepcionMovimientoInvalido;
+import Excepciones.ExcepcionUnidadNoPerteneceATuEjercito;
 import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
@@ -52,23 +53,25 @@ public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
             listo.setOnAction(e -> {
                 Posicion nuevaPosicion = infoCasillero.getPosicion();
                 try {
-                    UnidadMovible unidad = (UnidadMovible) tablero.getUnidad(posicionAMover);
+                    UnidadMovible unidad = (UnidadMovible) tablero.getUnidadDe(posicionAMover,jugadorActual);
                     unidad.mover(nuevaPosicion, tablero);
                     tableroView.actualizar();
                     tableroView.mostrar(nuevaPosicion);
-                    turno.setTurno(true,jugadorActual);
+                    turno.setTurno(true);
                 } catch (ExcepcionCasilleroOcupado error) {
                     infoCasillero.setText("No podes moverlo a un casillero ocupado");
-                    turno.setTurno(false,jugadorActual);
+                    turno.setTurno(false);
                 } catch (ExcepcionCasilleroVacio error) {
                     infoCasillero.setText(" Esa posicion esta VACIA");
-                    turno.setTurno(false,jugadorActual);
+                    turno.setTurno(false);
                 } catch (ExcepcionMovimientoInvalido error) {
                     infoCasillero.setText("Movimiento invalido");
-                    turno.setTurno(false,jugadorActual);
+                    turno.setTurno(false);
                 } catch (ClassCastException error) {
                     infoCasillero.setText(" No podes mover una catapulta");
-                    turno.setTurno(false,jugadorActual);
+                    turno.setTurno(false);
+                } catch (ExcepcionUnidadNoPerteneceATuEjercito error){
+                    infoCasillero.setText(" No podes mover una unidad enemiga!!");
                 }
             });
         });

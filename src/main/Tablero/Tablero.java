@@ -3,6 +3,8 @@ package Tablero;
 import Excepciones.ExcepcionCasilleroOcupado;
 import Excepciones.ExcepcionCasilleroVacio;
 import Excepciones.ExcepcionSectorEnemigo;
+import Excepciones.ExcepcionUnidadNoPerteneceATuEjercito;
+import Jugador.Jugador;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 import Unidades.UnidadMovible;
@@ -115,6 +117,17 @@ public class Tablero {
         }
 
         return posiciones;
+    }
+
+    public Unidad getUnidadDe(Posicion unaPosicion, Jugador unJugador)throws ExcepcionUnidadNoPerteneceATuEjercito {
+        Unidad unidad= getUnidad(unaPosicion);
+        if(unidad.getEjercito()!=unJugador.getNombre()){
+            throw new ExcepcionUnidadNoPerteneceATuEjercito();
+        }
+        else{
+            return unidad;
+        }
+
     }
 
 }

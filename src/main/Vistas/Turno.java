@@ -12,6 +12,7 @@ public class Turno extends VBox {
 
     private Jugador jugadorUno;
     private Jugador jugadorDos;
+    private Jugador jugadorActual;
     private InfoCasillero infoCasillero;
     private Tablero tablero;
     private TableroView tableroView;
@@ -21,15 +22,26 @@ public class Turno extends VBox {
 
         this.jugadorUno = jugadorUno;
         this.jugadorDos = jugadorDos;
+        this.jugadorActual = jugadorUno;
         this.infoCasillero = infoCasillero;
         this.tablero = tablero;
         this.tableroView = tableroView;
         this.opcionesView = opcionesView;
 
-        this.setTurno(false,jugadorUno);
+        this.setTurno(false);
     }
 
-    public void setTurno(boolean yaMovio,Jugador jugadorActual) {
+    public void cambiarJugador(){
+        if(jugadorUno.getNombre()==jugadorActual.getNombre()){
+            jugadorActual=jugadorDos;
+            this.setTurno(false);
+        }else{
+            jugadorActual=jugadorUno;
+            this.setTurno(false);
+        }
+    }
+
+    public void setTurno(boolean yaMovio) {
         this.getChildren().clear();
 
         Label jugador = new Label(jugadorActual.getNombre());
@@ -39,11 +51,10 @@ public class Turno extends VBox {
 
         BotonAtacar atacar = new BotonAtacar(tablero, infoCasillero, jugadorActual, tableroView,this);
 
-        Button curar = new Button("Curar");
-        curar.setPadding( new Insets(20,24,20,24));
-        //curar.setOnAction( e-> atacar(jugadorDeTurno));
+        BotonCurar curar = new BotonCurar(tablero, infoCasillero, jugadorActual, tableroView,this);
 
-        BotonPasar pasar = new BotonPasar(tablero, infoCasillero,jugadorUno,jugadorDos, jugadorActual, tableroView,this);
+        BotonPasar pasar = new BotonPasar(this);
+
         this.setSpacing(10);
         if(!yaMovio){
             this.getChildren().addAll(jugador,opcionesDeTurno,mover,atacar,curar,pasar);
