@@ -1,8 +1,10 @@
 package Controller;
 
 import Excepciones.ExcepcionCasilleroVacio;
+import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
+import Unidades.Unidad;
 import Vistas.BotonCasillero;
 import Vistas.ButtonCrearUnidad;
 import Vistas.InfoCasillero;
@@ -15,22 +17,29 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
     private InfoCasillero infoCasillero;
     private Tablero tablero;
     private BotonCasillero botonCasillero;
+    private Jugador jugadorUno;
+    private Jugador jugadorDos;
 
 
-    public CasilleroEventHandler(Tablero tablero, Posicion unaPosicion, InfoCasillero infoCasillero, BotonCasillero botonCasillero) {
+    public CasilleroEventHandler(Tablero tablero, Posicion unaPosicion, InfoCasillero infoCasillero, BotonCasillero botonCasillero, Jugador jugadorUno, Jugador jugadorDos) {
+
         this.posicion = unaPosicion;
         this.infoCasillero = infoCasillero;
         this.tablero = tablero;
         this.botonCasillero = botonCasillero;
+        this.jugadorUno = jugadorUno;
+        this.jugadorDos = jugadorDos;
+
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
         String infoCasillero;
         try {
-            String tipoUnidad = tablero.getUnidad(posicion).getTipoUnidad();
+            Unidad unidad= tablero.getUnidad(posicion);
+            String tipoUnidad = unidad.getTipoUnidad();
             infoCasillero = "unidad:" + tipoUnidad + "(" + (posicion.getFila() + 1) + ";" + (posicion.getColumna() + 1) + ")";
-            String textoCasillero = setearTextoCasillero(tipoUnidad);
+            String textoCasillero = setearTextoCasillero(tipoUnidad,unidad.getEjercito());
             botonCasillero.setText(textoCasillero);
         } catch (ExcepcionCasilleroVacio e) {
             infoCasillero = "(" + (posicion.getFila() + 1) + ";" + (posicion.getColumna() + 1) + ")";
@@ -40,7 +49,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
         this.infoCasillero.actualizarPosicionClickeada(infoCasillero,posicion);
     }
 
-    private String setearTextoCasillero(String tipoUnidad) {
+    private String setearTextoCasillero(String tipoUnidad, String ejercito) {
         String textoCasillero;
         switch (tipoUnidad) {
             case "soldado":
@@ -57,6 +66,12 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
                 break;
             default:
                 textoCasillero = "Nan";
+        }
+        if(ejercito== this.jugadorUno.getNombre()){
+            textoCasillero=textoCasillero+"1";
+        }
+        else{
+            textoCasillero=textoCasillero+"2";
         }
 
         return textoCasillero;

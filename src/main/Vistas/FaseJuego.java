@@ -39,7 +39,7 @@ public class FaseJuego extends Application{
 
         StatusTablero statusTablero = new StatusTablero(infoCasillero,tablero,jugadorUno,jugadorDos);
 
-        TableroView tableroView = new TableroView(tablero,infoCasillero);
+        TableroView tableroView = new TableroView(tablero,infoCasillero, jugadorUno, jugadorDos);
         faseJuego.setLeft(tableroView);
         faseJuego.setRight(statusTablero);
 

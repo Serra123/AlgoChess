@@ -9,6 +9,6 @@ public class OpcionesView extends VBox {
 
 
     public OpcionesView(InfoCasillero infoCasillero,Tablero tablero, Jugador jugadorUno, Jugador jugadorDos) {
-        this.getChildren().add(new AgregarUnidades(infoCasillero,tablero, jugadorUno));
+        this.getChildren().add(new AgregarUnidades(infoCasillero,tablero, jugadorUno,jugadorDos,false));
     }
 }

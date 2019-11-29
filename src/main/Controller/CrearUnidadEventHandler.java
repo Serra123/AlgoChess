@@ -1,5 +1,8 @@
 package Controller;
 
+import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionPuntosInsuficientes;
+import Excepciones.ExcepcionSectorEnemigo;
 import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
@@ -24,7 +27,15 @@ public class CrearUnidadEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Posicion unaPosicion = infoCasillero.getPosicion();
-        jugadorActual.crearUnidadEnPosicion(unaPosicion, unidadACrear, tablero);
+        try {
+            Posicion unaPosicion = infoCasillero.getPosicion();
+            jugadorActual.crearUnidadEnPosicion(unaPosicion, unidadACrear, tablero);
+        } catch (ExcepcionSectorEnemigo e){
+            infoCasillero.setText("Este no es tu sector");
+        } catch(ExcepcionCasilleroOcupado e){
+            infoCasillero.setText("Este casillero esta Ocupado!! ");
+        }catch(ExcepcionPuntosInsuficientes e){
+            infoCasillero.setText("No te alcanzan los Puntos!");
+        }
     }
 }
