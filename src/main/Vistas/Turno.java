@@ -53,7 +53,7 @@ public class Turno extends VBox {
 
         Button pasar = new Button("Pasar");
         pasar.setPadding( new Insets(15,15,15,15));
-
+        this.setSpacing(10);
         this.getChildren().addAll(jugador,opcionesDeTurno,mover,atacar,curar,pasar);
     }
 }

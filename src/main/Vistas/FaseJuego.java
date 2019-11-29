@@ -4,6 +4,8 @@ import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -27,8 +29,9 @@ public class FaseJuego extends Application{
         inicializarJuego();
 
         BorderPane faseJuego = new BorderPane();
-
+        faseJuego.setPadding(new Insets(10,200,0,0));
         Label tituloJuego = new Label("AlgoChess");
+        faseJuego.setAlignment(tituloJuego, Pos.CENTER);
         faseJuego.setTop(tituloJuego);
 
         InfoCasillero infoCasillero = new InfoCasillero("");
