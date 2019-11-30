@@ -14,8 +14,8 @@ public class CuranderoTest {
     @Test
     public void testCurarSoldadoAliadoCorrectamente(){
         Tablero unTablero = new Tablero(20,20,"Ejercito aliado","Ejercito enemigo");
-        Posicion posicionUno = new Posicion(0,0);
-        Posicion posicionDos = new Posicion(1,0);
+        Posicion posicionUno = new Posicion(8,0);
+        Posicion posicionDos = new Posicion(9,0);
         Posicion posicionTres = new Posicion(10,0);
         Curandero unCurandero = new Curandero(posicionUno,"Ejercito aliado");
         Soldado soldadoAliado = new Soldado(posicionDos,"Ejercito aliado");
@@ -34,8 +34,8 @@ public class CuranderoTest {
     @Test
     public void testCurarUnidadNoDebeSuperarSuVidaMaxima(){
         Tablero unTablero = new Tablero(20,20,"Ejercito aliado","Ejercito enemigo");
-        Posicion posicionUno = new Posicion(0,0);
-        Posicion posicionDos = new Posicion(1,0);
+        Posicion posicionUno = new Posicion(8,0);
+        Posicion posicionDos = new Posicion(9,0);
         Posicion posicionTres = new Posicion(10,0);
         Curandero unCurandero = new Curandero(posicionUno,"Ejercito aliado");
         Soldado soldadoAliado = new Soldado(posicionDos,"Ejercito aliado");
