@@ -1,6 +1,7 @@
 package Test;
 
 import Excepciones.ExcepcionAtaqueAAliado;
+import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
@@ -10,10 +11,36 @@ import org.junit.Test;
 
 public class SoldadoTest {
 
+    @Test (expected = ExcepcionDistanciaAtaqueInvalida.class)
+    public void testSoldadoQuiereAtacarADistanciaLejanaYNoPuede(){
+        Tablero unTablero = new Tablero(20,20,"juan","fede");
+        Posicion unaPosicion = new Posicion(9,0);
+        Posicion otraPosicion = new Posicion(17,0);
+        Soldado unSoldado = new Soldado(unaPosicion, "juan");
+        Soldado enemigo = new Soldado(otraPosicion, "fede");
+        unTablero.colocarUnidad(unSoldado);
+        unTablero.colocarUnidad(enemigo);
+
+        unSoldado.atacar(enemigo, unTablero);
+    }
+
+    @Test (expected = ExcepcionDistanciaAtaqueInvalida.class)
+    public void testSoldadoQuiereAtacarADistanciaMediaYNoPuede(){
+        Tablero unTablero = new Tablero(20,20,"juan","fede");
+        Posicion unaPosicion = new Posicion(9,0);
+        Posicion otraPosicion = new Posicion(13,0);
+        Soldado unSoldado = new Soldado(unaPosicion, "juan");
+        Soldado enemigo = new Soldado(otraPosicion, "fede");
+        unTablero.colocarUnidad(unSoldado);
+        unTablero.colocarUnidad(enemigo);
+
+        unSoldado.atacar(enemigo, unTablero);
+    }
+
     @Test
     public void testSoldadoAtacaASoldadoEnemigoCorrectamente() {
         Tablero unTablero = new Tablero(20,20,"juan","fede");
-        Posicion unaPosicion = new Posicion(0,0);
+        Posicion unaPosicion = new Posicion(9,0);
         Posicion otraPosicion = new Posicion(10,0);
         Soldado unSoldado = new Soldado(unaPosicion, "juan");
         Soldado enemigo = new Soldado(otraPosicion, "fede");
