@@ -12,6 +12,7 @@ public class BotonCrearBatallon extends Button {
     public BotonCrearBatallon(Tablero tablero, InfoCasillero infoCasillero, Jugador jugadorActual, TableroView tableroView, Turno turno) {
         this.setPadding( new Insets(20,20,20,20));
         this.setText("Crear Batallon");
+        this.setStyle("-fx-background-image: url('imagenBotonCrearBatallon.jpg')");
         this.setOnAction(new CrearBatallonEventHandler(tablero,infoCasillero,jugadorActual,tableroView,turno));
 
     }

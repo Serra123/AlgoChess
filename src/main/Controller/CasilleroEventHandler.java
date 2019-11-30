@@ -43,7 +43,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
             estadisticasCasillero = "( " + (posicion.getFila() + 1) + " ; " + (posicion.getColumna() + 1) + " )";
             botonCasillero.setText("");
         }
-        botonCasillero.setStyle("");
+        botonCasillero.setStyle("-fx-background-image: url('fondoCasillero.jpg')");
         this.infoCasillero.actualizarPosicionClickeada(estadisticasCasillero,posicion);
     }
 

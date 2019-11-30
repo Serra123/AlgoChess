@@ -48,7 +48,7 @@ public class CasilleroParaBatallonEventHandler implements EventHandler<ActionEve
             estadisticasCasillero = "( " + (posicion.getFila() + 1) + " ; " + (posicion.getColumna() + 1) + " )";
             botonCasillero.setText("");
         }
-        botonCasillero.setStyle("-fx-base: brown;");
+        botonCasillero.setStyle("-fx-background-image: url('fondoCasilleroBatallon.jpg')");
         listaPosiciones.add(posicion);
         this.infoCasillero.actualizarPosicionClickeada(estadisticasCasillero, posicion);
     }

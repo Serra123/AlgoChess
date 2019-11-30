@@ -24,7 +24,8 @@ public class BotonCasillero extends Button {
         this.infoCasillero = infoCasillero;
         this.jugadorUno = jugadorUno;
         this.jugadorDos = jugadorDos;
-        this.setPrefSize(50,30);
+        this.setPrefSize(50,34);
+        this.setStyle("-fx-background-image: url('fondoCasillero.jpg')");
         this.setOnAction(new CasilleroEventHandler(tablero,unaPosicion,infoCasillero,this,jugadorUno));
     }
 
