@@ -4,9 +4,10 @@ import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Batallon;
 import Unidades.Posicion.Posicion;
-import Vistas.InfoCasillero;
-import Vistas.TableroView;
-import Vistas.Turno;
+import Vistas.FaseJuego.JuegoPrincipal;
+import Vistas.FaseJuego.InfoCasilleroBox;
+import Vistas.FaseJuego.TableroView;
+import Vistas.FaseJuego.FaseTurnos.OpcionesTurno;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -18,17 +19,17 @@ import java.util.ArrayList;
 public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
 
     private Jugador jugadorActual;
-    private InfoCasillero infoCasillero;
+    private InfoCasilleroBox infoCasilleroBox;
     private Tablero tablero;
     private TableroView tableroView;
-    private Turno turno;
+    private OpcionesTurno opcionesTurno;
 
-    public CrearBatallonEventHandler(Tablero tablero, InfoCasillero infoCasillero, Jugador jugadorActual, TableroView tableroView, Turno turno) {
-        this.jugadorActual = jugadorActual;
-        this.tablero = tablero;
-        this.tableroView = tableroView;
-        this.infoCasillero = infoCasillero;
-        this.turno = turno;
+    public CrearBatallonEventHandler(JuegoPrincipal juegoPrincipal, OpcionesTurno opcionesTurno) {
+        this.jugadorActual = juegoPrincipal.getJugadorActual();
+        this.tablero = juegoPrincipal.getTableroDeJuego();
+        this.tableroView = juegoPrincipal.getTableroView();
+        this.infoCasilleroBox = juegoPrincipal.getInfoCasilleroBox();
+        this.opcionesTurno = opcionesTurno;
     }
 
 
@@ -36,40 +37,40 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         ArrayList<Posicion> posiciones = new ArrayList();
         tableroView.agregarCasillerosClickeadosALista(posiciones);
-        turno.getChildren().clear();
+        opcionesTurno.getChildren().clear();
         Label seleccionSoldadosBatallon = new Label("Seleccione 3 soldados para formar un batallon");
         Button listo = new Button("listo");
 
-        turno.getChildren().addAll(seleccionSoldadosBatallon,listo);
+        opcionesTurno.getChildren().addAll(seleccionSoldadosBatallon,listo);
         listo.setOnAction(e->{
-            turno.getChildren().clear();
+            opcionesTurno.getChildren().clear();
             tableroView.resetearComportamientoDeCasilleros();
 
             Label cantidadPosiciones = new Label("tenes: "+posiciones.size()+"posiciones");
-            turno.getChildren().add(cantidadPosiciones);
-            for(int i=0;i<posiciones.size();i++){
-                Label label = new Label(posiciones.get(i).getFila()+";"+posiciones.get(i).getColumna());
-                turno.getChildren().add(label);
+            opcionesTurno.getChildren().add(cantidadPosiciones);
+            for (Posicion posicion : posiciones) {
+                Label label = new Label(posicion.getFila() + ";" + posicion.getColumna());
+                opcionesTurno.getChildren().add(label);
             }
             Ejercito ejercito = jugadorActual.getEjercito();
             try{
                 Batallon batallon = ejercito.crearBatallon(posiciones);
                 Label seleccionDirecion = new Label("Seleccione la direccion en la que desea mover el batallon");
                 Button listoDos = new Button("listo");
-                turno.getChildren().addAll(seleccionDirecion,listoDos);
+                opcionesTurno.getChildren().addAll(seleccionDirecion,listoDos);
                 listoDos.setOnAction(f->{
-                    Posicion nuevaPosicion = infoCasillero.getPosicion();
-                    infoCasillero.setText(nuevaPosicion.getFila()+";"+nuevaPosicion.getColumna());
+                    Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
+                    infoCasilleroBox.setText(nuevaPosicion.getFila()+";"+nuevaPosicion.getColumna());
 
                     batallon.agregarTablero(tablero);
                     batallon.moverBatallon(nuevaPosicion);
                     tableroView.actualizar();
                     tableroView.mostrar(nuevaPosicion);
-                    turno.setTurno(true);
+                    opcionesTurno.setTurno(true);
                 });
             }catch(Exception error){
-                infoCasillero.setText("Algo salio mal");
-                turno.setTurno(true);
+                infoCasilleroBox.setText("Algo salio mal");
+                opcionesTurno.setTurno(true);
             }
         });
     }

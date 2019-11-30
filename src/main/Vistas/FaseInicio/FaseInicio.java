@@ -1,4 +1,4 @@
-package Vistas;
+package Vistas.FaseInicio;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,11 +10,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-class FaseInicio{
+public class FaseInicio{
 
     private static String[] nombreJugadores = new String[2];
 
-    static String[] display(){
+    public String[] display(){
 
         Stage unaVentana = new Stage();
 

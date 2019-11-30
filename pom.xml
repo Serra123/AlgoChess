@@ -96,7 +96,7 @@
                     <artifactId>javafx-maven-plugin</artifactId>
                     <version>11</version>
                     <configuration>
-                        <mainClass>Vistas.FaseJuego</mainClass>
+                        <mainClass>Vistas.FaseJuego.JuegoPrincipal</mainClass>
                     </configuration>
                 </plugin>
             </plugins>

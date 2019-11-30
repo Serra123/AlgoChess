@@ -6,66 +6,67 @@ import Tablero.Tablero;
 import Unidades.Curandero;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
-import Unidades.UnidadMovible;
-import Vistas.InfoCasillero;
-import Vistas.TableroView;
-import Vistas.Turno;
+import Vistas.FaseJuego.JuegoPrincipal;
+import Vistas.FaseJuego.InfoCasilleroBox;
+import Vistas.FaseJuego.TableroView;
+import Vistas.FaseJuego.FaseTurnos.OpcionesTurno;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
+
     private Jugador jugadorActual;
-    private InfoCasillero infoCasillero;
+    private InfoCasilleroBox infoCasilleroBox;
     private Tablero tablero;
     private TableroView tableroView;
-    private Turno turno;
+    private OpcionesTurno opcionesTurno;
 
-    public CurarUnidadEventHandler(Tablero tablero , InfoCasillero infoCasillero, Jugador jugadorActual, TableroView tableroView, Turno turno) {
+    public CurarUnidadEventHandler(JuegoPrincipal juegoPrincipal, OpcionesTurno opcionesTurno) {
 
-        this.jugadorActual = jugadorActual;
-        this.tablero = tablero;
-        this.tableroView = tableroView;
-        this.infoCasillero = infoCasillero;
-        this.turno = turno;
+        this.jugadorActual = juegoPrincipal.getJugadorActual();
+        this.tablero = juegoPrincipal.getTableroDeJuego();
+        this.tableroView = juegoPrincipal.getTableroView();
+        this.infoCasilleroBox = juegoPrincipal.getInfoCasilleroBox();
+        this.opcionesTurno = opcionesTurno;
 
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        turno.getChildren().clear();
+        opcionesTurno.getChildren().clear();
 
         Label jugador = new Label(jugadorActual.getNombre());
         Label seleccionUnidadCuradora = new Label("Seleccione con que unidad desea curar \ny luego listo");
         Button listo = new Button ("listo");
-        turno.getChildren().addAll(jugador,seleccionUnidadCuradora,listo);
+        opcionesTurno.getChildren().addAll(jugador,seleccionUnidadCuradora,listo);
 
         listo.setOnAction(f-> {
-            Posicion posicionAMover = infoCasillero.getPosicion();
-            turno.getChildren().clear();
+            Posicion posicionAMover = infoCasilleroBox.getPosicion();
+            opcionesTurno.getChildren().clear();
             Label seleccionUnidadCurada = new Label("Seleccione a que unidad que desea \ncurar y luego listo");
-            turno.getChildren().addAll(jugador, seleccionUnidadCurada, listo);
+            opcionesTurno.getChildren().addAll(jugador, seleccionUnidadCurada, listo);
 
             listo.setOnAction(e -> {
-                Posicion nuevaPosicion = infoCasillero.getPosicion();
+                Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
                 try {
-                    Curandero unidadACuradora =(Curandero) tablero.getUnidadDe(posicionAMover,jugadorActual);   //verifico que sea de mi ejercito
+                    Curandero unidadCurandera =(Curandero) tablero.getUnidadDe(posicionAMover,jugadorActual);   //verifico que sea de mi ejercito
                     Unidad unidadACurar =tablero.getUnidad(nuevaPosicion);
-                    unidadACuradora.curar(unidadACurar);
+                    unidadCurandera.curar(unidadACurar);
 
                     tableroView.actualizar();
                     tableroView.mostrar(nuevaPosicion);
-                    turno.cambiarJugador();
+                    opcionesTurno.cambiarJugador();
                 } catch (ExcepcionCasilleroVacio error) {
-                    infoCasillero.setText(" Esa posicion esta VACIA");
-                    turno.setTurno(true);
+                    infoCasilleroBox.setText(" Esa posicion esta VACIA");
+                    opcionesTurno.setTurno(true);
                 } catch (ClassCastException error) {
-                    infoCasillero.setText(" No podes curar con una unidad que no es Curandero");
-                    turno.setTurno(true);
+                    infoCasilleroBox.setText(" No podes curar con una unidad que no es Curandero");
+                    opcionesTurno.setTurno(true);
                 } catch (ExcepcionCuracionAEnemigo error){
-                    infoCasillero.setText(" No podes curar a una unidad enemiga!!");
-                    turno.setTurno(true);
+                    infoCasilleroBox.setText(" No podes curar a una unidad enemiga!!");
+                    opcionesTurno.setTurno(true);
                 }
             });
         });

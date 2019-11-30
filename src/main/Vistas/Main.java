@@ -1,6 +1,10 @@
 package Vistas;
 
 import Jugador.Jugador;
+import Vistas.FaseInicio.FaseInicio;
+import Vistas.FaseJuego.FaseAgregarUnidades.FaseAgregarUnidades;
+import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
+import Vistas.FaseJuego.JuegoPrincipal;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,17 +19,25 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-
         inicializarJuego();
     }
 
     private void inicializarJuego(){
-
-        String[] nombreJugadores = FaseInicio.display();
+        FaseInicio faseInicio = new FaseInicio();
+        String[] nombreJugadores = faseInicio.display();
         Jugador jugadorUno = new Jugador(nombreJugadores[POSICIONNOMBREJUGADORUNO]);
         Jugador jugadorDos = new Jugador(nombreJugadores[POSICIONNOMBREJUGADORDOS]);
 
-        FaseJuego.display(jugadorUno, jugadorDos);
+        JuegoPrincipal juegoPrincipal = new JuegoPrincipal(jugadorUno,jugadorDos);
+
+        FaseAgregarUnidades faseAgregarUnidades = new FaseAgregarUnidades(juegoPrincipal);
+        faseAgregarUnidades.display();
+
+
+
+
+
+
 
     }
 

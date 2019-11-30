@@ -1,20 +1,20 @@
 package Controller;
 
-import Vistas.Turno;
+import Vistas.FaseJuego.FaseTurnos.OpcionesTurno;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class PasarEventHandler implements EventHandler<ActionEvent> {
 
-    private Turno turno;
+    private OpcionesTurno opcionesTurno;
 
-    public PasarEventHandler(Turno turno) {
-        this.turno = turno;
+    public PasarEventHandler(OpcionesTurno opcionesTurno) {
+        this.opcionesTurno = opcionesTurno;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        turno.getChildren().clear();
-        turno.cambiarJugador();
+        opcionesTurno.getChildren().clear();
+        opcionesTurno.cambiarJugador();
     }
 }
