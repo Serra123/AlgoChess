@@ -1,6 +1,7 @@
 package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
+import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
@@ -9,6 +10,7 @@ public class Soldado extends UnidadMovible {
     private static final int DANIOCUERPOACUERPO = 10;
     private static final int VIDAINICIAL = 100;
     private static final int COSTO = 1;
+    private static final int DISTANCIACORTA = 2;
 
     @Override
     public boolean candidatoABatallonEn(Posicion unaPosicion) {
@@ -29,6 +31,9 @@ public class Soldado extends UnidadMovible {
         boolean enemigoEstaEnSuSector = unTablero.estaEnSector(unidadEnemiga);
         if(this.esAliado(unidadEnemiga)){
             throw new ExcepcionAtaqueAAliado();
+        }
+        else if(this.posicion.calcularDistancia(unidadEnemiga.getPosicion()) > DISTANCIACORTA){
+            throw new ExcepcionDistanciaAtaqueInvalida();
         }
         else {
             unidadEnemiga.recibirAtaque(DANIOCUERPOACUERPO, enemigoEstaEnSuSector);

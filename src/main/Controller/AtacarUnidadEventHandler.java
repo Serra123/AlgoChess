@@ -39,7 +39,7 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
 
         Label jugador = new Label(jugadorActual.getNombre());
         Label seleccionUnidadAtacante = new Label("Seleccione con que unidad desea \natacar y luego listo");
-        Button listo = new Button ("listo");
+        Button listo = new Button ("Listo");
         turno.getChildren().addAll(jugador,seleccionUnidadAtacante,listo);
 
         listo.setOnAction(f-> {
@@ -66,6 +66,9 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                     turno.setTurno(true);
                 } catch(ExcepcionCuranderoNoAtaca error){
                     infoCasillero.setText("No podes atacar con un curandero");
+                } catch (ExcepcionDistanciaAtaqueInvalida error){
+                    infoCasillero.setText("La distancia de ataque NO es valida!");
+                    turno.setTurno(true);
                 }
             });
         });
