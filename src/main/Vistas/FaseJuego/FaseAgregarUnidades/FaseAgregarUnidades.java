@@ -11,14 +11,10 @@ import javafx.scene.layout.VBox;
 public class FaseAgregarUnidades {
 
 
-    private JuegoPrincipal juegoPrincipal; //referencia al juegoPrincipal
+    private JuegoPrincipal juegoPrincipal;
     private VBox statusTablero;
     private Jugador jugadorActual;
     private BorderPane juegoView;
-
-
-
-
 
     public FaseAgregarUnidades(JuegoPrincipal juegoPrincipal) {
         this.juegoPrincipal = juegoPrincipal;
@@ -46,6 +42,8 @@ public class FaseAgregarUnidades {
 
     public VBox crearLayoutFaseParaJugadorActual(){
         Label jugador = new Label(this.getJugadorActual().getNombre());
+        Label puntosJugadorActual = new Label("Al jugador " + jugadorActual.getNombre() + " le quedan: " +
+                                               jugadorActual.getEjercito().getPuntos() + " puntos." );
         Label opcionesIngreso = new Label("Clickee la posicion donde desea crear unidad \nY LUEGO la unidad que desee");
         Insets configBotonesOpcionesUnidades = new Insets(20,20,20,20);
 

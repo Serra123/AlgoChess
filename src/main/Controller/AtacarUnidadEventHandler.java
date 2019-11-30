@@ -67,6 +67,10 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                 } catch(ExcepcionCuranderoNoAtaca error){
                     infoCasilleroBox.setText("No podes atacar con un curandero");
                 }
+                catch (ExcepcionDistanciaAtaqueInvalida error){
+                    infoCasilleroBox.setText("La distancia de ataque NO es valida!");
+                    opcionesTurno.setTurno(true);
+                }
             });
         });
     }
