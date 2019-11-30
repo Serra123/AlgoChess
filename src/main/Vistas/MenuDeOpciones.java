@@ -33,7 +33,6 @@ public class MenuDeOpciones extends VBox {
 
     public void iniciarTurno() {
         this.getChildren().clear();
-        this.getChildren().add(new Turno(tableroView, infoCasillero, tablero,
-                                        jugadorUno,jugadorDos,this));
+        this.getChildren().add(new Turno(tableroView, infoCasillero, tablero,jugadorUno,jugadorDos,this));
     }
 }

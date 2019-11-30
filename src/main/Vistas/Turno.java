@@ -53,11 +53,13 @@ public class Turno extends VBox {
 
         BotonCurar curar = new BotonCurar(tablero, infoCasillero, jugadorActual, tableroView,this);
 
+        BotonCrearBatallon crearBatallon = new BotonCrearBatallon(tablero, infoCasillero, jugadorActual, tableroView,this);
+
         BotonPasar pasar = new BotonPasar(this);
 
         this.setSpacing(10);
         if(!yaMovio){
-            this.getChildren().addAll(jugador,opcionesDeTurno,mover,atacar,curar,pasar);
+            this.getChildren().addAll(jugador,opcionesDeTurno,mover,crearBatallon,atacar,curar,pasar);
         }else {
             this.getChildren().addAll(jugador,opcionesDeTurno,atacar,curar,pasar);
         }

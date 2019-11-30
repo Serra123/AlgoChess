@@ -81,6 +81,44 @@ public class BatallonTest {
     }
 
     @Test
+    public void testMuevoCorrectamenteLosSoldadosEnHorizontal(){
+
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Posicion posicionUno = new Posicion(9,13);
+        Posicion posicionDos = new Posicion(9,14);
+        Posicion posicionTres = new Posicion(9,15);
+
+        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
+        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
+        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+
+        Posicion nuevaPosicionUno = new Posicion(10,13);
+        Posicion nuevaPosicionDos = new Posicion(10,14);
+        Posicion nuevaPosicionTres = new Posicion(10,15);
+
+        ArrayList<Soldado> soldados = new ArrayList<>();
+
+        soldados.add(soldadoUno);
+        soldados.add(soldadoDos);
+        soldados.add(soldadoTres);
+
+        unTablero.colocarUnidad(soldadoUno);
+        unTablero.colocarUnidad(soldadoDos);
+        unTablero.colocarUnidad(soldadoTres);
+
+        Batallon batallon= new Batallon(soldados);
+        batallon.agregarTablero(unTablero);
+        batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
+
+        boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
+        boolean movioBienSoldadoDos = ((soldadoDos.getPosicion().calcularDistancia(nuevaPosicionDos)) == 0 );
+        boolean movioBienSoldadoTres = ((soldadoTres.getPosicion().calcularDistancia(nuevaPosicionTres)) == 0 );
+
+        Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
+    }
+
+    @Test
     public void testUnSoldadoNoSeMuevePeroLosOtrosSi(){
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
