@@ -44,13 +44,14 @@ public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
         Label jugador = new Label(jugadorActual.getNombre());
         Label seleccionUnidadAMover = new Label("Seleccione que unidad desea mover y luego listo");
         Button listo = new Button ("listo");
-        statusTablero.getChildren().addAll(jugador,seleccionUnidadAMover,listo);
+        infoCasilleroBox.setText("");
+        statusTablero.getChildren().addAll(jugador,seleccionUnidadAMover,listo,infoCasilleroBox);
 
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
             statusTablero.getChildren().clear();
             Label seleccionCasillero = new Label("Seleccione a donde desea mover la unidad");
-            statusTablero.getChildren().addAll(jugador, seleccionCasillero, listo);
+            statusTablero.getChildren().addAll(jugador, seleccionCasillero, listo,infoCasilleroBox);
 
             listo.setOnAction(e -> {
                 Posicion nuevaPosicion = infoCasilleroBox.getPosicion();

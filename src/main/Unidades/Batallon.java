@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Batallon {
 
     private ArrayList<Soldado> soldados;
-    private UnidadMovible soldadoCentral;
+    private Soldado soldadoCentral;
     private Tablero unTablero;
 
     public Batallon(ArrayList<Soldado> listaSoldados){
@@ -23,14 +23,12 @@ public class Batallon {
         return soldados.size();
     }
 
-    private UnidadMovible getSoldadoCentral(){
+    private Soldado getSoldadoCentral(){
         double distanciaMin = 100;
-        UnidadMovible soldadoCentral = soldados.get(1);
+        Soldado soldadoCentral = soldados.get(1);
         for(int i=0;i<soldados.size();i++){
-            double distanciaSoldado = 0;
-            for (UnidadMovible soldado : soldados) {
-                distanciaSoldado += soldados.get(i).distanciaA(soldado);
-            }
+            int finalI = i;
+            int distanciaSoldado = (int) soldados.stream().filter(s -> s.distanciaA(soldados.get(finalI))>1.5).count();
             if(distanciaSoldado<distanciaMin){
                 distanciaMin = distanciaSoldado;
                 soldadoCentral=soldados.get(i);
@@ -38,6 +36,7 @@ public class Batallon {
         }
         return soldadoCentral;
     }
+
     public void moverBatallon(Posicion posicionCentralNueva) {
         Posicion posicionCentralVieja = soldadoCentral.getPosicion();
         ArrayList<Posicion> nuevasPosiciones = calcularPosicionesNuevas(posicionCentralNueva,posicionCentralVieja);
@@ -65,12 +64,17 @@ public class Batallon {
             moverSoldados(nuevasPosiciones,soldadoActual+1);
         }
     }
-    private void moverUnSoldado(ArrayList<Posicion> nuevasPosiciones,int soldadoActual){
+    private void moverUnSoldado(ArrayList<Posicion> nuevasPosiciones,int numeroSoldado){
+
+        Soldado soldadoActual = soldados.get(numeroSoldado);
+        Posicion posicionActual = soldadoActual.getPosicion();
         try{
-            soldados.get(soldadoActual).mover(nuevasPosiciones.get(soldadoActual),unTablero);
+
+            soldadoActual.mover(nuevasPosiciones.get(numeroSoldado),unTablero);
         }
         catch (ExcepcionCasilleroOcupado | ExcepcionSuperaLimitesDelTablero e){
-            //no hago nada,si tira esta excepcion esta bien que no lo mueva.
+            soldadoActual.mover(posicionActual,unTablero);
+            //lo "vuelvo" a mover a la posicion vieja
         }
     }
 

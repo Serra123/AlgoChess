@@ -11,14 +11,6 @@ public class BotonAtacar extends Button {
         this.setPadding( new Insets(20,20,20,20));
         this.setText("Atacar");
 
-
-        /*Image playI=new Image("casilleroApretado.jpg");
-        ImageView iv1=new ImageView(playI);
-
-        iv1.setScaleX(this.getScaleX());
-        iv1.setScaleY(this.getScaleY());
-
-        this.setGraphic(iv1);*/
         this.setStyle("-fx-background-image: url('imagenBotonAtacar.jpg')");
         this.setOnAction(new AtacarUnidadEventHandler(juegoPrincipal, faseTurnos));
     }

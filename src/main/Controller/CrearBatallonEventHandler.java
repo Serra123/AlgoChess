@@ -43,7 +43,8 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
         Label seleccionSoldadosBatallon = new Label("Seleccione 3 soldados para formar un batallon");
         Button listo = new Button("listo");
 
-        statusTablero.getChildren().addAll(seleccionSoldadosBatallon,listo);
+        infoCasilleroBox.setText("");
+        statusTablero.getChildren().addAll(seleccionSoldadosBatallon,listo,infoCasilleroBox);
         listo.setOnAction(e->{
             statusTablero.getChildren().clear();
             tableroView.resetearComportamientoDeCasilleros();
@@ -59,7 +60,7 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
                 Batallon batallon = ejercito.crearBatallon(posiciones);
                 Label seleccionDirecion = new Label("Seleccione la direccion en la que desea mover el batallon");
                 Button listoDos = new Button("listo");
-                statusTablero.getChildren().addAll(seleccionDirecion,listoDos);
+                statusTablero.getChildren().addAll(seleccionDirecion,listoDos,infoCasilleroBox);
                 listoDos.setOnAction(f->{
                     Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
                     infoCasilleroBox.setText(nuevaPosicion.getFila()+";"+nuevaPosicion.getColumna());

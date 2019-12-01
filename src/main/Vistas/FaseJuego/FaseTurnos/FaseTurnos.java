@@ -28,21 +28,17 @@ public class FaseTurnos {
     }
 
     public void cambiarJugador(){
-        if(juegoPrincipal.getJugadorUno().getNombre() == jugadorActual.getNombre()){
-            jugadorActual = juegoPrincipal.getJugadorDos();
-            this.crearLayoutFaseParaJugadorActual(false);
-        }else{
-            jugadorActual= juegoPrincipal.getJugadorUno();
-            this.crearLayoutFaseParaJugadorActual(false);
-        }
+
+        juegoPrincipal.cambiarJugador();
+        this.crearLayoutFaseParaJugadorActual(false);
     }
 
 
 
     public void crearLayoutFaseParaJugadorActual(boolean yaMovio){
-        this.statusTablero.getChildren().clear();
 
-        Label jugador = new Label(jugadorActual.getNombre());
+        this.statusTablero.getChildren().clear();
+        Label jugador = new Label(juegoPrincipal.getJugadorActual().getNombre());
         Label opcionesDeTurno = new Label("Indique que accion desea realizar");
 
         BotonMover mover = new BotonMover(juegoPrincipal,this);
@@ -66,4 +62,13 @@ public class FaseTurnos {
     public VBox getStatusTablero(){
         return this.statusTablero;
     }
+
+    public Jugador getJugadorActual(){
+        return jugadorActual;
+    }
+
 }
+
+
+
+

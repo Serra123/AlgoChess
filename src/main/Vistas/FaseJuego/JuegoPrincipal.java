@@ -42,6 +42,14 @@ public class JuegoPrincipal {
 
     }
 
+    public void cambiarJugador(){
+        if(this.getJugadorUno().getNombre() == jugadorActual.getNombre()){
+            this.jugadorActual = this.getJugadorDos();
+        }else{
+            this.jugadorActual = this.getJugadorUno();
+        }
+    }
+
     public Jugador getJugadorActual(){
         return this.jugadorActual;
     }

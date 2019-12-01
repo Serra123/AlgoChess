@@ -42,13 +42,14 @@ public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
         Label jugador = new Label(jugadorActual.getNombre());
         Label seleccionUnidadCuradora = new Label("Seleccione con que unidad desea curar \ny luego listo");
         Button listo = new Button ("listo");
-        statusTablero.getChildren().addAll(jugador,seleccionUnidadCuradora,listo);
+        infoCasilleroBox.setText("");
+        statusTablero.getChildren().addAll(jugador,seleccionUnidadCuradora,listo,infoCasilleroBox);
 
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
             statusTablero.getChildren().clear();
             Label seleccionUnidadCurada = new Label("Seleccione a que unidad que desea \ncurar y luego listo");
-            statusTablero.getChildren().addAll(jugador, seleccionUnidadCurada, listo);
+            statusTablero.getChildren().addAll(jugador, seleccionUnidadCurada, listo,infoCasilleroBox);
 
             listo.setOnAction(e -> {
                 Posicion nuevaPosicion = infoCasilleroBox.getPosicion();

@@ -42,13 +42,15 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
         Label jugador = new Label(jugadorActual.getNombre());
         Label seleccionUnidadAtacante = new Label("Seleccione con que unidad desea \natacar y luego listo");
         Button listo = new Button ("listo");
-        statusTablero.getChildren().addAll(jugador,seleccionUnidadAtacante,listo);
+
+        infoCasilleroBox.setText("");
+        statusTablero.getChildren().addAll(jugador,seleccionUnidadAtacante,listo,infoCasilleroBox);
 
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
             statusTablero.getChildren().clear();
             Label seleccionUnidadAtacada = new Label("Seleccione a que unidad que desea \natacar y luego listo");
-            statusTablero.getChildren().addAll(jugador, seleccionUnidadAtacada, listo);
+            statusTablero.getChildren().addAll(jugador, seleccionUnidadAtacada, listo,infoCasilleroBox);
 
             listo.setOnAction(e -> {
                 Posicion nuevaPosicion = infoCasilleroBox.getPosicion();

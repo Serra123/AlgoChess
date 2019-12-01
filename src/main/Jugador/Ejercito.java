@@ -34,7 +34,6 @@ public class Ejercito {
     }
 
 
-    //cambiar int por Batallon luego o algo asi
     public Batallon crearBatallon(ArrayList<Posicion> posicionesTotales){
 
         ArrayList<Posicion> posiciones = getTresPosiciones(posicionesTotales);
@@ -48,22 +47,19 @@ public class Ejercito {
             throw new ExcepcionCantidadInsuficienteDePosiciones();
         }
         ArrayList<Posicion> tresPosiciones = new ArrayList<>();
-        for(int i=0;i<3;i++){
-            tresPosiciones.add(posicionesTotales.get(i));
-        }
+
+        tresPosiciones.add(posicionesTotales.get(0));
+        tresPosiciones.add(posicionesTotales.get(1));
+        tresPosiciones.add(posicionesTotales.get(2));
+
         return tresPosiciones;
 
     }
 
     private void posicionesEstanContiguas(ArrayList<Posicion> posiciones)throws ExcepcionLasUnidadesEstanSeparadas {
         for(int i=0;i<posiciones.size();i++){
-            int cantidadPosicionesSeparadas = 0;
-            for (Posicion posicion : posiciones) {
-                double distanciaAPosicionActual = posiciones.get(i).calcularDistancia(posicion);
-                if (distanciaAPosicionActual >= 2) {
-                    cantidadPosicionesSeparadas++;
-                }
-            }
+            int finalI = i;
+            int cantidadPosicionesSeparadas = (int) posiciones.stream().filter(p->posiciones.get(finalI).calcularDistancia(p)>=2).count();
             if (cantidadPosicionesSeparadas>1) {
                 throw new ExcepcionLasUnidadesEstanSeparadas();
             }
@@ -74,10 +70,11 @@ public class Ejercito {
 
         ArrayList<Soldado> soldadosDeBatallon = new ArrayList<>();
 
-        for (Unidad unidades : unidades) {
-            if (unidades.candidatoABatallonEn(posiciones.get(0)) | unidades.candidatoABatallonEn(posiciones.get(1)) |
-                                        unidades.candidatoABatallonEn(posiciones.get(2))) {
-                soldadosDeBatallon.add((Soldado) unidades);
+        for (Unidad unidad : unidades) {
+            for(Posicion posicion : posiciones){
+                if(unidad.candidatoABatallonEn(posicion)){
+                    soldadosDeBatallon.add((Soldado) unidad);
+                }
             }
         }
         if(soldadosDeBatallon.size()<3){
