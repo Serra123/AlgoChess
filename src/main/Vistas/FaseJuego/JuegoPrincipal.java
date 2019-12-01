@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -38,7 +39,12 @@ public class JuegoPrincipal {
         ventana.setWidth(1500);
         ventana.setHeight(710);
         juegoView.setPadding(new Insets(0,200,0,0));
+        Label titulo = new Label("AlgoChess");
+        juegoView.setTop(titulo);
+        juegoView.setAlignment(titulo,Pos.CENTER);
+        titulo.setFont(new Font("Arial", 30));
         juegoView.setLeft(tableroView);
+        //juegoView.setStyle("-fx-background-image: url('fondoJuego.jpg')");
 
     }
 
