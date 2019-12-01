@@ -2,16 +2,10 @@ package Vistas.FaseJuego;
 
 import Jugador.Jugador;
 import Tablero.Tablero;
-import Unidades.Posicion.Posicion;
-import Vistas.FaseJuego.FaseAgregarUnidades.FaseAgregarUnidades;
-import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
-import Vistas.FaseJuego.FaseTurnos.OpcionesTurno;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 

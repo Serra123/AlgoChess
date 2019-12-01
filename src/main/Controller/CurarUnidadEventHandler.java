@@ -6,14 +6,15 @@ import Tablero.Tablero;
 import Unidades.Curandero;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
+import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
 import Vistas.FaseJuego.JuegoPrincipal;
 import Vistas.FaseJuego.InfoCasilleroBox;
 import Vistas.FaseJuego.TableroView;
-import Vistas.FaseJuego.FaseTurnos.OpcionesTurno;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
 
@@ -21,32 +22,33 @@ public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
     private InfoCasilleroBox infoCasilleroBox;
     private Tablero tablero;
     private TableroView tableroView;
-    private OpcionesTurno opcionesTurno;
+    private FaseTurnos faseTurnos;
 
-    public CurarUnidadEventHandler(JuegoPrincipal juegoPrincipal, OpcionesTurno opcionesTurno) {
+    public CurarUnidadEventHandler(JuegoPrincipal juegoPrincipal, FaseTurnos faseTurnos) {
 
         this.jugadorActual = juegoPrincipal.getJugadorActual();
         this.tablero = juegoPrincipal.getTableroDeJuego();
         this.tableroView = juegoPrincipal.getTableroView();
         this.infoCasilleroBox = juegoPrincipal.getInfoCasilleroBox();
-        this.opcionesTurno = opcionesTurno;
+        this.faseTurnos = faseTurnos;
 
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        opcionesTurno.getChildren().clear();
+        VBox statusTablero = faseTurnos.getStatusTablero();
+        statusTablero.getChildren().clear();
 
         Label jugador = new Label(jugadorActual.getNombre());
         Label seleccionUnidadCuradora = new Label("Seleccione con que unidad desea curar \ny luego listo");
         Button listo = new Button ("listo");
-        opcionesTurno.getChildren().addAll(jugador,seleccionUnidadCuradora,listo);
+        statusTablero.getChildren().addAll(jugador,seleccionUnidadCuradora,listo);
 
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
-            opcionesTurno.getChildren().clear();
+            statusTablero.getChildren().clear();
             Label seleccionUnidadCurada = new Label("Seleccione a que unidad que desea \ncurar y luego listo");
-            opcionesTurno.getChildren().addAll(jugador, seleccionUnidadCurada, listo);
+            statusTablero.getChildren().addAll(jugador, seleccionUnidadCurada, listo);
 
             listo.setOnAction(e -> {
                 Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
@@ -57,16 +59,16 @@ public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
 
                     tableroView.actualizar();
                     tableroView.mostrar(nuevaPosicion);
-                    opcionesTurno.cambiarJugador();
+                    faseTurnos.cambiarJugador();
                 } catch (ExcepcionCasilleroVacio error) {
                     infoCasilleroBox.setText(" Esa posicion esta VACIA");
-                    opcionesTurno.setTurno(true);
+                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
                 } catch (ClassCastException error) {
                     infoCasilleroBox.setText(" No podes curar con una unidad que no es Curandero");
-                    opcionesTurno.setTurno(true);
+                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
                 } catch (ExcepcionCuracionAEnemigo error){
                     infoCasilleroBox.setText(" No podes curar a una unidad enemiga!!");
-                    opcionesTurno.setTurno(true);
+                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
                 }
             });
         });

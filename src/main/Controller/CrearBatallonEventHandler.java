@@ -4,15 +4,16 @@ import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Batallon;
 import Unidades.Posicion.Posicion;
+import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
 import Vistas.FaseJuego.JuegoPrincipal;
 import Vistas.FaseJuego.InfoCasilleroBox;
 import Vistas.FaseJuego.TableroView;
-import Vistas.FaseJuego.FaseTurnos.OpcionesTurno;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import Jugador.Ejercito;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
@@ -22,14 +23,14 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
     private InfoCasilleroBox infoCasilleroBox;
     private Tablero tablero;
     private TableroView tableroView;
-    private OpcionesTurno opcionesTurno;
+    private FaseTurnos faseTurnos;
 
-    public CrearBatallonEventHandler(JuegoPrincipal juegoPrincipal, OpcionesTurno opcionesTurno) {
+    public CrearBatallonEventHandler(JuegoPrincipal juegoPrincipal, FaseTurnos faseTurnos) {
         this.jugadorActual = juegoPrincipal.getJugadorActual();
         this.tablero = juegoPrincipal.getTableroDeJuego();
         this.tableroView = juegoPrincipal.getTableroView();
         this.infoCasilleroBox = juegoPrincipal.getInfoCasilleroBox();
-        this.opcionesTurno = opcionesTurno;
+        this.faseTurnos = faseTurnos;
     }
 
 
@@ -37,27 +38,28 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         ArrayList<Posicion> posiciones = new ArrayList();
         tableroView.agregarCasillerosClickeadosALista(posiciones);
-        opcionesTurno.getChildren().clear();
+        VBox statusTablero = this.faseTurnos.getStatusTablero();
+        statusTablero.getChildren().clear();
         Label seleccionSoldadosBatallon = new Label("Seleccione 3 soldados para formar un batallon");
         Button listo = new Button("listo");
 
-        opcionesTurno.getChildren().addAll(seleccionSoldadosBatallon,listo);
+        statusTablero.getChildren().addAll(seleccionSoldadosBatallon,listo);
         listo.setOnAction(e->{
-            opcionesTurno.getChildren().clear();
+            statusTablero.getChildren().clear();
             tableroView.resetearComportamientoDeCasilleros();
 
             Label cantidadPosiciones = new Label("tenes: "+posiciones.size()+"posiciones");
-            opcionesTurno.getChildren().add(cantidadPosiciones);
+            statusTablero.getChildren().add(cantidadPosiciones);
             for (Posicion posicion : posiciones) {
                 Label label = new Label(posicion.getFila() + ";" + posicion.getColumna());
-                opcionesTurno.getChildren().add(label);
+                statusTablero.getChildren().add(label);
             }
             Ejercito ejercito = jugadorActual.getEjercito();
             try{
                 Batallon batallon = ejercito.crearBatallon(posiciones);
                 Label seleccionDirecion = new Label("Seleccione la direccion en la que desea mover el batallon");
                 Button listoDos = new Button("listo");
-                opcionesTurno.getChildren().addAll(seleccionDirecion,listoDos);
+                statusTablero.getChildren().addAll(seleccionDirecion,listoDos);
                 listoDos.setOnAction(f->{
                     Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
                     infoCasilleroBox.setText(nuevaPosicion.getFila()+";"+nuevaPosicion.getColumna());
@@ -66,11 +68,11 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
                     batallon.moverBatallon(nuevaPosicion);
                     tableroView.actualizar();
                     tableroView.mostrar(nuevaPosicion);
-                    opcionesTurno.setTurno(true);
+                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
                 });
             }catch(Exception error){
                 infoCasilleroBox.setText("Algo salio mal");
-                opcionesTurno.setTurno(true);
+                faseTurnos.crearLayoutFaseParaJugadorActual(true);
             }
         });
     }

@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 
 public class BotonAtacar extends Button {
 
-    public BotonAtacar(JuegoPrincipal juegoPrincipal, OpcionesTurno opcionesTurno) {
+    public BotonAtacar(JuegoPrincipal juegoPrincipal, FaseTurnos faseTurnos) {
         this.setPadding( new Insets(20,20,20,20));
         this.setText("Atacar");
 
@@ -20,6 +20,6 @@ public class BotonAtacar extends Button {
 
         this.setGraphic(iv1);*/
         this.setStyle("-fx-background-image: url('imagenBotonAtacar.jpg')");
-        this.setOnAction(new AtacarUnidadEventHandler(juegoPrincipal, opcionesTurno));
+        this.setOnAction(new AtacarUnidadEventHandler(juegoPrincipal, faseTurnos));
     }
 }
