@@ -7,6 +7,8 @@ import Unidades.Soldado;
 import Unidades.Unidad;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 
 public class Ejercito {
 
@@ -43,7 +45,10 @@ public class Ejercito {
     }
 
     private ArrayList<Posicion> getTresPosiciones(ArrayList<Posicion> posicionesTotales)throws ExcepcionCantidadInsuficienteDePosiciones{
-        if(posicionesTotales.size()<3){
+
+        LinkedHashSet<Posicion> hashSet = new LinkedHashSet<>(posicionesTotales);
+        ArrayList <Posicion> posiciones = new ArrayList<>(hashSet);
+        if(posiciones.size()<3){
             throw new ExcepcionCantidadInsuficienteDePosiciones();
         }
         ArrayList<Posicion> tresPosiciones = new ArrayList<>();

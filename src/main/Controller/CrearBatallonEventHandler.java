@@ -1,5 +1,8 @@
 package Controller;
 
+import Excepciones.ExcepcionCantidadInsuficienteDePosiciones;
+import Excepciones.ExcepcionLasUnidadesEstanSeparadas;
+import Excepciones.ExcepcionPosicionInvalida;
 import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Batallon;
@@ -71,10 +74,24 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
                     tableroView.mostrar(nuevaPosicion);
                     faseTurnos.crearLayoutFaseParaJugadorActual(true);
                 });
-            }catch(Exception error){
-                infoCasilleroBox.setText("Algo salio mal");
-                faseTurnos.crearLayoutFaseParaJugadorActual(true);
+            }catch(ExcepcionCantidadInsuficienteDePosiciones error){
+                tableroView.actualizar();
+                infoCasilleroBox.setText("Tenes que elegir 3 posiciones!");
+                faseTurnos.crearLayoutFaseParaJugadorActual(false);
+            } catch(ExcepcionPosicionInvalida error){
+                tableroView.actualizar();
+                infoCasilleroBox.setText("Las posiciones no contienen soldados");
+                faseTurnos.crearLayoutFaseParaJugadorActual(false);
+            } catch(ExcepcionLasUnidadesEstanSeparadas error) {
+                tableroView.actualizar();
+                infoCasilleroBox.setText("Las posiciones no son contiguas");
+                faseTurnos.crearLayoutFaseParaJugadorActual(false);
             }
+            /*catch(Exception error){
+                infoCasilleroBox.setText("Algo salio mal");
+                tableroView.actualizar();
+                faseTurnos.crearLayoutFaseParaJugadorActual(false);
+            }*/
         });
     }
 }
