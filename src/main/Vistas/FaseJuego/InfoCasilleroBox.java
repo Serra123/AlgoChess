@@ -14,7 +14,7 @@ public class InfoCasilleroBox extends Label{
     public InfoCasilleroBox(JuegoPrincipal juegoPrincipal, String texto){
         this.tablero = juegoPrincipal.getTableroDeJuego();
         this.setText("Estadisticas del casillero: \n\n\n" + texto);
-        this.setTranslateY(50);
+        this.setTranslateY(100);
     }
 
     public void actualizarPosicionClickeada(Posicion unaPosicion) {

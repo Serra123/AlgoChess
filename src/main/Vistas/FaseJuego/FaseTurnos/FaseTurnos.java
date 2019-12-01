@@ -2,14 +2,16 @@ package Vistas.FaseJuego.FaseTurnos;
 
 import Jugador.Jugador;
 import Vistas.FaseJuego.JuegoPrincipal;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class FaseTurnos {
 
-    private JuegoPrincipal juegoPrincipal; //referencia a la FaseJuego
+    private JuegoPrincipal juegoPrincipal;
     private BorderPane juegoView;
     private VBox statusTablero;
     private Jugador jugadorActual;
@@ -38,20 +40,33 @@ public class FaseTurnos {
     public void crearLayoutFaseParaJugadorActual(boolean yaMovio){
 
         this.statusTablero.getChildren().clear();
-        Label jugador = new Label(juegoPrincipal.getJugadorActual().getNombre());
+        Label jugador = new Label("Es el turno del jugador: " + juegoPrincipal.getJugadorActual().getNombre());
+        jugador.setTranslateX(50);
+        jugador.setTranslateY(20);
+        jugador.setFont(new Font("Arial", 25));
         Label opcionesDeTurno = new Label("Indique que accion desea realizar");
+        opcionesDeTurno.setTranslateY(50);
 
         BotonMover mover = new BotonMover(juegoPrincipal,this);
+        mover.setMinWidth(500);
+        mover.setTranslateY(80);
 
         BotonAtacar atacar = new BotonAtacar(juegoPrincipal,this);
+        atacar.setMinWidth(500);
+        atacar.setTranslateY(80);
 
         BotonCurar curar = new BotonCurar(juegoPrincipal,this);
+        curar.setMinWidth(500);
+        curar.setTranslateY(80);
 
         BotonCrearBatallon crearBatallon = new BotonCrearBatallon(juegoPrincipal,this);
+        crearBatallon.setMinWidth(500);
+        crearBatallon.setTranslateY(80);
 
         BotonPasar pasar = new BotonPasar(this);
+        pasar.setMinWidth(500);
+        pasar.setTranslateY(80);
 
-        this.statusTablero.setSpacing(10);
         if(!yaMovio){
             this.statusTablero.getChildren().addAll(jugador,opcionesDeTurno,mover,crearBatallon,atacar,curar,pasar);
         }else {

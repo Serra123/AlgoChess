@@ -9,7 +9,7 @@ public class BotonPasar extends Button {
     public BotonPasar(FaseTurnos faseTurnos) {
         this.setPadding( new Insets(20,24,20,24));
         this.setText("Pasar");
-        this.setStyle("-fx-background-image: url('imagenBotonPasar.jpg')");
+        //this.setStyle("-fx-background-image: url('imagenBotonPasar.jpg')");
         this.setOnAction(new PasarEventHandler(faseTurnos));
 
     }

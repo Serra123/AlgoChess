@@ -36,6 +36,8 @@ public class JuegoPrincipal {
         ventana.setTitle("AlgoChess");
         ventana.setMinWidth(1500);
         ventana.setMinHeight(710);
+        ventana.setMaxWidth(1500);
+        ventana.setMaxHeight(710);
         ventana.setWidth(1500);
         ventana.setHeight(710);
         juegoView.setPadding(new Insets(0,0,0,0));

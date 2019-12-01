@@ -8,12 +8,10 @@ import java.util.ArrayList;
 public class TableroView extends GridPane {
 
     private static final int LADO = 20;
-    private JuegoPrincipal faseDeJuegoDelTablero; // referencia a la fase a la cual pertenece
 
     private BotonCasillero[][] botonesCasillero = new BotonCasillero[LADO][LADO];
 
     public TableroView(JuegoPrincipal faseDeJuegoDelTablero){
-        this.faseDeJuegoDelTablero = faseDeJuegoDelTablero;
 
         for(int i = 0; i < LADO; i++){
             for(int j = 0; j < LADO;j++){
@@ -37,7 +35,7 @@ public class TableroView extends GridPane {
         botonesCasillero[unaPosicion.getFila()][unaPosicion.getColumna()].fire();
     }
 
-    public void agregarCasillerosClickeadosALista(ArrayList listaPosiciones) {
+    public void agregarCasillerosClickeadosALista(ArrayList<Posicion> listaPosiciones) {
         for(int i = 0; i < LADO; i++){
             for(int j = 0; j < LADO;j++){
                 botonesCasillero[i][j].cambiarEventHandlerParaCrearBatallon(listaPosiciones);
