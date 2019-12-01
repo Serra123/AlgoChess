@@ -42,24 +42,23 @@ public class FaseAgregarUnidades {
 
     public VBox crearLayoutFaseParaJugadorActual(){
         Label jugador = new Label(this.getJugadorActual().getNombre());
-        Label puntosJugadorActual = new Label("Al jugador " + jugadorActual.getNombre() + " le quedan: " +
-                                               jugadorActual.getEjercito().getPuntos() + " puntos." );
+        Label puntosJugadorActual = new Label();
         Label opcionesIngreso = new Label("Clickee la posicion donde desea crear unidad \nY LUEGO la unidad que desee");
         Insets configBotonesOpcionesUnidades = new Insets(20,20,20,20);
 
-        ButtonCrearUnidad crearSoldado = new ButtonCrearUnidad("Soldado",this.getJugadorActual(),juegoPrincipal);
+        ButtonCrearUnidad crearSoldado = new ButtonCrearUnidad("Soldado",this.getJugadorActual(),juegoPrincipal, puntosJugadorActual);
         crearSoldado.setMinWidth(statusTablero.getPrefWidth());
         crearSoldado.setPadding(configBotonesOpcionesUnidades);
 
-        ButtonCrearUnidad crearJinete = new ButtonCrearUnidad("Jinete",this.getJugadorActual(),juegoPrincipal);
+        ButtonCrearUnidad crearJinete = new ButtonCrearUnidad("Jinete",this.getJugadorActual(),juegoPrincipal,puntosJugadorActual);
         crearJinete.setMinWidth(statusTablero.getPrefWidth());
         crearJinete.setPadding(configBotonesOpcionesUnidades);
 
-        ButtonCrearUnidad crearCurandero = new ButtonCrearUnidad("Curandero",this.getJugadorActual(),juegoPrincipal);
+        ButtonCrearUnidad crearCurandero = new ButtonCrearUnidad("Curandero",this.getJugadorActual(),juegoPrincipal,puntosJugadorActual);
         crearCurandero.setMinWidth(statusTablero.getPrefWidth());
         crearCurandero.setPadding(configBotonesOpcionesUnidades);
 
-        ButtonCrearUnidad crearCatapulta = new ButtonCrearUnidad("Catapulta",this.getJugadorActual(),juegoPrincipal);
+        ButtonCrearUnidad crearCatapulta = new ButtonCrearUnidad("Catapulta",this.getJugadorActual(),juegoPrincipal,puntosJugadorActual);
         crearCatapulta.setMinWidth(statusTablero.getPrefWidth());
         crearCatapulta.setPadding(configBotonesOpcionesUnidades);
 
@@ -68,7 +67,7 @@ public class FaseAgregarUnidades {
         botonFrenarCreacionUnidades.setPadding( new Insets(15,15,15,15));
 
 
-        statusTablero.getChildren().addAll(jugador,opcionesIngreso,crearSoldado,crearJinete,crearCurandero,crearCatapulta,botonFrenarCreacionUnidades,juegoPrincipal.getInfoCasilleroBox());
+        statusTablero.getChildren().addAll(jugador,puntosJugadorActual,opcionesIngreso,crearSoldado,crearJinete,crearCurandero,crearCatapulta,botonFrenarCreacionUnidades,juegoPrincipal.getInfoCasilleroBox());
 
         return statusTablero;
     }
