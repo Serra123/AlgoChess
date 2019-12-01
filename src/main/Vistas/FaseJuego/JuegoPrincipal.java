@@ -32,18 +32,18 @@ public class JuegoPrincipal {
         this.ventana = new Stage();
         this.juegoView = new BorderPane();
         ventana.initModality(Modality.APPLICATION_MODAL);
-        ventana.setTitle("AlgoChess - Agregar Unidades");
-        ventana.setMinWidth(500);
-        juegoView.setPadding(new Insets(10,200,0,0));
-        Label tituloJuego = new Label("AlgoChess");
-        BorderPane.setAlignment(tituloJuego, Pos.CENTER);
-        juegoView.setTop(tituloJuego);
+        ventana.setTitle("AlgoChess");
+        ventana.setMinWidth(1500);
+        ventana.setMinHeight(710);
+        ventana.setWidth(1500);
+        ventana.setHeight(710);
+        juegoView.setPadding(new Insets(0,200,0,0));
         juegoView.setLeft(tableroView);
 
     }
 
     public void cambiarJugador(){
-        if(this.getJugadorUno().getNombre() == jugadorActual.getNombre()){
+        if(this.getJugadorUno().getNombre().equals(jugadorActual.getNombre())){
             this.jugadorActual = this.getJugadorDos();
         }else{
             this.jugadorActual = this.getJugadorUno();

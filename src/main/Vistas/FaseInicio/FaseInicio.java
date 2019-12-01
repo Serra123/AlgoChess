@@ -27,7 +27,7 @@ public class FaseInicio{
 
         VBox seccionJugadorUno = new VBox();
         Label ingreseNombreUsuarioUno = new Label();
-        ingreseNombreUsuarioUno.setText("Ingrese el nombre del usuario uno:");
+        ingreseNombreUsuarioUno.setText("Ingrese el nombre del jugador uno:");
         TextField campoNombreUsuarioUno = new TextField();
         campoNombreUsuarioUno.setAlignment(Pos.CENTER);
         campoNombreUsuarioUno.setMaxWidth(200);
@@ -40,7 +40,7 @@ public class FaseInicio{
         campoNombreUsuarioDos.setAlignment(Pos.CENTER);
         campoNombreUsuarioDos.setMaxWidth(200);
         Label ingreseNombreUsuarioDos = new Label();
-        ingreseNombreUsuarioDos.setText("Ingrese el nombre del usuario dos:");
+        ingreseNombreUsuarioDos.setText("Ingrese el nombre del jugador dos:");
         seccionJugadorDos.getChildren().addAll(ingreseNombreUsuarioDos,campoNombreUsuarioDos);
         seccionJugadorDos.setSpacing(10);
         seccionJugadorDos.setAlignment(Pos.CENTER);
