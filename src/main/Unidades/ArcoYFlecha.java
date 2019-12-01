@@ -12,10 +12,7 @@ public class ArcoYFlecha implements Arma {
     @Override
     public void atacar(Unidad enemigo, Posicion posicionAtacante, boolean enemigoEstaEnSuSector) {
         double distanciaAEnemigo = posicionAtacante.calcularDistancia(enemigo.getPosicion());
-        if(distanciaAEnemigo <= DISTANCIACORTA){
-            throw new ExcepcionDistanciaAtaqueInvalida();
-        }
-        else if(distanciaAEnemigo >= DISTANCIALEJANA){
+        if(distanciaAEnemigo <= DISTANCIACORTA || distanciaAEnemigo >= DISTANCIALEJANA){
             throw new ExcepcionDistanciaAtaqueInvalida();
         }
         else{

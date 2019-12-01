@@ -80,8 +80,8 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                     new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 }
                 catch (ExcepcionDistanciaAtaqueInvalida error){
-                    String cabecera = "La unidad a atacar esta fuera de rando";
-                    String contenido = "Selecciona una unidad a atacar que esté dentro del rango";
+                    String cabecera = "La unidad a atacar esta fuera de rango";
+                    String contenido = "Selecciona una unidad dentro del rango de ataque";
                     new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 }
             });
