@@ -10,6 +10,7 @@ import Unidades.Posicion.Posicion;
 import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
 import Vistas.FaseJuego.JuegoPrincipal;
 import Vistas.FaseJuego.InfoCasilleroBox;
+import Vistas.FaseJuego.LabelDatosJuego;
 import Vistas.FaseJuego.TableroView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -43,7 +44,7 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
         tableroView.agregarCasillerosClickeadosALista(posiciones);
         VBox statusTablero = this.faseTurnos.getStatusTablero();
         statusTablero.getChildren().clear();
-        Label seleccionSoldadosBatallon = new Label("Seleccione 3 soldados para formar un batallon");
+        LabelDatosJuego seleccionSoldadosBatallon = new LabelDatosJuego(0,0,"Seleccione 3 soldados para formar un batallon");
         Button listo = new Button("listo");
 
         infoCasilleroBox.setText("");
@@ -52,16 +53,16 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
             statusTablero.getChildren().clear();
             tableroView.resetearComportamientoDeCasilleros();
 
-            Label cantidadPosiciones = new Label("tenes: "+posiciones.size()+"posiciones");
+            LabelDatosJuego cantidadPosiciones = new LabelDatosJuego(0,0,"tenes: "+posiciones.size()+"posiciones");
             statusTablero.getChildren().add(cantidadPosiciones);
             for (Posicion posicion : posiciones) {
-                Label label = new Label(posicion.getFila() + ";" + posicion.getColumna());
+                LabelDatosJuego label = new LabelDatosJuego(0,0,posicion.getFila() + ";" + posicion.getColumna());
                 statusTablero.getChildren().add(label);
             }
             Ejercito ejercito = jugadorActual.getEjercito();
             try{
                 Batallon batallon = ejercito.crearBatallon(posiciones);
-                Label seleccionDirecion = new Label("Seleccione la direccion en la que desea mover el batallon");
+                LabelDatosJuego seleccionDirecion = new LabelDatosJuego(0,0,"Seleccione la direccion en la que desea mover el batallon");
                 Button listoDos = new Button("listo");
                 statusTablero.getChildren().addAll(seleccionDirecion,listoDos,infoCasilleroBox);
                 listoDos.setOnAction(f->{

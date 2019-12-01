@@ -5,10 +5,8 @@ import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
+import Vistas.FaseJuego.*;
 import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
-import Vistas.FaseJuego.JuegoPrincipal;
-import Vistas.FaseJuego.InfoCasilleroBox;
-import Vistas.FaseJuego.TableroView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -39,17 +37,17 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
         VBox statusTablero = faseTurnos.getStatusTablero();
         statusTablero.getChildren().clear();
 
-        Label jugador = new Label(jugadorActual.getNombre());
-        Label seleccionUnidadAtacante = new Label("Seleccione con que unidad desea \natacar y luego listo");
+        LabelNombreJugador jugador = new LabelNombreJugador(-250,0,jugadorActual.getNombre());
+        LabelDatosJuego seleccionUnidadAtacante = new LabelDatosJuego(-250,0,"Seleccione con que unidad desea \natacar y luego listo");
         Button listo = new Button ("listo");
-
+        listo.setTranslateX(-250);
         infoCasilleroBox.setText("");
         statusTablero.getChildren().addAll(jugador,seleccionUnidadAtacante,listo,infoCasilleroBox);
 
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
             statusTablero.getChildren().clear();
-            Label seleccionUnidadAtacada = new Label("Seleccione a que unidad que desea \natacar y luego listo");
+            LabelDatosJuego seleccionUnidadAtacada = new LabelDatosJuego(-250,0,"Seleccione a que unidad que desea \natacar y luego listo");
             statusTablero.getChildren().addAll(jugador, seleccionUnidadAtacada, listo,infoCasilleroBox);
 
             listo.setOnAction(e -> {

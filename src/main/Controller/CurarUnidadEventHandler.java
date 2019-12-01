@@ -6,10 +6,8 @@ import Tablero.Tablero;
 import Unidades.Curandero;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
+import Vistas.FaseJuego.*;
 import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
-import Vistas.FaseJuego.JuegoPrincipal;
-import Vistas.FaseJuego.InfoCasilleroBox;
-import Vistas.FaseJuego.TableroView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -39,8 +37,8 @@ public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
         VBox statusTablero = faseTurnos.getStatusTablero();
         statusTablero.getChildren().clear();
 
-        Label jugador = new Label(jugadorActual.getNombre());
-        Label seleccionUnidadCuradora = new Label("Seleccione con que unidad desea curar \ny luego listo");
+        LabelNombreJugador jugador = new LabelNombreJugador(0,0,jugadorActual.getNombre());
+        LabelDatosJuego seleccionUnidadCuradora = new LabelDatosJuego(0,0,"Seleccione con que unidad desea curar \ny luego listo");
         Button listo = new Button ("listo");
         infoCasilleroBox.setText("");
         statusTablero.getChildren().addAll(jugador,seleccionUnidadCuradora,listo,infoCasilleroBox);
@@ -48,7 +46,7 @@ public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
             statusTablero.getChildren().clear();
-            Label seleccionUnidadCurada = new Label("Seleccione a que unidad que desea \ncurar y luego listo");
+            LabelDatosJuego seleccionUnidadCurada = new LabelDatosJuego(0,0,"Seleccione a que unidad que desea \ncurar y luego listo");
             statusTablero.getChildren().addAll(jugador, seleccionUnidadCurada, listo,infoCasilleroBox);
 
             listo.setOnAction(e -> {

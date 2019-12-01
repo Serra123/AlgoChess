@@ -2,6 +2,8 @@ package Vistas.FaseJuego.FaseTurnos;
 
 import Jugador.Jugador;
 import Vistas.FaseJuego.JuegoPrincipal;
+import Vistas.FaseJuego.LabelDatosJuego;
+import Vistas.FaseJuego.LabelNombreJugador;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -40,12 +42,8 @@ public class FaseTurnos {
     public void crearLayoutFaseParaJugadorActual(boolean yaMovio){
 
         this.statusTablero.getChildren().clear();
-        Label jugador = new Label("Es el turno del jugador: " + juegoPrincipal.getJugadorActual().getNombre());
-        jugador.setTranslateX(50);
-        jugador.setTranslateY(20);
-        jugador.setFont(new Font("Arial", 25));
-        Label opcionesDeTurno = new Label("Indique que accion desea realizar");
-        opcionesDeTurno.setTranslateY(50);
+        LabelNombreJugador jugador = new LabelNombreJugador(50,20,"Es el turno del jugador: " + juegoPrincipal.getJugadorActual().getNombre());
+        LabelDatosJuego opcionesDeTurno = new LabelDatosJuego(0,50,"Indique que accion desea realizar");
 
         BotonMover mover = new BotonMover(juegoPrincipal,this);
         mover.setMinWidth(500);
