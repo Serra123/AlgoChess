@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
 
@@ -41,16 +42,25 @@ public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
         VBox statusTablero = faseTurnos.getStatusTablero();
         statusTablero.getChildren().clear();
 
-        Label jugador = new Label(jugadorActual.getNombre());
-        Label seleccionUnidadAMover = new Label("Seleccione que unidad desea mover y luego listo");
+        Label jugador = new Label("Es el turno de: " + jugadorActual.getNombre());
+        jugador.setFont(new Font("Arial",25));
+        jugador.setTranslateX(-150);
+        jugador.setTranslateY(25);
+        Label seleccionUnidadAMover = new Label("Seleccione que unidad desea mover y luego listo.");
+        seleccionUnidadAMover.setTranslateY(60);
+        seleccionUnidadAMover.setTranslateX(-150);
         Button listo = new Button ("listo");
+        listo.setTranslateX(-150);
+        listo.setTranslateY(80);
         infoCasilleroBox.setText("");
         statusTablero.getChildren().addAll(jugador,seleccionUnidadAMover,listo,infoCasilleroBox);
 
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
             statusTablero.getChildren().clear();
-            Label seleccionCasillero = new Label("Seleccione a donde desea mover la unidad");
+            Label seleccionCasillero = new Label("Seleccione a donde desea mover la unidad y luego listo.");
+            seleccionCasillero.setTranslateX(-150);
+            seleccionCasillero.setTranslateY(60);
             statusTablero.getChildren().addAll(jugador, seleccionCasillero, listo,infoCasilleroBox);
 
             listo.setOnAction(e -> {
