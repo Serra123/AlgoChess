@@ -13,7 +13,8 @@ public class InfoCasilleroBox extends Label{
 
     public InfoCasilleroBox(JuegoPrincipal juegoPrincipal, String texto){
         this.tablero = juegoPrincipal.getTableroDeJuego();
-        this.setText(texto);
+        this.setText("Estadisticas del casillero: \n\n\n" + texto);
+        this.setTranslateY(50);
     }
 
     public void actualizarPosicionClickeada(Posicion unaPosicion) {
@@ -22,12 +23,12 @@ public class InfoCasilleroBox extends Label{
         try{
             Unidad unaUnidad = this.tablero.getUnidad(posicion);
             String tipoUnidad = unaUnidad.getTipoUnidad();
-            estadisticasCasillero = "Unidad: " + tipoUnidad + " (" + (posicion.getFila() + 1) + " ; " +
+            estadisticasCasillero = "Estadisticas del casillero: \n\n\nUnidad: " + tipoUnidad + " (" + (posicion.getFila() + 1) + " ; " +
                     (posicion.getColumna() + 1) + "). Vida: "+ unaUnidad.getVida();
 
 
         }catch(ExcepcionCasilleroVacio e){
-            estadisticasCasillero = "(" + (posicion.getFila() + 1) + " ; " + (posicion.getColumna() + 1) + ")";
+            estadisticasCasillero = "Estadisticas del casillero: \n\n\n(" + (posicion.getFila() + 1) + " ; " + (posicion.getColumna() + 1) + ")";
 
         }
         this.setText(estadisticasCasillero);

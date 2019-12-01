@@ -38,11 +38,7 @@ public class JuegoPrincipal {
         ventana.setMinHeight(710);
         ventana.setWidth(1500);
         ventana.setHeight(710);
-        juegoView.setPadding(new Insets(0,200,0,0));
-        Label titulo = new Label("AlgoChess");
-        juegoView.setTop(titulo);
-        juegoView.setAlignment(titulo,Pos.CENTER);
-        titulo.setFont(new Font("Arial", 30));
+        juegoView.setPadding(new Insets(0,0,0,0));
         juegoView.setLeft(tableroView);
         //juegoView.setStyle("-fx-background-image: url('fondoJuego.jpg')");
 
