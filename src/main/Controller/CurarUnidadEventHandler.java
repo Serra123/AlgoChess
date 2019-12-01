@@ -62,14 +62,17 @@ public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
                     tableroView.mostrar(nuevaPosicion);
                     faseTurnos.cambiarJugador();
                 } catch (ExcepcionCasilleroVacio error) {
-                    infoCasilleroBox.setText(" Esa posicion esta VACIA");
-                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
+                    String cabecera = "Esta posicion esta vacia";
+                    String contenido = "Selecciona una posicion con unidad";
+                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 } catch (ClassCastException error) {
-                    infoCasilleroBox.setText(" No podes curar con una unidad que no es Curandero");
-                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
+                    String cabecera = "No podes curar con una unidad que no es Curandero";
+                    String contenido = "Selecciona una curandero o realiza otra accion";
+                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 } catch (ExcepcionCuracionAEnemigo error){
-                    infoCasilleroBox.setText(" No podes curar a una unidad enemiga!!");
-                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
+                    String cabecera = "No podes curar a una unidad enemiga";
+                    String contenido = "Cura a una ajena o realiza otra accion";
+                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 }
             });
         });

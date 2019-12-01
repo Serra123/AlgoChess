@@ -1,6 +1,7 @@
 package Controller;
 
 import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionCasilleroVacio;
 import Excepciones.ExcepcionPuntosInsuficientes;
 import Excepciones.ExcepcionSectorEnemigo;
 import Jugador.Jugador;
@@ -44,11 +45,19 @@ public class CrearUnidadEventHandler implements EventHandler<ActionEvent> {
             puntosJugadorActual.setText("Al jugador " + jugadorActual.getNombre() + " le quedan: " +
                     jugadorActual.getEjercito().getPuntos() + " puntos." );
         } catch (ExcepcionSectorEnemigo e){
-            infoCasilleroBox.setText("Este no es tu sector");
+            String cabecera = "Hubo un problema al crear esta unidad";
+            String contenido = "Este no es tu sector";
+            new ExcepcionCrearUnidadEventHandler(cabecera,contenido);
         } catch(ExcepcionCasilleroOcupado e){
-            infoCasilleroBox.setText("Este casillero esta Ocupado!! ");
+            String cabecera = "Hubo un problema al crear esta unidad";
+            String contenido = "Este casillero esta Ocupado";
+            new ExcepcionCrearUnidadEventHandler(cabecera,contenido);
         }catch(ExcepcionPuntosInsuficientes e){
-            infoCasilleroBox.setText("No te alcanzan los Puntos!");
+            String cabecera = "Hubo un problema al crear esta unidad";
+            String contenido = "No te alcanzan los puntos para crear esta unidad";
+            new ExcepcionCrearUnidadEventHandler(cabecera,contenido);
+        }catch(java.lang.NullPointerException e){
+            //no hago nada, solo lo tira si clickeo crear unida antes de mandarle una posicion
         }
     }
 }

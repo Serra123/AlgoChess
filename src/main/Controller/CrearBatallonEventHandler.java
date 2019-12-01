@@ -75,17 +75,17 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
                     faseTurnos.crearLayoutFaseParaJugadorActual(true);
                 });
             }catch(ExcepcionCantidadInsuficienteDePosiciones error){
-                tableroView.actualizar();
-                infoCasilleroBox.setText("Tenes que elegir 3 posiciones!");
-                faseTurnos.crearLayoutFaseParaJugadorActual(false);
+                String cabecera = "Tenes que elegir 3 posiciones!";
+                String contenido = "Selecciona 3 posiciones e intenta nuevamente";
+                new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
             } catch(ExcepcionPosicionInvalida error){
-                tableroView.actualizar();
-                infoCasilleroBox.setText("Las posiciones no contienen soldados");
-                faseTurnos.crearLayoutFaseParaJugadorActual(false);
+                String cabecera = "Las posiciones no contienen soldados";
+                String contenido = "Selecciona posiciones con soldados e intenta nuevamente";
+                new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
             } catch(ExcepcionLasUnidadesEstanSeparadas error) {
-                tableroView.actualizar();
-                infoCasilleroBox.setText("Las posiciones no son contiguas");
-                faseTurnos.crearLayoutFaseParaJugadorActual(false);
+                String cabecera = "Las unidades estan separadas";
+                String contenido = "Selecciona posiciones contiguas e intenta nuevamente";
+                new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
             }
             /*catch(Exception error){
                 infoCasilleroBox.setText("Algo salio mal");

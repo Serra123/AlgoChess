@@ -62,18 +62,27 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                     tableroView.actualizar();
                     tableroView.mostrar(nuevaPosicion);
                     faseTurnos.cambiarJugador();
+                } catch (ExcepcionCasilleroVacio error) {
+                    String cabecera = "Esta posicion esta vacia";
+                    String contenido = "Selecciona una posicion con unidad";
+                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 } catch (ExcepcionUnidadNoPerteneceATuEjercito error) {
-                    infoCasilleroBox.setText("No podes atacar con una unidad que no pertenece a tu ejercito!!");
-                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
+                    String cabecera = "No podes atacar con una unidad que no pertenece a tu ejercito";
+                    String contenido = "Selecciona una unidad propia e intenta nuevamente";
+                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 } catch(ExcepcionAtaqueAAliado error){
-                    infoCasilleroBox.setText("No podes atacar a un aliado!!");
-                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
+                    String cabecera = "No podes atacar a un aliado";
+                    String contenido = "Selecciona una unidad enemiga e intenta nuevamente";
+                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 } catch(ExcepcionCuranderoNoAtaca error){
-                    infoCasilleroBox.setText("No podes atacar con un curandero");
+                    String cabecera = "No podes con un curandero";
+                    String contenido = "Selecciona una unidad que sí ataque";
+                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 }
                 catch (ExcepcionDistanciaAtaqueInvalida error){
-                    infoCasilleroBox.setText("La distancia de ataque NO es valida!");
-                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
+                    String cabecera = "La unidad a atacar esta fuera de rando";
+                    String contenido = "Selecciona una unidad a atacar que esté dentro del rango";
+                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
                 }
             });
         });
