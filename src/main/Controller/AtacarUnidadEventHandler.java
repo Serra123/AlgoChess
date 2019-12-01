@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
 
 
+    private final JuegoPrincipal juegoPrincipal;
     private Jugador jugadorActual;
     private InfoCasilleroBox infoCasilleroBox;
     private Tablero tablero;
@@ -28,6 +29,7 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
         this.tablero = juegoPrincipal.getTableroDeJuego();
         this.tableroView = juegoPrincipal.getTableroView();
         this.infoCasilleroBox = juegoPrincipal.getInfoCasilleroBox();
+        this.juegoPrincipal = juegoPrincipal;
         this.faseTurnos = faseTurnos;
 
     }
@@ -56,9 +58,16 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                     Unidad unidadAtacante =tablero.getUnidadDe(posicionAMover,jugadorActual);
                     Unidad unidadAtacada =tablero.getUnidad(nuevaPosicion);
                     unidadAtacante.atacar(unidadAtacada, tablero);
-
+                    if(unidadAtacada.getVida() <= 0 ){
+                        if(unidadAtacada.getEjercito().equals(juegoPrincipal.getJugadorUno().getNombre())){
+                            juegoPrincipal.getJugadorUno().getEjercito().eliminarUnidad(unidadAtacada);
+                        }else{
+                            juegoPrincipal.getJugadorDos().getEjercito().eliminarUnidad(unidadAtacada);
+                        }
+                    }
                     tableroView.actualizar();
                     tableroView.mostrar(nuevaPosicion);
+                    verificarSiTerminoJuego();
                     faseTurnos.cambiarJugador();
                 } catch (ExcepcionCasilleroVacio error) {
                     String cabecera = "Esta posicion esta vacia";
@@ -84,5 +93,19 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                 }
             });
         });
+    }
+
+    private void verificarSiTerminoJuego() {
+        if(juegoPrincipal.getJugadorUno().getNombre().equals(jugadorActual.getNombre())){
+           if(juegoPrincipal.getJugadorDos().getEjercito().ejercitoVacio()){
+               new ExcepcionFinDeJuegoEventHandler(juegoPrincipal.getJugadorUno().getNombre());
+           }
+        }else if(juegoPrincipal.getJugadorDos().getNombre().equals(jugadorActual.getNombre())){
+            if(juegoPrincipal.getJugadorUno().getEjercito().ejercitoVacio()){
+                new ExcepcionFinDeJuegoEventHandler(juegoPrincipal.getJugadorDos().getNombre());
+            }
+        }
+
+
     }
 }

@@ -105,4 +105,12 @@ public class Ejercito {
             throw new ExcepcionPuntosInsuficientes();
         }
     }
+
+    public boolean ejercitoVacio(){
+        return (unidades.size()==0);
+    }
+
+    public void eliminarUnidad(Unidad unidadAtacada) {
+        this.unidades.remove(unidadAtacada);
+    }
 }
