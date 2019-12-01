@@ -21,9 +21,8 @@ public class BotonCasillero extends Button {
         this.setOnAction(new CasilleroEventHandler(faseDeJuego,unaPosicion,this));
     }
 
-    public void cambiarEventHandlerParaCrearBatallon(ArrayList listaPosiciones) {
+    public void cambiarEventHandlerParaCrearBatallon(ArrayList<Posicion> listaPosiciones) {
         this.setOnAction(new CasilleroParaBatallonEventHandler(faseDeJuego,posicion,this,listaPosiciones));
-        //this.setOnAction(); este set on action tiene que agregar la posicion clickeada hasta que apriete un boton listo
     }
 
     public void resetarEventHandler() {

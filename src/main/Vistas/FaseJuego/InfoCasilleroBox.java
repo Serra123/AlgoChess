@@ -23,10 +23,12 @@ public class InfoCasilleroBox extends Label{
         try{
             Unidad unaUnidad = this.tablero.getUnidad(posicion);
             String tipoUnidad = unaUnidad.getTipoUnidad();
-            estadisticasCasillero = "Estadisticas del casillero: \n\n\nUnidad: " + tipoUnidad + " (" + (posicion.getFila() + 1) + " ; " +
-                    (posicion.getColumna() + 1) + "). Vida: "+ unaUnidad.getVida();
-
-
+            if(unaUnidad.getVida() > 0) {
+                estadisticasCasillero = "Estadisticas del casillero: \n\n\nUnidad: " + tipoUnidad + " (" + (posicion.getFila() + 1) + " ; " +
+                        (posicion.getColumna() + 1) + "). Vida: " + unaUnidad.getVida();
+            }else{
+                estadisticasCasillero = "Estadisticas del casillero: \n\n\n(" + (posicion.getFila() + 1) + " ; " + (posicion.getColumna() + 1) + ")";
+            }
         }catch(ExcepcionCasilleroVacio e){
             estadisticasCasillero = "Estadisticas del casillero: \n\n\n(" + (posicion.getFila() + 1) + " ; " + (posicion.getColumna() + 1) + ")";
 

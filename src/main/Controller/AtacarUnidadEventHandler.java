@@ -53,7 +53,7 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
             listo.setOnAction(e -> {
                 Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
                 try {
-                    Unidad unidadAtacante =tablero.getUnidadDe(posicionAMover,jugadorActual);   //verifico que la atacante sea del jugadorActual,la otra despues veo
+                    Unidad unidadAtacante =tablero.getUnidadDe(posicionAMover,jugadorActual);
                     Unidad unidadAtacada =tablero.getUnidad(nuevaPosicion);
                     unidadAtacante.atacar(unidadAtacada, tablero);
 

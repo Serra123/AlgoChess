@@ -17,9 +17,6 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
     protected InfoCasilleroBox infoCasilleroBox;
     protected Tablero tablero;
     protected BotonCasillero botonCasillero;
-    protected Jugador jugadorUno;
-    protected Jugador jugadorDos;
-
 
     public CasilleroEventHandler(JuegoPrincipal faseDeJuego, Posicion unaPosicion, BotonCasillero unBoton) {
 
@@ -32,11 +29,9 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        String estadisticasCasillero;
         try {
             Unidad unidad = tablero.getUnidad(posicion);
-            String tipoUnidad = unidad.getTipoUnidad();
-            setearTextoCasillero(tipoUnidad,unidad.getEjercito(),botonCasillero);
+            setearTextoCasillero(unidad,botonCasillero);
         } catch (ExcepcionCasilleroVacio e) {
             botonCasillero.setText("");
         }
@@ -44,9 +39,10 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
         this.infoCasilleroBox.actualizarPosicionClickeada(posicion);
     }
 
-    private void setearTextoCasillero(String tipoUnidad, String ejercito, BotonCasillero botonCasillero) {
+    private void setearTextoCasillero(Unidad unaUnidad, BotonCasillero botonCasillero) {
+
         String textoCasillero;
-        switch (tipoUnidad) {
+        switch (unaUnidad.getTipoUnidad()) {
             case "soldado":
                 textoCasillero = "S";
                 break;
@@ -62,9 +58,12 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
             default:
                 textoCasillero = "Nan";
         }
-        textoCasillero = textoCasillero + ejercito;
-
-        botonCasillero.setText(textoCasillero);
+        if(unaUnidad.getVida() > 0 ){
+            textoCasillero = textoCasillero + unaUnidad.getEjercito();
+            botonCasillero.setText(textoCasillero);
+        }else{
+            botonCasillero.setText("");
+        }
     }
 
 }
