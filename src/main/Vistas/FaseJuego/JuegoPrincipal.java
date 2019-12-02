@@ -23,12 +23,12 @@ public class JuegoPrincipal {
     private BorderPane juegoView;
     private Stage ventana;
 
-    public JuegoPrincipal(Jugador jugadorUno, Jugador jugadorDos){
+    public JuegoPrincipal(Jugador jugadorUno, Jugador jugadorDos) {
         this.jugadorUno = jugadorUno;
         this.jugadorDos = jugadorDos;
-        this.tableroDeJuego = new Tablero(LADO,LADO,jugadorUno.getNombre(),jugadorDos.getNombre());
+        this.tableroDeJuego = new Tablero(LADO, LADO, jugadorUno.getNombre(), jugadorDos.getNombre());
         this.jugadorActual = jugadorUno;
-        this.infoCasilleroBox = new InfoCasilleroBox(this,"");
+        this.infoCasilleroBox = new InfoCasilleroBox(this, "");
         infoCasilleroBox.setStyle("-fx-background-image: url('fondoTexto.jpg')");
         this.tableroView = new TableroView(this);
         this.ventana = new Stage();
@@ -41,7 +41,6 @@ public class JuegoPrincipal {
         ventana.setMaxHeight(710);
         ventana.setWidth(1500);
         ventana.setHeight(710);
-        juegoView.setPadding(new Insets(0,0,0,0));
         juegoView.setLeft(tableroView);
         juegoView.setStyle("-fx-background-image: url('fondoTablero.jpg')");
 

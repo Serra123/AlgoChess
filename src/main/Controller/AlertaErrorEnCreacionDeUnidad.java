@@ -2,8 +2,8 @@ package Controller;
 
 import javafx.scene.control.Alert;
 
-public class ExcepcionCrearUnidadEventHandler extends Alert {
-    public ExcepcionCrearUnidadEventHandler(String cabecera, String contenido) {
+public class AlertaErrorEnCreacionDeUnidad extends Alert {
+    public AlertaErrorEnCreacionDeUnidad(String cabecera, String contenido) {
         super(Alert.AlertType.INFORMATION);
         this.setTitle("ERROR");
         this.setHeaderText(cabecera);

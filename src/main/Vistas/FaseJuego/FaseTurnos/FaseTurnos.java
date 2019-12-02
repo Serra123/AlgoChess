@@ -5,11 +5,11 @@ import Vistas.FaseJuego.JuegoPrincipal;
 import Vistas.FaseJuego.LabelDatosJuego;
 import Vistas.FaseJuego.LabelNombreJugador;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class FaseTurnos {
 
@@ -25,6 +25,7 @@ public class FaseTurnos {
         this.juegoView = juegoPrincipal.getJuegoView();
         this.jugadorActual = juegoPrincipal.getJugadorActual();
         this.statusTablero = new VBox();
+        this.statusTablero.setPadding(new Insets(0,0,0,20));
         this.crearLayoutFaseParaJugadorActual(false);
         this.juegoView.setRight(statusTablero);
 

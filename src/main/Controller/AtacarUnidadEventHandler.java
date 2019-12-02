@@ -10,7 +10,6 @@ import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
@@ -72,24 +71,24 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                 } catch (ExcepcionCasilleroVacio error) {
                     String cabecera = "Esta posicion esta vacia";
                     String contenido = "Selecciona una posicion con unidad";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
                 } catch (ExcepcionUnidadNoPerteneceATuEjercito error) {
                     String cabecera = "No podes atacar con una unidad que no pertenece a tu ejercito";
                     String contenido = "Selecciona una unidad propia e intenta nuevamente";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
                 } catch(ExcepcionAtaqueAAliado error){
                     String cabecera = "No podes atacar a un aliado";
                     String contenido = "Selecciona una unidad enemiga e intenta nuevamente";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
                 } catch(ExcepcionCuranderoNoAtaca error){
                     String cabecera = "No podes con un curandero";
                     String contenido = "Selecciona una unidad que sí ataque";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
                 }
                 catch (ExcepcionDistanciaAtaqueInvalida error){
                     String cabecera = "La unidad a atacar esta fuera de rango";
                     String contenido = "Selecciona una unidad dentro del rango de ataque";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
                 }
             });
         });
@@ -98,11 +97,11 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
     private void verificarSiTerminoJuego() {
         if(juegoPrincipal.getJugadorUno().getNombre().equals(jugadorActual.getNombre())){
            if(juegoPrincipal.getJugadorDos().getEjercito().ejercitoVacio()){
-               new ExcepcionFinDeJuegoEventHandler(juegoPrincipal.getJugadorUno().getNombre());
+               new AlertaFinDeJuego(juegoPrincipal.getJugadorUno().getNombre());
            }
         }else if(juegoPrincipal.getJugadorDos().getNombre().equals(jugadorActual.getNombre())){
             if(juegoPrincipal.getJugadorUno().getEjercito().ejercitoVacio()){
-                new ExcepcionFinDeJuegoEventHandler(juegoPrincipal.getJugadorDos().getNombre());
+                new AlertaFinDeJuego(juegoPrincipal.getJugadorDos().getNombre());
             }
         }
 

@@ -1,5 +1,6 @@
 package Vistas.FaseInicio;
 
+import Controller.AlertaErrorNombreDeJugador;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -29,6 +30,7 @@ public class FaseInicio{
         Label ingreseNombreUsuarioUno = new Label();
         ingreseNombreUsuarioUno.setText("Ingrese el nombre del jugador uno:");
         TextField campoNombreUsuarioUno = new TextField();
+        campoNombreUsuarioUno.setPromptText("JUGADORUNO");
         campoNombreUsuarioUno.setAlignment(Pos.CENTER);
         campoNombreUsuarioUno.setMaxWidth(200);
         seccionJugadorUno.getChildren().addAll(ingreseNombreUsuarioUno,campoNombreUsuarioUno);
@@ -38,6 +40,7 @@ public class FaseInicio{
         VBox seccionJugadorDos = new VBox();
         TextField campoNombreUsuarioDos = new TextField();
         campoNombreUsuarioDos.setAlignment(Pos.CENTER);
+        campoNombreUsuarioDos.setPromptText("JUGADORDOS");
         campoNombreUsuarioDos.setMaxWidth(200);
         Label ingreseNombreUsuarioDos = new Label();
         ingreseNombreUsuarioDos.setText("Ingrese el nombre del jugador dos:");
@@ -47,12 +50,21 @@ public class FaseInicio{
 
         Button continuar = new Button("Continuar");
         continuar.setOnAction(e -> {
+            Boolean nombreVacio = (campoNombreUsuarioDos.getText().isEmpty() ||
+                    campoNombreUsuarioUno.getText().isEmpty());
+            Boolean nombresIguales = (campoNombreUsuarioDos.getText().equals(campoNombreUsuarioUno.getText()));
+            if(nombreVacio || nombresIguales) {
+                new AlertaErrorNombreDeJugador();
 
-            nombreJugadores[0] = campoNombreUsuarioUno.getText();
+            }else {
+                nombreJugadores[0] = campoNombreUsuarioUno.getText();
 
-            nombreJugadores[1] = campoNombreUsuarioDos.getText();
+                nombreJugadores[1] = campoNombreUsuarioDos.getText();
 
-            unaVentana.close();
+                unaVentana.close();
+            }
+
+
 
         });
 
