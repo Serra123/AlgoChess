@@ -1,5 +1,7 @@
 package Unidades.Posicion;
 
+import static java.lang.Math.abs;
+
 public class Posicion {
     private int fila;
     private int columna;
@@ -28,9 +30,11 @@ public class Posicion {
     }
 
     public double calcularDistancia(Posicion nuevaPosicion) {
-       int diferenciaFilas = this.fila - nuevaPosicion.getFila();
-       int diferenciaColumnas = this.columna - nuevaPosicion.getColumna();
-        return (Math.sqrt(diferenciaFilas*diferenciaFilas + diferenciaColumnas*diferenciaColumnas));
+       int diferenciaFilas = abs(this.fila - nuevaPosicion.getFila());
+       int diferenciaColumnas = abs(this.columna - nuevaPosicion.getColumna());
+       if(diferenciaColumnas > diferenciaFilas){
+           return diferenciaColumnas;
+       }else return diferenciaFilas;
     }
 
     public void mantenerDistanciaARespectoDe(Posicion posicionCentralNueva, Posicion posicionCentralVieja) {
