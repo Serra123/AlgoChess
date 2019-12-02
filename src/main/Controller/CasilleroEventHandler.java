@@ -13,6 +13,9 @@ import javafx.event.EventHandler;
 
 public class CasilleroEventHandler implements EventHandler<ActionEvent> {
 
+    private static final String BLANCO = "-fx-background-color: #fdfefe;";
+
+
     protected Posicion posicion;
     protected InfoCasilleroBox infoCasilleroBox;
     protected Tablero tablero;
@@ -35,7 +38,6 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
         } catch (ExcepcionCasilleroVacio e) {
             botonCasillero.setText("");
         }
-        botonCasillero.setStyle("-fx-background-image: url('fondoCasillero.jpg')");
         this.infoCasilleroBox.actualizarPosicionClickeada(posicion);
     }
 
@@ -61,8 +63,10 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
         if(unaUnidad.getVida() > 0 ){
             textoCasillero = textoCasillero + unaUnidad.getEjercito();
             botonCasillero.setText(textoCasillero);
+            botonCasillero.setStyle(BLANCO);
         }else{
             botonCasillero.setText("");
+            botonCasillero.setStyle(botonCasillero.getColor());
         }
     }
 

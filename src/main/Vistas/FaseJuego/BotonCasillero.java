@@ -4,20 +4,28 @@ import Controller.CasilleroEventHandler;
 import Controller.CasilleroParaBatallonEventHandler;
 import Unidades.Posicion.Posicion;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
 public class BotonCasillero extends Button {
 
+    private final String color;
     private JuegoPrincipal faseDeJuego;
     private Posicion posicion;
 
 
-    BotonCasillero(JuegoPrincipal faseDeJuego, Posicion unaPosicion){
+    BotonCasillero(JuegoPrincipal faseDeJuego, Posicion unaPosicion, String unColor){
         this.faseDeJuego = faseDeJuego;
         this.posicion = unaPosicion;
+        this.color = unColor;
         this.setPrefSize(50,34);
-        this.setStyle("-fx-background-image: url('fondoCasillero.jpg')");
+        this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
+        this.setStyle(unColor);
         this.setOnAction(new CasilleroEventHandler(faseDeJuego,unaPosicion,this));
     }
 
@@ -27,5 +35,9 @@ public class BotonCasillero extends Button {
 
     public void resetarEventHandler() {
         this.setOnAction(new CasilleroEventHandler(faseDeJuego,posicion,this));
+    }
+
+    public String getColor() {
+        return this.color;
     }
 }
