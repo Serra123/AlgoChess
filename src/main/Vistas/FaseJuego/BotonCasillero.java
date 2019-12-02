@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class BotonCasillero extends Button {
 
     private final String colorInicial;
+    private boolean clickeado;
     private JuegoPrincipal faseDeJuego;
     private Posicion posicion;
 
@@ -23,10 +24,15 @@ public class BotonCasillero extends Button {
         this.faseDeJuego = faseDeJuego;
         this.posicion = unaPosicion;
         this.colorInicial = unColor;
+        this.clickeado=false;
         this.setPrefSize(50,34);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
         this.setStyle(unColor);
         this.setOnAction(new CasilleroEventHandler(faseDeJuego,unaPosicion,this));
+        this.setOnMouseClicked(e->{this.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
+                                        this.clickeado=true;
+                                    });
+
     }
 
     public void cambiarEventHandlerParaCrearBatallon(ArrayList<Posicion> listaPosiciones) {
@@ -39,5 +45,13 @@ public class BotonCasillero extends Button {
 
     public String getColorInicial() {
         return this.colorInicial;
+    }
+
+    public boolean estaClickeado() {
+        return this.clickeado;
+    }
+
+    public void setClickeado(boolean estadoClickeado) {
+        this.clickeado=estadoClickeado;
     }
 }
