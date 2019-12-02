@@ -8,7 +8,6 @@ import Unidades.Unidad;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.stream.Collectors;
 
 public class Ejercito {
 
@@ -44,12 +43,12 @@ public class Ejercito {
         return new Batallon(SoldadosDeBatallon);
     }
 
-    private ArrayList<Posicion> getTresPosiciones(ArrayList<Posicion> posicionesTotales)throws ExcepcionCantidadInsuficienteDePosiciones{
+    private ArrayList<Posicion> getTresPosiciones(ArrayList<Posicion> posicionesTotales)throws ExcepcionCantidadIncorrectaDePosiciones {
 
         LinkedHashSet<Posicion> hashSet = new LinkedHashSet<>(posicionesTotales);
         ArrayList <Posicion> posiciones = new ArrayList<>(hashSet);
-        if(posiciones.size()<3){
-            throw new ExcepcionCantidadInsuficienteDePosiciones();
+        if(posiciones.size()!=3){
+            throw new ExcepcionCantidadIncorrectaDePosiciones();
         }
         ArrayList<Posicion> tresPosiciones = new ArrayList<>();
 
