@@ -29,15 +29,6 @@ public abstract class Unidad {
        }
     }
 
-    void expandirAtaqueRecibido(int valorDanio, Tablero unTablero){
-        ArrayList<Posicion> posicionesAfectadas = new ArrayList<>();
-        posicionesAfectadas = unTablero.obtenerPosicionesAfectadasPorExpansion(this.posicion,posicionesAfectadas);
-        posicionesAfectadas.forEach((posicion) -> {
-                    boolean estaEnSectorAliado = unTablero.estaEnSector(unTablero.getUnidad(posicion));
-                    unTablero.getUnidad(posicion).recibirAtaque(valorDanio, estaEnSectorAliado);
-                }
-        );
-    }
 
     double distanciaA(Unidad unaUnidad){
         return this.posicion.calcularDistancia(unaUnidad.getPosicion());

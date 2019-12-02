@@ -64,7 +64,7 @@ public class Batallon {
             moverSoldados(nuevasPosiciones,soldadoActual+1);
         }
     }
-    private void moverUnSoldado(ArrayList<Posicion> nuevasPosiciones,int numeroSoldado){
+    private void moverUnSoldado(ArrayList<Posicion> nuevasPosiciones,int numeroSoldado) throws ExcepcionMovimientoInvalido{
 
         Soldado soldadoActual = soldados.get(numeroSoldado);
         Posicion posicionActual = soldadoActual.getPosicion();
