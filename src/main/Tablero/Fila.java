@@ -38,30 +38,6 @@ public class Fila {
         unCasillero.recibirUnidad(unaUnidad);
     }
 
-    void agregarPosicionesAfectadasPorExpansion(int unaColumna, ArrayList<Posicion> posicionesAfectadas, Tablero unTablero){
-        boolean posicionNoAfectada = true;
-
-        try{
-            Casillero unCasillero = this.getCasillero(unaColumna);
-            Unidad unaUnidad = unCasillero.contenido();
-            Posicion unaPosicion = unaUnidad.getPosicion();
-            for (Posicion posicionesAfectada : posicionesAfectadas) {
-                if (unaPosicion.equals(posicionesAfectada)) {
-                    posicionNoAfectada = false;
-                    break;
-                }
-            }
-            if(posicionNoAfectada){
-                posicionesAfectadas.add(unaPosicion);
-                unTablero.obtenerPosicionesAfectadasPorExpansion(unaPosicion,posicionesAfectadas);
-            }
-        }catch(ExcepcionCasilleroVacio e){
-            // no tiene que hacer nada pues el casillero esta vacio.
-        }catch(IndexOutOfBoundsException e){
-            // no tiene que hacer nada pues el casillero no existe.
-        }
-    }
-
     int getCantidadColumnas(){
         return casilleros.size();
     }

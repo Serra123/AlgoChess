@@ -8,12 +8,16 @@ import Jugador.Jugador;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 import Unidades.UnidadMovible;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Tablero {
 
     private static final int FILACUALQUIERA = 1;
+    private static final int DISTANCIACONTIGUA = 1;
     private ArrayList<Fila> filas;
     private HashMap<String,Sector> sectores;
 
@@ -61,13 +65,7 @@ public class Tablero {
         return unCasillero.contenido();
     }
 
-    public ArrayList<Unidad> obtenerUnidadesADistancia(Posicion posicionReferencia, int distancia){
-        ArrayList<Unidad> unidadesCercanas;
-        unidadesCercanas = obtenerUnidadesAlejadasA(posicionReferencia, distancia);
-        return unidadesCercanas;
-    }
-
-    private ArrayList<Unidad> obtenerUnidadesAlejadasA(Posicion posicionReferencia, int distancia) {
+    public ArrayList<Unidad> obtenerUnidadesAlejadasA(Posicion posicionReferencia, int distancia) {
         ArrayList<Unidad> unidadesCercanas = new ArrayList<>();
         int filaReferencia = posicionReferencia.getFila();
         int columnaReferencia = posicionReferencia.getColumna();
@@ -98,25 +96,23 @@ public class Tablero {
         return (filaValida && columnaValida);
     }
 
-    public ArrayList<Posicion> obtenerPosicionesAfectadasPorExpansion(Posicion unaPosicion, ArrayList<Posicion> posiciones){
-        int filaCentro = unaPosicion.getFila();
-        int columnaCentro = unaPosicion.getColumna();
-        Fila filaActual;
+    public void obtenerUnidadesDeExpansion(ArrayList<Unidad>unidadesTotal,Posicion unaPosicion){
 
-        for(int i = filaCentro -1; i <= filaCentro+1;i++) {
-            try {
-                filaActual = filas.get(i);
-            }catch(IndexOutOfBoundsException e){
-                continue;
-            }
-            for (int j = columnaCentro - 1; j <= columnaCentro + 1; j++) {
-                if ((i != filaCentro) || (j != columnaCentro)) {
-                    filaActual.agregarPosicionesAfectadasPorExpansion(j, posiciones, this);
-                }
-            }
+        ArrayList<Unidad> unidadesParcial;
+        unidadesParcial = this.obtenerUnidadesAlejadasA(unaPosicion,DISTANCIACONTIGUA);
+        unidadesParcial.add(this.getUnidad(unaPosicion));
+
+        for(Iterator<Unidad> iterator = unidadesParcial.iterator();iterator.hasNext();){
+            Unidad unaUnidad = iterator.next();
+            if (!(unidadesTotal.contains(unaUnidad))) {
+                unidadesTotal.add(unaUnidad);
+            }else iterator.remove();
+        }
+        for (Unidad unaUnidad : unidadesParcial) {
+            this.obtenerUnidadesDeExpansion(unidadesTotal, unaUnidad.getPosicion());
         }
 
-        return posiciones;
+
     }
 
     public Unidad getUnidadDe(Posicion unaPosicion, Jugador unJugador)throws ExcepcionUnidadNoPerteneceATuEjercito {
