@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class BotonCasillero extends Button {
 
-    private final String color;
+    private final String colorInicial;
     private JuegoPrincipal faseDeJuego;
     private Posicion posicion;
 
@@ -22,7 +22,7 @@ public class BotonCasillero extends Button {
     BotonCasillero(JuegoPrincipal faseDeJuego, Posicion unaPosicion, String unColor){
         this.faseDeJuego = faseDeJuego;
         this.posicion = unaPosicion;
-        this.color = unColor;
+        this.colorInicial = unColor;
         this.setPrefSize(50,34);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
         this.setStyle(unColor);
@@ -37,7 +37,7 @@ public class BotonCasillero extends Button {
         this.setOnAction(new CasilleroEventHandler(faseDeJuego,posicion,this));
     }
 
-    public String getColor() {
-        return this.color;
+    public String getColorInicial() {
+        return this.colorInicial;
     }
 }

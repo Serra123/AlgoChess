@@ -1,7 +1,6 @@
 package Controller;
 
 import Excepciones.ExcepcionCasilleroVacio;
-import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
@@ -37,6 +36,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
             setearTextoCasillero(unidad,botonCasillero);
         } catch (ExcepcionCasilleroVacio e) {
             botonCasillero.setText("");
+            botonCasillero.setStyle(botonCasillero.getColorInicial());
         }
         this.infoCasilleroBox.actualizarPosicionClickeada(posicion);
     }
@@ -66,7 +66,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
             botonCasillero.setStyle(BLANCO);
         }else{
             botonCasillero.setText("");
-            botonCasillero.setStyle(botonCasillero.getColor());
+            botonCasillero.setStyle(botonCasillero.getColorInicial());
         }
     }
 

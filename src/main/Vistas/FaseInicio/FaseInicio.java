@@ -30,7 +30,7 @@ public class FaseInicio{
         Label ingreseNombreUsuarioUno = new Label();
         ingreseNombreUsuarioUno.setText("Ingrese el nombre del jugador uno:");
         TextField campoNombreUsuarioUno = new TextField();
-        campoNombreUsuarioUno.setPromptText("JUGADORUNO");
+        campoNombreUsuarioUno.setPromptText("Jugador uno");
         campoNombreUsuarioUno.setAlignment(Pos.CENTER);
         campoNombreUsuarioUno.setMaxWidth(200);
         seccionJugadorUno.getChildren().addAll(ingreseNombreUsuarioUno,campoNombreUsuarioUno);
@@ -40,7 +40,7 @@ public class FaseInicio{
         VBox seccionJugadorDos = new VBox();
         TextField campoNombreUsuarioDos = new TextField();
         campoNombreUsuarioDos.setAlignment(Pos.CENTER);
-        campoNombreUsuarioDos.setPromptText("JUGADORDOS");
+        campoNombreUsuarioDos.setPromptText("Jugador dos");
         campoNombreUsuarioDos.setMaxWidth(200);
         Label ingreseNombreUsuarioDos = new Label();
         ingreseNombreUsuarioDos.setText("Ingrese el nombre del jugador dos:");
