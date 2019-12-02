@@ -12,7 +12,6 @@ import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import Jugador.Ejercito;
 import javafx.scene.layout.VBox;
 
@@ -73,15 +72,15 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
             }catch(ExcepcionCantidadInsuficienteDePosiciones error){
                 String cabecera = "Tenes que elegir 3 posiciones!";
                 String contenido = "Selecciona 3 posiciones e intenta nuevamente";
-                new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
             } catch(ExcepcionPosicionInvalida error){
                 String cabecera = "Las posiciones no contienen soldados";
                 String contenido = "Selecciona posiciones con soldados e intenta nuevamente";
-                new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
             } catch(ExcepcionLasUnidadesEstanSeparadas error) {
                 String cabecera = "Las unidades estan separadas";
                 String contenido = "Selecciona posiciones contiguas e intenta nuevamente";
-                new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
             }
             /*catch(Exception error){
                 infoCasilleroBox.setText("Algo salio mal");

@@ -13,9 +13,7 @@ import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
 
@@ -65,23 +63,23 @@ public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
                 } catch (ExcepcionCasilleroOcupado error) {
                     String cabecera = "No podes moverte a un casillero ocupado";
                     String contenido = "Selecciona uno vacio al que moverte";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
                 } catch (ExcepcionCasilleroVacio error) {
                     String cabecera = "Esta posicion esta vacia";
                     String contenido = "Selecciona una posicion con unidad";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
                 } catch (ExcepcionMovimientoInvalido error) {
                     String cabecera = "Movimiento invalido";
                     String contenido = "Selecciona una distancia a la cual tu unidad se pueda mover";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
                 } catch (ClassCastException error) {
                     String cabecera = "No podes mover una catapulta";
                     String contenido = "Selecciona una unidad que sí puedas mover";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
                 } catch (ExcepcionUnidadNoPerteneceATuEjercito error){
                     String cabecera = "No podes mover una unidad enemiga";
                     String contenido = "Selecciona una unidad propia";
-                    new ExcepcionTurnoEventHandler(cabecera,contenido,tableroView,faseTurnos,false);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
                 }
             });
         });
