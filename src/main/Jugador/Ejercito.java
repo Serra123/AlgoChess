@@ -14,7 +14,7 @@ public class Ejercito {
 
     private ArrayList<Unidad> unidades;
     private int puntos;
-    private static final int PUNTOSINICIALES = 200;
+    private static final int PUNTOSINICIALES = 20;
 
     public Ejercito(){
         this.unidades = new ArrayList<>();
