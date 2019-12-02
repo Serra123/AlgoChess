@@ -71,24 +71,24 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                 } catch (ExcepcionCasilleroVacio error) {
                     String cabecera = "Esta posicion esta vacia";
                     String contenido = "Selecciona una posicion con unidad";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 } catch (ExcepcionUnidadNoPerteneceATuEjercito error) {
                     String cabecera = "No podes atacar con una unidad que no pertenece a tu ejercito";
                     String contenido = "Selecciona una unidad propia e intenta nuevamente";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 } catch(ExcepcionAtaqueAAliado error){
                     String cabecera = "No podes atacar a un aliado";
                     String contenido = "Selecciona una unidad enemiga e intenta nuevamente";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 } catch(ExcepcionCuranderoNoAtaca error){
                     String cabecera = "No podes con un curandero";
                     String contenido = "Selecciona una unidad que sí ataque";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 }
                 catch (ExcepcionDistanciaAtaqueInvalida error){
                     String cabecera = "La unidad a atacar esta fuera de rango";
                     String contenido = "Selecciona una unidad dentro del rango de ataque";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 }
             });
         });

@@ -63,19 +63,19 @@ public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
                 } catch (ExcepcionCasilleroVacio error) {
                     String cabecera = "Esta posicion esta vacia";
                     String contenido = "Selecciona una posicion con unidad";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 } catch (ClassCastException error) {
                     String cabecera = "No podes curar con una unidad que no es Curandero";
                     String contenido = "Selecciona una curandero o realiza otra accion";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 } catch (ExcepcionCuracionAEnemigo error){
                     String cabecera = "No podes curar a una unidad enemiga";
                     String contenido = "Cura a una ajena o realiza otra accion";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 } catch(ExcepcionDistanciaCuracionInvalida error){
                     String cabecera = "No podes curar a una unidad que está tan lejos";
                     String contenido = "Cura a una que esté más cerca o realiza otra acción";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,true);
+                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 }
             });
         });

@@ -58,7 +58,7 @@ public class EjercitoTest {
     }
 
 
-    @Test (expected = ExcepcionCantidadInsuficienteDePosiciones.class)
+    @Test (expected = ExcepcionCantidadIncorrectaDePosiciones.class)
     public void testNoLeMandoSuficientesPosicionesParaBatallon() {
 
         Ejercito unEjercito = new Ejercito();
@@ -82,8 +82,8 @@ public class EjercitoTest {
         unEjercito.crearBatallon(posiciones);
     }
 
-    @Test
-    public void testCreaBatallonConTresPosicionesAunqueLeMandeMas() {
+    @Test (expected = ExcepcionCantidadIncorrectaDePosiciones.class)
+    public void testLeMandoDemasiadasPosiciones() {
 
         Ejercito unEjercito = new Ejercito();
 

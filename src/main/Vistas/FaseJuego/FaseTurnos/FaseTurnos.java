@@ -17,6 +17,7 @@ public class FaseTurnos {
     private BorderPane juegoView;
     private VBox statusTablero;
     private Jugador jugadorActual;
+    private Boolean yaMovio;
 
 
 
@@ -26,7 +27,8 @@ public class FaseTurnos {
         this.jugadorActual = juegoPrincipal.getJugadorActual();
         this.statusTablero = new VBox();
         this.statusTablero.setPadding(new Insets(0,0,0,20));
-        this.crearLayoutFaseParaJugadorActual(false);
+        this.yaMovio = false;
+        this.mostrarLayoutFaseParaJugadorActual();
         this.juegoView.setRight(statusTablero);
 
 
@@ -35,12 +37,17 @@ public class FaseTurnos {
     public void cambiarJugador(){
 
         juegoPrincipal.cambiarJugador();
-        this.crearLayoutFaseParaJugadorActual(false);
+        yaMovio = false;
+        this.mostrarLayoutFaseParaJugadorActual();
+    }
+
+    public void jugadorYaMovio(){
+        yaMovio = true;
+        this.mostrarLayoutFaseParaJugadorActual();
     }
 
 
-
-    public void crearLayoutFaseParaJugadorActual(boolean yaMovio){
+    public void mostrarLayoutFaseParaJugadorActual(){
 
         this.statusTablero.getChildren().clear();
         LabelNombreJugador jugador = new LabelNombreJugador(0,0,"Es el turno de: " + juegoPrincipal.getJugadorActual().getNombre()+".");
