@@ -42,7 +42,7 @@ public class FaseTurnos {
     public void crearLayoutFaseParaJugadorActual(boolean yaMovio){
 
         this.statusTablero.getChildren().clear();
-        LabelNombreJugador jugador = new LabelNombreJugador(50,20,"Es el turno del jugador: " + juegoPrincipal.getJugadorActual().getNombre());
+        LabelNombreJugador jugador = new LabelNombreJugador(0,0,"Es el turno de: " + juegoPrincipal.getJugadorActual().getNombre()+".");
         LabelDatosJuego opcionesDeTurno = new LabelDatosJuego(0,50,"Indique que accion desea realizar");
 
         BotonMover mover = new BotonMover(juegoPrincipal,this);

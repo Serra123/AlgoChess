@@ -40,23 +40,22 @@ public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
         VBox statusTablero = faseTurnos.getStatusTablero();
         statusTablero.getChildren().clear();
 
-        LabelNombreJugador jugador = new LabelNombreJugador(-150,25,"Es el turno de: " + jugadorActual.getNombre());
-        LabelDatosJuego seleccionUnidadAMover = new LabelDatosJuego(-150,60,"Seleccione que unidad desea mover y luego listo.");
+        LabelNombreJugador jugador = new LabelNombreJugador(-170,0,"Es el turno de: " + jugadorActual.getNombre());
+        LabelDatosJuego instrucciones = new LabelDatosJuego(-170,60,"Seleccione que unidad desea mover y luego listo.");
         Button listo = new Button ("listo");
-        listo.setTranslateX(-150);
+        listo.setTranslateX(-170);
         listo.setTranslateY(80);
         infoCasilleroBox.setText("");
-        statusTablero.getChildren().addAll(jugador,seleccionUnidadAMover,listo,infoCasilleroBox);
+        infoCasilleroBox.setTranslateX(-170);
+        statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
 
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
-            statusTablero.getChildren().clear();
-            LabelDatosJuego seleccionCasillero = new LabelDatosJuego(-150,60,"Seleccione a donde desea mover la unidad y luego listo.");
-            seleccionCasillero.setTranslateX(-150);
-            statusTablero.getChildren().addAll(jugador, seleccionCasillero, listo,infoCasilleroBox);
+            instrucciones.setText("Seleccione a donde desea moverla y luego listo. ");
 
             listo.setOnAction(e -> {
                 Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
+                infoCasilleroBox.setTranslateX(0);
                 try {
                     UnidadMovible unidad = (UnidadMovible) tablero.getUnidadDe(posicionAMover,jugadorActual);
                     unidad.mover(nuevaPosicion, tablero);

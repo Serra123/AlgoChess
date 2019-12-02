@@ -40,20 +40,20 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
         statusTablero.getChildren().clear();
 
         LabelNombreJugador jugador = new LabelNombreJugador(-250,0,jugadorActual.getNombre());
-        LabelDatosJuego seleccionUnidadAtacante = new LabelDatosJuego(-250,0,"Seleccione con que unidad desea \natacar y luego listo");
+        LabelDatosJuego instrucciones = new LabelDatosJuego(-250,0,"Seleccione con que unidad desea \natacar y luego listo");
         Button listo = new Button ("listo");
         listo.setTranslateX(-250);
         infoCasilleroBox.setText("");
-        statusTablero.getChildren().addAll(jugador,seleccionUnidadAtacante,listo,infoCasilleroBox);
+        infoCasilleroBox.setTranslateX(-250);
+        statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
 
         listo.setOnAction(f-> {
             Posicion posicionAMover = infoCasilleroBox.getPosicion();
-            statusTablero.getChildren().clear();
-            LabelDatosJuego seleccionUnidadAtacada = new LabelDatosJuego(-250,0,"Seleccione a que unidad que desea \natacar y luego listo");
-            statusTablero.getChildren().addAll(jugador, seleccionUnidadAtacada, listo,infoCasilleroBox);
+            instrucciones.setText("Seleccione a que unidad que desea \natacar y luego listo");
 
             listo.setOnAction(e -> {
                 Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
+                infoCasilleroBox.setTranslateX(0);
                 try {
                     Unidad unidadAtacante =tablero.getUnidadDe(posicionAMover,jugadorActual);
                     Unidad unidadAtacada =tablero.getUnidad(nuevaPosicion);
