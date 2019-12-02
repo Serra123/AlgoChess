@@ -32,7 +32,6 @@ public abstract class Unidad {
     void expandirAtaqueRecibido(int valorDanio, Tablero unTablero){
         ArrayList<Posicion> posicionesAfectadas = new ArrayList<>();
         posicionesAfectadas = unTablero.obtenerPosicionesAfectadasPorExpansion(this.posicion,posicionesAfectadas);
-        posicionesAfectadas.add(this.posicion);
         posicionesAfectadas.forEach((posicion) -> {
                     boolean estaEnSectorAliado = unTablero.estaEnSector(unTablero.getUnidad(posicion));
                     unTablero.getUnidad(posicion).recibirAtaque(valorDanio, estaEnSectorAliado);
