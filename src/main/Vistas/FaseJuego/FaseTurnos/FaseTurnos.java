@@ -26,9 +26,10 @@ public class FaseTurnos {
         this.juegoView = juegoPrincipal.getJuegoView();
         this.jugadorActual = juegoPrincipal.getJugadorActual();
         this.statusTablero = new VBox();
-        this.statusTablero.setPadding(new Insets(0,0,0,20));
+        this.statusTablero.setPadding(new Insets(0,0,0,0));
         this.yaMovio = false;
         this.mostrarLayoutFaseParaJugadorActual();
+        juegoView.setAlignment(statusTablero,Pos.TOP_LEFT);
         this.juegoView.setRight(statusTablero);
 
 
@@ -51,7 +52,7 @@ public class FaseTurnos {
 
         this.statusTablero.getChildren().clear();
         LabelNombreJugador jugador = new LabelNombreJugador(0,0,"Es el turno de: " + juegoPrincipal.getJugadorActual().getNombre()+".");
-        LabelDatosJuego opcionesDeTurno = new LabelDatosJuego(0,50,"Indique que accion desea realizar");
+        LabelDatosJuego opcionesDeTurno = new LabelDatosJuego(0,50,"Indique la posicion que desee utilizar, \no para crear un batallon");
 
         BotonMover mover = new BotonMover(juegoPrincipal,this);
         mover.setMinWidth(500);

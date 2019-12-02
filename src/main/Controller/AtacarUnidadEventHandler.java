@@ -38,59 +38,59 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
         VBox statusTablero = faseTurnos.getStatusTablero();
         statusTablero.getChildren().clear();
 
-        LabelNombreJugador jugador = new LabelNombreJugador(-250,0,jugadorActual.getNombre());
-        LabelDatosJuego instrucciones = new LabelDatosJuego(-250,0,"Seleccione con que unidad desea \natacar y luego listo");
+        Posicion posicionAMover = infoCasilleroBox.getPosicion();
+        LabelNombreJugador jugador = new LabelNombreJugador(-270,0,jugadorActual.getNombre());
+        LabelDatosJuego instrucciones = new LabelDatosJuego(-270,0,"Seleccione con que unidad desea \natacar y luego listo");
         Button listo = new Button ("listo");
-        listo.setTranslateX(-250);
+        listo.setTranslateX(-270);
         infoCasilleroBox.setText("");
-        infoCasilleroBox.setTranslateX(-250);
+        infoCasilleroBox.setTranslateX(-270);
         statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
 
-        listo.setOnAction(f-> {
-            Posicion posicionAMover = infoCasilleroBox.getPosicion();
-            instrucciones.setText("Seleccione a que unidad que desea \natacar y luego listo");
-
-            listo.setOnAction(e -> {
-                Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
-                infoCasilleroBox.setTranslateX(0);
-                try {
-                    Unidad unidadAtacante =tablero.getUnidadDe(posicionAMover,jugadorActual);
-                    Unidad unidadAtacada =tablero.getUnidad(nuevaPosicion);
-                    unidadAtacante.atacar(unidadAtacada, tablero);
-                    if(unidadAtacada.getVida() <= 0 ){
-                        if(unidadAtacada.getEjercito().equals(juegoPrincipal.getJugadorUno().getNombre())){
-                            juegoPrincipal.getJugadorUno().getEjercito().eliminarUnidad(unidadAtacada);
-                        }else{
-                            juegoPrincipal.getJugadorDos().getEjercito().eliminarUnidad(unidadAtacada);
-                        }
+        listo.setOnAction(e -> {
+            Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
+            infoCasilleroBox.setTranslateX(0);
+            try {
+                Unidad unidadAtacante =tablero.getUnidadDe(posicionAMover,jugadorActual);
+                Unidad unidadAtacada =tablero.getUnidad(nuevaPosicion);
+                unidadAtacante.atacar(unidadAtacada, tablero);
+                if(unidadAtacada.getVida() <= 0 ){
+                    if(unidadAtacada.getEjercito().equals(juegoPrincipal.getJugadorUno().getNombre())){
+                        juegoPrincipal.getJugadorUno().getEjercito().eliminarUnidad(unidadAtacada);
+                    }else{
+                        juegoPrincipal.getJugadorDos().getEjercito().eliminarUnidad(unidadAtacada);
                     }
-                    tableroView.actualizar();
-                    tableroView.mostrar(nuevaPosicion);
-                    verificarSiTerminoJuego();
-                    faseTurnos.cambiarJugador();
-                } catch (ExcepcionCasilleroVacio error) {
-                    String cabecera = "Esta posicion esta vacia";
-                    String contenido = "Selecciona una posicion con unidad";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                } catch (ExcepcionUnidadNoPerteneceATuEjercito error) {
-                    String cabecera = "No podes atacar con una unidad que no pertenece a tu ejercito";
-                    String contenido = "Selecciona una unidad propia e intenta nuevamente";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                } catch(ExcepcionAtaqueAAliado error){
-                    String cabecera = "No podes atacar a un aliado";
-                    String contenido = "Selecciona una unidad enemiga e intenta nuevamente";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                } catch(ExcepcionCuranderoNoAtaca error){
-                    String cabecera = "No podes con un curandero";
-                    String contenido = "Selecciona una unidad que sí ataque";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
                 }
-                catch (ExcepcionDistanciaAtaqueInvalida error){
-                    String cabecera = "La unidad a atacar esta fuera de rango";
-                    String contenido = "Selecciona una unidad dentro del rango de ataque";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                }
-            });
+                tableroView.actualizar();
+                tableroView.mostrar(nuevaPosicion);
+                verificarSiTerminoJuego();
+                faseTurnos.cambiarJugador();
+            } catch (ExcepcionCasilleroVacio error) {
+                String cabecera = "Esta posicion esta vacia";
+                String contenido = "Selecciona una posicion con unidad";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            } catch (ExcepcionUnidadNoPerteneceATuEjercito error) {
+                String cabecera = "No podes atacar con una unidad que no pertenece a tu ejercito";
+                String contenido = "Selecciona una unidad propia e intenta nuevamente";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            } catch(ExcepcionAtaqueAAliado error){
+                String cabecera = "No podes atacar a un aliado";
+                String contenido = "Selecciona una unidad enemiga e intenta nuevamente";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            } catch(ExcepcionCuranderoNoAtaca error){
+                String cabecera = "No podes atacar con un curandero";
+                String contenido = "Selecciona una unidad que sí ataque";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            }
+            catch (ExcepcionDistanciaAtaqueInvalida error){
+                String cabecera = "La unidad a atacar esta fuera de rango";
+                String contenido = "Selecciona una unidad dentro del rango de ataque";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            } catch(ExcepcionCatapultaNoAtacaAliados error){
+                String cabecera = "La catapulta no puede atacar directamente a un aliado";
+                String contenido = "Selecciona una unidad enemiga a la cual atacar";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            }
         });
     }
 
