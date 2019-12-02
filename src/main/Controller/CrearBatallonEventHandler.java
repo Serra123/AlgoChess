@@ -1,7 +1,8 @@
 package Controller;
 
-import Excepciones.ExcepcionCantidadInsuficienteDePosiciones;
+import Excepciones.ExcepcionCantidadIncorrectaDePosiciones;
 import Excepciones.ExcepcionLasUnidadesEstanSeparadas;
+import Excepciones.ExcepcionMovimientoInvalido;
 import Excepciones.ExcepcionPosicionInvalida;
 import Jugador.Jugador;
 import Tablero.Tablero;
@@ -64,29 +65,38 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
                     infoCasilleroBox.setText(nuevaPosicion.getFila()+";"+nuevaPosicion.getColumna());
 
                     batallon.agregarTablero(tablero);
-                    batallon.moverBatallon(nuevaPosicion);
-                    tableroView.actualizar();
-                    tableroView.mostrar(nuevaPosicion);
-                    faseTurnos.crearLayoutFaseParaJugadorActual(true);
+                    try {
+                        batallon.moverBatallon(nuevaPosicion);
+                        tableroView.actualizar();
+                        tableroView.mostrar(nuevaPosicion);
+                        faseTurnos.jugadorYaMovio();
+                    } catch(ExcepcionMovimientoInvalido error) {
+                        String cabecera = "Movimiento invalido";
+                        String contenido = "Selecciona una distancia a la cual tu unidad se pueda mover";
+                        new AlertaErrorEnTurno(cabecera, contenido, tableroView, faseTurnos);
+                    } catch(StackOverflowError error){
+                        String cabecera = "Camino bloqueado";
+                        String contenido = "No podes moverte en esta direccion";
+                        new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+                    } catch(NullPointerException error){
+                        String cabecera = "Camino bloqueado";
+                        String contenido = "No podes moverte en esta direccion";
+                        new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+                    }
                 });
-            }catch(ExcepcionCantidadInsuficienteDePosiciones error){
-                String cabecera = "Tenes que elegir 3 posiciones!";
+            }catch(ExcepcionCantidadIncorrectaDePosiciones error){
+                String cabecera = "No elegiste 3 posiciones!";
                 String contenido = "Selecciona 3 posiciones e intenta nuevamente";
-                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
             } catch(ExcepcionPosicionInvalida error){
                 String cabecera = "Las posiciones no contienen soldados";
                 String contenido = "Selecciona posiciones con soldados e intenta nuevamente";
-                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
             } catch(ExcepcionLasUnidadesEstanSeparadas error) {
                 String cabecera = "Las unidades estan separadas";
                 String contenido = "Selecciona posiciones contiguas e intenta nuevamente";
-                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos,false);
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
             }
-            /*catch(Exception error){
-                infoCasilleroBox.setText("Algo salio mal");
-                tableroView.actualizar();
-                faseTurnos.crearLayoutFaseParaJugadorActual(false);
-            }*/
         });
     }
 }

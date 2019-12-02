@@ -45,7 +45,7 @@ public class FaseAgregarUnidades {
 
     public VBox crearLayoutFaseParaJugadorActual(){
         LabelNombreJugador jugador = new LabelNombreJugador(0,0,"Es el turno de: " + this.getJugadorActual().getNombre()+".");
-        LabelDatosJuego puntosJugadorActual = new LabelDatosJuego(0,50,"Jugador");
+        LabelDatosJuego puntosJugadorActual = new LabelDatosJuego(0,50,"Al jugador " + this.getJugadorActual().getNombre() + " le quedan: 20 puntos.");
         LabelDatosJuego opcionesIngreso = new LabelDatosJuego(0,55,"Clickee la posicion donde desea crear una unidad y \nluego el tipo de unidad que desee.");
         Insets configBotonesOpcionesUnidades = new Insets(20,20,20,20);
 

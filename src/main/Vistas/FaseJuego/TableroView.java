@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class TableroView extends GridPane {
 
     private static final int LADO = 20;
+    private static final String NARANJAOSCURO = "-fx-background-color:  #a04000;";
+    private static final String BORDO = "-fx-background-color:    #6e2c00;";
 
     private BotonCasillero[][] botonesCasillero = new BotonCasillero[LADO][LADO];
 
@@ -16,7 +18,11 @@ public class TableroView extends GridPane {
         for(int i = 0; i < LADO; i++){
             for(int j = 0; j < LADO;j++){
                 Posicion unaPosicion = new Posicion(i,j);
-                botonesCasillero[i][j] = new BotonCasillero(faseDeJuegoDelTablero,unaPosicion);
+                if(i<LADO/2){
+                    botonesCasillero[i][j] = new BotonCasillero(faseDeJuegoDelTablero,unaPosicion, BORDO);
+                }else{
+                    botonesCasillero[i][j] = new BotonCasillero(faseDeJuegoDelTablero,unaPosicion, NARANJAOSCURO);
+                }
                 this.add(botonesCasillero[i][j],j,i);
             }
         }

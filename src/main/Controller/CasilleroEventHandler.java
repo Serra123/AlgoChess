@@ -1,7 +1,6 @@
 package Controller;
 
 import Excepciones.ExcepcionCasilleroVacio;
-import Jugador.Jugador;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
@@ -12,6 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class CasilleroEventHandler implements EventHandler<ActionEvent> {
+
+    private static final String BLANCO = "-fx-background-color: #fdfefe;";
+
 
     protected Posicion posicion;
     protected InfoCasilleroBox infoCasilleroBox;
@@ -34,8 +36,8 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
             setearTextoCasillero(unidad,botonCasillero);
         } catch (ExcepcionCasilleroVacio e) {
             botonCasillero.setText("");
+            botonCasillero.setStyle(botonCasillero.getColorInicial());
         }
-        botonCasillero.setStyle("-fx-background-image: url('fondoCasillero.jpg')");
         this.infoCasilleroBox.actualizarPosicionClickeada(posicion);
     }
 
@@ -61,8 +63,10 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
         if(unaUnidad.getVida() > 0 ){
             textoCasillero = textoCasillero + unaUnidad.getEjercito();
             botonCasillero.setText(textoCasillero);
+            botonCasillero.setStyle(BLANCO);
         }else{
             botonCasillero.setText("");
+            botonCasillero.setStyle(botonCasillero.getColorInicial());
         }
     }
 

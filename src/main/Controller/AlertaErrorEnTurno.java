@@ -5,7 +5,7 @@ import Vistas.FaseJuego.TableroView;
 import javafx.scene.control.Alert;
 
 public class AlertaErrorEnTurno extends Alert {
-    public AlertaErrorEnTurno(String cabecera, String contenido, TableroView tableroView, FaseTurnos faseTurnos, boolean yaMovio) {
+    public AlertaErrorEnTurno(String cabecera, String contenido, TableroView tableroView, FaseTurnos faseTurnos) {
         super(Alert.AlertType.INFORMATION);
         this.setTitle("ERROR");
         this.setHeaderText(cabecera);
@@ -13,6 +13,6 @@ public class AlertaErrorEnTurno extends Alert {
         this.showAndWait();
 
         tableroView.actualizar();
-        faseTurnos.crearLayoutFaseParaJugadorActual(yaMovio);
+        faseTurnos.mostrarLayoutFaseParaJugadorActual();
     }
 }
