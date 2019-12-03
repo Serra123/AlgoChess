@@ -5,8 +5,9 @@ import Excepciones.ExcepcionLasUnidadesEstanSeparadas;
 import Excepciones.ExcepcionMovimientoInvalido;
 import Excepciones.ExcepcionPosicionInvalida;
 import Jugador.Jugador;
+import Modelo.Batallon;
 import Tablero.Tablero;
-import Unidades.Batallon;
+import Modelo.Batallon;
 import Unidades.Posicion.Posicion;
 import Vistas.FaseJuego.*;
 import Vistas.FaseJuego.FaseTurnos.FaseTurnos;
@@ -56,7 +57,7 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
             Ejercito ejercito = jugadorActual.getEjercito();
             try{
                 infoCasilleroBox.setTranslateX(0);
-                Batallon batallon = ejercito.crearBatallon(posiciones);
+                Batallon batallon =new Batallon(posiciones,jugadorActual,tablero);
                 infoCasilleroBox.setTranslateX(-190);
                 instrucciones.setText("Seleccione la direccion a la que desea mover \na la posicion central del batallon creado");
                 listo.setOnAction(f->{
@@ -64,7 +65,6 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
                     Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
                     infoCasilleroBox.setText(nuevaPosicion.getFila()+";"+nuevaPosicion.getColumna());
 
-                    batallon.agregarTablero(tablero);
                     try {
                         batallon.moverBatallon(nuevaPosicion);
                         tableroView.actualizar();

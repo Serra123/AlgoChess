@@ -1,71 +1,70 @@
 package Modelo;
-
-import Excepciones.ExcepcionCantidadIncorrectaDePosiciones;
-import Excepciones.ExcepcionLasUnidadesEstanSeparadas;
-import Excepciones.ExcepcionPosicionInvalida;
+import Excepciones.ExcepcionCasilleroOcupado;
+import Excepciones.ExcepcionMovimientoInvalido;
+import Excepciones.ExcepcionSuperaLimitesDelTablero;
 import Jugador.Jugador;
+import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
-import Unidades.Unidad;
-
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 
 public class Batallon {
-
-    private ArrayList<Soldado> SoldadosDeBatallon;
-
-    public Batallon(ArrayList<Posicion> posicionesTotales, Jugador jugador){
-
-        ArrayList<Posicion> posiciones = getTresPosiciones(posicionesTotales);
-        posicionesEstanContiguas(posiciones);
-        SoldadosDeBatallon =  getSoldadosDePosiciones(posiciones,jugador);
+    private ArrayList<Soldado> soldados;
+    private Soldado soldadoCentral;
+    private Tablero unTablero;
+    public Batallon(ArrayList<Posicion> posicionesTotales, Jugador jugador, Tablero tablero) {
+        this.soldados =new VerificarCreacionDeBatallon().VerificarBatallon(posicionesTotales, jugador, tablero);
+        this.soldadoCentral = this.getSoldadoCentral();
+        this.unTablero = tablero;
     }
-
-    private ArrayList<Posicion> getTresPosiciones(ArrayList<Posicion> posicionesTotales)throws ExcepcionCantidadIncorrectaDePosiciones {
-
-        LinkedHashSet<Posicion> hashSet = new LinkedHashSet<>(posicionesTotales);
-        ArrayList <Posicion> posiciones = new ArrayList<>(hashSet);
-        if(posiciones.size()!=3){
-            throw new ExcepcionCantidadIncorrectaDePosiciones();
-        }
-        ArrayList<Posicion> tresPosiciones = new ArrayList<>();
-
-        tresPosiciones.add(posicionesTotales.get(0));
-        tresPosiciones.add(posicionesTotales.get(1));
-        tresPosiciones.add(posicionesTotales.get(2));
-
-        return tresPosiciones;
-
-    }
-
-    private void posicionesEstanContiguas(ArrayList<Posicion> posiciones)throws ExcepcionLasUnidadesEstanSeparadas {
-        for(int i = 0; i<posiciones.size(); i++){
+    private Soldado getSoldadoCentral(){
+        double distanciaMin = 100;
+        Soldado soldadoCentral = soldados.get(1);
+        for(int i=0;i<soldados.size();i++){
             int finalI = i;
-            int cantidadPosicionesSeparadas = (int) posiciones.stream().filter(p->posiciones.get(finalI).calcularDistancia(p)>=2).count();
-            if (cantidadPosicionesSeparadas>1) {
-                throw new ExcepcionLasUnidadesEstanSeparadas();
+            int distanciaSoldado = (int) soldados.stream().filter(s -> s.distanciaA(soldados.get(finalI))>1.5).count();
+            if(distanciaSoldado<distanciaMin){
+                distanciaMin = distanciaSoldado;
+                soldadoCentral=soldados.get(i);
             }
         }
+        return soldadoCentral;
     }
-
-    private ArrayList<Soldado> getSoldadosDePosiciones(ArrayList<Posicion> posiciones,Jugador jugador)throws ExcepcionPosicionInvalida {
-
-        ArrayList<Soldado> soldadosDeBatallon = new ArrayList<>();
-
-        /*for (Unidad unidad : unidades) {
-            for(Posicion posicion : posiciones){
-                if(unidad.candidatoABatallonEn(posicion)){
-                    soldadosDeBatallon.add((Soldado) unidad);
-                }
-            }
-        }*/
-        //for(){
-
-        /*}
-        if(soldadosDeBatallon.size()<3){
-            throw new ExcepcionPosicionInvalida();
-        }*/
-        return soldadosDeBatallon;
+    public void moverBatallon(Posicion posicionCentralNueva) {
+        Posicion posicionCentralVieja = soldadoCentral.getPosicion();
+        ArrayList<Posicion> nuevasPosiciones = calcularPosicionesNuevas(posicionCentralNueva,posicionCentralVieja);
+        moverSoldados(nuevasPosiciones,0);
+    }
+    private ArrayList<Posicion> calcularPosicionesNuevas(Posicion posicionCentralNueva, Posicion posicionCentralVieja){
+        ArrayList<Posicion> nuevasPosiciones = new ArrayList<>();
+        for (Soldado soldado : soldados) {
+            Posicion nuevaPosicion = soldado.getPosicion().calcularNuevaPosicionRespectoDe(posicionCentralNueva, posicionCentralVieja);
+            nuevasPosiciones.add(nuevaPosicion);
+        }
+        return nuevasPosiciones;
+    }
+    private void moverSoldados(ArrayList<Posicion> nuevasPosiciones,int soldadoActual){
+        boolean mismaPosicionConDos = nuevasPosiciones.get(soldadoActual).calcularDistancia(soldados.get(1).getPosicion()) == 0;
+        boolean mismaPosicionConTres = nuevasPosiciones.get(soldadoActual).calcularDistancia(soldados.get(2).getPosicion()) == 0;
+        if(mismaPosicionConDos && soldadoActual!=1){
+            moverSoldados(nuevasPosiciones,1);
+        }
+        else if(mismaPosicionConTres && soldadoActual!=2){
+            moverSoldados(nuevasPosiciones,2);
+        }
+        moverUnSoldado(nuevasPosiciones,soldadoActual);
+        if(soldadoActual<2){
+            moverSoldados(nuevasPosiciones,soldadoActual+1);
+        }
+    }
+    private void moverUnSoldado(ArrayList<Posicion> nuevasPosiciones,int numeroSoldado) throws ExcepcionMovimientoInvalido {
+        Soldado soldadoActual = soldados.get(numeroSoldado);
+        Posicion posicionActual = soldadoActual.getPosicion();
+        try{
+            soldadoActual.mover(nuevasPosiciones.get(numeroSoldado),unTablero);
+        }
+        catch (ExcepcionCasilleroOcupado | ExcepcionSuperaLimitesDelTablero e){
+            soldadoActual.mover(posicionActual,unTablero);
+        }
     }
 }

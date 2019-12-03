@@ -35,7 +35,7 @@ public abstract class Unidad {
     }
 
 
-    double distanciaA(Unidad unaUnidad){
+    public double distanciaA(Unidad unaUnidad){
         return this.posicion.calcularDistancia(unaUnidad.getPosicion());
     }
 
