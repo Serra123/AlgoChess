@@ -1,9 +1,6 @@
 package Controller;
 
-import Excepciones.ExcepcionCantidadIncorrectaDePosiciones;
-import Excepciones.ExcepcionLasUnidadesEstanSeparadas;
-import Excepciones.ExcepcionMovimientoInvalido;
-import Excepciones.ExcepcionPosicionInvalida;
+import Excepciones.*;
 import Jugador.Jugador;
 import Modelo.Batallon;
 import Tablero.Tablero;
@@ -54,7 +51,6 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
         listo.setOnAction(e->{
             tableroView.resetearComportamientoDeCasilleros();
 
-            Ejercito ejercito = jugadorActual.getEjercito();
             try{
                 infoCasilleroBox.setTranslateX(0);
                 Batallon batallon =new Batallon(posiciones,jugadorActual,tablero);
@@ -92,6 +88,14 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
                 String cabecera = "Las unidades estan separadas";
                 String contenido = "Selecciona posiciones contiguas e intenta nuevamente";
                 new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            }catch(ExcepcionCasilleroVacio error){
+                String cabecera = "Las unidades estan separadas";
+                String contenido = "Selecciona posiciones contiguas e intenta nuevamente";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            }catch(ExcepcionUnidadNoPerteneceATuEjercito error) {
+                String cabecera = "Clickeaste una unidad que no pertenece a tu ejercito";
+                String contenido = "Selecciona unidades que sí lo hagan";
+                new AlertaErrorEnTurno(cabecera, contenido, tableroView, faseTurnos);
             }
         });
     }
