@@ -20,8 +20,10 @@ public class TableroView extends GridPane {
                 Posicion unaPosicion = new Posicion(i,j);
                 if(i<LADO/2){
                     botonesCasillero[i][j] = new BotonCasillero(faseDeJuegoDelTablero,unaPosicion, BORDO);
+                    botonesCasillero[i][j].getStyleClass().add("botonCasillero");
                 }else{
                     botonesCasillero[i][j] = new BotonCasillero(faseDeJuegoDelTablero,unaPosicion, NARANJAOSCURO);
+                    botonesCasillero[i][j].getStyleClass().add("botonCasillero1");
                 }
                 this.add(botonesCasillero[i][j],j,i);
             }

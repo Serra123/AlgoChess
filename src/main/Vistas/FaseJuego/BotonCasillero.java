@@ -20,12 +20,14 @@ public class BotonCasillero extends Button {
 
 
     BotonCasillero(JuegoPrincipal faseDeJuego, Posicion unaPosicion, String unColor){
+        this.getStyleClass().add("botonCasillero");
+        this.getStylesheets().add("botonCasillero.css");
         this.faseDeJuego = faseDeJuego;
         this.posicion = unaPosicion;
         this.colorInicial = unColor;
         this.setPrefSize(50,34);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
-        this.setStyle(unColor);
+        //this.setStyle(unColor);
         this.setOnAction(new CasilleroEventHandler(faseDeJuego,unaPosicion,this));
     }
 

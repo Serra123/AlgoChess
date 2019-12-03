@@ -36,7 +36,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
             setearTextoCasillero(unidad,botonCasillero);
         } catch (ExcepcionCasilleroVacio e) {
             botonCasillero.setText("");
-            botonCasillero.setStyle(botonCasillero.getColorInicial());
+            //botonCasillero.setStyle(botonCasillero.getColorInicial());
         }
         this.infoCasilleroBox.actualizarPosicionClickeada(posicion);
     }
@@ -63,10 +63,10 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
         if(unaUnidad.getVida() > 0 ){
             textoCasillero = textoCasillero + unaUnidad.getEjercito();
             botonCasillero.setText(textoCasillero);
-            botonCasillero.setStyle(BLANCO);
+
         }else{
             botonCasillero.setText("");
-            botonCasillero.setStyle(botonCasillero.getColorInicial());
+
         }
     }
 
