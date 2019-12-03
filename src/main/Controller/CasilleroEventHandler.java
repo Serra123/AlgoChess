@@ -39,6 +39,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
         } catch (ExcepcionCasilleroVacio e) {
             botonCasillero.getStyleClass().removeAll("botonConSoldado1","botonConJinete1","botonConCurandero1","botonConCatapulta1");
             botonCasillero.getStyleClass().removeAll("botonConSoldado2","botonConJinete2","botonConCurandero2","botonConCatapulta2");
+            botonCasillero.getStyleClass().removeAll("botonBatallon");
         }
         this.infoCasilleroBox.actualizarPosicionClickeada(posicion);
     }

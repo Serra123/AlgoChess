@@ -57,7 +57,6 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                 unidadAtacante.atacar(unidadAtacada, tablero);
                 tableroView.actualizar();
                 tableroView.mostrar(nuevaPosicion);
-                jugadorAtacado.verificarSiPierde();
                 faseTurnos.cambiarJugador();
             } catch (ExcepcionCasilleroVacio error) {
                 String cabecera = "Esta posicion esta vacia";
@@ -84,9 +83,6 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                 String cabecera = "La catapulta no puede atacar directamente a un aliado";
                 String contenido = "Selecciona una unidad enemiga a la cual atacar";
                 new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-            }
-            catch (ExcepcionFinDeJuego error){
-                new AlertaFinDeJuego(jugadorActual.getNombre(),juegoPrincipal.getVentana());
             }
         });
     }

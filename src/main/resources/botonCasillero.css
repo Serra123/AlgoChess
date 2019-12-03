@@ -11,6 +11,10 @@
     -fx-border-width: 3px;
 }
 
+.botonBatallon{
+    -fx-background-color: RED;
+}
+
 
 .botonCasillero1{
     -fx-background-color: #6e2c00;

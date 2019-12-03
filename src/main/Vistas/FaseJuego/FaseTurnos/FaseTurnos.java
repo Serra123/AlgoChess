@@ -1,5 +1,7 @@
 package Vistas.FaseJuego.FaseTurnos;
 
+import Controller.AlertaFinDeJuego;
+import Excepciones.ExcepcionFinDeJuego;
 import Jugador.Jugador;
 import Vistas.FaseJuego.JuegoPrincipal;
 import Vistas.FaseJuego.LabelDatosJuego;
@@ -37,6 +39,11 @@ public class FaseTurnos {
     public void cambiarJugador(){
 
         juegoPrincipal.cambiarJugador();
+        try{
+            jugadorActual.verificarSiPierde();
+        }catch (ExcepcionFinDeJuego error){
+            new AlertaFinDeJuego(jugadorActual.getNombre(),juegoPrincipal.getVentana());
+        }
         yaMovio = false;
         this.mostrarLayoutFaseParaJugadorActual();
     }
