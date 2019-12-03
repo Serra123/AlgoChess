@@ -29,7 +29,6 @@ public class FaseTurnos {
         this.statusTablero.setPadding(new Insets(0,0,0,0));
         this.yaMovio = false;
         this.mostrarLayoutFaseParaJugadorActual();
-        juegoView.setAlignment(statusTablero,Pos.TOP_LEFT);
         this.juegoView.setRight(statusTablero);
 
 

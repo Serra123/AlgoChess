@@ -16,20 +16,50 @@
     -fx-background-color: #6e2c00;
 }
 
-.botonConSoldado{
+.botonConSoldado1{
     -fx-background-image: url("soldado.png");
-    -fx-background-size: 60px 60px;
+    -fx-background-size: 50px 50px;
     -fx-background-repeat: no-repeat;
 }
 
-.botonConJinete{
+.botonConJinete1{
     -fx-background-image: url("caballo.png");
     -fx-background-size: 60px 60px;
     -fx-background-repeat: no-repeat;
 }
 
-.botonConCurandero{
-    -fx-background-image: url("curandero.png");
+.botonConCurandero1{
+    -fx-background-image: url("curandero2.png");
+    -fx-background-size: 60px 60px;
+    -fx-background-repeat: no-repeat;
+}
+
+.botonConCatapulta1{
+    -fx-background-image: url("catapulta.png");
+    -fx-background-size: 60px 60px;
+    -fx-background-repeat: no-repeat;
+}
+
+.botonConSoldado2{
+    -fx-background-image: url("soldado1.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+}
+
+.botonConJinete2{
+    -fx-background-image: url("caballo1.png");
+    -fx-background-size: 60px 60px;
+    -fx-background-repeat: no-repeat;
+}
+
+.botonConCurandero2{
+    -fx-background-image: url("curandero1.png");
+    -fx-background-size: 60px 60px;
+    -fx-background-repeat: no-repeat;
+}
+
+.botonConCatapulta2{
+    -fx-background-image: url("catapult.png");
     -fx-background-size: 60px 60px;
     -fx-background-repeat: no-repeat;
 }

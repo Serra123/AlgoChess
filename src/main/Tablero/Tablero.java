@@ -47,6 +47,11 @@ public class Tablero {
         } else throw new ExcepcionSectorEnemigo();
     }
 
+    public void vaciarCasillero(Posicion unaPosicion){
+        Fila unaFila = filas.get(unaPosicion.getFila());
+        unaFila.vaciarUnidad(unaPosicion.getColumna());
+    }
+
     public void moverUnidad(UnidadMovible unaUnidadMovible,Posicion posicionNueva) throws ExcepcionCasilleroOcupado,
                                                                                           ExcepcionCasilleroVacio {
         Posicion unaPosicion = unaUnidadMovible.getPosicion();
@@ -59,6 +64,10 @@ public class Tablero {
     public Unidad getUnidad(Posicion unaPosicion){
         Fila unaFila = filas.get(unaPosicion.getFila());
         Casillero unCasillero = unaFila.getCasillero(unaPosicion.getColumna());
+        Unidad unaUnidad = unCasillero.contenido();
+        if(unaUnidad.getVida() <= 0){
+            this.vaciarCasillero(unaUnidad.getPosicion());
+        }
         return unCasillero.contenido();
     }
 

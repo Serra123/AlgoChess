@@ -57,4 +57,5 @@ public class CrearUnidadEventHandler implements EventHandler<ActionEvent> {
             //no hago nada, solo lo tira si clickeo crear unida antes de mandarle una posicion
         }
     }
+
 }
