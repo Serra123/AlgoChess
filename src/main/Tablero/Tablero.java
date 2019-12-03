@@ -101,14 +101,29 @@ public class Tablero {
         unidadesParcial = this.obtenerUnidadesAlejadasA(unaPosicion,DISTANCIACONTIGUA);
         unidadesParcial.add(this.getUnidad(unaPosicion));
 
-        for(Iterator<Unidad> iterator = unidadesParcial.iterator();iterator.hasNext();){
+        /*for(Iterator<Unidad> iterator = unidadesParcial.iterator();iterator.hasNext();){
             Unidad unaUnidad = iterator.next();
             if (!(unidadesTotal.contains(unaUnidad))) {
                 unidadesTotal.add(unaUnidad);
             }else iterator.remove();
-        }
-        unidadesParcial.stream().peek(x -> this.obtenerUnidadesDeExpansion(unidadesTotal, x.getPosicion())).toArray();
+        }*/
 
+        ArrayList<Unidad> unidadesARemover =new ArrayList<>();
+        unidadesParcial.stream().forEach(u -> {
+            if(this.yaEstaEnUnidadesTotales(unidadesTotal,u)){
+                unidadesTotal.add(u);
+            }else{
+                unidadesARemover.add(u);
+            }
+        }
+        );
+
+        unidadesParcial.stream().filter(p->!unidadesARemover.contains(p)).peek(x -> this.obtenerUnidadesDeExpansion(unidadesTotal, x.getPosicion())).toArray();
+
+    }
+
+    public boolean yaEstaEnUnidadesTotales(ArrayList<Unidad>unidadesTotal,Unidad unaUnidad){
+        return !unidadesTotal.contains(unaUnidad);
     }
 
     public Unidad getUnidadDe(Posicion unaPosicion, Jugador unJugador)throws ExcepcionUnidadNoPerteneceATuEjercito {

@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+
+
     private static final int POSICIONNOMBREJUGADORUNO = 0;
     private static final int POSICIONNOMBREJUGADORDOS = 1;
 
