@@ -23,6 +23,5 @@ public class CasilleroParaBatallonEventHandler extends CasilleroEventHandler {
     public void handle(ActionEvent actionEvent) {
         super.handle(actionEvent);
         posiciones.add(posicion);
-        botonCasillero.getStyleClass().add("botonBatallon");
         }
 }
