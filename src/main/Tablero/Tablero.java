@@ -9,10 +9,8 @@ import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 import Unidades.UnidadMovible;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,7 +34,7 @@ public class Tablero {
 
     public boolean estaEnSector(Unidad unaUnidad){
 
-        Sector sector = sectores.get(unaUnidad.getEjercito());
+        Sector sector = sectores.get(unaUnidad.getNombreJugador());
 
         return (sector.estaEnSector(unaUnidad.getPosicion()));
 
@@ -128,7 +126,7 @@ public class Tablero {
 
     public Unidad getUnidadDe(Posicion unaPosicion, Jugador unJugador)throws ExcepcionUnidadNoPerteneceATuEjercito {
         Unidad unidad= getUnidad(unaPosicion);
-        if(unidad.getEjercito()!=unJugador.getNombre()){
+        if(!unidad.getNombreJugador().equals(unJugador.getNombre())){
             throw new ExcepcionUnidadNoPerteneceATuEjercito();
         }
         else{

@@ -16,6 +16,7 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
 
 
     private final JuegoPrincipal juegoPrincipal;
+    private Jugador jugadorAtacado;
     private Jugador jugadorActual;
     private InfoCasilleroBox infoCasilleroBox;
     private Tablero tablero;
@@ -30,6 +31,7 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
         this.infoCasilleroBox = juegoPrincipal.getInfoCasilleroBox();
         this.juegoPrincipal = juegoPrincipal;
         this.faseTurnos = faseTurnos;
+        this.jugadorAtacado = obtenerJugadorAtacado();
 
     }
 
@@ -46,7 +48,6 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
         infoCasilleroBox.setText("");
         infoCasilleroBox.setTranslateX(-270);
         statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
-
         listo.setOnAction(e -> {
             Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
             infoCasilleroBox.setTranslateX(0);
@@ -54,16 +55,9 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                 Unidad unidadAtacante =tablero.getUnidadDe(posicionAMover,jugadorActual);
                 Unidad unidadAtacada =tablero.getUnidad(nuevaPosicion);
                 unidadAtacante.atacar(unidadAtacada, tablero);
-                if(unidadAtacada.getVida() <= 0 ){
-                    if(unidadAtacada.getEjercito().equals(juegoPrincipal.getJugadorUno().getNombre())){
-                        juegoPrincipal.getJugadorUno().getEjercito().eliminarUnidad(unidadAtacada);
-                    }else{
-                        juegoPrincipal.getJugadorDos().getEjercito().eliminarUnidad(unidadAtacada);
-                    }
-                }
                 tableroView.actualizar();
                 tableroView.mostrar(nuevaPosicion);
-                verificarSiTerminoJuego();
+                jugadorAtacado.verificarSiPierde();
                 faseTurnos.cambiarJugador();
             } catch (ExcepcionCasilleroVacio error) {
                 String cabecera = "Esta posicion esta vacia";
@@ -91,20 +85,18 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
                 String contenido = "Selecciona una unidad enemiga a la cual atacar";
                 new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
             }
+            catch (ExcepcionFinDeJuego error){
+                new AlertaFinDeJuego(jugadorActual.getNombre(),juegoPrincipal.getVentana());
+            }
         });
     }
 
-    private void verificarSiTerminoJuego() {
-        if(juegoPrincipal.getJugadorUno().getNombre().equals(jugadorActual.getNombre())){
-           if(juegoPrincipal.getJugadorDos().getEjercito().ejercitoVacio()){
-               new AlertaFinDeJuego(juegoPrincipal.getJugadorUno().getNombre());
-           }
-        }else if(juegoPrincipal.getJugadorDos().getNombre().equals(jugadorActual.getNombre())){
-            if(juegoPrincipal.getJugadorUno().getEjercito().ejercitoVacio()){
-                new AlertaFinDeJuego(juegoPrincipal.getJugadorDos().getNombre());
-            }
+    private Jugador obtenerJugadorAtacado() {
+        if(this.juegoPrincipal.getJugadorUno()==jugadorActual){
+            return juegoPrincipal.getJugadorDos();
         }
-
-
+        else{
+            return juegoPrincipal.getJugadorUno();
+        }
     }
 }

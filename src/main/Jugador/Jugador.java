@@ -1,5 +1,7 @@
 package Jugador;
 
+import Controller.AlertaFinDeJuego;
+import Excepciones.ExcepcionFinDeJuego;
 import Excepciones.ExcepcionPuntosInsuficientes;
 import Tablero.Tablero;
 import Unidades.*;
@@ -13,8 +15,8 @@ public class Jugador {
 
     public Jugador(String nombre){
         this.nombre = nombre;
-        this.ejercito = new Ejercito();
-        this.fabrica = new FabricaDeUnidades(nombre);
+        this.ejercito = new Ejercito(nombre);
+        this.fabrica = new FabricaDeUnidades(this.ejercito);
     }
 
     public void crearUnidadEnPosicion(Posicion unaPosicion, String tipoUnidad, Tablero unTablero) throws ExcepcionPuntosInsuficientes {
@@ -27,4 +29,9 @@ public class Jugador {
 
     public Ejercito getEjercito(){ return ejercito;}
 
+    public void verificarSiPierde() {
+        if(this.ejercito.ejercitoVacio()){
+            throw new ExcepcionFinDeJuego();
+        }
+    }
 }

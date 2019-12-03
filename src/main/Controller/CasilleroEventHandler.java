@@ -70,7 +70,7 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
                 textoCasillero = "Nan";
         }
         if(unaUnidad.getVida() > 0 ){
-            textoCasillero = textoCasillero + unaUnidad.getEjercito();
+            textoCasillero = textoCasillero + unaUnidad.getNombreJugador();
             botonCasillero.setText(textoCasillero);
 
         }else{

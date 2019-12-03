@@ -2,7 +2,7 @@ package Test;
 
 import Excepciones.ExcepcionCatapultaNoAtacaAliados;
 import Excepciones.ExcepcionDistanciaAtaqueInvalida;
-import Excepciones.ExcepcionSectorEnemigo;
+import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Catapulta;
 import Unidades.Posicion.Posicion;
@@ -16,10 +16,12 @@ public class CatapultaTest {
     public void testCatapultaAtacaSoldadoEnemigoCorrectamente() {
         Posicion unaPosicion = new Posicion(0, 0);
         Posicion otraPosicion = new Posicion(6,6);
+        Ejercito unEjercito = new Ejercito("Jugador2");
+        Ejercito otroEjercito = new Ejercito("Jugador1");
 
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
-        Catapulta unaCatapulta = new Catapulta(unaPosicion, "Jugador1");
-        Soldado enemigo = new Soldado(otraPosicion, "Jugador2");
+        Catapulta unaCatapulta = new Catapulta(unaPosicion, otroEjercito);
+        Soldado enemigo = new Soldado(otraPosicion, unEjercito);
 
         unTablero.colocarUnidad(unaCatapulta);
         unTablero.colocarUnidad(enemigo);
@@ -30,14 +32,16 @@ public class CatapultaTest {
 
     @Test
     public void testCatapultaAtacaSoldadoEnemigoContiguoCorrectamente() {
+        Ejercito unEjercito = new Ejercito("Jugador2");
+        Ejercito otroEjercito = new Ejercito("Jugador1");
         Posicion unaPosicion = new Posicion(0, 0);
         Posicion otraPosicion = new Posicion(6,6);
         Posicion otraPosicion2 = new Posicion(7,7);
 
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
-        Catapulta unaCatapulta = new Catapulta(unaPosicion, "Jugador1");
-        Soldado enemigo = new Soldado(otraPosicion, "Jugador2");
-        Soldado enemigo2 = new Soldado(otraPosicion2,"Jugador2");
+        Catapulta unaCatapulta = new Catapulta(unaPosicion, otroEjercito);
+        Soldado enemigo = new Soldado(otraPosicion, unEjercito);
+        Soldado enemigo2 = new Soldado(otraPosicion2,unEjercito);
 
         unTablero.colocarUnidad(unaCatapulta);
         unTablero.colocarUnidad(enemigo);
@@ -50,6 +54,8 @@ public class CatapultaTest {
 
     @Test
     public void testCatapultaAtacaSoldadosEnemigosContiguosCorrectamente() {
+        Ejercito unEjercito = new Ejercito("Jugador2");
+        Ejercito otroEjercito = new Ejercito("Jugador1");
         Posicion unaPosicion = new Posicion(0, 0);
         Posicion otraPosicion = new Posicion(6,6);
         Posicion otraPosicion2 = new Posicion(7,7);
@@ -57,10 +63,10 @@ public class CatapultaTest {
 
 
         Tablero unTablero = new Tablero(10,10,"Jugador1","Jugador2");
-        Catapulta unaCatapulta = new Catapulta(unaPosicion, "Jugador1");
-        Soldado enemigo = new Soldado(otraPosicion, "Jugador2");
-        Soldado enemigo2 = new Soldado(otraPosicion2,"Jugador2");
-        Soldado enemigo3 = new Soldado(otraPosicion3,"Jugador2");
+        Catapulta unaCatapulta = new Catapulta(unaPosicion, otroEjercito);
+        Soldado enemigo = new Soldado(otraPosicion, unEjercito);
+        Soldado enemigo2 = new Soldado(otraPosicion2,unEjercito);
+        Soldado enemigo3 = new Soldado(otraPosicion3,unEjercito);
 
         unTablero.colocarUnidad(unaCatapulta);
         unTablero.colocarUnidad(enemigo);
@@ -76,12 +82,13 @@ public class CatapultaTest {
 
     @Test (expected = ExcepcionCatapultaNoAtacaAliados.class)
     public void testCatapultaAtacaSoldadoAliadoYSaltaExcepcion(){
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Posicion unaPosicion = new Posicion(0,0);
         Posicion otraPosicion = new Posicion(0,9);
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
-        Catapulta unaCatapulta = new Catapulta(unaPosicion,"Jugador1");
-        Soldado aliado = new Soldado(otraPosicion,"Jugador1");
+        Catapulta unaCatapulta = new Catapulta(unaPosicion,unEjercito);
+        Soldado aliado = new Soldado(otraPosicion,unEjercito);
         unTablero.colocarUnidad(aliado);
         unTablero.colocarUnidad(unaCatapulta);
         unaCatapulta.atacar(aliado,unTablero);
@@ -90,11 +97,13 @@ public class CatapultaTest {
 
     @Test(expected = ExcepcionDistanciaAtaqueInvalida.class)
     public void testCatapultaNoPuedeAtacarADistanciaCorta(){
+        Ejercito unEjercito = new Ejercito("Jugador2");
+        Ejercito otroEjercito = new Ejercito("Jugador1");
         Posicion unaPosicion = new Posicion(9,0);
         Posicion otraPosicion = new Posicion(10,0);
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
-        Catapulta unaCatapulta = new Catapulta(unaPosicion,"Jugador1");
-        Soldado unSoldado = new Soldado(otraPosicion,"Jugador2");
+        Catapulta unaCatapulta = new Catapulta(unaPosicion,otroEjercito);
+        Soldado unSoldado = new Soldado(otraPosicion,unEjercito);
         unTablero.colocarUnidad(unaCatapulta);
         unTablero.colocarUnidad(unSoldado);
         unaCatapulta.atacar(unSoldado,unTablero);
@@ -102,14 +111,16 @@ public class CatapultaTest {
 
     @Test
     public void testCatapultaAtacaASoldadoEnemigoQueNoSeEncuentraEnSuSector(){
+        Ejercito unEjercito = new Ejercito("Jugador2");
+        Ejercito otroEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion unaPosicion = new Posicion(0,0);
         Posicion otraPosicion = new Posicion(10,0);
         Posicion nuevaPosicionEnemigo = new Posicion(9,0);
 
-        Catapulta aliado = new Catapulta(unaPosicion,"Jugador1");
-        Soldado enemigo = new Soldado(otraPosicion,"Jugador2");
+        Catapulta aliado = new Catapulta(unaPosicion,otroEjercito);
+        Soldado enemigo = new Soldado(otraPosicion,unEjercito);
 
         unTablero.colocarUnidad(aliado);
         unTablero.colocarUnidad(enemigo);
