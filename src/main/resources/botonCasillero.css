@@ -1,0 +1,15 @@
+.botonCasillero{
+    -fx-background-color: #a04000;
+    -fx-text-fill: WHITE;
+}
+
+
+.botonCasillero:focused{
+    -fx-border-color: RED;
+    -fx-border-width: 3px;
+}
+
+
+.botonCasillero1{
+    -fx-background-color: #6e2c00;
+}
