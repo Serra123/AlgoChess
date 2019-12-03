@@ -23,19 +23,21 @@
 }
 
 .botonConJinete1{
-    -fx-background-image: url("caballo.png");
-    -fx-background-size: 60px 60px;
+    -fx-background-image: url("caballo1.png");
+    -fx-background-size: 50px 50px;
     -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }
 
 .botonConCurandero1{
     -fx-background-image: url("curandero2.png");
-    -fx-background-size: 60px 60px;
+    -fx-background-size: 50px 50px;
     -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }
 
 .botonConCatapulta1{
-    -fx-background-image: url("catapulta.png");
+    -fx-background-image: url("catapulta1.png");
     -fx-background-size: 60px 60px;
     -fx-background-repeat: no-repeat;
 }
@@ -47,19 +49,20 @@
 }
 
 .botonConJinete2{
-    -fx-background-image: url("caballo1.png");
-    -fx-background-size: 60px 60px;
+    -fx-background-image: url("caballo2.png");
+    -fx-background-size: 50px 50px;
     -fx-background-repeat: no-repeat;
 }
 
 .botonConCurandero2{
     -fx-background-image: url("curandero1.png");
-    -fx-background-size: 60px 60px;
+    -fx-background-size: 50px 50px;
     -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }
 
 .botonConCatapulta2{
-    -fx-background-image: url("catapult.png");
+    -fx-background-image: url("catapulta2.png");
     -fx-background-size: 60px 60px;
     -fx-background-repeat: no-repeat;
 }
