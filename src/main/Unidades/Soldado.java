@@ -2,6 +2,7 @@ package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
 import Excepciones.ExcepcionDistanciaAtaqueInvalida;
+import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
@@ -17,13 +18,13 @@ public class Soldado extends UnidadMovible {
         return (this.posicion.equals(unaPosicion));
     }
 
-    public Soldado(Posicion unaPosicion, String unNombreDeJugador) {
+    public Soldado(Posicion unaPosicion, Ejercito unEjercito) {
         super(unaPosicion);
         this.vida = VIDAINICIAL;
         this.vidaMaxima = VIDAINICIAL;
         this.costo = COSTO;
         this.posicion = unaPosicion;
-        ejercito = unNombreDeJugador;
+        this.ejercito = unEjercito;
     }
 
     @Override

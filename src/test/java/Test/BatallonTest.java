@@ -1,6 +1,7 @@
 package Test;
 
 import Excepciones.*;
+import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.*;
@@ -15,14 +16,15 @@ public class BatallonTest {
     @Test
     public void testPuedoCrearBatallon(){
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Ejercito unEjercito = new Ejercito("Jugador1");
 
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         Posicion nuevaPosicionCentral = new Posicion(1,2);
 
@@ -45,15 +47,16 @@ public class BatallonTest {
     @Test
     public void testMuevoCorrectamenteLosSoldados(){
 
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         Posicion nuevaPosicionUno = new Posicion(1,1);
         Posicion nuevaPosicionDos = new Posicion(1,2);
@@ -83,15 +86,16 @@ public class BatallonTest {
     @Test
     public void testMuevoCorrectamenteLosSoldadosEnHorizontal(){
 
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(9,13);
         Posicion posicionDos = new Posicion(9,14);
         Posicion posicionTres = new Posicion(9,15);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         Posicion nuevaPosicionUno = new Posicion(10,13);
         Posicion nuevaPosicionDos = new Posicion(10,14);
@@ -120,6 +124,7 @@ public class BatallonTest {
 
     @Test
     public void testUnSoldadoNoSeMuevePeroLosOtrosSi(){
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(0,1);
@@ -127,12 +132,11 @@ public class BatallonTest {
         Posicion posicionTres = new Posicion(0,3);
         Posicion posicionCatapulta = new Posicion(1,1);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
-        Unidad catapulpa = new Catapulta(posicionCatapulta,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
+        Unidad catapulpa = new Catapulta(posicionCatapulta,unEjercito);
 
-        Posicion nuevaPosicionUno = new Posicion(1,1);
         Posicion nuevaPosicionDos = new Posicion(1,2);
         Posicion nuevaPosicionTres = new Posicion(1,3);
 
@@ -160,6 +164,7 @@ public class BatallonTest {
 
     @Test
     public void testMuevoCorrectamenteLosSoldadosConPosicionesDistintasYSuperposicionEnElMedio(){
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(1,1);
@@ -167,11 +172,11 @@ public class BatallonTest {
         Posicion posicionTres = new Posicion(3,1);
         Posicion posicionCatapulta = new Posicion(2,1);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
-        Unidad catapulta = new Catapulta(posicionCatapulta,"Jugador1");
+        Unidad catapulta = new Catapulta(posicionCatapulta,unEjercito);
 
         Posicion nuevaPosicionUno = new Posicion(1,0);
         Posicion nuevaPosicionDos = new Posicion(2,1);
@@ -200,15 +205,16 @@ public class BatallonTest {
 
     @Test
     public void testSoldadosAlineadosNoSeSuperponenEntreSiAlMoverse(){
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(2,1);
         Posicion posicionTres = new Posicion(3,1);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         Posicion nuevaPosicionUno = new Posicion(2,1);
         Posicion nuevaPosicionDos = new Posicion(3,1);
@@ -236,15 +242,16 @@ public class BatallonTest {
     }
     @Test
     public void testSoldadosEnDiagonalNoSeSuperponenEntreSiAlMoverse(){
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(2,2);
         Posicion posicionDos = new Posicion(1,1);
         Posicion posicionTres = new Posicion(0,0);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         Posicion nuevaPosicionUno = new Posicion(3,3);
         Posicion nuevaPosicionDos = new Posicion(2,2);
@@ -274,15 +281,16 @@ public class BatallonTest {
     @Test (expected = ExcepcionMovimientoInvalido.class)
     public void testNoPuedoMovermeMasDeUnCasilleroDeDistancia() {
 
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20, 20, "Jugador1", "Jugador2");
 
         Posicion posicionUno = new Posicion(2, 2);
         Posicion posicionDos = new Posicion(1, 1);
         Posicion posicionTres = new Posicion(0, 0);
 
-        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres, "Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos, unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres, unEjercito);
 
         ArrayList<Soldado> soldados = new ArrayList<>();
 
@@ -305,7 +313,7 @@ public class BatallonTest {
 
     @Test
     public void testBatallonSoloTieneTresSoldadosAunqueLeMandeMas() {
-
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(0,1);
@@ -313,10 +321,10 @@ public class BatallonTest {
         Posicion posicionTres = new Posicion(0,3);
         Posicion posicionCuatro = new Posicion(0,4);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
-        Soldado soldadoCuatro = new Soldado(posicionCuatro,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
+        Soldado soldadoCuatro = new Soldado(posicionCuatro,unEjercito);
 
         Posicion nuevaPosicionUno = new Posicion(1,1);
         Posicion nuevaPosicionDos = new Posicion(1,2);
@@ -350,19 +358,18 @@ public class BatallonTest {
     @Test
     public void testSoldadosNoExcedenLimiteDeTablero(){
 
+        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(0,0);
         Posicion posicionDos = new Posicion(1,1);
         Posicion posicionTres = new Posicion(2,0);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
-        Posicion nuevaPosicionUno = new Posicion(0,-1);
         Posicion nuevaPosicionDos = new Posicion(1,0);
-        Posicion nuevaPosicionTres = new Posicion(2,-1);
 
         ArrayList<Soldado> soldados = new ArrayList<>();
 

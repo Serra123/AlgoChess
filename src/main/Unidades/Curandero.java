@@ -2,8 +2,8 @@ package Unidades;
 
 import Excepciones.ExcepcionCuracionAEnemigo;
 import Excepciones.ExcepcionCuranderoNoAtaca;
-import Excepciones.ExcepcionDistanciaAtaqueInvalida;
 import Excepciones.ExcepcionDistanciaCuracionInvalida;
+import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
@@ -14,13 +14,13 @@ public class Curandero extends UnidadMovible {
     private static final int VIDAINICIAL = 75;
     private static final int COSTO = 2;
 
-    public Curandero(Posicion unaPosicion, String unNombreDeJugador){
+    public Curandero(Posicion unaPosicion, Ejercito unEjercito){
 
         super(unaPosicion);
         this.vidaMaxima = VIDAINICIAL;
         this.vida = VIDAINICIAL;
         this.costo = COSTO;
-        this.ejercito = unNombreDeJugador;
+        this.ejercito = unEjercito;
     }
 
     public void curar(Unidad unidadAliada) throws ExcepcionCuracionAEnemigo, ExcepcionDistanciaCuracionInvalida {

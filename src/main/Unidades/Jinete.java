@@ -1,6 +1,7 @@
 package Unidades;
 
 import Excepciones.ExcepcionAtaqueAAliado;
+import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
@@ -14,12 +15,12 @@ public class Jinete extends UnidadMovible {
 
     private Arma armaDeAtaque;
 
-    public Jinete(Posicion unaPosicion, String unNombreDeJugador) {
+    public Jinete(Posicion unaPosicion, Ejercito unEjercito) {
         super(unaPosicion);
         this.costo = COSTO;
         this.vida = VIDAINICIAL;
         this.vidaMaxima = VIDAINICIAL;
-        this.ejercito = unNombreDeJugador;
+        this.ejercito = unEjercito;
         armaDeAtaque = new Espada();
     }
 

@@ -34,7 +34,8 @@ public class EjercitoTest {
 
     @Test (expected = ExcepcionPuntosInsuficientes.class)
     public void testJugadorIntentaAgregarUnidadSinPuntosNecesariosNoPuedeYLosPuntosQuedanIntactos(){
-        Ejercito unEjercito = new Ejercito();
+        Ejercito unEjercito = new Ejercito("Jugador 1");
+        Ejercito otroEjercito = new Ejercito("Jugador2");
 
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(2,2);
@@ -42,11 +43,11 @@ public class EjercitoTest {
         Posicion posicionCuatro = new Posicion(4,4);
         Posicion posicionCinco = new Posicion(5,5);
 
-        Catapulta catapultaUno = new Catapulta(posicionUno,"Jugador 2");
-        Catapulta catapultaDos = new Catapulta(posicionDos,"Jugador 2");
-        Catapulta catapultaTres = new Catapulta(posicionTres,"Jugador 2");
-        Catapulta catapultaCuatro = new Catapulta(posicionCuatro,"Jugador 2");
-        Catapulta catapultaCinco = new Catapulta(posicionCinco,"Jugador 2");
+        Catapulta catapultaUno = new Catapulta(posicionUno,otroEjercito);
+        Catapulta catapultaDos = new Catapulta(posicionDos,otroEjercito);
+        Catapulta catapultaTres = new Catapulta(posicionTres,otroEjercito);
+        Catapulta catapultaCuatro = new Catapulta(posicionCuatro,otroEjercito);
+        Catapulta catapultaCinco = new Catapulta(posicionCinco,otroEjercito);
 
         unEjercito.agregarUnidad(catapultaUno);
         unEjercito.agregarUnidad(catapultaDos);
@@ -61,15 +62,15 @@ public class EjercitoTest {
     @Test (expected = ExcepcionCantidadIncorrectaDePosiciones.class)
     public void testNoLeMandoSuficientesPosicionesParaBatallon() {
 
-        Ejercito unEjercito = new Ejercito();
+        Ejercito unEjercito = new Ejercito("Jugador1");
 
         Posicion posicionUno = new Posicion(2, 2);
         Posicion posicionDos = new Posicion(1, 1);
         Posicion posicionTres = new Posicion(3, 3);
 
-        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador 1");
+        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos, unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         unEjercito.agregarUnidad(soldadoUno);
         unEjercito.agregarUnidad(soldadoDos);
@@ -85,17 +86,17 @@ public class EjercitoTest {
     @Test (expected = ExcepcionCantidadIncorrectaDePosiciones.class)
     public void testLeMandoDemasiadasPosiciones() {
 
-        Ejercito unEjercito = new Ejercito();
+        Ejercito unEjercito = new Ejercito("Jugador1");
 
         Posicion posicionUno = new Posicion(2, 2);
         Posicion posicionDos = new Posicion(1, 1);
         Posicion posicionTres = new Posicion(3, 3);
         Posicion posicionCuatro = new Posicion(6, 6);
 
-        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador 1");
-        Soldado soldadoCuatro = new Soldado(posicionCuatro,"Jugador 1");
+        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos, unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
+        Soldado soldadoCuatro = new Soldado(posicionCuatro,unEjercito);
 
         unEjercito.agregarUnidad(soldadoUno);
         unEjercito.agregarUnidad(soldadoDos);
@@ -117,15 +118,15 @@ public class EjercitoTest {
     @Test (expected = ExcepcionLasUnidadesEstanSeparadas.class)
     public void testNoCreoBatallonSiPosicionesNoEstanContiguas() {
 
-        Ejercito unEjercito = new Ejercito();
+        Ejercito unEjercito = new Ejercito("Jugador1");
 
         Posicion posicionUno = new Posicion(2, 2);
         Posicion posicionDos = new Posicion(1, 1);
         Posicion posicionTres = new Posicion(3, 4);
 
-        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres, "Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos, unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres, unEjercito);
 
         unEjercito.agregarUnidad(soldadoUno);
         unEjercito.agregarUnidad(soldadoDos);
@@ -141,16 +142,16 @@ public class EjercitoTest {
 
     @Test (expected = ExcepcionPosicionInvalida.class)
     public void testLeMandoUnaPosicionQueNoTieneSoldado(){
-        Ejercito unEjercito = new Ejercito();
+        Ejercito unEjercito = new Ejercito("Jugador1");
 
         Posicion posicionUno = new Posicion(2, 2);
         Posicion posicionDos = new Posicion(1, 1);
         Posicion posicionTres = new Posicion(3, 3);
         Posicion posicionSinSoldado = new Posicion(2, 3);
 
-        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador 1");
+        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos, unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         unEjercito.agregarUnidad(soldadoUno);
         unEjercito.agregarUnidad(soldadoDos);
@@ -166,15 +167,15 @@ public class EjercitoTest {
 
     @Test
     public void testCreoUnBatallonExitosamente(){
-        Ejercito unEjercito = new Ejercito();
+        Ejercito unEjercito = new Ejercito("Jugador1");
 
         Posicion posicionUno = new Posicion(2, 2);
         Posicion posicionDos = new Posicion(1, 1);
         Posicion posicionTres = new Posicion(3, 3);
 
-        Soldado soldadoUno = new Soldado(posicionUno, "Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos, "Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador 1");
+        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos, unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         unEjercito.agregarUnidad(soldadoUno);
         unEjercito.agregarUnidad(soldadoDos);
@@ -191,7 +192,7 @@ public class EjercitoTest {
     @Test
     public void testMuevoCorrectamenteLosSoldadosDeBatallon(){
 
-        Ejercito unEjercito = new Ejercito();
+        Ejercito unEjercito = new Ejercito("Jugador1");
 
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
@@ -199,9 +200,9 @@ public class EjercitoTest {
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
 
-        Soldado soldadoUno = new Soldado(posicionUno,"Jugador1");
-        Soldado soldadoDos = new Soldado(posicionDos,"Jugador1");
-        Soldado soldadoTres = new Soldado(posicionTres,"Jugador1");
+        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
+        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         Posicion nuevaPosicionUno = new Posicion(1,1);
         Posicion nuevaPosicionDos = new Posicion(1,2);

@@ -1,5 +1,6 @@
 package Unidades;
 
+import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
@@ -12,13 +13,14 @@ public abstract class Unidad {
     int vidaMaxima;
     int costo;
     protected Posicion posicion;
-    protected String ejercito;
+    protected Ejercito ejercito;
 
     public double getVida() {
         return vida;
     }
     public int getCosto(){ return costo; }
-    public String getEjercito(){ return ejercito; }
+    public String getNombreJugador(){ return ejercito.getNombreEjercito(); }
+    public Ejercito getEjercito(){ return ejercito; }
 
     void recibirAtaque(int valorDanio, boolean estaEnSectorAliado) {
        if(estaEnSectorAliado){
@@ -27,6 +29,9 @@ public abstract class Unidad {
        else{
            vida -= (valorDanio * PENALIZACIONSECTORENEMIGO);
        }
+        if(this.getVida() <= 0 ){
+            this.getEjercito().eliminarUnidad(this);
+        }
     }
 
 
@@ -42,7 +47,7 @@ public abstract class Unidad {
         }
     }
     boolean esAliado(Unidad unaUnidad){
-        return  (this.ejercito.equals(unaUnidad.getEjercito()));
+        return  (this.ejercito.getNombreEjercito().equals(unaUnidad.getNombreJugador()));
 
     }
 
@@ -53,12 +58,12 @@ public abstract class Unidad {
     public boolean candidatoABatallonEn(Posicion unaPosicion){ return false; }
 
     boolean hayUnidadEnemiga(ArrayList<Unidad> unidadesCercanas) {
-      return  unidadesCercanas.stream().anyMatch(unidad -> ( ! ( unidad.getEjercito().equals(this.ejercito) ) ) );
+      return  unidadesCercanas.stream().anyMatch(unidad -> ( ! ( unidad.getNombreJugador().equals(this.ejercito.getNombreEjercito()) ) ) );
     }
 
     boolean haySoldadoAliado(ArrayList<Unidad> unidadesCercanas) {
         return unidadesCercanas.stream().anyMatch(unidad -> (unidad instanceof Soldado) &&
-                                                            (unidad.getEjercito().equals(this.ejercito)));
+                                                            (unidad.getNombreJugador().equals(this.ejercito.getNombreEjercito())));
     }
 
     public abstract String getTipoUnidad();

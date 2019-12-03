@@ -11,13 +11,15 @@ import java.util.LinkedHashSet;
 
 public class Ejercito {
 
+    private final String nombreEjercito;
     private ArrayList<Unidad> unidades;
     private int puntos;
     private static final int PUNTOSINICIALES = 20;
 
-    public Ejercito(){
+    public Ejercito(String nombreEjercito){
         this.unidades = new ArrayList<>();
         this.puntos = PUNTOSINICIALES;
+        this.nombreEjercito = nombreEjercito;
     }
 
     public void agregarUnidad(Unidad unaUnidad) throws ExcepcionPuntosInsuficientes{
@@ -112,4 +114,9 @@ public class Ejercito {
     public void eliminarUnidad(Unidad unidadAtacada) {
         this.unidades.remove(unidadAtacada);
     }
+
+    public String getNombreEjercito() {
+        return nombreEjercito;
+    }
+
 }

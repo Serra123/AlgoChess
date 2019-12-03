@@ -1,11 +1,11 @@
 package Test;
 
+import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Catapulta;
 import Unidades.Curandero;
 import Unidades.Posicion.Posicion;
 import Unidades.Soldado;
-import javafx.geometry.Pos;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,13 +13,15 @@ public class CuranderoTest {
 
     @Test
     public void testCurarSoldadoAliadoCorrectamente(){
+        Ejercito unEjercito = new Ejercito("Ejercito aliado");
+        Ejercito otroEjercito = new Ejercito("Ejercito enemigo");
         Tablero unTablero = new Tablero(20,20,"Ejercito aliado","Ejercito enemigo");
         Posicion posicionUno = new Posicion(8,0);
         Posicion posicionDos = new Posicion(9,0);
         Posicion posicionTres = new Posicion(10,0);
-        Curandero unCurandero = new Curandero(posicionUno,"Ejercito aliado");
-        Soldado soldadoAliado = new Soldado(posicionDos,"Ejercito aliado");
-        Soldado soldadoEnemigo = new Soldado(posicionTres,"Ejercito enemigo");
+        Curandero unCurandero = new Curandero(posicionUno,unEjercito);
+        Soldado soldadoAliado = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoEnemigo = new Soldado(posicionTres,otroEjercito);
         unTablero.colocarUnidad(unCurandero);
         unTablero.colocarUnidad(soldadoAliado);
         unTablero.colocarUnidad(soldadoEnemigo);
@@ -33,13 +35,15 @@ public class CuranderoTest {
 
     @Test
     public void testCurarUnidadNoDebeSuperarSuVidaMaxima(){
+        Ejercito unEjercito = new Ejercito("Ejercito aliado");
+        Ejercito otroEjercito = new Ejercito("Ejercito enemigo");
         Tablero unTablero = new Tablero(20,20,"Ejercito aliado","Ejercito enemigo");
         Posicion posicionUno = new Posicion(8,0);
         Posicion posicionDos = new Posicion(9,0);
         Posicion posicionTres = new Posicion(10,0);
-        Curandero unCurandero = new Curandero(posicionUno,"Ejercito aliado");
-        Soldado soldadoAliado = new Soldado(posicionDos,"Ejercito aliado");
-        Soldado soldadoEnemigo = new Soldado(posicionTres,"Ejercito enemigo");
+        Curandero unCurandero = new Curandero(posicionUno,unEjercito);
+        Soldado soldadoAliado = new Soldado(posicionDos,unEjercito);
+        Soldado soldadoEnemigo = new Soldado(posicionTres,otroEjercito);
         unTablero.colocarUnidad(unCurandero);
         unTablero.colocarUnidad(soldadoAliado);
         unTablero.colocarUnidad(soldadoEnemigo);
@@ -52,16 +56,15 @@ public class CuranderoTest {
 
     @Test
     public void testCurarCatapultaTiraError(){
+        Ejercito unEjercito = new Ejercito("");
         Posicion unaPosicion = new Posicion(0,0);
-        Curandero unCurandero = new Curandero(unaPosicion,"");
-        Catapulta unaCatapulta = new Catapulta(unaPosicion,"");
+        Curandero unCurandero = new Curandero(unaPosicion,unEjercito);
+        Catapulta unaCatapulta = new Catapulta(unaPosicion,unEjercito);
 
         try {
             unCurandero.curar(unaCatapulta);
         }
-        catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-            //En esta parte, el jugador tendría que poder elegir otra unidad para curar.
+        catch (RuntimeException ignored) {
         }
         Assert.assertEquals(unaCatapulta.getVida(),50,0);
     }

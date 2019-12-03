@@ -3,6 +3,7 @@ package Unidades;
 import Excepciones.ExcepcionCatapultaNoAtacaAliados;
 import Excepciones.ExcepcionCuracionACatapulta;
 import Excepciones.ExcepcionDistanciaAtaqueInvalida;
+import Jugador.Ejercito;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 
@@ -26,18 +27,18 @@ public class Catapulta extends Unidad {
             ArrayList<Unidad> unidadesAfectadas = new ArrayList<>();
             unTablero.obtenerUnidadesDeExpansion(unidadesAfectadas,cualquierUnidad.getPosicion());
             unidadesAfectadas.forEach(e ->{
-                Boolean estaEnSectorAliado = unTablero.estaEnSector(e);
+                boolean estaEnSectorAliado = unTablero.estaEnSector(e);
                 e.recibirAtaque(DANIO,estaEnSectorAliado);
             } );
         }
     }
 
-    public Catapulta(Posicion unaPosicion, String unNombreDeJugador){
+    public Catapulta(Posicion unaPosicion, Ejercito unEjercito){
 
         this.vidaMaxima= VIDAINICIAL;
         this.costo = COSTO;
         this.vida = VIDAINICIAL;
-        this.ejercito = unNombreDeJugador;
+        this.ejercito = unEjercito;
         this.posicion = unaPosicion;
     }
     @Override
