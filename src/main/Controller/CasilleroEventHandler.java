@@ -9,15 +9,8 @@ import Vistas.FaseJuego.JuegoPrincipal;
 import Vistas.FaseJuego.InfoCasilleroBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.paint.Color;
 
 public class CasilleroEventHandler implements EventHandler<ActionEvent> {
-
-    private static final String BLANCO = "-fx-background-color: #fdfefe;";
 
 
     protected Posicion posicion;
@@ -36,46 +29,32 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        if(botonCasillero.estaClickeado()){
-           botonCasillero.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
-           botonCasillero.setClickeado(false);
-        }
+
         try {
             Unidad unidad = tablero.getUnidad(posicion);
-            setearTextoCasillero(unidad,botonCasillero);
+            setearImagenCasillero(unidad,botonCasillero);
         } catch (ExcepcionCasilleroVacio e) {
-            botonCasillero.setText("");
-            //botonCasillero.setStyle(botonCasillero.getColorInicial());
+            botonCasillero.getStyleClass().removeAll("botonConSoldado");
         }
         this.infoCasilleroBox.actualizarPosicionClickeada(posicion);
     }
 
-    private void setearTextoCasillero(Unidad unaUnidad, BotonCasillero botonCasillero) {
+    private void setearImagenCasillero(Unidad unaUnidad, BotonCasillero botonCasillero) {
 
-        String textoCasillero;
         switch (unaUnidad.getTipoUnidad()) {
             case "soldado":
-                textoCasillero = "S";
+                botonCasillero.getStyleClass().add("botonConSoldado");
                 break;
             case "curandero":
-                textoCasillero = "Cu";
+                botonCasillero.getStyleClass().add("botonConCurandero");
                 break;
             case "catapulta":
-                textoCasillero = "Ca";
                 break;
             case "jinete":
-                textoCasillero = "J";
+                botonCasillero.getStyleClass().add("botonConJinete");
                 break;
             default:
-                textoCasillero = "Nan";
-        }
-        if(unaUnidad.getVida() > 0 ){
-            textoCasillero = textoCasillero + unaUnidad.getEjercito();
-            botonCasillero.setText(textoCasillero);
-
-        }else{
-            botonCasillero.setText("");
-
+                break;
         }
     }
 

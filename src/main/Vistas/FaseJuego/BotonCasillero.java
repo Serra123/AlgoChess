@@ -27,13 +27,9 @@ public class BotonCasillero extends Button {
         this.posicion = unaPosicion;
         this.colorInicial = unColor;
         this.clickeado=false;
-        this.setPrefSize(50,34);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
         //this.setStyle(unColor);
         this.setOnAction(new CasilleroEventHandler(faseDeJuego,unaPosicion,this));
-        this.setOnMouseClicked(e->{this.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
-                                        this.clickeado=true;
-                                    });
 
     }
 

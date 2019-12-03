@@ -1,6 +1,8 @@
 .botonCasillero{
     -fx-background-color: #a04000;
     -fx-text-fill: WHITE;
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px
 }
 
 
@@ -12,4 +14,22 @@
 
 .botonCasillero1{
     -fx-background-color: #6e2c00;
+}
+
+.botonConSoldado{
+    -fx-background-image: url("Attack.png");
+    -fx-background-size: 60px 60px;
+    -fx-background-repeat: no-repeat;
+}
+
+.botonConJinete{
+    -fx-background-image: url("caballo.png");
+    -fx-background-size: 60px 60px;
+    -fx-background-repeat: no-repeat;
+}
+
+.botonConCurandero{
+    -fx-background-image: url("curandero.png");
+    -fx-background-size: 60px 60px;
+    -fx-background-repeat: no-repeat;
 }

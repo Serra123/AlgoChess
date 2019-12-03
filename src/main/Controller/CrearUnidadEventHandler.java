@@ -37,7 +37,6 @@ public class CrearUnidadEventHandler implements EventHandler<ActionEvent> {
         Posicion unaPosicion = infoCasilleroBox.getPosicion();
         try {
             jugadorActual.crearUnidadEnPosicion(unaPosicion, unidadACrear, tablero);
-            tableroView.actualizar(); //Actualiza el tablero entero
             tableroView.mostrar(unaPosicion); // Me muestra la ultima posicion creada
             // sin esto, me muestra siempre (20,20) automaticamente por ser la ultima en actualizarse
             puntosJugadorActual.setText("Al jugador " + jugadorActual.getNombre() + " le quedan: " +

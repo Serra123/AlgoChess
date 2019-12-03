@@ -35,10 +35,7 @@ public class JuegoPrincipal {
         this.juegoView = new BorderPane();
         ventana.initModality(Modality.APPLICATION_MODAL);
         ventana.setTitle("AlgoChess");
-        ventana.setMinWidth(1500);
-        ventana.setMinHeight(710);
-        ventana.setMaxWidth(1500);
-        ventana.setMaxHeight(710);
+        ventana.setFullScreen(true);
         ventana.setWidth(1500);
         ventana.setHeight(710);
         juegoView.setLeft(tableroView);

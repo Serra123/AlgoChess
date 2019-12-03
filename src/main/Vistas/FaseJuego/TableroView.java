@@ -1,9 +1,11 @@
 package Vistas.FaseJuego;
 
 import Unidades.Posicion.Posicion;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TableroView extends GridPane {
 
@@ -31,7 +33,6 @@ public class TableroView extends GridPane {
     }
 
     public void actualizar(){
-
         for(int i = 0; i < LADO; i++){
             for(int j = 0; j < LADO;j++){
                 botonesCasillero[i][j].fire();

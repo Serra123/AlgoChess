@@ -74,11 +74,7 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
                         String cabecera = "Movimiento invalido";
                         String contenido = "Selecciona una distancia a la cual tu unidad se pueda mover";
                         new AlertaErrorEnTurno(cabecera, contenido, tableroView, faseTurnos);
-                    } catch(StackOverflowError error){
-                        String cabecera = "Camino bloqueado";
-                        String contenido = "No podes moverte en esta direccion";
-                        new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                    } catch(NullPointerException error){
+                    } catch(StackOverflowError | NullPointerException error){
                         String cabecera = "Camino bloqueado";
                         String contenido = "No podes moverte en esta direccion";
                         new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
