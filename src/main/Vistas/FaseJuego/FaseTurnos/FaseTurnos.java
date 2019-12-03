@@ -18,7 +18,6 @@ public class FaseTurnos {
     private JuegoPrincipal juegoPrincipal;
     private BorderPane juegoView;
     private VBox statusTablero;
-    private Jugador jugadorActual;
     private Boolean yaMovio;
 
 
@@ -26,7 +25,6 @@ public class FaseTurnos {
     public FaseTurnos(JuegoPrincipal juegoPrincipal){
         this.juegoPrincipal = juegoPrincipal;
         this.juegoView = juegoPrincipal.getJuegoView();
-        this.jugadorActual = juegoPrincipal.getJugadorActual();
         this.statusTablero = new VBox();
         this.statusTablero.setPadding(new Insets(0,0,0,0));
         this.yaMovio = false;
@@ -40,13 +38,21 @@ public class FaseTurnos {
 
         juegoPrincipal.cambiarJugador();
         try{
-            jugadorActual.verificarSiPierde();
+            juegoPrincipal.getJugadorActual().verificarSiPierde();
         }catch (ExcepcionFinDeJuego error){
-            new AlertaFinDeJuego(jugadorActual.getNombre(),juegoPrincipal.getVentana());
+            Jugador jugadorQueGana = this.getJugadorGanador();
+            new AlertaFinDeJuego(jugadorQueGana.getNombre(),juegoPrincipal.getVentana());
         }
         yaMovio = false;
         this.mostrarLayoutFaseParaJugadorActual();
     }
+
+    private Jugador getJugadorGanador() {
+        if(juegoPrincipal.getJugadorActual() == juegoPrincipal.getJugadorUno()){
+            return juegoPrincipal.getJugadorDos();
+        }else return juegoPrincipal.getJugadorUno();
+    }
+
 
     public void jugadorYaMovio(){
         yaMovio = true;
@@ -91,9 +97,6 @@ public class FaseTurnos {
         return this.statusTablero;
     }
 
-    public Jugador getJugadorActual(){
-        return jugadorActual;
-    }
 
 }
 
