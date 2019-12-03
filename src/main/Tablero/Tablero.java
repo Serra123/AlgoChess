@@ -13,26 +13,25 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Tablero {
 
     private static final int FILACUALQUIERA = 1;
     private static final int DISTANCIACONTIGUA = 1;
-    private ArrayList<Fila> filas;
+    private List<Fila> filas;
     private HashMap<String,Sector> sectores;
 
-    public Tablero(int filas, int columnas, String nombreUnJugador, String nombreOtroJugador) {
-        this.filas = new ArrayList<Fila>();
+    public Tablero(int cantidadFilas, int cantidadColumnas, String nombreUnJugador, String nombreOtroJugador) {
+
         this.sectores= new HashMap<String, Sector>();
 
-        sectores.put(nombreUnJugador,new Sector(0 ,((filas/2)-1)));
-        sectores.put(nombreOtroJugador,new Sector(filas/2 ,filas));
+        sectores.put(nombreUnJugador,new Sector(0 ,((cantidadFilas/2)-1)));
+        sectores.put(nombreOtroJugador,new Sector(cantidadFilas/2 ,cantidadFilas));
 
-        for(int i=0; i < filas;i++){
-            Fila nuevaFila = new Fila(columnas);
-            this.filas.add(nuevaFila);
-
-        }
+        this.filas= IntStream.range(0, cantidadFilas).mapToObj(x -> new Fila(cantidadColumnas)).collect(Collectors.toList());
     }
 
     public boolean estaEnSector(Unidad unaUnidad){
@@ -108,10 +107,7 @@ public class Tablero {
                 unidadesTotal.add(unaUnidad);
             }else iterator.remove();
         }
-        for (Unidad unaUnidad : unidadesParcial) {
-            this.obtenerUnidadesDeExpansion(unidadesTotal, unaUnidad.getPosicion());
-        }
-
+        unidadesParcial.stream().peek(x -> this.obtenerUnidadesDeExpansion(unidadesTotal, x.getPosicion())).toArray();
 
     }
 

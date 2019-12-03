@@ -6,17 +6,16 @@ import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Fila {
 
-    private ArrayList<Casillero> casilleros;
+    private List<Casillero> casilleros;
 
     public Fila(int columnas) {
-        casilleros = new ArrayList<Casillero>();
-        for (int i = 0; i < columnas; i++) {
-            Casillero unCasillero = new Casillero();
-            casilleros.add(unCasillero);
-        }
+        casilleros= IntStream.range(0, columnas).mapToObj(x -> new Casillero()).collect(Collectors.toList());
     }
 
     public Casillero getCasillero(int unaColumna) {
