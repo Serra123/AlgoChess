@@ -17,7 +17,7 @@
 }
 
 .botonConSoldado{
-    -fx-background-image: url("Attack.png");
+    -fx-background-image: url("soldado.png");
     -fx-background-size: 60px 60px;
     -fx-background-repeat: no-repeat;
 }
