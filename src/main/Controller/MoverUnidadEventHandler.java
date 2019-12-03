@@ -38,50 +38,46 @@ public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
         VBox statusTablero = faseTurnos.getStatusTablero();
         statusTablero.getChildren().clear();
 
-        LabelNombreJugador jugador = new LabelNombreJugador(-170,0,"Es el turno de: " + jugadorActual.getNombre());
-        LabelDatosJuego instrucciones = new LabelDatosJuego(-170,60,"Seleccione que unidad desea mover y luego listo.");
+        Posicion posicionAMover = infoCasilleroBox.getPosicion();
+        LabelNombreJugador jugador = new LabelNombreJugador(-210,0,"Es el turno de: " + jugadorActual.getNombre());
+        LabelDatosJuego instrucciones = new LabelDatosJuego(-210,60,"Seleccione a donde desea mover la unidad.");
         Button listo = new Button ("listo");
-        listo.setTranslateX(-170);
+        listo.setTranslateX(-210);
         listo.setTranslateY(80);
         infoCasilleroBox.setText("");
-        infoCasilleroBox.setTranslateX(-170);
+        infoCasilleroBox.setTranslateX(-210);
         statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
 
-        listo.setOnAction(f-> {
-            Posicion posicionAMover = infoCasilleroBox.getPosicion();
-            instrucciones.setText("Seleccione a donde desea moverla y luego listo. ");
-
-            listo.setOnAction(e -> {
-                Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
-                infoCasilleroBox.setTranslateX(0);
-                try {
-                    UnidadMovible unidad = (UnidadMovible) tablero.getUnidadDe(posicionAMover,jugadorActual);
-                    unidad.mover(nuevaPosicion, tablero);
-                    tableroView.actualizar();
-                    tableroView.mostrar(nuevaPosicion);
-                    faseTurnos.jugadorYaMovio();
-                } catch (ExcepcionCasilleroOcupado error) {
-                    String cabecera = "No podes moverte a un casillero ocupado";
-                    String contenido = "Selecciona uno vacio al que moverte";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                } catch (ExcepcionCasilleroVacio error) {
-                    String cabecera = "Esta posicion esta vacia";
-                    String contenido = "Selecciona una posicion con unidad";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                } catch (ExcepcionMovimientoInvalido error) {
-                    String cabecera = "Movimiento invalido";
-                    String contenido = "Selecciona una distancia a la cual tu unidad se pueda mover";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                } catch (ClassCastException error) {
-                    String cabecera = "No podes mover una catapulta";
-                    String contenido = "Selecciona una unidad que sí puedas mover";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                } catch (ExcepcionUnidadNoPerteneceATuEjercito error){
-                    String cabecera = "No podes mover una unidad enemiga";
-                    String contenido = "Selecciona una unidad propia";
-                    new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
-                }
-            });
+        listo.setOnAction(e -> {
+            Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
+            infoCasilleroBox.setTranslateX(0);
+            try {
+                UnidadMovible unidad = (UnidadMovible) tablero.getUnidadDe(posicionAMover,jugadorActual);
+                unidad.mover(nuevaPosicion, tablero);
+                tableroView.actualizar();
+                tableroView.mostrar(nuevaPosicion);
+                faseTurnos.jugadorYaMovio();
+            } catch (ExcepcionCasilleroOcupado error) {
+                String cabecera = "No podes moverte a un casillero ocupado";
+                String contenido = "Selecciona uno vacio al que moverte";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            } catch (ExcepcionCasilleroVacio error) {
+                String cabecera = "Esta posicion esta vacia";
+                String contenido = "Selecciona una posicion con unidad";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            } catch (ExcepcionMovimientoInvalido error) {
+                String cabecera = "Movimiento invalido";
+                String contenido = "Selecciona una distancia a la cual tu unidad se pueda mover";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            } catch (ClassCastException error) {
+                String cabecera = "No podes mover una catapulta";
+                String contenido = "Selecciona una unidad que sí puedas mover";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            } catch (ExcepcionUnidadNoPerteneceATuEjercito error){
+                String cabecera = "No podes mover una unidad enemiga";
+                String contenido = "Selecciona una unidad propia";
+                new AlertaErrorEnTurno(cabecera,contenido,tableroView,faseTurnos);
+            }
         });
     }
 }

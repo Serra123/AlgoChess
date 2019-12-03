@@ -9,6 +9,11 @@ import Vistas.FaseJuego.JuegoPrincipal;
 import Vistas.FaseJuego.InfoCasilleroBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.paint.Color;
 
 public class CasilleroEventHandler implements EventHandler<ActionEvent> {
 
@@ -31,6 +36,10 @@ public class CasilleroEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
+        if(botonCasillero.estaClickeado()){
+           botonCasillero.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
+           botonCasillero.setClickeado(false);
+        }
         try {
             Unidad unidad = tablero.getUnidad(posicion);
             setearTextoCasillero(unidad,botonCasillero);
