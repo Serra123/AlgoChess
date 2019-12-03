@@ -25,7 +25,7 @@ public class InfoCasilleroBox extends Label{
             String tipoUnidad = unaUnidad.getTipoUnidad();
             if(unaUnidad.getVida() > 0) {
                 estadisticasCasillero = "Estadisticas del casillero: \n\n\nUnidad: " + tipoUnidad + " (" + (posicion.getFila() + 1) + " ; " +
-                        (posicion.getColumna() + 1) + "). Vida: " + unaUnidad.getVida();
+                        (posicion.getColumna() + 1) + "). Vida: " + unaUnidad.getVida() + "\nEjercito: " + unaUnidad.getEjercito().getNombreEjercito() + ".";
             }else{
                 estadisticasCasillero = "Estadisticas del casillero: \n\n\n(" + (posicion.getFila() + 1) + " ; " + (posicion.getColumna() + 1) + ")";
             }
