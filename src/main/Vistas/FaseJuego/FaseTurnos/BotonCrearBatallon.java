@@ -10,7 +10,8 @@ public class BotonCrearBatallon extends Button {
     public BotonCrearBatallon(JuegoPrincipal juegoPrincipal, FaseTurnos faseTurnos) {
         this.setPadding( new Insets(20,20,20,20));
         this.setText("Crear Batallon");
-        //this.setStyle("-fx-background-image: url('imagenBotonCrearBatallon.jpg')");
+        this.getStylesheets().add("botonEleccionUnidad.css");
+        this.getStyleClass().add("botonEleccionUnidad");
         this.setOnAction(new CrearBatallonEventHandler(juegoPrincipal, faseTurnos));
 
     }

@@ -10,8 +10,8 @@ public class BotonAtacar extends Button {
     public BotonAtacar(JuegoPrincipal juegoPrincipal, FaseTurnos faseTurnos) {
         this.setPadding( new Insets(20,20,20,20));
         this.setText("Atacar");
-
-        //this.setStyle("-fx-background-image: url('imagenBotonAtacar.jpg')");
+        this.getStylesheets().add("botonEleccionUnidad.css");
+        this.getStyleClass().add("botonEleccionUnidad");
         this.setOnAction(new AtacarUnidadEventHandler(juegoPrincipal, faseTurnos));
     }
 }

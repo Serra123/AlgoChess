@@ -26,10 +26,12 @@ public class FaseTurnos {
         this.juegoPrincipal = juegoPrincipal;
         this.juegoView = juegoPrincipal.getJuegoView();
         this.statusTablero = new VBox();
-        this.statusTablero.setPadding(new Insets(0,0,0,0));
+        this.statusTablero.setAlignment(Pos.TOP_LEFT);
+        this.statusTablero.setSpacing(40);
         this.yaMovio = false;
         this.mostrarLayoutFaseParaJugadorActual();
-        this.juegoView.setRight(statusTablero);
+        this.juegoView.setCenter(statusTablero);
+        this.statusTablero.setTranslateX(150);
 
 
     }
@@ -67,24 +69,19 @@ public class FaseTurnos {
         LabelDatosJuego opcionesDeTurno = new LabelDatosJuego(0,50,"Indique la posicion que desee utilizar, \no para crear un batallon");
 
         BotonMover mover = new BotonMover(juegoPrincipal,this);
-        mover.setMinWidth(500);
-        mover.setTranslateY(80);
+
 
         BotonAtacar atacar = new BotonAtacar(juegoPrincipal,this);
-        atacar.setMinWidth(500);
-        atacar.setTranslateY(80);
+
 
         BotonCurar curar = new BotonCurar(juegoPrincipal,this);
-        curar.setMinWidth(500);
-        curar.setTranslateY(80);
+
 
         BotonCrearBatallon crearBatallon = new BotonCrearBatallon(juegoPrincipal,this);
-        crearBatallon.setMinWidth(500);
-        crearBatallon.setTranslateY(80);
+
 
         BotonPasar pasar = new BotonPasar(this);
-        pasar.setMinWidth(500);
-        pasar.setTranslateY(80);
+
 
         if(!yaMovio){
             this.statusTablero.getChildren().addAll(jugador,opcionesDeTurno,mover,crearBatallon,atacar,curar,pasar);

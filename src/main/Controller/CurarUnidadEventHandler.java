@@ -40,15 +40,11 @@ public class CurarUnidadEventHandler implements EventHandler<ActionEvent> {
         LabelNombreJugador jugador = new LabelNombreJugador(-260,0,jugadorActual.getNombre());
         LabelDatosJuego instrucciones = new LabelDatosJuego(-260,60,"Seleccione a que unidad que desea \ncurar y luego listo");
         Button listo = new Button ("listo");
-        listo.setTranslateX(-260);
-        listo.setTranslateY(80);
         infoCasilleroBox.setText("");
-        infoCasilleroBox.setTranslateX(-260);
         statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
 
         listo.setOnAction(e -> {
             Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
-            infoCasilleroBox.setTranslateX(0);
             try {
                 Curandero unidadCurandera =(Curandero) tablero.getUnidadDe(posicionAMover,jugadorActual);   //verifico que sea de mi ejercito
                 Unidad unidadACurar =tablero.getUnidad(nuevaPosicion);

@@ -5,6 +5,7 @@ import Vistas.FaseJuego.JuegoPrincipal;
 import Vistas.FaseJuego.LabelDatosJuego;
 import Vistas.FaseJuego.LabelNombreJugador;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -26,8 +27,10 @@ public class FaseAgregarUnidades {
         jugadorActual = juegoPrincipal.getJugadorActual();
         this.statusTablero.setPrefWidth(500);
         VBox statusTablero = crearLayoutFaseParaJugadorActual();
+        statusTablero.setSpacing(60);
         this.juegoView = juegoPrincipal.getJuegoView();
-        this.juegoView.setRight(statusTablero);
+        this.juegoView.setCenter(statusTablero);
+        this.statusTablero.setTranslateX(150);
     }
 
     public void display(){
@@ -45,8 +48,8 @@ public class FaseAgregarUnidades {
 
     public VBox crearLayoutFaseParaJugadorActual(){
         LabelNombreJugador jugador = new LabelNombreJugador(0,0,"Es el turno de: " + this.getJugadorActual().getNombre()+".");
-        LabelDatosJuego puntosJugadorActual = new LabelDatosJuego(0,50,"Al jugador " + this.getJugadorActual().getNombre() + " le quedan: 20 puntos.");
-        LabelDatosJuego opcionesIngreso = new LabelDatosJuego(0,55,"Clickee la posicion donde desea crear una unidad y \nluego el tipo de unidad que desee.");
+        LabelDatosJuego puntosJugadorActual = new LabelDatosJuego(0,50,"Al jugador " + this.getJugadorActual().getNombre() + " le quedan: 20 puntos.\n" +
+                "Clickee la posicion donde desea crear una unidad y \nluego el tipo de unidad que desee.");
         Insets configBotonesOpcionesUnidades = new Insets(20,20,20,20);
 
         ButtonCrearUnidad crearSoldado = new ButtonCrearUnidad("Soldado",this.getJugadorActual(),juegoPrincipal, puntosJugadorActual);
@@ -59,7 +62,7 @@ public class FaseAgregarUnidades {
 
         HBox cajaBotonesUno = new HBox();
         cajaBotonesUno.getChildren().addAll(crearSoldado,crearJinete);
-        cajaBotonesUno.setTranslateY(75);
+        cajaBotonesUno.setSpacing(20);
 
         ButtonCrearUnidad crearCurandero = new ButtonCrearUnidad("Curandero",this.getJugadorActual(),juegoPrincipal,puntosJugadorActual);
         crearCurandero.setMinWidth(statusTablero.getPrefWidth()*3/8);
@@ -71,15 +74,15 @@ public class FaseAgregarUnidades {
 
         HBox cajaBotonesDos = new HBox();
         cajaBotonesDos.getChildren().addAll(crearCurandero,crearCatapulta);
-        cajaBotonesDos.setTranslateY(75);
+        cajaBotonesDos.setSpacing(20);
 
         BotonFrenarCreacionUnidades botonFrenarCreacionUnidades = new BotonFrenarCreacionUnidades("Listo",juegoPrincipal,this);
-        botonFrenarCreacionUnidades.setStyle("-fx-background-color: #2FD00C;-fx-font-size: 2em");
+        botonFrenarCreacionUnidades.getStyleClass().add("botonEleccionUnidad");
+        botonFrenarCreacionUnidades.getStyleClass().add("botonListo");
+        botonFrenarCreacionUnidades.getStylesheets().add("botonEleccionUnidad.css");
         botonFrenarCreacionUnidades.setPadding( new Insets(15,15,15,15));
-        botonFrenarCreacionUnidades.setTranslateY(400);
-        botonFrenarCreacionUnidades.setTranslateX(270);
 
-        statusTablero.getChildren().addAll(jugador,puntosJugadorActual,opcionesIngreso,cajaBotonesUno,cajaBotonesDos,botonFrenarCreacionUnidades,juegoPrincipal.getInfoCasilleroBox());
+        statusTablero.getChildren().addAll(jugador,puntosJugadorActual,cajaBotonesUno,cajaBotonesDos,juegoPrincipal.getInfoCasilleroBox(),botonFrenarCreacionUnidades);
         return statusTablero;
     }
 

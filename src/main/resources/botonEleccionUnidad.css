@@ -1,0 +1,30 @@
+.botonEleccionUnidad{
+
+    -fx-border-radius: 40px;
+    -fx-background-color:MAROON;
+    -fx-pref-width:200px;
+    -fx-font-size:20px;
+    -fx-text-fill:BLACK;
+}
+
+.botonEleccionUnidad:hover{
+
+    -fx-background-color:FIREBRICK;
+
+
+}
+
+.botonListo{
+
+    -fx-background-color:GREEN;
+    -fx-pref-width:250;
+    -fx-pref-height:100;
+    -fx-text-alignment:CENTER;
+
+}
+
+.botonListo:hover{
+
+    -fx-background-color:LIME;
+
+}

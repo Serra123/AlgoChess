@@ -46,20 +46,14 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
         LabelNombreJugador jugador = new LabelNombreJugador(-190,0,"Es el turno de: " + jugadorActual.getNombre());
         LabelDatosJuego instrucciones = new LabelDatosJuego(-190,60,"Seleccione 3 soldados para formar un batallon");
         Button listo = new Button ("listo");
-        listo.setTranslateX(-190);
-        listo.setTranslateY(80);
         infoCasilleroBox.setText("");
-        infoCasilleroBox.setTranslateX(-190);;
         statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
         listo.setOnAction(e->{
             tableroView.resetearComportamientoDeCasilleros();
             try{
-                infoCasilleroBox.setTranslateX(0);
                 Batallon batallon =new Batallon(posiciones,jugadorActual,tablero);
-                infoCasilleroBox.setTranslateX(-190);
                 instrucciones.setText("Seleccione la direccion a la que desea mover \na la posicion central del batallon creado");
                 listo.setOnAction(f->{
-                    infoCasilleroBox.setTranslateX(0);
                     Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
                     infoCasilleroBox.setText(nuevaPosicion.getFila()+";"+nuevaPosicion.getColumna());
 

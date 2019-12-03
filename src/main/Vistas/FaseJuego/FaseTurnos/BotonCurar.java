@@ -10,7 +10,8 @@ public class BotonCurar extends Button {
     public BotonCurar(JuegoPrincipal juegoPrincipal, FaseTurnos faseTurnos){
         this.setPadding( new Insets(20,20,20,20));
         this.setText("Curar");
-        //this.setStyle("-fx-background-image: url('imagenBotonCurar.jpg')");
+        this.getStylesheets().add("botonEleccionUnidad.css");
+        this.getStyleClass().add("botonEleccionUnidad");
         this.setOnAction(new CurarUnidadEventHandler(juegoPrincipal, faseTurnos));
     }
 

@@ -4,6 +4,7 @@ import Excepciones.ExcepcionCasilleroVacio;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.Unidad;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 public class InfoCasilleroBox extends Label{
@@ -13,8 +14,10 @@ public class InfoCasilleroBox extends Label{
 
     public InfoCasilleroBox(JuegoPrincipal juegoPrincipal, String texto){
         this.tablero = juegoPrincipal.getTableroDeJuego();
+        this.setPrefHeight(150);
+        this.setPrefWidth(300);
+        this.setAlignment(Pos.CENTER);
         this.setText("Estadisticas del casillero: \n\n\n" + texto);
-        this.setTranslateY(100);
     }
 
     public void actualizarPosicionClickeada(Posicion unaPosicion) {

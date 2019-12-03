@@ -42,15 +42,11 @@ public class MoverUnidadEventHandler implements EventHandler<ActionEvent> {
         LabelNombreJugador jugador = new LabelNombreJugador(-210,0,"Es el turno de: " + jugadorActual.getNombre());
         LabelDatosJuego instrucciones = new LabelDatosJuego(-210,60,"Seleccione a donde desea mover la unidad.");
         Button listo = new Button ("listo");
-        listo.setTranslateX(-210);
-        listo.setTranslateY(80);
         infoCasilleroBox.setText("");
-        infoCasilleroBox.setTranslateX(-210);
         statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
 
         listo.setOnAction(e -> {
             Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
-            infoCasilleroBox.setTranslateX(0);
             try {
                 UnidadMovible unidad = (UnidadMovible) tablero.getUnidadDe(posicionAMover,jugadorActual);
                 unidad.mover(nuevaPosicion, tablero);

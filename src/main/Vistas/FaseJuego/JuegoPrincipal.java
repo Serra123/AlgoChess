@@ -39,6 +39,7 @@ public class JuegoPrincipal {
         ventana.setWidth(1500);
         ventana.setHeight(710);
         juegoView.setLeft(tableroView);
+
         juegoView.setStyle("-fx-background-image: url('fondoTablero.jpg')");
 
     }

@@ -44,13 +44,10 @@ public class AtacarUnidadEventHandler implements EventHandler<ActionEvent> {
         LabelNombreJugador jugador = new LabelNombreJugador(-270,0,jugadorActual.getNombre());
         LabelDatosJuego instrucciones = new LabelDatosJuego(-270,0,"Seleccione con que unidad desea \natacar y luego listo");
         Button listo = new Button ("listo");
-        listo.setTranslateX(-270);
         infoCasilleroBox.setText("");
-        infoCasilleroBox.setTranslateX(-270);
         statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
         listo.setOnAction(e -> {
             Posicion nuevaPosicion = infoCasilleroBox.getPosicion();
-            infoCasilleroBox.setTranslateX(0);
             try {
                 Unidad unidadAtacante =tablero.getUnidadDe(posicionAMover,jugadorActual);
                 Unidad unidadAtacada =tablero.getUnidad(nuevaPosicion);
