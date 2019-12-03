@@ -2,6 +2,8 @@ package Test;
 
 import Excepciones.*;
 import Jugador.Ejercito;
+import Jugador.Jugador;
+import Modelo.Batallon;
 import Tablero.Tablero;
 import Unidades.Posicion.Posicion;
 import Unidades.*;
@@ -12,34 +14,29 @@ import java.util.ArrayList;
 
 public class BatallonTest {
 
-/*
     @Test
     public void testPuedoCrearBatallon(){
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
-        Ejercito unEjercito = new Ejercito("Jugador1");
+
+        Jugador jugador = new Jugador("Jugador1");
 
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
 
-        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
 
         Posicion nuevaPosicionCentral = new Posicion(1,2);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
+        ArrayList<Posicion> posiciones = new ArrayList<>();
 
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
 
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
-
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
         batallon.moverBatallon(nuevaPosicionCentral);
     }
 
@@ -47,34 +44,38 @@ public class BatallonTest {
     @Test
     public void testMuevoCorrectamenteLosSoldados(){
 
-        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Jugador jugador = new Jugador("Jugador1");
 
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
 
-        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
+
+
+        Unidad soldadoUno = unTablero.getUnidad(posicionUno);
+        Unidad soldadoDos = unTablero.getUnidad(posicionDos);
+        Unidad soldadoTres = unTablero.getUnidad(posicionTres);
+
+        Posicion nuevaPosicionCentral = new Posicion(1,2);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
+        batallon.moverBatallon(nuevaPosicionCentral);
 
         Posicion nuevaPosicionUno = new Posicion(1,1);
         Posicion nuevaPosicionDos = new Posicion(1,2);
         Posicion nuevaPosicionTres = new Posicion(1,3);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
-
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
-
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
-
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
-        batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
 
         boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
         boolean movioBienSoldadoDos = ((soldadoDos.getPosicion().calcularDistancia(nuevaPosicionDos)) == 0 );
@@ -83,36 +84,38 @@ public class BatallonTest {
         Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
     }
 
+
     @Test
     public void testMuevoCorrectamenteLosSoldadosEnHorizontal(){
-
-        Ejercito unEjercito = new Ejercito("Jugador1");
-        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(9,13);
         Posicion posicionDos = new Posicion(9,14);
         Posicion posicionTres = new Posicion(9,15);
 
-        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Jugador jugador = new Jugador("Jugador1");
+
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
+
+
+        Unidad soldadoUno = unTablero.getUnidad(posicionUno);
+        Unidad soldadoDos = unTablero.getUnidad(posicionDos);
+        Unidad soldadoTres = unTablero.getUnidad(posicionTres);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
 
         Posicion nuevaPosicionUno = new Posicion(10,13);
         Posicion nuevaPosicionDos = new Posicion(10,14);
         Posicion nuevaPosicionTres = new Posicion(10,15);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
-
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
-
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
-
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
         batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
 
         boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
@@ -122,37 +125,39 @@ public class BatallonTest {
         Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
     }
 
+
     @Test
     public void testUnSoldadoNoSeMuevePeroLosOtrosSi(){
-        Ejercito unEjercito = new Ejercito("Jugador1");
-        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(0,1);
         Posicion posicionDos = new Posicion(0,2);
         Posicion posicionTres = new Posicion(0,3);
         Posicion posicionCatapulta = new Posicion(1,1);
 
-        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
-        Unidad catapulpa = new Catapulta(posicionCatapulta,unEjercito);
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Jugador jugador = new Jugador("Jugador1");
+
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionCatapulta,"Catapulta",unTablero);
+
+
+        Unidad soldadoUno = unTablero.getUnidad(posicionUno);
+        Unidad soldadoDos = unTablero.getUnidad(posicionDos);
+        Unidad soldadoTres = unTablero.getUnidad(posicionTres);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
 
         Posicion nuevaPosicionDos = new Posicion(1,2);
         Posicion nuevaPosicionTres = new Posicion(1,3);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
-
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
-
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
-        unTablero.colocarUnidad(catapulpa);
-
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
         batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
 
         boolean noMovioSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(posicionUno)) == 0 );
@@ -162,39 +167,41 @@ public class BatallonTest {
         Assert.assertTrue( noMovioSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
     }
 
+
     @Test
-    public void testMuevoCorrectamenteLosSoldadosConPosicionesDistintasYSuperposicionEnElMedio(){
-        Ejercito unEjercito = new Ejercito("Jugador1");
-        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+    public void testMuevoCorrectamenteLosSoldadosConPosicionesDistintasYSuperposicionEnElMedio() {
 
-        Posicion posicionUno = new Posicion(1,1);
-        Posicion posicionDos = new Posicion(2,2);
-        Posicion posicionTres = new Posicion(3,1);
-        Posicion posicionCatapulta = new Posicion(2,1);
+        Posicion posicionUno = new Posicion(1, 1);
+        Posicion posicionDos = new Posicion(2, 2);
+        Posicion posicionTres = new Posicion(3, 1);
+        Posicion posicionCatapulta = new Posicion(2, 1);
 
-        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
+        Tablero unTablero = new Tablero(20, 20, "Jugador1", "Jugador2");
 
-        Unidad catapulta = new Catapulta(posicionCatapulta,unEjercito);
+        Jugador jugador = new Jugador("Jugador1");
 
-        Posicion nuevaPosicionUno = new Posicion(1,0);
-        Posicion nuevaPosicionDos = new Posicion(2,1);
-        Posicion nuevaPosicionTres = new Posicion(3,0);
+        jugador.crearUnidadEnPosicion(posicionUno, "Soldado", unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos, "Soldado", unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres, "Soldado", unTablero);
+        jugador.crearUnidadEnPosicion(posicionCatapulta, "Catapulta", unTablero);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
 
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
+        Unidad soldadoUno = unTablero.getUnidad(posicionUno);
+        Unidad soldadoDos = unTablero.getUnidad(posicionDos);
+        Unidad soldadoTres = unTablero.getUnidad(posicionTres);
 
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
-        unTablero.colocarUnidad(catapulta);
+        Posicion nuevaPosicionUno = new Posicion(1, 0);
+        Posicion nuevaPosicionDos = new Posicion(2, 1);
+        Posicion nuevaPosicionTres = new Posicion(3, 0);
 
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
         batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
 
         boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
@@ -205,33 +212,34 @@ public class BatallonTest {
 
     @Test
     public void testSoldadosAlineadosNoSeSuperponenEntreSiAlMoverse(){
-        Ejercito unEjercito = new Ejercito("Jugador1");
+
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Jugador jugador = new Jugador("Jugador1");
 
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(2,1);
         Posicion posicionTres = new Posicion(3,1);
 
-        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
-
         Posicion nuevaPosicionUno = new Posicion(2,1);
         Posicion nuevaPosicionDos = new Posicion(3,1);
         Posicion nuevaPosicionTres = new Posicion(4,1);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
 
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
 
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
+        Unidad soldadoUno = unTablero.getUnidad(posicionUno);
+        Unidad soldadoDos = unTablero.getUnidad(posicionDos);
+        Unidad soldadoTres = unTablero.getUnidad(posicionTres);
 
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
         batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
 
         boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
@@ -240,35 +248,39 @@ public class BatallonTest {
 
         Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
     }
+
+
     @Test
     public void testSoldadosEnDiagonalNoSeSuperponenEntreSiAlMoverse(){
-        Ejercito unEjercito = new Ejercito("Jugador1");
+
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Jugador jugador = new Jugador("Jugador1");
 
         Posicion posicionUno = new Posicion(2,2);
         Posicion posicionDos = new Posicion(1,1);
         Posicion posicionTres = new Posicion(0,0);
 
-        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
 
         Posicion nuevaPosicionUno = new Posicion(3,3);
         Posicion nuevaPosicionDos = new Posicion(2,2);
         Posicion nuevaPosicionTres = new Posicion(1,1);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
 
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
 
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
+        Unidad soldadoUno = unTablero.getUnidad(posicionUno);
+        Unidad soldadoDos = unTablero.getUnidad(posicionDos);
+        Unidad soldadoTres = unTablero.getUnidad(posicionTres);
 
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
         batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
 
         boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
@@ -278,42 +290,34 @@ public class BatallonTest {
         Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres);
     }
 
+
     @Test (expected = ExcepcionMovimientoInvalido.class)
     public void testNoPuedoMovermeMasDeUnCasilleroDeDistancia() {
-
-        Ejercito unEjercito = new Ejercito("Jugador1");
-        Tablero unTablero = new Tablero(20, 20, "Jugador1", "Jugador2");
 
         Posicion posicionUno = new Posicion(2, 2);
         Posicion posicionDos = new Posicion(1, 1);
         Posicion posicionTres = new Posicion(0, 0);
 
-        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos, unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres, unEjercito);
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Jugador jugador = new Jugador("Jugador1");
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
 
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
+        ArrayList<Posicion> posiciones = new ArrayList<>();
 
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
 
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
-
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
         Posicion posicionCentralNueva = new Posicion(3, 3);
-
         batallon.moverBatallon(posicionCentralNueva);
     }
 
-
-    @Test
-    public void testBatallonSoloTieneTresSoldadosAunqueLeMandeMas() {
-        Ejercito unEjercito = new Ejercito("Jugador1");
+    @Test (expected = ExcepcionCantidadIncorrectaDePosiciones.class)
+    public void testBatallonNoSeCreaSiLeMandoMasDeTresPosiciones() {
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(0,1);
@@ -321,77 +325,166 @@ public class BatallonTest {
         Posicion posicionTres = new Posicion(0,3);
         Posicion posicionCuatro = new Posicion(0,4);
 
-        Soldado soldadoUno = new Soldado(posicionUno,unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
-        Soldado soldadoCuatro = new Soldado(posicionCuatro,unEjercito);
+        Jugador jugador = new Jugador("Jugador1");
 
-        Posicion nuevaPosicionUno = new Posicion(1,1);
-        Posicion nuevaPosicionDos = new Posicion(1,2);
-        Posicion nuevaPosicionTres = new Posicion(1,3);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionCuatro,"Soldado",unTablero);
 
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
-        soldados.add(soldadoCuatro);
+        ArrayList<Posicion> posiciones = new ArrayList<>();
 
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
-        unTablero.colocarUnidad(soldadoCuatro);
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+        posiciones.add(posicionCuatro);
 
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
-        batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
-
-        boolean movioBienSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(nuevaPosicionUno)) == 0 );
-        boolean movioBienSoldadoDos = ((soldadoDos.getPosicion().calcularDistancia(nuevaPosicionDos)) == 0 );
-        boolean movioBienSoldadoTres = ((soldadoTres.getPosicion().calcularDistancia(nuevaPosicionTres)) == 0 );
-        boolean noMovioSoldadoCuatro = ((soldadoCuatro.getPosicion().calcularDistancia(posicionCuatro)) == 0 );
-        Assert.assertTrue( movioBienSoldadoUno && movioBienSoldadoDos && movioBienSoldadoTres && noMovioSoldadoCuatro);
-
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
     }
 
+    @Test (expected = ExcepcionCantidadIncorrectaDePosiciones.class)
+    public void testBatallonNoSeCreaSiLeMandoMenosDeTresPosiciones() {
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Posicion posicionUno = new Posicion(0,1);
+        Posicion posicionDos = new Posicion(0,2);
+        Posicion posicionTres = new Posicion(0,3);
+        Posicion posicionCuatro = new Posicion(0,4);
+
+        Jugador jugador = new Jugador("Jugador1");
+
+
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionCuatro,"Soldado",unTablero);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
+    }
+
+    @Test
+    public void testBatallonSeCreaSiLeMandoPosicionesRepetidas() {
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+
+        Posicion posicionUno = new Posicion(0,1);
+        Posicion posicionDos = new Posicion(0,2);
+        Posicion posicionTres = new Posicion(0,3);
+        Posicion posicionCuatro = new Posicion(0,4);
+
+        Jugador jugador = new Jugador("Jugador1");
+
+
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionCuatro,"Soldado",unTablero);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+        posiciones.add(posicionDos);
+
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
+    }
 
     @Test
     public void testSoldadosNoExcedenLimiteDeTablero(){
 
-        Ejercito unEjercito = new Ejercito("Jugador1");
         Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
 
         Posicion posicionUno = new Posicion(0,0);
         Posicion posicionDos = new Posicion(1,1);
         Posicion posicionTres = new Posicion(2,0);
 
-        Soldado soldadoUno = new Soldado(posicionUno, unEjercito);
-        Soldado soldadoDos = new Soldado(posicionDos,unEjercito);
-        Soldado soldadoTres = new Soldado(posicionTres,unEjercito);
+        Jugador jugador = new Jugador("Jugador1");
 
-        Posicion nuevaPosicionDos = new Posicion(1,0);
 
-        ArrayList<Soldado> soldados = new ArrayList<>();
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
 
-        soldados.add(soldadoUno);
-        soldados.add(soldadoDos);
-        soldados.add(soldadoTres);
+        Unidad soldadoUno = unTablero.getUnidad(posicionUno);
+        Unidad soldadoDos = unTablero.getUnidad(posicionDos);
+        Unidad soldadoTres = unTablero.getUnidad(posicionTres);
 
-        unTablero.colocarUnidad(soldadoUno);
-        unTablero.colocarUnidad(soldadoDos);
-        unTablero.colocarUnidad(soldadoTres);
+        ArrayList<Posicion> posiciones = new ArrayList<>();
 
-        Batallon batallon= new Batallon(soldados);
-        batallon.agregarTablero(unTablero);
-        batallon.moverBatallon(nuevaPosicionDos);    //La posicion central del batallon es la dos,asique muevo esta
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+        Batallon batallon= new Batallon(posiciones,jugador,unTablero);
+        batallon.moverBatallon(posicionUno);    //La posicion central del batallon es la dos,asique muevo esta
 
         boolean noMovioSoldadoUno = ((soldadoUno.getPosicion().calcularDistancia(posicionUno)) == 0 );
-        boolean movioBienSoldadoDos = ((soldadoDos.getPosicion().calcularDistancia(nuevaPosicionDos)) == 0 );
+        boolean movioBienSoldadoDos = ((soldadoDos.getPosicion().calcularDistancia(posicionDos)) == 0 );
         boolean noMovioSoldadoTres = ((soldadoTres.getPosicion().calcularDistancia(posicionTres)) == 0 );
 
         Assert.assertTrue( noMovioSoldadoUno && movioBienSoldadoDos && noMovioSoldadoTres);
     }
 
-*/
+
+
+
+    @Test (expected = ExcepcionLasUnidadesEstanSeparadas.class)
+    public void testNoCreoBatallonSiPosicionesNoEstanContiguas() {
+
+        Posicion posicionUno = new Posicion(2, 2);
+        Posicion posicionDos = new Posicion(1, 1);
+        Posicion posicionTres = new Posicion(3, 4);
+
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Jugador jugador = new Jugador("Jugador1");
+
+
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionTres);
+
+        Batallon batallon = new Batallon(posiciones,jugador,unTablero);
+    }
+
+    @Test (expected = ExcepcionCasilleroVacio.class)
+    public void testLeMandoUnaPosicionQueNoTieneSoldado(){
+
+        Posicion posicionUno = new Posicion(2, 2);
+        Posicion posicionDos = new Posicion(1, 1);
+        Posicion posicionTres = new Posicion(3, 3);
+        Posicion posicionSinSoldado = new Posicion(2, 3);
+
+        Tablero unTablero = new Tablero(20,20,"Jugador1","Jugador2");
+        Jugador jugador = new Jugador("Jugador1");
+
+
+        jugador.crearUnidadEnPosicion(posicionUno,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionDos,"Soldado",unTablero);
+        jugador.crearUnidadEnPosicion(posicionTres,"Soldado",unTablero);
+
+
+        ArrayList<Posicion> posiciones = new ArrayList<>();
+
+        posiciones.add(posicionUno);
+        posiciones.add(posicionDos);
+        posiciones.add(posicionSinSoldado);
+
+        Batallon batallon = new Batallon(posiciones,jugador,unTablero);
+    }
+
+
 
 }
