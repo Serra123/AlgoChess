@@ -53,8 +53,6 @@ public class CrearBatallonEventHandler implements EventHandler<ActionEvent> {
         statusTablero.getChildren().addAll(jugador,instrucciones,listo,infoCasilleroBox);
         listo.setOnAction(e->{
             tableroView.resetearComportamientoDeCasilleros();
-
-            Ejercito ejercito = jugadorActual.getEjercito();
             try{
                 infoCasilleroBox.setTranslateX(0);
                 Batallon batallon =new Batallon(posiciones,jugadorActual,tablero);
